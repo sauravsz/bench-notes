@@ -88,7 +88,7 @@ export const useAppearance = create<AppearanceState>()(
   persist(
     (set, get) => ({
       sidebarCollapsed: false,
-      textWidth: "medium",
+      textWidth: "wide",
       fontSize: 17,
       lineSpacing: "normal",
       fontFamily: "serif",
@@ -147,7 +147,7 @@ export const useAppearance = create<AppearanceState>()(
       resetAppearance: () =>
         set({
           sidebarCollapsed: false,
-          textWidth: "medium",
+          textWidth: "wide",
           fontSize: 17,
           lineSpacing: "normal",
           fontFamily: "serif",
