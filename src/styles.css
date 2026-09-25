@@ -1,0 +1,198 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #f4f0e6;
+  --color-bg-warm: #ebe4d4;
+  --color-surface: #fffcf7;
+  --color-surface-2: #f7f1e6;
+  --color-ink: #1c1915;
+  --color-ink-soft: #3a342c;
+  --color-muted: #6b6459;
+  --color-faint: #8a8276;
+  --color-line: #ddd6c8;
+  --color-line-strong: #c9c0ae;
+  --color-accent: #2f4553;
+  --color-accent-2: #3d5a6c;
+  --color-accent-fg: #f4f0e6;
+  --color-mark: #5c3d3d;
+  --color-studied: #3f5344;
+
+  --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --font-sans: "Source Sans 3", "Source Sans Pro", "Segoe UI", system-ui, sans-serif;
+  --font-serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  --shadow-border:
+    0px 0px 0px 1px rgba(28, 25, 21, 0.06),
+    0px 1px 2px -1px rgba(28, 25, 21, 0.06),
+    0px 2px 4px 0px rgba(28, 25, 21, 0.04);
+  --shadow-border-hover:
+    0px 0px 0px 1px rgba(28, 25, 21, 0.1),
+    0px 1px 2px -1px rgba(28, 25, 21, 0.08),
+    0px 4px 10px 0px rgba(28, 25, 21, 0.06);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-accent) 22%, white);
+    color: var(--color-ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.note-prose h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--color-ink);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.note-prose h3:first-child {
+  margin-top: 0;
+}
+
+.note-prose h4 {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  color: var(--color-ink-soft);
+  margin-top: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.note-prose p {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--color-ink-soft);
+  margin-bottom: 0.85rem;
+}
+
+.note-prose ul,
+.note-prose ol {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+  margin: 0 0 1rem 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.note-prose ul {
+  list-style: disc;
+}
+
+.note-prose ol {
+  list-style: decimal;
+}
+
+.note-prose li::marker {
+  color: var(--color-faint);
+}
+
+.note-prose em {
+  font-style: italic;
+  color: var(--color-ink);
+}
+
+.note-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  margin: 0.5rem 0 1.25rem;
+  font-family: var(--font-sans);
+}
+
+.note-prose th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-ink);
+  padding: 0.55rem 0.7rem;
+  border-bottom: 1px solid var(--color-line-strong);
+  background: var(--color-surface-2);
+}
+
+.note-prose td {
+  padding: 0.55rem 0.7rem;
+  border-bottom: 1px solid var(--color-line);
+  color: var(--color-ink-soft);
+  vertical-align: top;
+}
+
+.note-tree {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-ink-soft);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  margin: 0.4rem 0 1.2rem;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+@media print {
+  header, nav, aside, .no-print {
+    display: none !important;
+  }
+  body, html {
+    background: white;
+  }
+  main {
+    padding: 0 !important;
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Bench Notes",
+      "hasCanvas": false,
+      "bodyTextLen": 6316,
+      "bodyTextHash": "092094559f038b6cd253d01cd688d5630543d9ea90a35b595339ba2bc7e180c6",
+      "bodyTextPrefix": "Bench Notes BUSINESS LAW 303 · LR MA'AM 0/13 studied DESK Syllab",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Bench Notes",
+      "hasCanvas": false,
+      "bodyTextLen": 5283,
+      "bodyTextHash": "6a2f797d0ea1778de10bb2f817b38158b3f6474516e3e1fb2cfb701d29841c5f",
+      "bodyTextPrefix": "Bench Notes BUSINESS LAW 303 · LR MA'AM Exam notes from the lect",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}
