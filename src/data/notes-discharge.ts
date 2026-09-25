@@ -22,6 +22,12 @@ export const dischargeTopics: Topic[] = [
         body: "A contract is discharged when it ceases to operate, that is, when the primary rights and obligations created by it come to an end.",
       },
       {
+        type: "diagram",
+        kind: "discharge-remedies",
+        title: "Discharge & Breach Remedies Architecture",
+        caption: "The complete lifecycle: 6 statutory modes of termination and 5 civil remedies on breach.",
+      },
+      {
         type: "h3",
         text: "Part I: The Six Modes of Discharge of Contract",
       },

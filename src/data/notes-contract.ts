@@ -46,9 +46,10 @@ export const contractTopics: Topic[] = [
         body: "An agreement enforceable by law is a contract.",
       },
       {
-        type: "callout",
-        label: "The Definitive 2-Stage Mathematical Formula",
-        body: "Stage 1: Proposal (Offer) + Assent (Acceptance) = Promise.\nStage 2: Promise + Consideration (Quid Pro Quo) = Agreement.\nStage 3: Agreement + Legal Enforceability (Section 10) = Contract.",
+        type: "diagram",
+        kind: "contract-formation",
+        title: "Statutory Path from Proposal to Enforceable Contract",
+        caption: "A proposal becomes a promise upon acceptance; promises backed by consideration form agreements; Section 10 enforceability makes it a contract.",
       },
       {
         type: "h3",

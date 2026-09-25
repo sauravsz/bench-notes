@@ -1,8 +1,8 @@
 import { type ReactNode, useMemo } from "react";
 import type { NoteBlock } from "@/data/types";
 import { HIGHLIGHT_COLORS, useHighlights, type HighlightItem } from "@/lib/highlights";
+import { DiagramRenderer } from "./diagrams/diagram-renderer";
 import { cn } from "@/lib/utils";
-
 function renderWithHighlights(
   rawText: string,
   docHighlights: HighlightItem[],
@@ -208,18 +208,25 @@ function Block({
           <p className="mb-0 text-[1.02rem]">{render(block.body)}</p>
         </aside>
       );
+    case "diagram":
+      return (
+        <DiagramRenderer
+          kind={block.kind}
+          title={block.title}
+          caption={block.caption}
+        />
+      );
     case "tree":
       return (
-        <div>
+        <div className="my-5 rounded-xl border border-line bg-surface p-4 shadow-xs">
           {block.title ? (
-            <p className="mb-2 font-sans text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+            <p className="mb-2 font-sans text-xs font-semibold uppercase tracking-[0.14em] text-accent">
               {render(block.title)}
             </p>
           ) : null}
-          <pre className="note-tree">{block.lines.join("\n")}</pre>
+          <pre className="note-tree m-0 p-3 rounded-lg bg-bg-warm/70 font-mono text-xs leading-relaxed text-ink-soft overflow-x-auto">{block.lines.join("\n")}</pre>
         </div>
       );
-    default:
       return null;
   }
 }

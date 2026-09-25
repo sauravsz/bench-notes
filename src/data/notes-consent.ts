@@ -82,6 +82,12 @@ export const consentTopics: Topic[] = [
         body: "Consent is said to be free when it is not caused by: (1) Coercion (Sec 15), (2) Undue Influence (Sec 16), (3) Fraud (Sec 17), (4) Misrepresentation (Sec 18), or (5) Mistake (Sec 20, 21, 22).",
       },
       {
+        type: "diagram",
+        kind: "free-consent",
+        title: "Free Consent and Vitiating Factors Map",
+        caption: "Section 14 requires that consent is not caused by coercion, undue influence, fraud, misrepresentation, or bilateral mistake.",
+      },
+      {
         type: "h3",
         text: "5. The Five Vitiating Factors in Free Consent",
       },
@@ -112,6 +118,12 @@ export const consentTopics: Topic[] = [
       {
         type: "p",
         text: "Contract law classifies legal agreements into structured categories based on three primary operational criteria: (1) Enforceability & Validity, (2) Mode of Formation, and (3) Extent of Performance.",
+      },
+      {
+        type: "diagram",
+        kind: "contract-classification",
+        title: "Three-Dimensional Classification of Contracts",
+        caption: "Systematic categorization based on legal validity, formation mechanics, and performance milestones.",
       },
       {
         type: "h3",

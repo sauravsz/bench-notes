@@ -1,3 +1,11 @@
+export type DiagramKind =
+  | "judiciary-hierarchy"
+  | "contract-formation"
+  | "contract-classification"
+  | "free-consent"
+  | "discharge-remedies"
+  | "company-types";
+
 export type NoteBlock =
   | { type: "h3"; text: string }
   | { type: "h4"; text: string }
@@ -14,7 +22,8 @@ export type NoteBlock =
   | { type: "def"; term: string; section?: string; body: string }
   | { type: "maxim"; latin: string; meaning: string }
   | { type: "callout"; label: string; body: string }
-  | { type: "tree"; title?: string; lines: string[] };
+  | { type: "tree"; title?: string; lines: string[] }
+  | { type: "diagram"; kind: DiagramKind; title?: string; caption?: string };
 
 export type Topic = {
   id: string;

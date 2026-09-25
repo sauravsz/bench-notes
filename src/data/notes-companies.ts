@@ -159,6 +159,12 @@ export const companiesTopics: Topic[] = [
         text: "2. Types of Companies Under the Companies Act, 2013",
       },
       {
+        type: "diagram",
+        kind: "company-types",
+        title: "Classification of Companies under Companies Act, 2013",
+        caption: "Taxonomy of registered companies based on liability limits, membership scale, holding control, and charitable purpose.",
+      },
+      {
         type: "h4",
         text: "Classification by Liability of Members",
       },
