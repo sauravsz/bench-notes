@@ -27,7 +27,7 @@ function MaximsPage() {
               <p className="font-sans text-xs tabular-nums text-faint">
                 {String(i + 1).padStart(2, "0")}
               </p>
-              <h2 className="mt-1 font-serif text-xl italic leading-snug text-ink">
+              <h2 className="mt-1 font-serif text-xl font-bold leading-snug text-ink">
                 {maxim.latin}
               </h2>
               <p className="mt-2 font-serif text-[1.05rem] leading-relaxed text-ink-soft">

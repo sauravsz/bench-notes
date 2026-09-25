@@ -89,10 +89,17 @@ function renderWithHighlights(
 }
 
 function parseInlineMarkdown(text: string): ReactNode[] {
-  const parts = text.split(/(_[^_]+_)/g);
+  const parts = text.split(/(_[^_]+_|\*[^*]+\*)/g);
   return parts.map((part, i) => {
-    if (part.startsWith("_") && part.endsWith("_") && part.length > 2) {
-      return <em key={i}>{part.slice(1, -1)}</em>;
+    if (
+      (part.startsWith("_") && part.endsWith("_") && part.length > 2) ||
+      (part.startsWith("*") && part.endsWith("*") && part.length > 2)
+    ) {
+      return (
+        <strong key={i} className="font-bold text-ink">
+          {part.slice(1, -1)}
+        </strong>
+      );
     }
     return <span key={i}>{part}</span>;
   });
@@ -164,11 +171,11 @@ function Block({
     case "quote":
       return (
         <blockquote className="my-4 border-l-2 border-accent/40 bg-surface-2 px-4 py-3">
-          <p className="mb-1 font-serif text-[1.05rem] italic text-ink">
+          <p className="mb-1 font-serif text-[1.05rem] font-medium text-ink">
             {render(block.text)}
           </p>
           {block.cite ? (
-            <footer className="font-sans text-sm text-muted">
+            <footer className="font-sans text-sm font-semibold text-muted">
               — {render(block.cite)}
             </footer>
           ) : null}
@@ -193,7 +200,7 @@ function Block({
     case "maxim":
       return (
         <article className="mb-3 rounded-lg border border-line bg-surface-2 px-4 py-3">
-          <p className="mb-1 font-serif text-[1.05rem] italic text-ink">
+          <p className="mb-1 font-serif text-[1.05rem] font-bold text-ink">
             {render(block.latin)}
           </p>
           <p className="mb-0 text-[0.98rem] text-ink-soft">{render(block.meaning)}</p>

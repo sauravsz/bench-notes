@@ -43,7 +43,7 @@ export function DiagramRenderer({
       ) : null}
       {renderDiagram()}
       {caption ? (
-        <p className="mt-1 text-center font-serif text-xs italic text-muted">
+        <p className="mt-1 text-center font-serif text-xs font-semibold text-muted">
           {caption}
         </p>
       ) : null}

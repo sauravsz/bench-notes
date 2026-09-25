@@ -157,11 +157,9 @@ export function HighlightPopover({
           </button>
         </div>
       </div>
-
-      <div className="my-2.5 max-h-20 overflow-y-auto rounded-md bg-bg-warm/60 p-2 font-serif text-xs italic leading-relaxed text-ink-soft">
+      <div className="my-2.5 max-h-20 overflow-y-auto rounded-md bg-bg-warm/60 p-2 font-serif text-xs font-semibold leading-relaxed text-ink-soft">
         “{highlight.text}”
       </div>
-
       {/* Color Picker */}
       <div className="flex items-center justify-between gap-1 py-1">
         <span className="text-[11px] font-medium text-muted">Color:</span>

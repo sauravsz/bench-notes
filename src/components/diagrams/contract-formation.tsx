@@ -103,7 +103,7 @@ export function ContractFormationDiagram() {
       </div>
 
       <div className="mt-5 rounded-xl bg-bg-warm/70 p-3.5 text-center border border-line/80">
-        <p className="font-serif text-xs italic text-ink leading-relaxed">
+        <p className="font-serif text-xs font-semibold text-ink leading-relaxed">
           "All contracts are agreements because every contract begins as an agreement; but all agreements are not contracts because bare social arrangements and void bargains lack Section 10 legal enforceability."
         </p>
       </div>
