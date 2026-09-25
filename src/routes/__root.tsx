@@ -3,6 +3,7 @@ import { Toaster } from "sonner";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { AppShell } from "@/components/app-shell";
+import { VerificationGuard } from "@/components/auth/verification-guard";
 import appCss from "../styles.css?url";
 
 const APP_NAME = "Bench Notes";
@@ -40,9 +41,10 @@ export const Route = createRootRoute({
         <PreviewHostBridge />
         <AuthProvider>
           <AppShell>
-            <Outlet />
+            <VerificationGuard>
+              <Outlet />
+            </VerificationGuard>
           </AppShell>
-          <Toaster position="bottom-right" richColors />
         </AuthProvider>
         <Scripts />
       </body>

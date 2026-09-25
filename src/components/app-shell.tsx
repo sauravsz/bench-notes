@@ -10,7 +10,9 @@ import {
   PanelLeftClose,
   Scale,
   Search,
+  ShieldCheck,
   Type,
+  User,
   X,
   Zap,
   ZapOff,
@@ -19,7 +21,9 @@ import { useProgress } from "@/lib/progress";
 import { useHighlights } from "@/lib/highlights";
 import { useAppearance, THEME_TONE_STYLES } from "@/lib/appearance";
 import { useCurrentCourse } from "@/lib/current-course";
+import { useAccessControl } from "@/lib/auth/access-control";
 import { useReaderShortcuts } from "@/lib/use-reader-shortcuts";
+import { GoogleLoginDialog } from "./auth/google-login-dialog";
 import { HighlightsDrawer } from "./highlights-drawer";
 import { AppearancePopover } from "./appearance-popover";
 import { CourseSwitcher } from "./course-switcher";
@@ -31,6 +35,8 @@ import { toast } from "sonner";
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
+  const currentUser = useAccessControl((s) => s.currentUser);
+  const isAdmin = useAccessControl((s) => s.isAdmin(s.currentUser?.email));
   const studied = useProgress((s) => s.studied);
   const highlights = useHighlights((s) => s.highlights);
   const autoHighlight = useHighlights((s) => s.autoHighlight);
@@ -132,6 +138,27 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           <span>Search</span>
         </Link>
 
+        {isAdmin && (
+          <Link
+            to="/admin"
+            onClick={onNavigate}
+            className={cn(
+              "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-colors",
+              pathname === "/admin"
+                ? "bg-primary/15 font-bold text-primary shadow-2xs"
+                : "text-primary hover:bg-primary/10",
+            )}
+          >
+            <span className="flex items-center gap-2">
+              <ShieldCheck className="size-4 shrink-0 text-primary" strokeWidth={1.75} />
+              <span>Admin Verification</span>
+            </span>
+            <span className="rounded bg-primary text-white px-1.5 py-0.2 font-sans text-[10px] font-bold">
+              Admin
+            </span>
+          </Link>
+        )}
+
         <button
           type="button"
           onClick={() => {
@@ -222,11 +249,14 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 }
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  // Global Reader shortcuts (Cmd+B, Shift+H, Shift+<, Shift+>, Shift+-, Shift+=, Shift+:, Shift+")
   useReaderShortcuts();
 
   const [open, setOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
+  const currentUser = useAccessControl((s) => s.currentUser);
+  const isAdmin = useAccessControl((s) => s.isAdmin(s.currentUser?.email));
+  const signOut = useAccessControl((s) => s.signOut);
   const studied = useProgress((s) => s.studied);
   const highlights = useHighlights((s) => s.highlights);
   const autoHighlight = useHighlights((s) => s.autoHighlight);
@@ -357,6 +387,45 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             >
               <Search className="size-4 sm:size-4.5" strokeWidth={1.75} />
             </Link>
+
+            {/* User Profile / Admin Link / Sign In Button */}
+            {currentUser ? (
+              <div className="flex items-center gap-1.5">
+                {isAdmin && (
+                  <Link
+                    to="/admin"
+                    className="hidden sm:inline-flex items-center gap-1 rounded-lg bg-primary px-2.5 py-1 font-sans text-xs font-bold text-white shadow-2xs hover:bg-primary/90 transition-colors"
+                    title="Open Administrator Verification Panel"
+                  >
+                    <ShieldCheck className="size-3.5" />
+                    <span>Admin</span>
+                  </Link>
+                )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (window.confirm(`Sign out of account (${currentUser.email})?`)) {
+                      signOut();
+                      toast.info("Signed out");
+                    }
+                  }}
+                  className="inline-flex size-9 sm:size-10 items-center justify-center rounded-lg border border-line bg-surface font-sans text-xs font-bold text-ink hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/30 transition-colors shadow-2xs"
+                  title={`Signed in as ${currentUser.email}. Click to sign out.`}
+                >
+                  {currentUser.email.charAt(0).toUpperCase()}
+                </button>
+              </div>
+            ) : (
+              <Button
+                type="button"
+                size="sm"
+                onClick={() => setLoginModalOpen(true)}
+                className="h-9 px-3 text-xs font-bold gap-1.5 shadow-2xs"
+              >
+                <User className="size-3.5" />
+                <span>Sign In</span>
+              </Button>
+            )}
           </div>
         </div>
         <div className="h-0.5 bg-line">
@@ -409,6 +478,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {appearanceMenuOpen ? (
         <AppearancePopover onClose={() => setAppearanceMenuOpen(false)} />
       ) : null}
+
+      {/* Google Login Dialog */}
+      <GoogleLoginDialog
+        isOpen={loginModalOpen}
+        onClose={() => setLoginModalOpen(false)}
+      />
     </div>
   );
 }
