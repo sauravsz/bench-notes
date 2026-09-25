@@ -10,111 +10,120 @@ export const companiesTopics: Topic[] = [
     marks: 14,
     lecture: "11/09/26",
     summary:
-      "The 2013 Act replaced the 1956 Act after political, economic and social change. It shortens the statute, raises private-company membership, introduces the One Person Company, and makes several governance rules mandatory.",
-    tags: ["companies act", "2013", "1956", "CSR", "OPC"],
+      "The 2013 Act replaced the 1956 statute to modernize corporate governance, introduce One Person Companies, mandate CSR, and establish the National Company Law Tribunal (NCLT).",
+    tags: ["companies act", "2013", "1956", "CSR", "OPC", "salomon", "corporate veil"],
     blocks: [
       {
         type: "p",
-        text: "The lecture introduces the Companies Act, 2013 by comparing it with the Companies Act, 1956, against a background of political, economic, and social change.",
-      },
-      {
-        type: "quote",
-        text: "It is not the strongest of the species that survive, nor the most intelligent, but the one most responsive to change.",
-        cite: "Charles Darwin",
+        text: "The Companies Act, 2013 (Act No. 18 of 2013) received Presidential assent on 29th August 2013. It completely overhauled Indian corporate jurisprudence, replacing the legacy Companies Act, 1956. Engineered for economic liberalization, digital compliance, investor empowerment, and corporate social accountability, the 2013 Act contains 470 Sections organized into 29 Chapters and 7 Schedules.",
       },
       {
         type: "h3",
-        text: "Legislative milestones",
+        text: "1. Core Characteristics of a Company (*Salomon Principle*)",
       },
       {
         type: "ul",
         items: [
-          "2008–2009: introduction of the Companies Bill.",
-          "2010–2012: Parliamentary Standing Committee reviews.",
-          "2012: passed by the Lok Sabha (December 2012).",
-          "2013: passed by the Rajya Sabha (August 2013) and received Presidential assent.",
+          "_Independent Corporate Personality (*Salomon v. Salomon & Co. Ltd. [1897] AC 22*)_: A company is a distinct legal entity in the eyes of law, separate and independent from its shareholders, promoters, and directors. Aron Salomon sold his boot business to a company formed by him and his family. Upon liquidation, unsecured creditors claimed priority over Salomon's debentures. House of Lords held: The company is an independent legal person; Salomon as secured debenture holder was entitled to priority over unsecured creditors.",
+          "_Perpetual Succession_: The existence of a company is not affected by the death, insanity, insolvency, or exit of its members. *'Members may come and members may go, but the company goes on forever.'*",
+          "_Limited Liability_: Liability of members is limited to the unpaid amount on shares held by them (in companies limited by shares), or the guaranteed sum agreed in the MoA (in guarantee companies).",
+          "_Separate Property (*Macaura v. Northern Assurance Co. [1925]*)_: Company assets belong to the company, not to individual shareholders.",
+          "_Capacity to Sue and Be Sued_: A company can institute legal suits in its own corporate name and can be sued by third parties.",
+          "_Common Seal_: Optional under the 2015 Amendment Act. Documents can be authenticated by two directors, or one director and the Company Secretary.",
         ],
       },
       {
         type: "h3",
-        text: "Major objectives and governance reforms",
-      },
-      {
-        type: "ul",
-        items: [
-          "Simplify company law and enhance ease of doing business.",
-          "Improve corporate governance, transparency, and accountability.",
-          "Provide stronger regulatory oversight (for example NFRA, SFIO, NCLT).",
-          "Introduce Class Action Suits (Section 245) to safeguard minority shareholders.",
-          "Enforce gender diversity: mandatory appointment of Women Directors.",
-          "Ensure board independence: mandate at least one-third Independent Directors for listed companies.",
-          "Limit tenure of Independent Directors (maximum two consecutive terms of 5 years).",
-          "Make Corporate Social Responsibility (CSR) spending de facto mandatory (Section 135: 2% of average net profits).",
-          "Improve reporting quality: mandatory consolidated financial statements covering unlisted subsidiaries and joint ventures.",
-          "Mandatory statutory auditor rotation (individual: 5 years; firm: 10 years).",
-        ],
-      },
-      {
-        type: "h3",
-        text: "Structural comparison: 1956 versus 2013",
-      },
-      {
-        type: "table",
-        headers: ["Parameter", "Companies Act, 1956", "Companies Act, 2013"],
-        rows: [
-          [
-            "Structure",
-            "13 Parts, 658 Sections, 15 Schedules",
-            "29 Chapters, 470 Sections, 7 Schedules, 95 Definitions",
-          ],
-          [
-            "Maximum members (private company)",
-            "Maximum 50 members",
-            "Maximum 200 members (Section 2(68))",
-          ],
-          [
-            "One Person Company",
-            "Did not exist",
-            "Introduced One Person Company (OPC) (Section 2(62))",
-          ],
-          [
-            "Certificate of Incorporation",
-            "Treated as conclusive evidence",
-            "Conclusive of registration; penal action permitted for fraud (Sections 7(7), 447)",
-          ],
-        ],
-      },
-      {
-        type: "h3",
-        text: "Key provisions compared",
-      },
-      {
-        type: "ol",
-        items: [
-          "_Applicability_. 1956: extended to India with exceptions for Jammu and Kashmir / Sikkim. 2013: applicable to the entire territory of India (Section 1).",
-          "_Maximum number of directors_. 1956: maximum 12; Central Government approval needed to exceed. 2013: maximum 15; can be increased beyond 15 by a Special Resolution without government approval (Section 149(1)).",
-          "_Women director_. 1956: no statutory requirement. 2013: mandatory for all listed companies and public companies with paid-up capital ≥ ₹100 crore or turnover ≥ ₹300 crore (Section 149(1)).",
-          "_Resident director_. 1956: no requirement. 2013: every company must have at least one director resident in India for ≥ 182 days in the financial year (Section 149(3)).",
-          "_E-governance_. 1956: physical documentation and manual filings. 2013: mandatory electronic filings, electronic maintenance of records, and e-voting.",
-          "_Memorandum of Association — object clause_. 1956: split into Main, Ancillary, and Other Objects. 2013: bifurcation eliminated; the MoA lists Main Objects and matters considered necessary in furtherance thereof.",
-          "_Articles of Association — entrenchment_. 1956: no specific entrenchment provisions. 2013: specific statutory recognition of entrenchment clauses (Section 5(3)).",
-          "_Exit option for dissenting shareholders_. 1956: no exit mechanism if unutilised IPO funds changed purpose. 2013: promoters must provide an exit option to dissenting shareholders if changing objects after raising money from the public (Sections 13(8), 27).",
-          "_Bonus shares_. 1956: regulated by guidelines and articles. 2013: comprehensive statutory rules enacted under Section 63.",
-          "_Corporate Social Responsibility_. 1956: voluntary; no statutory mandate. 2013: mandatory CSR Committee and 2% net profit allocation for qualifying companies (Section 135).",
-        ],
-      },
-      {
-        type: "maxim",
-        latin: "Nil Utile Aut Honestum Quod Legibus Contrarium",
-        meaning: "Nothing is useful nor honourable that is contrary to law.",
-      },
-      {
-        type: "h3",
-        text: "Closing point for a 14-mark answer",
+        text: "2. Doctrine of Lifting / Piercing the Corporate Veil",
       },
       {
         type: "p",
-        text: "The 2013 Act is shorter, more definition-heavy, and more governance-driven than the 1956 Act. Private companies may have 200 members. A single person may form an OPC. Women directors, resident directors, independent directors, auditor rotation, class action, and CSR are statutory, not optional.",
+        text: "Although a company is a separate legal person, courts will lift or disregard the corporate veil to look at the real human agents behind the company where the corporate form is abused for fraud, tax evasion, or illegal conduct:",
+      },
+      {
+        type: "table",
+        headers: ["Ground for Lifting the Veil", "Landmark Case Law", "Legal Principle & Practical Application"],
+        rows: [
+          [
+            "Prevention of Fraud or Improper Conduct",
+            "*Gilford Motor Co. v. Horne [1933]*",
+            "A former employee bound by a non-compete covenant formed a dummy company to solicit his former employer's clients. Injunction was granted against both him and his company.",
+          ],
+          [
+            "Protection of Revenue / Tax Evasion",
+            "*Sir Dinshaw Maneckjee Petit [1927]*",
+            "An assessee created four dummy private investment companies solely to divert dividend income and evade super-tax. Court disregarded the separate entities and taxed him directly.",
+          ],
+          [
+            "Determination of Enemy Character in Wartime",
+            "*Daimler Co. Ltd. v. Continental Tyre & Rubber Co. [1916]*",
+            "A company incorporated in England whose entire share capital (except one share) was held by German nationals was held to possess enemy character during WWI.",
+          ],
+          [
+            "Avoidance of Welfare / Labour Legislation",
+            "*Workmen of Associated Rubber Industry Ltd. [1986] SC*",
+            "A company created a wholly owned subsidiary to siphon off profits and reduce statutory bonus payable to workmen. Supreme Court pierced the veil and merged profits for bonus calculation.",
+          ],
+        ],
+      },
+      {
+        type: "h3",
+        text: "3. Major Structural Shifts: 1956 vs. 2013 Companies Act",
+      },
+      {
+        type: "table",
+        headers: ["Feature / Parameter", "Companies Act, 1956", "Companies Act, 2013"],
+        rows: [
+          [
+            "Sections & Structure",
+            "658 Sections, 15 Schedules. Rigid, bulky, process-heavy.",
+            "470 Sections, 29 Chapters, 7 Schedules. Agile, rule-based delegated legislation.",
+          ],
+          [
+            "One Person Company (OPC)",
+            "Not recognized. Minimum 2 members required.",
+            "Introduced under Section 2(62) for individual entrepreneurs.",
+          ],
+          [
+            "Private Company Limit",
+            "Maximum 50 members.",
+            "Maximum 200 members (Section 2(68)).",
+          ],
+          [
+            "Corporate Social Responsibility",
+            "Voluntary philanthropy; zero statutory mandate.",
+            "Mandatory under Section 135 (2% net profits for qualifying companies).",
+          ],
+          [
+            "Adjudication Forum",
+            "Company Law Board (CLB) and High Courts.",
+            "National Company Law Tribunal (NCLT) & NCLAT.",
+          ],
+          [
+            "Board Diversity",
+            "No statutory mandate for women or independent directors.",
+            "Mandatory at least 1 Woman Director and 1/3rd Independent Directors for listed firms.",
+          ],
+          [
+            "Fraud Investigation & Penalties",
+            "General Department of Company Affairs inspections.",
+            "Statutory Serious Fraud Investigation Office (SFIO) under Sec 211; stringent Sec 447 fraud penalties.",
+          ],
+        ],
+      },
+      {
+        type: "h3",
+        text: "4. Deep Dive: Mandatory CSR Framework (Section 135)",
+      },
+      {
+        type: "ul",
+        items: [
+          "_Applicability Thresholds (Any ONE during immediately preceding financial year)_: (a) Net Worth ≥ ₹500 Crore, OR (b) Turnover ≥ ₹1,000 Crore, OR (c) Net Profit ≥ ₹5 Crore.",
+          "_CSR Committee Composition_: 3 or more directors, including at least one Independent Director.",
+          "_Mandatory Spend Formula_: Minimum **2% of the average net profits** of the company made during the three immediately preceding financial years.",
+          "_Approved Schedule VII Activities_: Eradicating hunger/poverty, healthcare, education, gender equality, environmental sustainability, PM National Relief Fund / PM CARES.",
+          "_Treatment of Unspent CSR Funds_: Unspent amounts relating to ongoing projects must be transferred to a special 'Unspent CSR Account' in a scheduled bank within 30 days and spent within 3 fiscal years; otherwise transferred to specified Schedule VII funds within 6 months.",
+        ],
       },
     ],
   },
@@ -127,164 +136,109 @@ export const companiesTopics: Topic[] = [
     marks: 14,
     lecture: "18/09/26",
     summary:
-      "Enterprises are corporate or non-corporate. Companies are then typed by liability, membership, control, and special status. Incorporation has been simplified, and fraud at incorporation is a non-bailable offence.",
-    tags: ["OPC", "private company", "public company", "incorporation", "prospectus"],
+      "Enterprises are classified by liability, membership, control, and special purpose. Incorporation is streamlined via SPICe+, while fraudulent incorporation incurs Section 447 penal liability.",
+    tags: ["OPC", "private company", "public company", "incorporation", "prospectus", "SPICe+", "section 8"],
     blocks: [
       {
         type: "p",
-        text: "Finish company law by classifying business enterprises, listing the types of company under the 2013 Act, and stating the incorporation and prospectus reforms.",
+        text: "Modern commercial enterprise law categorizes business organizations into corporate and non-corporate entities, with registered companies classified based on liability, membership scale, ownership control, and special statutory objectives.",
       },
       {
         type: "h3",
-        text: "Classification of business enterprises",
+        text: "1. Broad Classification of Business Enterprises",
+      },
+      {
+        type: "ul",
+        items: [
+          "_Corporate Enterprises_: Registered Companies (under Companies Act, 2013), Statutory Corporations (established by special Acts of Parliament, e.g. LIC, RBI, SBI), and Co-operative Societies.",
+          "_Non-Corporate Enterprises_: Sole Proprietorships, Partnership Firms (*Indian Partnership Act, 1932*), Hindu Undivided Family (HUF) businesses governed by Hindu Succession Act, and Joint Ventures.",
+        ],
+      },
+      {
+        type: "h3",
+        text: "2. Types of Companies Under the Companies Act, 2013",
       },
       {
         type: "h4",
-        text: "Corporate",
+        text: "Classification by Liability of Members",
       },
       {
         type: "ul",
         items: [
-          "Registered companies (limited by shares, limited by guarantee, unlimited).",
-          "Statutory corporations (created by special Acts of Parliament or a State Legislature).",
-          "Co-operative societies.",
+          "_Company Limited by Shares (Section 2(22))_: The liability of each member is limited to the amount, if any, unpaid on the shares held by him. Most commercial companies (e.g. Tata Motors Ltd, Infosys Ltd) belong to this category.",
+          "_Company Limited by Guarantee (Section 2(21))_: The liability of members is limited to such amount as the members undertake to contribute to the assets of the company in the event of winding up. Common in trade associations, clubs, and research societies.",
+          "_Unlimited Company (Section 2(92))_: A company where there is no statutory limit on the personal liability of its members; members are liable to contribute to company debts in full upon liquidation.",
         ],
       },
       {
         type: "h4",
-        text: "Non-corporate",
+        text: "Classification by Number of Members & Scale",
       },
       {
         type: "ul",
         items: [
-          "Sole proprietorship",
-          "Partnership firm (Indian Partnership Act, 1932)",
-          "Hindu Undivided Family (HUF)",
-          "Public-Private Partnerships (PPP) and Joint Ventures",
+          "_One Person Company (OPC) (Section 2(62))_: A private company with only **one natural Indian citizen member**. Requires nomination of another person who shall become the member in the event of the sole member's death or incapacity.",
+          "_Private Company (Section 2(68))_: Requires a minimum of 2 members and restricts maximum members to **200** (excluding current/former employees). By its Articles of Association, it: (a) Restricts the right to transfer shares, and (b) Prohibits any invitation to the public to subscribe for securities.",
+          "_Public Company (Section 2(71))_: A company which is NOT a private company. Requires a minimum of **7 members** with **no upper ceiling** on membership, and minimum 3 directors. Can invite public subscription for shares and debentures.",
+          "_Small Company (Section 2(85))_: A private company whose: (a) Paid-up share capital does not exceed ₹4 Crore, AND (b) Turnover does not exceed ₹40 Crore. Enjoys simplified compliance, fewer board meetings, and exemption from cash flow statements.",
         ],
       },
       {
-        type: "h3",
-        text: "Socio-economic jurisprudence of a corporation",
+        type: "h4",
+        text: "Classification by Ownership & Control",
       },
       {
         type: "ul",
         items: [
-          "_Traditional / capitalist view_: a company is private property; shareholders are the absolute owners.",
-          "_Modern socio-economic view_: a company is a social institution; shareholders are capital suppliers entitled to a reasonable return, while the company owes duties to employees, consumers, suppliers, and society.",
+          "_Holding Company (Section 2(46))_: A company of which other companies are subsidiary companies.",
+          "_Subsidiary Company (Section 2(87))_: A company in which the holding company: (a) Controls the composition of the Board of Directors, OR (b) Exercises or controls more than one-half (50%) of the total voting power.",
+          "_Associate Company (Section 2(6))_: A company in which another company has significant commercial influence (at least **20% of total voting power** or control of business decisions), but which is not a subsidiary.",
+          "_Government Company (Section 2(45))_: A company in which not less than **51% of the paid-up share capital** is held by the Central Government, State Government(s), or jointly (e.g. BHEL, ONGC, SAIL).",
+          "_Foreign Company (Section 2(42))_: A company incorporated outside India that has an established place of business in India (physically or electronically) and conducts business operations in India.",
+          "_Section 8 Company (Charitable / Non-Profit Company)_: Formed for promoting commerce, art, science, sports, education, research, social welfare, charity, or environmental protection. Profits must be applied solely toward promoting its objects; payment of dividends to members is strictly prohibited.",
         ],
       },
       {
         type: "h3",
-        text: "Types of companies by liability",
+        text: "3. Memorandum of Association (MoA) and Articles of Association (AoA)",
+      },
+      {
+        type: "table",
+        headers: ["Parameter", "Memorandum of Association (MoA - Section 4)", "Articles of Association (AoA - Section 5)"],
+        rows: [
+          [
+            "Nature & Purpose",
+            "Fundamental charter of the company; defines its constitution, powers, and outer operational boundaries with the outside world.",
+            "Internal regulations and bylaws governing the day-to-day management and internal administration of the company.",
+          ],
+          [
+            "Mandatory Clauses",
+            "6 Clauses: (1) Name Clause, (2) Registered Office Clause, (3) Objects Clause, (4) Liability Clause, (5) Capital Clause, (6) Association/Subscription Clause.",
+            "Rules regarding share allotment, transfer, forfeiture, director appointment, board meetings, voting, and dividend distribution.",
+          ],
+          [
+            "Doctrine of Ultra Vires",
+            "Any act done beyond the scope of the Objects Clause of the MoA is **ultra vires** (beyond powers) and void *ab initio*; it cannot be ratified even by unanimous shareholder vote (*Ashbury Railway Carriage v. Riche*).",
+            "Acts ultra vires the Articles but intra vires the Memorandum can be ratified by a special resolution of shareholders.",
+          ],
+          [
+            "Doctrine of Indoor Management",
+            "Not applicable to MoA (Constructive Notice applies).",
+            "*Turquand Rule*: Outsiders dealing with the company are entitled to assume that internal regulations of the AoA have been complied with (*Royal British Bank v. Turquand*).",
+          ],
+        ],
+      },
+      {
+        type: "h3",
+        text: "4. Incorporation Reforms & Section 447 Fraud Liability",
       },
       {
         type: "ul",
         items: [
-          "_Company limited by shares (Section 2(22))_: liability of members limited by the MoA to the amount unpaid on shares held.",
-          "_Company limited by guarantee (Section 2(21))_: liability limited to the amount undertaken to be contributed to company assets in the event of winding up.",
-          "_Unlimited company (Section 2(92))_: no limit on the liability of its members.",
+          "_Simplified Digital Incorporation (SPICe+ Form)_: Integrated single-window electronic filing on MCA21 portal covering Name Reservation (RUN), Incorporation, DIN allocation, PAN, TAN, EPFO, ESIC, Professional Tax, and mandatory Bank Account opening in one submission.",
+          "_Section 447 (Punishment for Corporate Fraud)_: Providing false, deceptive, or misleading information or suppressing material facts during incorporation is a severe **non-bailable criminal offence**. Punishment: Imprisonment from 6 months to 10 years + fine up to 3 times the amount involved in the fraud.",
+          "_NCLT Powers on Fraudulent Incorporation (Section 7(7))_: The National Company Law Tribunal is empowered to: (a) Regulate management, (b) Make member liability unlimited, (c) Remove company name from RoC, or (d) Order compulsory winding up.",
         ],
-      },
-      {
-        type: "h3",
-        text: "Types of companies by number of members and scale",
-      },
-      {
-        type: "ul",
-        items: [
-          "_One Person Company (OPC) (Section 2(62))_: a private company with only 1 person as a member.",
-          "_Private company (Section 2(68))_: restricts share transferability, limits members to 200, and prohibits public subscription.",
-          "_Public company (Section 2(71))_: not a private company; minimum 7 members, no upper limit.",
-          "_Small company (Section 2(85))_: other than a public company; paid-up share capital does not exceed ₹50 lakhs (or prescribed up to ₹4 crore / ₹10 crore); turnover does not exceed ₹2 crore (or prescribed up to ₹40 crore / ₹100 crore). This does not apply to holding or subsidiary companies, Section 8 companies, or statutory companies.",
-        ],
-      },
-      {
-        type: "h3",
-        text: "Types of companies by control and relationship",
-      },
-      {
-        type: "ul",
-        items: [
-          "_Holding company (Section 2(46))_: a company of which other companies are subsidiaries.",
-          "_Subsidiary company (Section 2(87))_: a company where the holding company controls board composition or holds more than 50% of voting power.",
-          "_Associate company (Section 2(6))_: a company in which another company has significant influence (≥ 20% voting power or control of business decisions), not being a subsidiary, including a joint venture.",
-        ],
-      },
-      {
-        type: "h3",
-        text: "Special categories",
-      },
-      {
-        type: "ul",
-        items: [
-          "_Section 8 company_: charitable companies for promoting commerce, art, science, sports, education, research, social welfare, religion, charity, or environmental protection. Profits are applied to objects; dividend distribution is prohibited.",
-          "_Government company (Section 2(45))_: ≥ 51% paid-up share capital held by the Central Government, State Government(s), or jointly.",
-          "_Foreign company (Section 2(42))_: incorporated outside India with a place of business in India (physically or electronically) and conducting business activities in India.",
-          "_Listed company (Section 2(52))_: has any of its securities listed on a recognised stock exchange.",
-        ],
-      },
-      {
-        type: "h3",
-        text: "Key preliminary definitions",
-      },
-      {
-        type: "ul",
-        items: [
-          "_Key Managerial Personnel (KMP) (Section 2(51))_: CEO, Managing Director, Manager, Company Secretary (CS), Whole-time Director, CFO.",
-          "_Independent Director (Section 149(6))_: defined with objective criteria of independence and integrity.",
-          "_Auditing standards (NFRA)_: statutory recognition and enforcement of mandatory auditing and accounting standards.",
-          "_Promoter (Section 2(69))_: statutorily defined based on control and role in the prospectus or annual return.",
-          "_Related party (Section 2(76)) and related party transactions (Section 188)_: comprehensive coverage of directors, KMP, relatives, holding, subsidiary, and associate entities.",
-          "_Officer in default (Section 2(60))_: scope expanded to include KMP, share transfer agents, merchant bankers, and registrars.",
-          "_Subsidiary of a public company_: deemed to be a public company for statutory purposes even if its articles retain private company restrictions.",
-          "_Employee Stock Option (ESOP)_: defined and statutorily permitted for employees or directors of holding and subsidiary companies.",
-        ],
-      },
-      {
-        type: "h3",
-        text: "Reforms in company incorporation",
-      },
-      {
-        type: "ul",
-        items: [
-          "Simplified MoA objects clause: elimination of the \"other objects\" category; focus on main objects and matters incidental thereto.",
-          "OPC introduction: single entrepreneur incorporation with limited liability.",
-          "Streamlined conversion between private, public, and OPC structures.",
-          "Standard financial year: uniform fiscal year (1 April to 31 March) for all companies (NCLT exceptions for foreign consolidation).",
-          "RoC enforcement: powers granted to the Registrar of Companies to strike off names of defunct companies or those incorporated through false representations.",
-        ],
-      },
-      {
-        type: "h3",
-        text: "Fraudulent incorporation and penalties",
-      },
-      {
-        type: "ul",
-        items: [
-          "_Section 447 (Punishment for fraud)_: any person deliberately furnishing false or incorrect information or suppressing material facts during incorporation is liable under Section 447. It is a non-bailable criminal offence, with imprisonment from 6 months up to 10 years and fine.",
-          "_Powers of the Tribunal (Section 7(7))_: any person can challenge the validity of incorporation before the National Company Law Tribunal (NCLT). NCLT can order regulation of management, direct changes in MoA or AoA, make liability of members unlimited, or order winding up.",
-        ],
-      },
-      {
-        type: "h3",
-        text: "Prospectus and allotment of securities (Chapter III)",
-      },
-      {
-        type: "ul",
-        items: [
-          "The chapter covers all securities (shares, debentures, bonds, derivatives) rather than just shares.",
-          "Public companies raise funds by public offer (IPO / FPO), private placement (Section 42), and rights issue or bonus issue (Sections 62 and 63).",
-          "If a company varies the terms of a contract or the objects stated in the prospectus, it is statutorily prohibited from using prospectus funds to buy, trade, or deal in equity shares of any other listed company.",
-        ],
-      },
-      {
-        type: "h3",
-        text: "Closing point for a 14-mark answer",
-      },
-      {
-        type: "p",
-        text: "Classify first (corporate or not; then by liability, membership, control, and special status). Then state that incorporation is simpler, but false incorporation is a serious criminal offence, and that public fundraising is now about securities, not only shares.",
       },
     ],
   },

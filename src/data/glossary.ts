@@ -24,7 +24,7 @@ export const glossary: GlossaryEntry[] = [
     term: "Proposal / Offer",
     section: "Section 2(a)",
     body: "When one person signifies to another his willingness to do or to abstain from doing anything, with a view to obtaining the assent of that other to such act or abstinence.",
-    topicSlug: "offer-and-rules",
+    topicSlug: "offer-meaning-essentials",
   },
   {
     id: "promise",

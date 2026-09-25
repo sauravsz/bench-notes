@@ -11,132 +11,89 @@ export const consentTopics: Topic[] = [
     lecture: "27/08/26",
     summary:
       "Only a major of sound mind who is not disqualified by law can contract. Consent is free when it is not caused by coercion, undue influence, fraud, misrepresentation, or mistake.",
-    tags: ["capacity", "section 11", "consent", "coercion", "fraud"],
+    tags: ["capacity", "section 11", "consent", "coercion", "fraud", "undue influence", "minor"],
     blocks: [
       {
         type: "p",
-        text: "Capacity and free consent are two separate essentials of a valid contract. A 14-mark answer should treat Section 11 first, then Sections 13 and 14, then the vitiating factors taught in class: coercion, undue influence, and fraud. Misrepresentation and mistake belong with the next topic, but they are named in Section 14 and should be listed here.",
+        text: "Capacity to contract refers to the legal competence of a person to enter into a binding contract. Section 11 of the Indian Contract Act, 1872 lays down the criteria for competence, while Section 14 ensures that agreements entered into by competent parties are backed by voluntary, uncoerced consent.",
+      },
+      {
+        type: "def",
+        term: "Who are competent to contract (Section 11)",
+        section: "Section 11",
+        body: "Every person is competent to contract who is of the age of majority according to the law to which he is subject, and who is of sound mind, and is not disqualified from contracting by any law to which he is subject.",
       },
       {
         type: "h3",
-        text: "Capacity to contract (Section 11)",
-      },
-      {
-        type: "p",
-        text: "Every person is competent to contract who:",
-      },
-      {
-        type: "ol",
-        items: [
-          "Is of the age of majority according to the law to which they are subject (18 years under the Indian Majority Act, 1875).",
-          "Is of sound mind.",
-          "Is not disqualified from contracting by any law to which they are subject.",
-        ],
-      },
-      {
-        type: "h4",
-        text: "Disqualified persons",
+        text: "1. Law Relating to Minors' Agreements (The Five Core Principles)",
       },
       {
         type: "ul",
         items: [
-          "_Minors_: agreements are _void ab initio_.",
-          "_Persons of unsound mind_: idiots, lunatics, drunkards or intoxicated persons.",
-          "_Disqualified by law_: alien enemies, foreign sovereigns, convicts, undischarged insolvents.",
+          "_1. Absolutely Void ab initio (*Mohori Bibee v. Dharmodas Ghose [1903] Privy Council*)_: A minor has no capacity to contract; an agreement entered into by a minor is an absolute nullity from the beginning. _Facts_: Dharmodas Ghose, a minor, mortgaged his property to moneylender Brahmo Dutt for ₹20,000. Held: The mortgage deed was completely void, and the moneylender could not enforce the loan or recover the money under contract law.",
+          "_2. No Estoppel Against Minor_: Even if a minor fraudulently misrepresents his age as major to induce the other party to enter into an agreement, the minor is not estopped from pleading his minority in defence (*Sadiq Ali Khan v. Jai Kishori*).",
+          "_3. No Ratification on Attaining Majority_: An agreement that is void _ab initio_ cannot be validated or ratified upon the minor reaching 18 years of age, because a void agreement has no legal existence and cannot form consideration for a subsequent promise (*Indran Ramaswamy v. Anthappa Chettiar*).",
+          "_4. Doctrine of Restitution (Section 33, Specific Relief Act, 1963)_: If a minor obtains property or goods by misrepresenting his age, the court may compel the minor to restore the traceable property/goods to the other party, but he cannot be compelled to repay money if it has been spent (*Leslie Ltd. v. Sheill*).",
+          "_5. Liability for Necessaries (Section 68 - Quasi-Contract)_: If a person incapable of entering into a contract (or a minor) is supplied by another with necessaries suited to his condition in life, the person who furnished such supplies is entitled to be reimbursed from the **property / estate** of such incapable person. The minor is **never personally liable**; only his estate is liable.",
         ],
       },
       {
         type: "h3",
-        text: "Free consent (Sections 13 and 14)",
+        text: "2. Soundness of Mind for Contracting (Section 12)",
+      },
+      {
+        type: "p",
+        text: "Section 12 provides that a person is of sound mind for the purpose of making a contract if, at the time of making it, he is capable of understanding it and forming a rational judgment as to its effect upon his interests.",
+      },
+      {
+        type: "ul",
+        items: [
+          "_Person usually of unsound mind, but occasionally of sound mind_: May make a contract when he is of sound mind (during a **lucid interval**). _Example_: A patient in a mental asylum who experiences temporary periods of lucidity can enter into valid commercial contracts during those lucid intervals.",
+          "_Person usually of sound mind, but occasionally of unsound mind_: Cannot make a contract when he is of unsound mind. _Example_: A sane person who is delirious with severe fever or so intoxicated by alcohol/drugs that he cannot understand terms cannot enter into a binding contract while in that state.",
+        ],
+      },
+      {
+        type: "h3",
+        text: "3. Disqualified Persons by Law",
+      },
+      {
+        type: "ul",
+        items: [
+          "_Alien Enemies_: Citizens of a foreign country with which India is at war. Contracts entered into during wartime are void; pre-existing peacetime contracts are either suspended or dissolved.",
+          "_Foreign Sovereigns & Ambassadors_: Enjoy diplomatic immunity under the *Vienna Convention*; they can sue in Indian courts, but cannot be sued without prior sanction of the Central Government (Section 86, CPC).",
+          "_Insolvent Persons_: An undischarged insolvent cannot enter into contracts dealing with his estate, as all property vests in the Official Receiver / Liquidator.",
+          "_Convicts_: While serving a sentence of imprisonment in jail, a convict is incapable of entering into contracts, except when on parole or with special license.",
+        ],
+      },
+      {
+        type: "h3",
+        text: "4. Consent vs. Free Consent (Sections 13 & 14)",
       },
       {
         type: "def",
-        term: "Consent",
+        term: "Consent (Consensus ad idem)",
         section: "Section 13",
-        body: "Two or more persons are said to consent when they agree upon the same thing in the same sense (_consensus ad idem_).",
+        body: "Two or more persons are said to consent when they agree upon the same thing in the same sense.",
       },
       {
         type: "def",
-        term: "Free consent",
+        term: "Free Consent",
         section: "Section 14",
-        body: "Consent is free when not caused by coercion (Section 15), undue influence (Section 16), fraud (Section 17), misrepresentation (Section 18), or mistake (Sections 20–22).",
+        body: "Consent is said to be free when it is not caused by: (1) Coercion (Sec 15), (2) Undue Influence (Sec 16), (3) Fraud (Sec 17), (4) Misrepresentation (Sec 18), or (5) Mistake (Sec 20, 21, 22).",
       },
       {
         type: "h3",
-        text: "Coercion (Section 15)",
-      },
-      {
-        type: "p",
-        text: "Coercion is committing or threatening to commit any act forbidden by the Indian Penal Code, or unlawfully detaining or threatening to detain property, to prejudice any person, with the intention of causing any person to enter into an agreement.",
-      },
-      {
-        type: "h4",
-        text: "Types and illustrations of coercion",
+        text: "5. The Five Vitiating Factors in Free Consent",
       },
       {
         type: "ul",
         items: [
-          "Committing an act forbidden by the Indian Penal Code.",
-          "Threatening to commit an act forbidden by the Indian Penal Code.",
-          "Unlawful detention of property.",
-          "Threat to detain property.",
-          "Threat to commit suicide constitutes coercion (_Chikkam Ammiraju v. Seshamma_).",
-          "Threat to file a legitimate suit is not coercion.",
+          "_Coercion (Section 15)_: Committing or threatening to commit any act forbidden by the Indian Penal Code, or the unlawful detaining or threatening to detain any property, to prejudice any person, with the intention of causing any person to enter into an agreement. _Landmark Case_: Threatening to commit suicide constitutes coercion (*Chikham Amiraju v. Seshamma*). _Legal Effect_: Contract is voidable at the option of the coerced party (Section 19).",
+          "_Undue Influence (Section 16)_: A contract where relations subsisting between parties are such that one of the parties is in a position to dominate the will of the other and uses that position to obtain an unfair advantage over the other. Occurs in real/apparent authority (master-servant, police-accused), fiduciary relationships (doctor-patient, lawyer-client, spiritual guru-disciple), or mental distress. _Landmark Case_: Spiritual guru inducing a devotee to gift all property to him (*Mannu Singh v. Umadat Pandey*). _Legal Effect_: Voidable at the option of the dominated party (Section 19A).",
+          "_Fraud (Section 17)_: Intentional deception with intent to deceive another party. Includes: (a) Suggestion of a false fact by one who does not believe it to be true (*Derry v. Peek*), (b) Active concealment of a known defect, (c) A promise made without any intention of performing it. _Legal Effect_: Voidable + Right to sue for damages in tort/deceit (Section 19).",
+          "_Misrepresentation (Section 18)_: An innocent, unwarranted false assertion of a material fact made without any intent to deceive, believing it to be true. _Legal Effect_: Voidable at the option of the misled party (Section 19).",
+          "_Mistake of Fact (Section 20)_: Where both parties are under a mutual (bilateral) mistake as to a matter of fact essential to the agreement, the agreement is completely **void ab initio**.",
         ],
-      },
-      {
-        type: "h4",
-        text: "Effect of coercion (Section 19)",
-      },
-      {
-        type: "p",
-        text: "The contract is voidable at the option of the aggrieved party.",
-      },
-      {
-        type: "h3",
-        text: "Undue influence (Section 16)",
-      },
-      {
-        type: "p",
-        text: "Undue influence exists when relations between the parties are such that one is in a position to dominate the will of the other and uses that position to obtain an unfair advantage. It arises in real or apparent authority, fiduciary relationships, or mental distress.",
-      },
-      {
-        type: "p",
-        text: "Effect (Section 19A): the contract is voidable at the option of the aggrieved party.",
-      },
-      {
-        type: "h3",
-        text: "Fraud (Section 17)",
-      },
-      {
-        type: "p",
-        text: "Fraud is intentional deception to induce agreement. It includes:",
-      },
-      {
-        type: "ol",
-        items: [
-          "Suggesting as a fact that which is not true by one who does not believe it to be true.",
-          "Active concealment of a fact by one having knowledge or belief of it.",
-          "A promise made without any intention of performing it.",
-          "Any other act fitted to deceive.",
-          "Any act or omission specifically declared fraudulent by law.",
-        ],
-      },
-      {
-        type: "h4",
-        text: "Mere silence is not fraud",
-      },
-      {
-        type: "p",
-        text: "Mere silence as to facts is generally not fraud, except where there is a duty to speak (_contracts uberrimae fidei_ such as insurance, marriage, family settlement, share allotment) or where silence is equivalent to speech. The principle of _caveat emptor_ (let the buyer beware) also applies.",
-      },
-      {
-        type: "h3",
-        text: "Closing point for a 14-mark answer",
-      },
-      {
-        type: "p",
-        text: "A person who is not competent cannot make a contract. A person who is competent still does not make a free contract if consent is obtained by coercion, undue influence, or fraud. Those contracts are voidable at the option of the aggrieved party.",
       },
     ],
   },
@@ -149,136 +106,100 @@ export const consentTopics: Topic[] = [
     marks: 14,
     lecture: "27/08/26",
     summary:
-      "Contracts are classified by enforceability, formation, and performance. Misrepresentation and bilateral mistake of fact have different effects. Idiots, lunatics, and drunkards are treated separately.",
-    tags: ["classification", "misrepresentation", "mistake", "idiot", "lunatic"],
+      "Contracts are classified across validity, formation, and performance dimensions. Misrepresentation and bilateral mistake carry different legal consequences.",
+    tags: ["classification", "misrepresentation", "mistake", "idiot", "lunatic", "formation", "performance"],
     blocks: [
       {
         type: "p",
-        text: "This topic combines two examination favourites: the classification of contracts, and the remaining vitiating factors of misrepresentation and mistake, together with the detailed rules on mental incapacity.",
+        text: "Contract law classifies legal agreements into structured categories based on three primary operational criteria: (1) Enforceability & Validity, (2) Mode of Formation, and (3) Extent of Performance.",
       },
       {
         type: "h3",
-        text: "Classification of contracts",
-      },
-      {
-        type: "h4",
-        text: "By enforceability",
+        text: "1. Classification by Enforceability & Validity",
       },
       {
         type: "ul",
         items: [
-          "_Valid_: an agreement enforceable by law.",
-          "_Voidable_: enforceable at the option of one or more parties, but not at the option of the other or others.",
-          "_Void_: a void agreement is unenforceable from the beginning (_void ab initio_). A void contract is one which later ceases to be enforceable.",
-          "_Illegal_: an agreement that the law does not permit.",
-          "_Unenforceable_: an agreement that cannot be enforced, for example for want of a required formality.",
-        ],
-      },
-      {
-        type: "h4",
-        text: "By formation",
-      },
-      {
-        type: "ul",
-        items: [
-          "Express",
-          "Implied",
-          "Quasi-contract",
-          "E-contract",
-        ],
-      },
-      {
-        type: "h4",
-        text: "By extent of performance",
-      },
-      {
-        type: "ul",
-        items: [
-          "_Executed_: performed.",
-          "_Executory_: still to be performed (unilateral or bilateral).",
-        ],
-      },
-      {
-        type: "callout",
-        label: "How to keep the types distinct",
-        body: "Enforceability asks whether the law will compel performance. Formation asks how the contract came into being. Performance asks whether the obligations have already been carried out.",
-      },
-      {
-        type: "h3",
-        text: "Misrepresentation (Section 18)",
-      },
-      {
-        type: "ul",
-        items: [
-          "Unwarranted positive assertions without deceptive intent.",
-          "Breach of duty without intent to deceive (constructive fraud).",
-          "Inducing an innocent mistake of fact.",
-        ],
-      },
-      {
-        type: "p",
-        text: "Effect (Section 19): voidable at the option of the aggrieved party.",
-      },
-      {
-        type: "h3",
-        text: "Mistake (Sections 20, 21, 22)",
-      },
-      {
-        type: "p",
-        text: "Mistake of law plus mistake of fact together make up mistake as a vitiating factor.",
-      },
-      {
-        type: "h4",
-        text: "Mistake of law",
-      },
-      {
-        type: "ul",
-        items: [
-          "Indian law: _Ignorantia juris non excusat_. No relief; the contract remains valid.",
-          "Foreign law: treated as a mistake of fact (void).",
-        ],
-      },
-      {
-        type: "h4",
-        text: "Mistake of fact",
-      },
-      {
-        type: "ul",
-        items: [
-          "_Bilateral mistake (Section 20)_: both parties under a mistake as to a matter of fact essential to the agreement. The agreement is void.",
-          "_Unilateral mistake (Section 22)_: only one party under a mistake. The contract is not voidable (it remains valid), except in cases of mistaken identity of person or nature of the transaction.",
+          "_Valid Contract (Section 2(h) & Sec 10)_: Enforceable by law; satisfies all statutory essentials. _Example_: A written commercial purchase order for raw steel with agreed price and delivery terms.",
+          "_Voidable Contract (Section 2(i))_: Enforceable at the option of the aggrieved party whose consent was caused by coercion, undue influence, fraud, or misrepresentation (Sections 19 & 19A). Remains valid until legally rescinded.",
+          "_Void Agreement (Section 2(g))_: Void from the very beginning (_void ab initio_); creates no legal rights or remedies. _Example_: Agreement with a minor or wagering bet.",
+          "_Void Contract (Section 2(j))_: A contract that was valid when made, but subsequently ceases to be enforceable due to supervening impossibility or destruction of subject matter (Section 56).",
+          "_Illegal Agreement (Section 23)_: Prohibited by law, criminal, or opposed to public policy. All collateral transactions are also void. _Example_: Agreement to smuggle restricted electronics.",
+          "_Unenforceable Contract_: Valid in substance, but barred from legal enforcement due to technical defects (lack of stamp duty, registration, or limitation expiry).",
         ],
       },
       {
         type: "h3",
-        text: "Mental incapacity and legal status",
+        text: "2. Classification by Mode of Formation",
       },
       {
-        type: "def",
-        term: "Idiot",
-        body: "Devoid of rational thinking from birth. All agreements (except for necessaries of life) are absolutely void.",
-      },
-      {
-        type: "def",
-        term: "Lunatic",
-        body: "Deranged mental faculties due to disease or strain. Agreements are void, except those made during lucid intervals.",
-      },
-      {
-        type: "def",
-        term: "Drunkard / intoxicated",
-        body: "Temporarily incapable of rational judgment. Agreements made while intoxicated are void.",
-      },
-      {
-        type: "p",
-        text: "Persons disqualified by law include alien enemies, convicts, insolvents, and corporations acting _ultra vires_.",
+        type: "ul",
+        items: [
+          "_Express Contract (Section 9)_: Created through express spoken words or written documents. _Example_: A signs a formal lease agreement with landlord B to rent an office at ₹50,000/month for 11 months.",
+          "_Implied / Tacit Contract (Section 9)_: Formed by the acts, conduct of the parties, or surrounding circumstances without verbal communication. _Example 1_: A commuter boards a public metro or bus; by boarding, an implied contract is formed to pay the fare. _Example 2_: Taking cash out of an automated bank ATM.",
+          "_Quasi-Contract (Sections 68–72: Relations Resembling Contract)_: Not created by mutual consent, but imposed by law to prevent **unjust enrichment** (*Nemo debet locupletari ex aliena jactura*). _Example 1 (Sec 71)_: A finder of lost goods has the legal duties of a bailee to find the true owner. _Example 2 (Sec 72)_: A person to whom money has been paid or goods delivered by mistake or under coercion must repay or return it.",
+          "_E-Contract (Cyber / Digital Contract)_: Formed through digital media, EDI, email exchanges, or electronic signatures under Section 10A of the Information Technology Act, 2000. Includes Click-wrap (e.g. clicking 'I Accept Terms' when buying software) and Shrink-wrap contracts.",
+        ],
       },
       {
         type: "h3",
-        text: "Closing point for a 14-mark answer",
+        text: "3. Classification by Extent of Performance",
       },
       {
-        type: "p",
-        text: "Classification tells you what kind of contract you are looking at. Misrepresentation makes a contract voidable. A bilateral mistake of essential fact makes the agreement void. An idiot's agreement is absolutely void; a lunatic may contract in a lucid interval.",
+        type: "ul",
+        items: [
+          "_Executed Contract_: Both contracting parties have completely fulfilled their reciprocal obligations. _Example_: A pays ₹1,000 cash at a pharmacy and receives the medicines immediately.",
+          "_Executory Contract_: The obligations of one or both parties remain to be performed in the future. It is subdivided into:",
+          "  • _Unilateral Contract (One-Sided Executory)_: One party has already performed their obligation at the time of contract formation, while the other party's promise is outstanding. _Example_: A finds a lost briefcase pursuant to a public reward offer of ₹10,000 announced by B. A has executed his part; B's duty to pay ₹10,000 remains executory.",
+          "  • _Bilateral Contract (Two-Sided Executory)_: Both parties make reciprocal promises to be executed at a future date. _Example_: A builder promises to construct an office block in 18 months, and the client promises to pay monthly progress billing installments.",
+        ],
+      },
+      {
+        type: "h3",
+        text: "4. Fraud vs. Misrepresentation (Comprehensive Comparative Table)",
+      },
+      {
+        type: "table",
+        headers: ["Parameter", "Fraud (Section 17)", "Misrepresentation (Section 18)"],
+        rows: [
+          [
+            "Intention to Deceive",
+            "Deliberate, intentional deceit to induce the other party into the contract.",
+            "Innocent false statement made without any fraudulent intent to deceive.",
+          ],
+          [
+            "Knowledge of Truth",
+            "The person making the representation knows it is false or does not believe it to be true.",
+            "The person making the representation genuinely believes it to be true based on his information.",
+          ],
+          [
+            "Remedies Available",
+            "Rescission of contract + Right to claim damages for the tort of deceit.",
+            "Rescission of contract, but NO damages can be claimed in tort (except under specific statutory warranty provisions).",
+          ],
+          [
+            "Defence of Due Diligence",
+            "Party committing fraud cannot defend by saying the victim had means of discovering the truth (except in cases of silent fraud).",
+            "If the aggrieved party had the ordinary means of discovering the truth with ordinary diligence, the contract cannot be rescinded.",
+          ],
+          [
+            "Practical Illustration",
+            "A sells a horse to B, knowing the horse is unsound, and fits false horseshoes to conceal hoof disease.",
+            "A tells B that his agricultural land yields 1,000 kg/acre based on an outdated revenue certificate, while output was 700 kg.",
+          ],
+        ],
+      },
+      {
+        type: "h3",
+        text: "5. The Law of Mistake (Sections 20, 21, and 22)",
+      },
+      {
+        type: "ul",
+        items: [
+          "_Bilateral Mistake of Fact (Section 20)_: When both parties are under a mutual mistake regarding a matter of fact essential to the agreement, the agreement is **void ab initio**. _Example_: A agrees to buy B's cargo of wheat believed to be sailing on ship 'Empress'; unknown to both parties, the ship had sunk the previous day (*Couturier v. Hastie*).",
+          "_Unilateral Mistake of Fact (Section 22)_: A contract is NOT voidable merely because it was caused by one of the parties being under a mistake as to a matter of fact (unless the mistake relates to the identity of the person or nature of document (*Balfour v. Jones*, *Foster v. Mackinnon*)).",
+          "_Mistake of Law (Section 21)_: A contract is not voidable because it was caused by a mistake as to any law in force in India (*Ignorantia juris non excusat* — ignorance of law is no excuse). However, a mistake as to foreign law is treated as a mistake of fact and makes the agreement void under Section 20.",
+        ],
       },
     ],
   },
