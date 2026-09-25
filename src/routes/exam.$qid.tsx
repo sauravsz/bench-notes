@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { getExam, getTopic } from "@/data";
-import { NoteBody } from "@/components/note-body";
+import { ReaderView } from "@/components/reader-view";
 
 export const Route = createFileRoute("/exam/$qid")({
   component: ExamAnswer,
@@ -35,8 +35,12 @@ function ExamAnswer() {
         <p className="mt-4 rounded-lg border border-line bg-surface-2 px-4 py-3 font-serif text-lg leading-relaxed text-ink">
           {exam.question}
         </p>
-        <div className="mt-8">
-          <NoteBody blocks={exam.blocks} />
+        <div className="mt-6">
+          <ReaderView
+            docId={`exam:${exam.id}`}
+            docTitle={`Question ${exam.number}: ${exam.title}`}
+            blocks={exam.blocks}
+          />
         </div>
         {related.length > 0 ? (
           <p className="mt-8 font-sans text-sm text-muted">

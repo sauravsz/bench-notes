@@ -1,10 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { adjacentTopics, getTopic } from "@/data";
 import { useProgress } from "@/lib/progress";
-import { NoteBody } from "@/components/note-body";
-import { Button } from "@/components/ui/button";
+import { ReaderView } from "@/components/reader-view";
 
 export const Route = createFileRoute("/topic/$slug")({
   component: TopicPage,
@@ -43,19 +42,14 @@ function TopicPage() {
           {topic.summary}
         </p>
 
-        <div className="mt-5 no-print">
-          <Button
-            variant={studied ? "default" : "outline"}
-            size="sm"
-            onClick={() => toggleStudied(slug)}
-          >
-            <Check className="size-4" />
-            {studied ? "Studied" : "Mark as studied"}
-          </Button>
-        </div>
-
-        <div className="mt-8">
-          <NoteBody blocks={topic.blocks} />
+        <div className="mt-5">
+          <ReaderView
+            docId={`topic:${topic.slug}`}
+            docTitle={topic.title}
+            blocks={topic.blocks}
+            studied={studied}
+            onToggleStudied={() => toggleStudied(slug)}
+          />
         </div>
 
         <nav className="no-print mt-10 flex flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:justify-between">

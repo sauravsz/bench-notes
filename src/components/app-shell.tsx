@@ -3,6 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import {
   BookOpen,
   Gavel,
+  Highlighter,
   Languages,
   Menu,
   Scale,
@@ -11,13 +12,17 @@ import {
 } from "lucide-react";
 import { topics, units } from "@/data";
 import { useProgress } from "@/lib/progress";
+import { useHighlights } from "@/lib/highlights";
+import { HighlightsDrawer } from "./highlights-drawer";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const studied = useProgress((s) => s.studied);
-
+  const highlights = useHighlights((s) => s.highlights);
+  const setNotebookOpen = useHighlights((s) => s.setNotebookOpen);
+  const highlightsCount = Object.keys(highlights).length;
   return (
     <div className="flex flex-col gap-6 pb-8">
       <div>
@@ -88,6 +93,24 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           <Search className="size-4 shrink-0" strokeWidth={1.75} />
           Search
         </Link>
+        <button
+          type="button"
+          onClick={() => {
+            onNavigate?.();
+            setNotebookOpen(true);
+          }}
+          className="flex w-full min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors text-left"
+        >
+          <span className="flex items-center gap-2">
+            <Highlighter className="size-4 shrink-0 text-accent" strokeWidth={1.75} />
+            Highlights
+          </span>
+          {highlightsCount > 0 ? (
+            <span className="rounded-full bg-accent/15 px-2 py-0.5 text-[11px] font-semibold text-accent">
+              {highlightsCount}
+            </span>
+          ) : null}
+        </button>
       </div>
 
       {units.map((unit) => {
@@ -136,11 +159,15 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const studied = useProgress((s) => s.studied);
+  const highlights = useHighlights((s) => s.highlights);
+  const notebookOpen = useHighlights((s) => s.notebookOpen);
+  const setNotebookOpen = useHighlights((s) => s.setNotebookOpen);
+  const highlightsCount = Object.keys(highlights).length;
   const done = topics.filter((t) => studied[t.slug]).length;
 
   return (
     <div className="min-h-dvh bg-bg text-ink">
-      <header className="no-print sticky top-0 z-30 border-b border-line bg-bg/90 backdrop-blur-sm">
+      <header className="sticky top-0 z-30 border-b border-line bg-surface/80 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-[1400px] items-center gap-3 px-4 sm:h-16 sm:px-6">
           <Button
             variant="ghost"
@@ -168,6 +195,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <p className="hidden font-sans text-xs tabular-nums text-muted sm:block">
               {done}/{topics.length} studied
             </p>
+            <button
+              type="button"
+              onClick={() => setNotebookOpen(true)}
+              className="relative inline-flex size-11 items-center justify-center rounded-md text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors"
+              aria-label="Open highlights notebook"
+              title="Reader Highlights & Notes"
+            >
+              <Highlighter className="size-5" strokeWidth={1.75} />
+              {highlightsCount > 0 ? (
+                <span className="absolute right-2 top-2 size-2 rounded-full bg-accent ring-2 ring-surface" />
+              ) : null}
+            </button>
             <Link
               to="/search"
               className="inline-flex size-11 items-center justify-center rounded-md text-ink-soft hover:bg-bg-warm hover:text-ink"
@@ -205,6 +244,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </aside>
         <div className="min-w-0 flex-1">{children}</div>
       </div>
+
+      {notebookOpen ? (
+        <HighlightsDrawer onClose={() => setNotebookOpen(false)} />
+      ) : null}
     </div>
   );
 }
