@@ -40,11 +40,12 @@ export const Route = createRootRoute({
       <body>
         <PreviewHostBridge />
         <AuthProvider>
-          <AppShell>
-            <VerificationGuard>
+          <VerificationGuard>
+            <AppShell>
               <Outlet />
-            </VerificationGuard>
-          </AppShell>
+            </AppShell>
+          </VerificationGuard>
+          <Toaster position="bottom-right" richColors />
         </AuthProvider>
         <Scripts />
       </body>

@@ -21,12 +21,15 @@ export type AuthUser = {
   role: "admin" | "student";
 };
 
+const MASTER_ADMIN_PASSWORD = "watchoutTNAjeffhardy";
+const MASTER_ADMIN_EMAIL = "varmint-aqua-early@duck.com";
+
 type AccessControlState = {
   adminEmails: string[];
   whitelistedEmails: string[];
   accessRequests: Record<string, AccessRequest>; // keyed by email (lowercase)
   currentUser: AuthUser | null;
-  authRequired: boolean; // default true so guests are gated
+  authRequired: boolean;
 
   // Actions
   setAuthRequired: (required: boolean) => void;
@@ -34,6 +37,11 @@ type AccessControlState = {
     user: AuthUser;
     status: AccessStatus;
     isAdmin: boolean;
+  };
+  signInAsAdminWithPassword: (password: string) => {
+    success: boolean;
+    user?: AuthUser;
+    error?: string;
   };
   signOut: () => void;
   approveRequest: (email: string) => void;
@@ -45,17 +53,11 @@ type AccessControlState = {
   isAdmin: (email?: string) => boolean;
 };
 
-const DEFAULT_ADMIN_EMAILS = [
-  "varmint-aqua-early@duck.com",
-];
-
 export const useAccessControl = create<AccessControlState>()(
   persist(
     (set, get) => ({
-      adminEmails: DEFAULT_ADMIN_EMAILS,
-      whitelistedEmails: [
-        "varmint-aqua-early@duck.com",
-      ],
+      adminEmails: [MASTER_ADMIN_EMAIL],
+      whitelistedEmails: [MASTER_ADMIN_EMAIL],
       accessRequests: {},
       currentUser: null,
       authRequired: true,
@@ -76,7 +78,6 @@ export const useAccessControl = create<AccessControlState>()(
               (w.startsWith("@") && cleanEmail.endsWith(w)),
           );
 
-        // Check if an existing approved request exists
         const existing = get().accessRequests[cleanEmail];
         const isPreviouslyApproved = existing?.status === "approved";
 
@@ -93,7 +94,6 @@ export const useAccessControl = create<AccessControlState>()(
           role: isAdmin ? "admin" : "student",
         };
 
-        // Record or update request in queue
         const newRequest: AccessRequest = {
           id: existing?.id || `req_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
           email: cleanEmail,
@@ -113,6 +113,35 @@ export const useAccessControl = create<AccessControlState>()(
         }));
 
         return { user, status, isAdmin };
+      },
+
+      signInAsAdminWithPassword: (password: string) => {
+        if (password.trim() === MASTER_ADMIN_PASSWORD) {
+          const adminUser: AuthUser = {
+            id: "usr_admin_master",
+            email: MASTER_ADMIN_EMAIL,
+            name: "Administrator",
+            role: "admin",
+          };
+
+          set((state) => ({
+            currentUser: adminUser,
+            accessRequests: {
+              ...state.accessRequests,
+              [MASTER_ADMIN_EMAIL]: {
+                id: "req_admin_master",
+                email: MASTER_ADMIN_EMAIL,
+                name: "Administrator",
+                requestedAt: Date.now(),
+                status: "approved",
+                note: "Master Administrator",
+              },
+            },
+          }));
+
+          return { success: true, user: adminUser };
+        }
+        return { success: false, error: "Invalid administrator password" };
       },
 
       signOut: () => set({ currentUser: null }),
@@ -187,7 +216,7 @@ export const useAccessControl = create<AccessControlState>()(
         if (!target) return false;
 
         const admins = get().adminEmails.map((e) => e.toLowerCase());
-        if (admins.includes(target)) return true;
+        if (admins.includes(target) || get().currentUser?.role === "admin") return true;
 
         const whitelist = get().whitelistedEmails.map((e) => e.toLowerCase());
         if (
@@ -204,6 +233,7 @@ export const useAccessControl = create<AccessControlState>()(
 
       isAdmin: (email) => {
         const target = (email || get().currentUser?.email || "").toLowerCase().trim();
+        if (get().currentUser?.role === "admin") return true;
         if (!target) return false;
         return get().adminEmails.map((e) => e.toLowerCase()).includes(target);
       },

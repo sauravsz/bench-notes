@@ -1,52 +1,79 @@
 import { useState } from "react";
-import { CheckCircle2, Lock, LogIn, Mail, ShieldAlert, ShieldCheck, User } from "lucide-react";
+import { CheckCircle2, KeyRound, Lock, LogIn, Mail, Shield, ShieldCheck, User } from "lucide-react";
 import { useAccessControl } from "@/lib/auth/access-control";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 export function GoogleLoginDialog({
   isOpen,
   onClose,
+  initialTab = "student",
 }: {
   isOpen: boolean;
   onClose?: () => void;
+  initialTab?: "student" | "admin";
 }) {
   const signInWithGoogle = useAccessControl((s) => s.signInWithGoogle);
+  const signInAsAdminWithPassword = useAccessControl(
+    (s) => s.signInAsAdminWithPassword,
+  );
+
+  const [activeTab, setActiveTab] = useState<"student" | "admin">(initialTab);
   const [emailInput, setEmailInput] = useState("");
   const [nameInput, setNameInput] = useState("");
+  const [adminPasswordInput, setAdminPasswordInput] = useState("");
 
   if (!isOpen) return null;
 
-  const handleGoogleAuth = (email: string, name: string) => {
-    if (!email || !email.includes("@")) {
+  const handleStudentAuth = () => {
+    if (!emailInput || !emailInput.includes("@")) {
       toast.error("Please enter a valid Google email address");
       return;
     }
 
     const result = signInWithGoogle({
-      email: email.trim(),
-      name: name.trim() || email.split("@")[0],
+      email: emailInput.trim(),
+      name: nameInput.trim() || emailInput.split("@")[0],
     });
 
     if (result.isAdmin) {
-      toast.success(`Welcome Administrator (${result.user.email})`, {
-        description: "Full administrative and verification privileges granted.",
+      toast.success("Administrator privileges active", {
+        description: "Full management and verification privileges granted.",
       });
     } else if (result.status === "approved") {
       toast.success(`Welcome back, ${result.user.name}!`, {
-        description: "Your Google account is verified.",
+        description: "Your account is verified.",
       });
     } else {
       toast.info("Access request submitted for verification", {
-        description: "The administrator will review and verify your email.",
+        description: "The administrator will review and verify your access.",
       });
     }
 
     onClose?.();
   };
 
+  const handleAdminAuth = () => {
+    if (!adminPasswordInput) {
+      toast.error("Please enter the administrator password");
+      return;
+    }
+
+    const res = signInAsAdminWithPassword(adminPasswordInput);
+    if (res.success) {
+      toast.success("Administrator Authenticated", {
+        description: "Full master administrative privileges unlocked.",
+      });
+      setAdminPasswordInput("");
+      onClose?.();
+    } else {
+      toast.error("Incorrect administrator password");
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4 animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150">
       <div className="w-full max-w-md rounded-2xl border border-line bg-surface p-6 shadow-2xl animate-in zoom-in-95 duration-150 space-y-5">
         {/* Header */}
         <div className="text-center space-y-1.5">
@@ -54,98 +81,162 @@ export function GoogleLoginDialog({
             <Lock className="size-6" />
           </div>
           <h3 className="font-serif text-2xl font-bold text-ink">
-            Google Identity Sign-In
+            BenchNotes Identity Access
           </h3>
           <p className="font-sans text-xs text-muted max-w-xs mx-auto">
-            BenchNotes uses verified Google accounts to protect notes and prevent unauthorized access.
+            Protected academic portal for verified MBA cohort students and faculty.
           </p>
         </div>
 
-        {/* 1-Click Quick Accounts for Instant Demo & Admin */}
-        <div className="space-y-2">
-          <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-muted block">
-            Select Your Google Account:
-          </span>
-
-          {/* Admin Quick Login */}
+        {/* Tab Switcher */}
+        <div className="flex rounded-xl bg-bg-warm p-1 text-xs font-semibold">
           <button
             type="button"
-            onClick={() => handleGoogleAuth("varmint-aqua-early@duck.com", "Admin Saurav")}
-            className="flex w-full items-center justify-between rounded-xl border border-primary/40 bg-primary/5 p-3 text-left transition-all hover:border-primary hover:bg-primary/10 shadow-2xs"
+            onClick={() => setActiveTab("student")}
+            className={cn(
+              "flex-1 rounded-lg py-2 transition-all flex items-center justify-center gap-1.5",
+              activeTab === "student"
+                ? "bg-surface text-ink font-bold shadow-xs"
+                : "text-muted hover:text-ink",
+            )}
           >
-            <div className="flex items-center gap-2.5">
-              <div className="flex size-8 items-center justify-center rounded-full bg-primary text-white font-sans text-xs font-bold">
-                A
-              </div>
-              <div>
-                <span className="font-sans text-xs font-bold text-ink block">
-                  varmint-aqua-early@duck.com
-                </span>
-                <span className="font-sans text-[10px] text-accent font-semibold">
-                  System Administrator (Full Privileges)
-                </span>
-              </div>
-            </div>
-            <span className="rounded bg-primary text-white px-2 py-0.5 text-[10px] font-bold">
-              Sign In
-            </span>
+            <User className="size-3.5" />
+            <span>Student Sign-In</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("admin")}
+            className={cn(
+              "flex-1 rounded-lg py-2 transition-all flex items-center justify-center gap-1.5",
+              activeTab === "admin"
+                ? "bg-surface text-ink font-bold shadow-xs"
+                : "text-muted hover:text-ink",
+            )}
+          >
+            <KeyRound className="size-3.5" />
+            <span>Admin Login</span>
           </button>
         </div>
 
-        {/* Custom Google Email Input */}
-        <div className="space-y-3 pt-2 border-t border-line">
-          <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-muted block">
-            Or Sign In with Any Student / Cohort Google Email:
-          </span>
+        {/* Tab 1: Student Google Sign In */}
+        {activeTab === "student" && (
+          <div className="space-y-4">
+            <div className="space-y-3">
+              <div>
+                <label className="block mb-1 font-sans text-xs font-semibold text-ink">
+                  Google Email Address
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-2.5 size-4 text-muted" />
+                  <input
+                    type="email"
+                    value={emailInput}
+                    onChange={(e) => setEmailInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleStudentAuth();
+                      }
+                    }}
+                    placeholder="student@gmail.com or @college.edu"
+                    className="h-10 w-full rounded-lg border border-line bg-surface pl-9 pr-3 font-sans text-xs text-ink placeholder:text-muted focus:border-accent focus:outline-none"
+                    autoFocus
+                  />
+                </div>
+              </div>
 
-          <div className="space-y-2">
-            <div>
-              <label className="block mb-1 font-sans text-xs font-semibold text-ink">
-                Google Email Address
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-2.5 size-4 text-muted" />
-                <input
-                  type="email"
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
-                  placeholder="yourname@gmail.com or @college.edu"
-                  className="h-10 w-full rounded-lg border border-line bg-surface pl-9 pr-3 font-sans text-xs text-ink placeholder:text-muted focus:border-accent focus:outline-none"
-                />
+              <div>
+                <label className="block mb-1 font-sans text-xs font-semibold text-ink">
+                  Full Name (Optional)
+                </label>
+                <div className="relative">
+                  <User className="absolute left-3 top-2.5 size-4 text-muted" />
+                  <input
+                    type="text"
+                    value={nameInput}
+                    onChange={(e) => setNameInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleStudentAuth();
+                      }
+                    }}
+                    placeholder="Your Full Name"
+                    className="h-10 w-full rounded-lg border border-line bg-surface pl-9 pr-3 font-sans text-xs text-ink placeholder:text-muted focus:border-accent focus:outline-none"
+                  />
+                </div>
               </div>
             </div>
 
-            <div>
-              <label className="block mb-1 font-sans text-xs font-semibold text-ink">
-                Full Name (Optional)
-              </label>
-              <div className="relative">
-                <User className="absolute left-3 top-2.5 size-4 text-muted" />
-                <input
-                  type="text"
-                  value={nameInput}
-                  onChange={(e) => setNameInput(e.target.value)}
-                  placeholder="Student Name"
-                  className="h-10 w-full rounded-lg border border-line bg-surface pl-9 pr-3 font-sans text-xs text-ink placeholder:text-muted focus:border-accent focus:outline-none"
-                />
-              </div>
-            </div>
+            <Button
+              type="button"
+              onClick={handleStudentAuth}
+              disabled={!emailInput}
+              className="w-full h-10 font-sans text-xs font-bold gap-2 shadow-sm"
+            >
+              <LogIn className="size-4" />
+              Sign in with Google
+            </Button>
+
+            <p className="text-center font-sans text-[11px] text-muted">
+              First-time sign-ins are verified by the administrator to prevent unauthorized access.
+            </p>
           </div>
+        )}
 
-          <Button
-            type="button"
-            onClick={() => handleGoogleAuth(emailInput, nameInput)}
-            disabled={!emailInput}
-            className="w-full h-10 font-sans text-xs font-bold"
-          >
-            <LogIn className="size-4 mr-1.5" />
-            Authenticate with Google
-          </Button>
-        </div>
+        {/* Tab 2: Admin Password Access */}
+        {activeTab === "admin" && (
+          <div className="space-y-4">
+            <div>
+              <label className="block mb-1 font-sans text-xs font-semibold text-ink">
+                Master Administrator Password
+              </label>
+              <div className="relative">
+                <KeyRound className="absolute left-3 top-2.5 size-4 text-muted" />
+                <input
+                  type="password"
+                  value={adminPasswordInput}
+                  onChange={(e) => setAdminPasswordInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleAdminAuth();
+                    }
+                  }}
+                  placeholder="Enter administrator password"
+                  className="h-10 w-full rounded-lg border border-line bg-surface pl-9 pr-3 font-sans text-xs text-ink placeholder:text-muted focus:border-accent focus:outline-none"
+                  autoFocus
+                />
+              </div>
+            </div>
 
-        <p className="text-center font-sans text-[11px] text-muted">
-          New student accounts require 1-time administrator verification before accessing study materials.
-        </p>
+            <Button
+              type="button"
+              onClick={handleAdminAuth}
+              disabled={!adminPasswordInput}
+              className="w-full h-10 font-sans text-xs font-bold gap-2 bg-primary hover:bg-primary/90 text-white shadow-sm"
+            >
+              <ShieldCheck className="size-4" />
+              Unlock Administrator Access
+            </Button>
+
+            <p className="text-center font-sans text-[11px] text-muted">
+              Authorized administrator access unlocks full verification controls at <code>/admin</code>.
+            </p>
+          </div>
+        )}
+
+        {onClose && (
+          <div className="pt-2 border-t border-line/60 flex justify-end">
+            <button
+              type="button"
+              onClick={onClose}
+              className="text-xs font-medium text-muted hover:text-ink"
+            >
+              Close
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
