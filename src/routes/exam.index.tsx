@@ -1,20 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { examQuestions } from "@/data";
+import { useCurrentCourse } from "@/lib/current-course";
 
 export const Route = createFileRoute("/exam/")({ component: ExamIndex });
 
 function ExamIndex() {
+  const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
+  const examQuestions = activeCourse.examQuestions;
   return (
     <main className="px-4 py-8 sm:px-10 sm:py-10">
       <div className="mx-auto max-w-2xl">
         <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-accent">
           Examination
         </p>
-        <h1 className="mt-2 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-          Model Examination Answers
+        <h1 className="mt-2 font-serif text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+          {activeCourse.code} · Model Examination Answers
         </h1>
         <p className="mt-4 font-serif text-lg leading-relaxed text-ink-soft">
-          Comprehensive university examination questions answered in complete analytical structure. Use the headings, statutory sections, and case citations as the skeleton of a written answer.
+          Comprehensive university examination questions for {activeCourse.title} answered in complete analytical structure.
         </p>
         <ol className="mt-8 flex flex-col gap-3">
           {examQuestions.map((q) => (

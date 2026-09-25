@@ -1,11 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowUpRight, Search, X } from "lucide-react";
-import { glossary } from "@/data";
+import { useCurrentCourse } from "@/lib/current-course";
 
 export const Route = createFileRoute("/glossary")({ component: GlossaryPage });
 
 function GlossaryPage() {
+  const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
+  const glossary = activeCourse.glossary || [];
   const [search, setSearch] = useState("");
   const [selectedLetter, setSelectedLetter] = useState<string>("All");
 

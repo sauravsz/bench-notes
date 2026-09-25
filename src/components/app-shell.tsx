@@ -15,13 +15,14 @@ import {
   Zap,
   ZapOff,
 } from "lucide-react";
-import { topics, units } from "@/data";
 import { useProgress } from "@/lib/progress";
 import { useHighlights } from "@/lib/highlights";
 import { useAppearance, THEME_TONE_STYLES } from "@/lib/appearance";
+import { useCurrentCourse } from "@/lib/current-course";
 import { useReaderShortcuts } from "@/lib/use-reader-shortcuts";
 import { HighlightsDrawer } from "./highlights-drawer";
 import { AppearancePopover } from "./appearance-popover";
+import { CourseSwitcher } from "./course-switcher";
 import { Switch } from "./ui/switch";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
@@ -29,6 +30,7 @@ import { toast } from "sonner";
 
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
   const studied = useProgress((s) => s.studied);
   const highlights = useHighlights((s) => s.highlights);
   const autoHighlight = useHighlights((s) => s.autoHighlight);
@@ -40,7 +42,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
     <div className="flex flex-col gap-6 pb-8">
       <div>
         <p className="mb-2 px-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-faint">
-          Desk
+          Desk · {activeCourse.code}
         </p>
         <Link
           to="/"
@@ -53,7 +55,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           )}
         >
           <BookOpen className="size-4 shrink-0 text-accent" strokeWidth={1.75} />
-          <span>Syllabus</span>
+          <span>Syllabus ({activeCourse.code})</span>
         </Link>
         <Link
           to="/exam"
@@ -67,48 +69,55 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
         >
           <span className="flex items-center gap-2">
             <Scale className="size-4 shrink-0 text-accent" strokeWidth={1.75} />
-            <span>Model Exam Answers</span>
+            <span>Model Answers</span>
           </span>
           <span className="rounded-full bg-accent/15 px-2 py-0.5 font-sans text-[11px] font-bold text-accent">
-            19 Qs
+            {activeCourse.examQuestions.length} Qs
           </span>
         </Link>
-        <Link
-          to="/glossary"
-          onClick={onNavigate}
-          className={cn(
-            "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-colors",
-            pathname.startsWith("/glossary")
-              ? "bg-bg-warm font-semibold text-ink shadow-2xs"
-              : "text-ink-soft hover:bg-bg-warm hover:text-ink",
-          )}
-        >
-          <span className="flex items-center gap-2">
-            <BookOpen className="size-4 shrink-0 text-muted" strokeWidth={1.75} />
-            <span>Glossary</span>
-          </span>
-          <span className="rounded-full bg-bg-warm px-1.5 py-0.5 font-sans text-[10px] font-semibold text-muted">
-            125
-          </span>
-        </Link>
-        <Link
-          to="/maxims"
-          onClick={onNavigate}
-          className={cn(
-            "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-colors",
-            pathname.startsWith("/maxims")
-              ? "bg-bg-warm font-semibold text-ink shadow-2xs"
-              : "text-ink-soft hover:bg-bg-warm hover:text-ink",
-          )}
-        >
-          <span className="flex items-center gap-2">
-            <Languages className="size-4 shrink-0 text-muted" strokeWidth={1.75} />
-            <span>Maxims</span>
-          </span>
-          <span className="rounded-full bg-bg-warm px-1.5 py-0.5 font-sans text-[10px] font-semibold text-muted">
-            25
-          </span>
-        </Link>
+
+        {activeCourse.glossary && activeCourse.glossary.length > 0 ? (
+          <Link
+            to="/glossary"
+            onClick={onNavigate}
+            className={cn(
+              "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-colors",
+              pathname.startsWith("/glossary")
+                ? "bg-bg-warm font-semibold text-ink shadow-2xs"
+                : "text-ink-soft hover:bg-bg-warm hover:text-ink",
+            )}
+          >
+            <span className="flex items-center gap-2">
+              <BookOpen className="size-4 shrink-0 text-muted" strokeWidth={1.75} />
+              <span>Glossary</span>
+            </span>
+            <span className="rounded-full bg-bg-warm px-1.5 py-0.5 font-sans text-[10px] font-semibold text-muted">
+              {activeCourse.glossary.length}
+            </span>
+          </Link>
+        ) : null}
+
+        {activeCourse.maxims && activeCourse.maxims.length > 0 ? (
+          <Link
+            to="/maxims"
+            onClick={onNavigate}
+            className={cn(
+              "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-colors",
+              pathname.startsWith("/maxims")
+                ? "bg-bg-warm font-semibold text-ink shadow-2xs"
+                : "text-ink-soft hover:bg-bg-warm hover:text-ink",
+            )}
+          >
+            <span className="flex items-center gap-2">
+              <Languages className="size-4 shrink-0 text-muted" strokeWidth={1.75} />
+              <span>Maxims</span>
+            </span>
+            <span className="rounded-full bg-bg-warm px-1.5 py-0.5 font-sans text-[10px] font-semibold text-muted">
+              {activeCourse.maxims.length}
+            </span>
+          </Link>
+        ) : null}
+
         <Link
           to="/search"
           onClick={onNavigate}
@@ -122,6 +131,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           <Search className="size-4 shrink-0 text-muted" strokeWidth={1.75} />
           <span>Search</span>
         </Link>
+
         <button
           type="button"
           onClick={() => {
@@ -168,8 +178,8 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
         </div>
       </div>
 
-      {units.map((unit) => {
-        const list = topics.filter((t) => t.unit === unit);
+      {activeCourse.units.map((unit) => {
+        const list = activeCourse.topics.filter((t) => t.unit === unit);
         return (
           <div key={unit}>
             <p className="mb-1 px-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-faint">
@@ -216,6 +226,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   useReaderShortcuts();
 
   const [open, setOpen] = useState(false);
+  const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
   const studied = useProgress((s) => s.studied);
   const highlights = useHighlights((s) => s.highlights);
   const autoHighlight = useHighlights((s) => s.autoHighlight);
@@ -223,7 +234,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const notebookOpen = useHighlights((s) => s.notebookOpen);
   const setNotebookOpen = useHighlights((s) => s.setNotebookOpen);
   const highlightsCount = Object.keys(highlights).length;
-  const done = topics.filter((t) => studied[t.slug]).length;
+  const done = activeCourse.topics.filter((t) => studied[t.slug]).length;
 
   const sidebarCollapsed = useAppearance((s) => s.sidebarCollapsed);
   const toggleSidebar = useAppearance((s) => s.toggleSidebar);
@@ -280,19 +291,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             )}
           </button>
 
-          <Link to="/" className="flex min-w-0 items-center gap-2.5">
-            <span className="flex size-8 items-center justify-center rounded-md bg-accent text-accent-fg shadow-2xs">
-              <Gavel className="size-4" strokeWidth={1.75} />
-            </span>
-            <span className="min-w-0">
-              <span className="block font-serif text-lg font-bold leading-none tracking-tight">
-                Bench Notes
-              </span>
-              <span className="mt-0.5 hidden font-sans text-[11px] uppercase tracking-[0.14em] text-muted sm:block">
-                Business Law 303 · LR Ma'am
-              </span>
-            </span>
-          </Link>
+          {/* Course Switcher Dropdown in Header */}
+          <div className="flex items-center gap-2">
+            <CourseSwitcher />
+          </div>
 
           <div className="ml-auto flex items-center gap-2 sm:gap-3">
             {/* Quick Auto-Highlight Header Toggle Switch */}
@@ -329,7 +331,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </button>
 
             <p className="hidden font-sans text-xs tabular-nums text-muted lg:block">
-              {done}/{topics.length} studied
+              {done}/{activeCourse.topics.length} studied
             </p>
 
             {/* Notebook Button */}
@@ -360,7 +362,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <div className="h-0.5 bg-line">
           <div
             className="h-full bg-accent transition-[width] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]"
-            style={{ width: `${(done / topics.length) * 100}%` }}
+            style={{
+              width: `${(done / (activeCourse.topics.length || 1)) * 100}%`,
+            }}
           />
         </div>
       </header>
