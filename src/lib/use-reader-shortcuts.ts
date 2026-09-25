@@ -29,12 +29,12 @@ export function useReaderShortcuts() {
         e.preventDefault();
         const next = toggleSidebar();
         if (next) {
-          toast.info("Sidebar collapsed", {
-            description: "Press Cmd+B or use sidebar button to expand.",
-            duration: 1500,
+          toast.info("Distraction-free mode", {
+            description: "Top bar & Sidebar hidden. Press Cmd+B or use restore button to expand.",
+            duration: 1800,
           });
         } else {
-          toast.info("Sidebar expanded", { duration: 1500 });
+          toast.info("Top bar & Sidebar restored", { duration: 1500 });
         }
         return;
       }

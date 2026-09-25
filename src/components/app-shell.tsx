@@ -293,7 +293,31 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         color: THEME_TONE_STYLES[themeTone]?.text,
       }}
     >
-      <header className="no-print sticky top-0 z-30 border-b border-line bg-surface/80 backdrop-blur-md">
+      {/* Floating Restore Button when Topbar & Sidebar are collapsed */}
+      {sidebarCollapsed ? (
+        <div className="no-print fixed left-4 top-4 z-40 flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+          <button
+            type="button"
+            onClick={toggleSidebar}
+            className="flex items-center gap-2 rounded-xl border border-line bg-surface/90 backdrop-blur-md px-3 py-2 text-xs font-bold text-ink shadow-lg hover:bg-bg-warm hover:text-accent transition-all duration-150 ring-1 ring-black/5"
+            title="Restore Navigation Bar & Sidebar (Cmd+B / [ )"
+            aria-label="Restore Top Bar & Sidebar"
+          >
+            <PanelLeft className="size-4 text-accent" strokeWidth={1.75} />
+            <span className="hidden sm:inline">Show Navigation & Sidebar</span>
+            <kbd className="hidden sm:inline-block rounded bg-bg-warm px-1.5 py-0.5 text-[10px] text-muted font-mono">
+              ⌘B
+            </kbd>
+          </button>
+        </div>
+      ) : null}
+
+      <header
+        className={cn(
+          "no-print sticky top-0 z-30 border-b border-line bg-surface/80 backdrop-blur-md transition-all duration-200",
+          sidebarCollapsed ? "hidden" : "block",
+        )}
+      >
         <div className="mx-auto flex h-14 max-w-[1400px] items-center gap-3 px-4 sm:h-16 sm:px-6">
           {/* Mobile drawer toggle */}
           <Button
@@ -454,8 +478,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       ) : null}
 
       {/* Main Content Layout */}
-      <div className="mx-auto flex max-w-[1500px]">
-        {/* Desktop Sidebar (Collapsible with Cmd+B) */}
+      <div className={cn("mx-auto flex max-w-[1500px]", sidebarCollapsed ? "pt-12 sm:pt-14" : "")}>
         <aside
           className={cn(
             "no-print sticky top-16 h-[calc(100dvh-4rem)] w-[280px] shrink-0 overflow-y-auto border-r border-line px-2 pt-6 transition-all duration-200",
