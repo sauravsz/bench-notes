@@ -89,11 +89,22 @@ function renderWithHighlights(
 }
 
 function parseInlineMarkdown(text: string): ReactNode[] {
-  const parts = text.split(/(_[^_]+_|\*[^*]+\*)/g);
+  if (!text) return [];
+  const parts = text.split(/(\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_)/g);
   return parts.map((part, i) => {
     if (
-      (part.startsWith("_") && part.endsWith("_") && part.length > 2) ||
-      (part.startsWith("*") && part.endsWith("*") && part.length > 2)
+      (part.startsWith("**") && part.endsWith("**") && part.length > 4) ||
+      (part.startsWith("__") && part.endsWith("__") && part.length > 4)
+    ) {
+      return (
+        <strong key={i} className="font-bold text-ink">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    if (
+      (part.startsWith("*") && part.endsWith("*") && part.length > 2) ||
+      (part.startsWith("_") && part.endsWith("_") && part.length > 2)
     ) {
       return (
         <strong key={i} className="font-bold text-ink">
@@ -107,16 +118,26 @@ function parseInlineMarkdown(text: string): ReactNode[] {
 
 function Block({
   block,
+  blockIndex,
   docHighlights,
   onHighlightClick,
 }: {
   block: NoteBlock;
+  blockIndex: number;
   docHighlights: HighlightItem[];
   onHighlightClick?: (id: string, e: React.MouseEvent) => void;
 }) {
-  const render = (text: string) =>
-    renderWithHighlights(text, docHighlights, onHighlightClick);
+  const blockSpecificHighlights = useMemo(() => {
+    return docHighlights.filter((h) => {
+      if (h.blockIndex !== undefined) {
+        return h.blockIndex === blockIndex;
+      }
+      return true;
+    });
+  }, [docHighlights, blockIndex]);
 
+  const render = (text: string) =>
+    renderWithHighlights(text, blockSpecificHighlights, onHighlightClick);
   switch (block.type) {
     case "h3":
       return <h3>{render(block.text)}</h3>;
@@ -234,6 +255,7 @@ function Block({
           <pre className="note-tree m-0 p-3 rounded-lg bg-bg-warm/70 font-mono text-xs leading-relaxed text-ink-soft overflow-x-auto">{block.lines.join("\n")}</pre>
         </div>
       );
+    default:
       return null;
   }
 }
@@ -259,12 +281,14 @@ export function NoteBody({
   return (
     <div className={cn("note-prose", className)}>
       {blocks.map((block, i) => (
-        <Block
-          key={i}
-          block={block}
-          docHighlights={docHighlights}
-          onHighlightClick={onHighlightClick}
-        />
+        <div key={i} data-block-index={i} className="block-wrapper">
+          <Block
+            block={block}
+            blockIndex={i}
+            docHighlights={docHighlights}
+            onHighlightClick={onHighlightClick}
+          />
+        </div>
       ))}
     </div>
   );

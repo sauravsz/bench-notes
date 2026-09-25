@@ -65,6 +65,8 @@ export type HighlightItem = {
   id: string;
   docId: string; // e.g. "topic:indian-judiciary", "exam:q1"
   docTitle?: string;
+  blockIndex?: number;
+  blockId?: string;
   text: string;
   color: HighlightColor;
   note?: string;
@@ -90,6 +92,8 @@ type HighlightsState = {
   addHighlight: (item: {
     docId: string;
     docTitle?: string;
+    blockIndex?: number;
+    blockId?: string;
     text: string;
     color?: HighlightColor;
     note?: string;
@@ -129,15 +133,18 @@ export const useHighlights = create<HighlightsState>()(
 
       setNotebookOpen: (open: boolean) => set({ notebookOpen: open }),
 
-      addHighlight: ({ docId, docTitle, text, color, note, tags }) => {
+      addHighlight: ({ docId, docTitle, blockIndex, blockId, text, color, note, tags }) => {
         const trimmed = text.trim();
         if (!trimmed) {
           throw new Error("Highlight text cannot be empty");
         }
 
-        // Check if an identical highlight already exists in this doc
+        // Check if an identical highlight already exists in this doc and block
         const existing = Object.values(get().highlights).find(
-          (h) => h.docId === docId && h.text.trim() === trimmed,
+          (h) =>
+            h.docId === docId &&
+            h.text.trim() === trimmed &&
+            (blockIndex === undefined || h.blockIndex === blockIndex),
         );
 
         if (existing) {
@@ -150,14 +157,15 @@ export const useHighlights = create<HighlightsState>()(
           id,
           docId,
           docTitle: docTitle || docId,
+          blockIndex,
+          blockId,
           text: trimmed,
           color: color || get().currentColor,
-          note: note || "",
+          note,
           tags: tags || [],
           createdAt: Date.now(),
           updatedAt: Date.now(),
         };
-
         set((state) => ({
           highlights: {
             ...state.highlights,

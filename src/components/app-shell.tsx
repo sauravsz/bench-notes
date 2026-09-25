@@ -40,65 +40,81 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           to="/"
           onClick={onNavigate}
           className={cn(
-            "flex min-h-11 items-center rounded-md px-3 text-sm font-medium",
+            "flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-medium transition-colors",
             pathname === "/"
-              ? "bg-bg-warm text-ink"
+              ? "bg-bg-warm font-semibold text-ink shadow-2xs"
               : "text-ink-soft hover:bg-bg-warm hover:text-ink",
           )}
         >
-          Syllabus
+          <BookOpen className="size-4 shrink-0 text-accent" strokeWidth={1.75} />
+          <span>Syllabus</span>
         </Link>
         <Link
           to="/exam"
           onClick={onNavigate}
           className={cn(
-            "flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-medium",
+            "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-colors",
             pathname.startsWith("/exam")
-              ? "bg-bg-warm text-ink"
+              ? "bg-bg-warm font-semibold text-ink shadow-2xs"
               : "text-ink-soft hover:bg-bg-warm hover:text-ink",
           )}
         >
-          <Scale className="size-4 shrink-0 text-accent" strokeWidth={1.75} />
-          Model Exam Answers
+          <span className="flex items-center gap-2">
+            <Scale className="size-4 shrink-0 text-accent" strokeWidth={1.75} />
+            <span>Model Exam Answers</span>
+          </span>
+          <span className="rounded-full bg-accent/15 px-2 py-0.5 font-sans text-[11px] font-bold text-accent">
+            19 Qs
+          </span>
         </Link>
         <Link
           to="/glossary"
           onClick={onNavigate}
           className={cn(
-            "flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-medium",
-            pathname === "/glossary"
-              ? "bg-bg-warm text-ink"
+            "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-colors",
+            pathname.startsWith("/glossary")
+              ? "bg-bg-warm font-semibold text-ink shadow-2xs"
               : "text-ink-soft hover:bg-bg-warm hover:text-ink",
           )}
         >
-          <BookOpen className="size-4 shrink-0" strokeWidth={1.75} />
-          Glossary
+          <span className="flex items-center gap-2">
+            <BookOpen className="size-4 shrink-0 text-muted" strokeWidth={1.75} />
+            <span>Glossary</span>
+          </span>
+          <span className="rounded-full bg-bg-warm px-1.5 py-0.5 font-sans text-[10px] font-semibold text-muted">
+            125
+          </span>
         </Link>
         <Link
           to="/maxims"
           onClick={onNavigate}
           className={cn(
-            "flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-medium",
-            pathname === "/maxims"
-              ? "bg-bg-warm text-ink"
+            "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-colors",
+            pathname.startsWith("/maxims")
+              ? "bg-bg-warm font-semibold text-ink shadow-2xs"
               : "text-ink-soft hover:bg-bg-warm hover:text-ink",
           )}
         >
-          <Languages className="size-4 shrink-0" strokeWidth={1.75} />
-          Maxims
+          <span className="flex items-center gap-2">
+            <Languages className="size-4 shrink-0 text-muted" strokeWidth={1.75} />
+            <span>Maxims</span>
+          </span>
+          <span className="rounded-full bg-bg-warm px-1.5 py-0.5 font-sans text-[10px] font-semibold text-muted">
+            25
+          </span>
         </Link>
         <Link
           to="/search"
           onClick={onNavigate}
           className={cn(
-            "flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-medium",
+            "flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-medium transition-colors",
             pathname === "/search"
-              ? "bg-bg-warm text-ink"
+              ? "bg-bg-warm font-semibold text-ink shadow-2xs"
               : "text-ink-soft hover:bg-bg-warm hover:text-ink",
           )}
         >
-          <Search className="size-4 shrink-0" strokeWidth={1.75} />
-          Search
+          <Search className="size-4 shrink-0 text-muted" strokeWidth={1.75} />
+          <span>Search</span>
         </Link>
         <button
           type="button"
@@ -215,7 +231,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-dvh bg-bg text-ink">
-      <header className="sticky top-0 z-30 border-b border-line bg-surface/80 backdrop-blur-md">
+      <header className="no-print sticky top-0 z-30 border-b border-line bg-surface/80 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-[1400px] items-center gap-3 px-4 sm:h-16 sm:px-6">
           <Button
             variant="ghost"

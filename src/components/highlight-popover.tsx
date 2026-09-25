@@ -25,6 +25,17 @@ export function HighlightPopover({
   const [copied, setCopied] = useState(false);
   const [showNoteInput, setShowNoteInput] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < 640 : false,
+  );
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < 640);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     if (highlight) {
@@ -32,7 +43,6 @@ export function HighlightPopover({
       setShowNoteInput(Boolean(highlight.note));
     }
   }, [highlight]);
-
   // Click outside listener
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -95,34 +105,40 @@ export function HighlightPopover({
   };
 
   // Position popover
+  const popoverWidth = 320;
+  const screenWidth = typeof window !== "undefined" ? window.innerWidth : 640;
+  const screenHeight = typeof window !== "undefined" ? window.innerHeight : 800;
+
   const style: React.CSSProperties = {
     position: "fixed",
     zIndex: 50,
   };
 
-  if (targetRect) {
-    const top = Math.min(
-      Math.max(10, targetRect.bottom + 8),
-      window.innerHeight - 300,
-    );
-    const left = Math.min(
-      Math.max(10, targetRect.left + targetRect.width / 2 - 160),
-      window.innerWidth - 330,
-    );
-    style.top = `${top}px`;
-    style.left = `${left}px`;
-  } else {
-    style.top = "50%";
-    style.left = "50%";
-    style.transform = "translate(-50%, -50%)";
+  if (!isMobile) {
+    if (targetRect) {
+      const top = Math.max(12, Math.min(targetRect.bottom + 8, screenHeight - 340));
+      const idealLeft = targetRect.left + targetRect.width / 2 - popoverWidth / 2;
+      const left = Math.max(12, Math.min(idealLeft, screenWidth - 332));
+      style.top = `${top}px`;
+      style.left = `${left}px`;
+    } else {
+      style.top = "50%";
+      style.left = "50%";
+      style.transform = "translate(-50%, -50%)";
+    }
   }
 
-  return (
+  const content = (
     <div
       ref={popoverRef}
-      style={style}
-      className="w-80 rounded-xl border border-line bg-surface p-3.5 shadow-xl animate-in fade-in zoom-in-95 duration-150"
+      style={!isMobile ? style : undefined}
+      className={
+        isMobile
+          ? "fixed bottom-0 left-0 right-0 z-50 w-full max-w-lg mx-auto rounded-t-2xl border-t border-line bg-surface p-4 shadow-2xl animate-in slide-in-from-bottom duration-200 max-h-[85vh] overflow-y-auto pb-safe font-sans"
+          : "w-80 rounded-xl border border-line bg-surface p-3.5 shadow-xl animate-in fade-in zoom-in-95 duration-150 font-sans"
+      }
     >
+      {isMobile && <div className="mx-auto -mt-1 mb-3 h-1.5 w-10 rounded-full bg-line" />}
       <div className="flex items-center justify-between pb-2 border-b border-line/60">
         <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
           Highlight
@@ -265,4 +281,18 @@ export function HighlightPopover({
       </div>
     </div>
   );
+
+  if (isMobile) {
+    return (
+      <>
+        <div
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[2px] animate-in fade-in duration-150"
+          onClick={onClose}
+        />
+        {content}
+      </>
+    );
+  }
+
+  return content;
 }

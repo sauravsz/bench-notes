@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
 import { adjacentTopics, getTopic } from "@/data";
 import { useProgress } from "@/lib/progress";
 import { ReaderView } from "@/components/reader-view";
@@ -19,12 +19,49 @@ function TopicPage() {
   const toggleStudied = useProgress((s) => s.toggleStudied);
   const setLastSlug = useProgress((s) => s.setLastSlug);
 
+  const [progress, setProgress] = useState(0);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const totalHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        setProgress(Math.min(100, Math.max(0, (scrollY / totalHeight) * 100)));
+      } else {
+        setProgress(0);
+      }
+      setShowBackToTop(scrollY > 300);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [slug]);
+
   useEffect(() => {
     setLastSlug(slug);
   }, [slug, setLastSlug]);
 
   return (
-    <article className="px-4 py-8 sm:px-10 sm:py-10">
+    <>
+      {/* Reading scroll progress bar */}
+      <div
+        className="no-print pointer-events-none fixed top-0 left-0 right-0 z-50 h-[3px] bg-line/30"
+        role="progressbar"
+        aria-valuenow={Math.round(progress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Reading progress"
+      >
+        <div
+          className="h-full bg-accent transition-[width] duration-75 ease-out"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+
+      <article className="px-4 py-8 sm:px-10 sm:py-10">
       <div className="mx-auto max-w-2xl">
         <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-accent">
           {topic.unit}
@@ -33,10 +70,11 @@ function TopicPage() {
           <h1 className="font-serif text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
             {topic.title}
           </h1>
-          <span className="font-sans text-xs font-medium uppercase tracking-[0.12em] text-muted">
-            {topic.marks} marks
-            {topic.lecture ? ` · ${topic.lecture}` : ""}
-          </span>
+          {topic.lecture ? (
+            <span className="font-sans text-xs font-medium uppercase tracking-[0.12em] text-muted">
+              {topic.lecture}
+            </span>
+          ) : null}
         </div>
         <p className="mt-4 font-serif text-lg leading-relaxed text-ink-soft">
           {topic.summary}
@@ -88,5 +126,18 @@ function TopicPage() {
         </nav>
       </div>
     </article>
+
+    {/* Floating Back to Top Button */}
+    {showBackToTop ? (
+      <button
+        type="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="no-print fixed bottom-6 right-6 z-40 flex size-10 items-center justify-center rounded-full border border-line bg-surface/90 text-ink-soft shadow-md backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-bg-warm hover:text-ink hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        aria-label="Back to top"
+      >
+        <ArrowUp className="size-4" />
+      </button>
+    ) : null}
+  </>
   );
 }

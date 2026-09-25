@@ -148,6 +148,10 @@
   color: var(--color-ink);
 }
 
+em, i {
+  font-style: normal;
+}
+
 .note-prose table {
   width: 100%;
   border-collapse: collapse;
@@ -187,13 +191,38 @@
 }
 
 @media print {
-  header, nav, aside, .no-print {
+  header, nav, aside, footer, button, .no-print, [role="navigation"], [data-no-print] {
     display: none !important;
   }
   body, html {
-    background: white;
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
   }
   main {
     padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .note-prose {
+    color: #000000 !important;
+    font-size: 11pt !important;
+  }
+  .note-tree {
+    background: #fdfdfd !important;
+    border: 1px solid #d0d0d0 !important;
+    color: #000000 !important;
+    page-break-inside: avoid;
+  }
+  table, tr, td, th {
+    page-break-inside: avoid;
+    border-color: #d0d0d0 !important;
+    color: #000000 !important;
+  }
+  article, section, .border, [class*="border-"] {
+    page-break-inside: avoid;
   }
 }

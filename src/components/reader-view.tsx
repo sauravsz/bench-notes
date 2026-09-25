@@ -30,8 +30,8 @@ export function ReaderView({
 
   // Manual selection toolbar state
   const [selectedText, setSelectedText] = useState("");
+  const [selectedBlockIndex, setSelectedBlockIndex] = useState<number | undefined>(undefined);
   const [selectionRect, setSelectionRect] = useState<DOMRect | null>(null);
-
   // Clicked highlight popover state
   const [activeHighlightId, setActiveHighlightId] = useState<string | null>(null);
   const [popoverRect, setPopoverRect] = useState<DOMRect | null>(null);
@@ -55,6 +55,7 @@ export function ReaderView({
       const selection = window.getSelection();
       if (!selection || selection.isCollapsed) {
         setSelectedText("");
+        setSelectedBlockIndex(undefined);
         setSelectionRect(null);
         return;
       }
@@ -63,16 +64,29 @@ export function ReaderView({
       // Only highlight if at least 2 non-whitespace characters
       if (text.length < 2) {
         setSelectedText("");
+        setSelectedBlockIndex(undefined);
         setSelectionRect(null);
         return;
       }
-
       // Verify the selection is inside this container
       if (
         containerRef.current &&
         !containerRef.current.contains(selection.anchorNode)
       ) {
         return;
+      }
+
+      // Determine which block the selection is in
+      let blockIndex: number | undefined;
+      const anchorNode = selection.anchorNode;
+      const element = anchorNode instanceof Element ? anchorNode : anchorNode?.parentElement;
+      const blockEl = element?.closest("[data-block-index]");
+      const blockIndexAttr = blockEl?.getAttribute("data-block-index");
+      if (blockIndexAttr !== null && blockIndexAttr !== undefined) {
+        const parsed = parseInt(blockIndexAttr, 10);
+        if (!isNaN(parsed)) {
+          blockIndex = parsed;
+        }
       }
 
       if (autoHighlight && !altHeld) {
@@ -82,6 +96,7 @@ export function ReaderView({
             docTitle,
             text,
             color: currentColor,
+            blockIndex,
           });
           toast.success("Highlighted text", {
             description: `Auto-saved to local notebook. Press Shift+H to toggle.`,
@@ -89,6 +104,7 @@ export function ReaderView({
           });
           selection.removeAllRanges();
           setSelectedText("");
+          setSelectedBlockIndex(undefined);
           setSelectionRect(null);
         } catch {
           // Ignore invalid highlights
@@ -99,6 +115,7 @@ export function ReaderView({
           const range = selection.getRangeAt(0);
           setSelectionRect(range.getBoundingClientRect());
           setSelectedText(text);
+          setSelectedBlockIndex(blockIndex);
         }
       }
     },
@@ -112,10 +129,12 @@ export function ReaderView({
       docTitle,
       text: selectedText,
       color: color || currentColor,
+      blockIndex: selectedBlockIndex,
     });
     toast.success("Highlighted text", { duration: 1500 });
     window.getSelection()?.removeAllRanges();
     setSelectedText("");
+    setSelectedBlockIndex(undefined);
     setSelectionRect(null);
   };
 
@@ -126,9 +145,11 @@ export function ReaderView({
       docTitle,
       text: selectedText,
       color: currentColor,
+      blockIndex: selectedBlockIndex,
     });
     window.getSelection()?.removeAllRanges();
     setSelectedText("");
+    setSelectedBlockIndex(undefined);
     setSelectionRect(null);
     // Open note popover on the newly created highlight
     setActiveHighlightId(item.id);

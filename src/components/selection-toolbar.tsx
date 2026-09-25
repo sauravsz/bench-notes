@@ -37,12 +37,16 @@ export function SelectionToolbar({
 
   if (!selectionRect || !selectedText) return null;
 
-  const top = Math.max(10, selectionRect.top - 48);
-  const left = Math.min(
-    Math.max(10, selectionRect.left + selectionRect.width / 2 - 120),
-    window.innerWidth - 260,
-  );
+  const toolbarWidth = 260;
+  const screenWidth = typeof window !== "undefined" ? window.innerWidth : 360;
+  const screenHeight = typeof window !== "undefined" ? window.innerHeight : 800;
 
+  const idealLeft = selectionRect.left + selectionRect.width / 2 - toolbarWidth / 2;
+  const left = Math.max(12, Math.min(idealLeft, screenWidth - toolbarWidth - 12));
+  const top =
+    selectionRect.top < 56
+      ? Math.min(screenHeight - 56, selectionRect.bottom + 8)
+      : Math.max(12, selectionRect.top - 48);
   const handleCopy = () => {
     navigator.clipboard.writeText(selectedText);
     setCopied(true);
@@ -60,7 +64,7 @@ export function SelectionToolbar({
         left: `${left}px`,
         zIndex: 50,
       }}
-      className="flex items-center gap-1 rounded-lg border border-line bg-surface p-1 shadow-lg animate-in fade-in zoom-in-95 duration-100"
+      className="flex max-w-[calc(100vw-24px)] items-center gap-1 overflow-x-auto rounded-lg border border-line bg-surface p-1 shadow-lg animate-in fade-in zoom-in-95 duration-100"
     >
       <button
         type="button"

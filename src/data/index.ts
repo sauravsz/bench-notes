@@ -1,4 +1,4 @@
-import type { NoteBlock, Topic } from "./types";
+import type { ExamQuestion, NoteBlock, Topic } from "./types";
 import { judiciaryTopics } from "./notes-judiciary";
 import { contractTopics } from "./notes-contract";
 import { constitutionTopics } from "./notes-constitution";
@@ -54,6 +54,18 @@ export function getExam(id: string) {
   return examQuestions.find((q) => q.id === id);
 }
 
+export function adjacentExams(id: string): {
+  prev?: ExamQuestion;
+  next?: ExamQuestion;
+} {
+  const i = examQuestions.findIndex((q) => q.id === id);
+  if (i < 0) return {};
+  return {
+    prev: i > 0 ? examQuestions[i - 1] : undefined,
+    next: i < examQuestions.length - 1 ? examQuestions[i + 1] : undefined,
+  };
+}
+
 function blockText(block: NoteBlock): string {
   switch (block.type) {
     case "h3":
@@ -77,6 +89,8 @@ function blockText(block: NoteBlock): string {
       return `${block.label} ${block.body}`;
     case "tree":
       return `${block.title ?? ""} ${block.lines.join(" ")}`;
+    case "diagram":
+      return `${block.title ?? ""} ${block.caption ?? ""}`;
     default:
       return "";
   }
@@ -92,7 +106,11 @@ export type SearchHit = {
 export function searchNotes(query: string): SearchHit[] {
   const q = query.trim().toLowerCase();
   if (q.length < 2) return [];
+  const terms = q.split(/\s+/).filter(Boolean);
+  if (terms.length === 0) return [];
   const hits: SearchHit[] = [];
+
+  const matches = (hay: string) => terms.every((term) => hay.includes(term));
 
   for (const topic of topics) {
     const hay = [
@@ -103,7 +121,7 @@ export function searchNotes(query: string): SearchHit[] {
     ]
       .join(" ")
       .toLowerCase();
-    if (hay.includes(q)) {
+    if (matches(hay)) {
       hits.push({
         kind: "topic",
         title: topic.title,
@@ -121,7 +139,7 @@ export function searchNotes(query: string): SearchHit[] {
     ]
       .join(" ")
       .toLowerCase();
-    if (hay.includes(q)) {
+    if (matches(hay)) {
       hits.push({
         kind: "exam",
         title: `Q${exam.number}. ${exam.title}`,
@@ -133,7 +151,7 @@ export function searchNotes(query: string): SearchHit[] {
 
   for (const entry of glossary) {
     const hay = `${entry.term} ${entry.section ?? ""} ${entry.body}`.toLowerCase();
-    if (hay.includes(q)) {
+    if (matches(hay)) {
       hits.push({
         kind: "glossary",
         title: entry.term,
@@ -145,7 +163,7 @@ export function searchNotes(query: string): SearchHit[] {
 
   for (const maxim of maxims) {
     const hay = `${maxim.latin} ${maxim.meaning}`.toLowerCase();
-    if (hay.includes(q)) {
+    if (matches(hay)) {
       hits.push({
         kind: "maxim",
         title: maxim.latin,

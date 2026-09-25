@@ -7,6 +7,7 @@ type ProgressState = {
   toggleStudied: (slug: string) => void;
   markStudied: (slug: string) => void;
   setLastSlug: (slug: string) => void;
+  resetProgress: () => void;
 };
 
 export const useProgress = create<ProgressState>()(
@@ -21,6 +22,7 @@ export const useProgress = create<ProgressState>()(
       markStudied: (slug) =>
         set((s) => ({ studied: { ...s.studied, [slug]: true } })),
       setLastSlug: (slug) => set({ lastSlug: slug }),
+      resetProgress: () => set({ studied: {}, lastSlug: null }),
     }),
     { name: "bench-notes-progress" },
   ),
