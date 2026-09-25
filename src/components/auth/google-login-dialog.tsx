@@ -26,17 +26,16 @@ export function GoogleLoginDialog({
 
   if (!isOpen) return null;
 
-  const handleStudentAuth = () => {
+  const handleStudentAuth = async () => {
     if (!emailInput || !emailInput.includes("@")) {
       toast.error("Please enter a valid Google email address");
       return;
     }
 
-    const result = signInWithGoogle({
+    const result = await signInWithGoogle({
       email: emailInput.trim(),
       name: nameInput.trim() || emailInput.split("@")[0],
     });
-
     if (result.isAdmin) {
       toast.success("Administrator privileges active", {
         description: "Full management and verification privileges granted.",
@@ -54,13 +53,13 @@ export function GoogleLoginDialog({
     onClose?.();
   };
 
-  const handleAdminAuth = () => {
+  const handleAdminAuth = async () => {
     if (!adminPasswordInput) {
       toast.error("Please enter the administrator password");
       return;
     }
 
-    const res = signInAsAdminWithPassword(adminPasswordInput);
+    const res = await signInAsAdminWithPassword(adminPasswordInput);
     if (res.success) {
       toast.success("Administrator Authenticated", {
         description: "Full master administrative privileges unlocked.",

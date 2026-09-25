@@ -61,6 +61,163 @@ function pgliteBootstrapPlugin(): Plugin {
  * and returns the 302 / completion HTML. Deployed apps do not use the popup
  * (full-page OAuth redirect), so `apply: "serve"` is enough.
  */
+function accessApiPlugin(): Plugin {
+  return {
+    name: "access-api-plugin",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        const rawUrl = req.url ?? "";
+        const pathOnly = rawUrl.split("?", 1)[0] ?? "";
+        if (!pathOnly.startsWith("/api/access/")) {
+          next();
+          return;
+        }
+
+        try {
+          const mod = (await server.ssrLoadModule("/server/store.ts")) as {
+            getGlobalStore: () => {
+              records: Record<string, any>;
+              whitelist: string[];
+              isApproved: (email: string) => boolean;
+              addRecord: (rec: any) => any;
+              approve: (email: string) => any;
+              reject: (email: string) => any;
+              addWhitelist: (entry: string) => void;
+              removeWhitelist: (entry: string) => void;
+            };
+          };
+          const store = mod.getGlobalStore();
+
+          res.setHeader("content-type", "application/json; charset=utf-8");
+
+          if (pathOnly === "/api/access/list" && (req.method ?? "GET") === "GET") {
+            res.end(
+              JSON.stringify({
+                ok: true,
+                records: Object.values(store.records),
+                whitelist: store.whitelist,
+              }),
+            );
+            return;
+          }
+
+          if (pathOnly === "/api/access/request" && req.method === "POST") {
+            let bodyStr = "";
+            req.on("data", (chunk) => {
+              bodyStr += chunk;
+            });
+            req.on("end", () => {
+              try {
+                const body = JSON.parse(bodyStr || "{}");
+                const record = store.addRecord({
+                  email: body.email,
+                  name: body.name,
+                  avatar: body.avatar,
+                  status: "pending",
+                });
+                res.end(
+                  JSON.stringify({
+                    ok: true,
+                    record,
+                    status: record.status,
+                    isApproved: store.isApproved(body.email),
+                  }),
+                );
+              } catch {
+                res.statusCode = 400;
+                res.end(JSON.stringify({ ok: false, error: "Invalid JSON" }));
+              }
+            });
+            return;
+          }
+
+          if (pathOnly === "/api/access/approve" && req.method === "POST") {
+            let bodyStr = "";
+            req.on("data", (chunk) => {
+              bodyStr += chunk;
+            });
+            req.on("end", () => {
+              try {
+                const body = JSON.parse(bodyStr || "{}");
+                const record = store.approve(body.email);
+                res.end(
+                  JSON.stringify({
+                    ok: true,
+                    record,
+                    records: Object.values(store.records),
+                    whitelist: store.whitelist,
+                  }),
+                );
+              } catch {
+                res.statusCode = 400;
+                res.end(JSON.stringify({ ok: false, error: "Invalid JSON" }));
+              }
+            });
+            return;
+          }
+
+          if (pathOnly === "/api/access/reject" && req.method === "POST") {
+            let bodyStr = "";
+            req.on("data", (chunk) => {
+              bodyStr += chunk;
+            });
+            req.on("end", () => {
+              try {
+                const body = JSON.parse(bodyStr || "{}");
+                const record = store.reject(body.email);
+                res.end(
+                  JSON.stringify({
+                    ok: true,
+                    record,
+                    records: Object.values(store.records),
+                    whitelist: store.whitelist,
+                  }),
+                );
+              } catch {
+                res.statusCode = 400;
+                res.end(JSON.stringify({ ok: false, error: "Invalid JSON" }));
+              }
+            });
+            return;
+          }
+
+          if (pathOnly === "/api/access/whitelist" && req.method === "POST") {
+            let bodyStr = "";
+            req.on("data", (chunk) => {
+              bodyStr += chunk;
+            });
+            req.on("end", () => {
+              try {
+                const body = JSON.parse(bodyStr || "{}");
+                if (body.action === "add") store.addWhitelist(body.entry);
+                if (body.action === "remove") store.removeWhitelist(body.entry);
+                res.end(
+                  JSON.stringify({
+                    ok: true,
+                    records: Object.values(store.records),
+                    whitelist: store.whitelist,
+                  }),
+                );
+              } catch {
+                res.statusCode = 400;
+                res.end(JSON.stringify({ ok: false, error: "Invalid JSON" }));
+              }
+            });
+            return;
+          }
+
+          next();
+        } catch (err) {
+          console.error("Access API error:", err);
+          res.statusCode = 500;
+          res.end(JSON.stringify({ ok: false, error: "Internal error" }));
+        }
+      });
+    },
+  };
+}
+
 function authPopupPlugin(): Plugin {
   return {
     name: "app-builder:auth-popup",
@@ -158,11 +315,10 @@ export default defineConfig(({ command, isPreview }) => ({
   },
   resolve: { tsconfigPaths: true },
   plugins: [
+    accessApiPlugin(),
     pgliteBootstrapPlugin(),
     // Before tanstackStart so /auth/popup never falls through to the SPA.
     authPopupPlugin(),
-    // Dev-only /__app-env, read by scripts/check-auth-invariant.mjs.
-    appEnvPlugin(),
     // PWA head + ?install=1 tutorial page; runs before Start/Nitro.
     grokPwaPlugin(),
     tailwindcss(),

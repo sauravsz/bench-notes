@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import {
   Clock,
   GraduationCap,
@@ -22,10 +22,20 @@ export function VerificationGuard({ children }: { children: ReactNode }) {
   const isAdmin = useAccessControl((s) => s.isAdmin);
   const authRequired = useAccessControl((s) => s.authRequired);
   const signOut = useAccessControl((s) => s.signOut);
+  const syncWithServer = useAccessControl((s) => s.syncWithServer);
   const accessRequests = useAccessControl((s) => s.accessRequests);
 
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [loginModalTab, setLoginModalTab] = useState<"student" | "admin">("student");
+
+  // Periodic sync with server so approvals reflect instantly
+  useEffect(() => {
+    syncWithServer();
+    const interval = setInterval(() => {
+      syncWithServer();
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [syncWithServer]);
 
   // If auth is not required, pass through
   if (!authRequired) {

@@ -21,8 +21,17 @@ export type AuthUser = {
   role: "admin" | "student";
 };
 
-const MASTER_ADMIN_PASSWORD = "watchoutTNAjeffhardy";
+const MASTER_ADMIN_HASH =
+  "a1565ed260e2ffc7bc621b55588ea8c0b8077496ea0c6d9a84b385071d40d14c";
 const MASTER_ADMIN_EMAIL = "varmint-aqua-early@duck.com";
+
+async function sha256Hex(text: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text.trim());
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+}
 
 type AccessControlState = {
   adminEmails: string[];
@@ -33,22 +42,23 @@ type AccessControlState = {
 
   // Actions
   setAuthRequired: (required: boolean) => void;
-  signInWithGoogle: (userData: { email: string; name: string; avatar?: string }) => {
+  syncWithServer: () => Promise<void>;
+  signInWithGoogle: (userData: { email: string; name: string; avatar?: string }) => Promise<{
     user: AuthUser;
     status: AccessStatus;
     isAdmin: boolean;
-  };
-  signInAsAdminWithPassword: (password: string) => {
+  }>;
+  signInAsAdminWithPassword: (password: string) => Promise<{
     success: boolean;
     user?: AuthUser;
     error?: string;
-  };
+  }>;
   signOut: () => void;
-  approveRequest: (email: string) => void;
-  rejectRequest: (email: string) => void;
+  approveRequest: (email: string) => Promise<void>;
+  rejectRequest: (email: string) => Promise<void>;
   deleteRequest: (email: string) => void;
-  addWhitelistEntry: (emailOrDomain: string) => void;
-  removeWhitelistEntry: (emailOrDomain: string) => void;
+  addWhitelistEntry: (emailOrDomain: string) => Promise<void>;
+  removeWhitelistEntry: (emailOrDomain: string) => Promise<void>;
   isApproved: (email?: string) => boolean;
   isAdmin: (email?: string) => boolean;
 };
@@ -64,7 +74,32 @@ export const useAccessControl = create<AccessControlState>()(
 
       setAuthRequired: (required) => set({ authRequired: required }),
 
-      signInWithGoogle: ({ email, name, avatar }) => {
+      syncWithServer: async () => {
+        try {
+          const res = await fetch("/api/access/list");
+          if (!res.ok) return;
+          const data = await res.json();
+          if (data.ok && Array.isArray(data.records)) {
+            const recordsMap: Record<string, AccessRequest> = {};
+            for (const r of data.records) {
+              recordsMap[r.email.toLowerCase()] = r;
+            }
+            set((state) => ({
+              accessRequests: {
+                ...state.accessRequests,
+                ...recordsMap,
+              },
+              whitelistedEmails: Array.from(
+                new Set([...state.whitelistedEmails, ...(data.whitelist || [])]),
+              ),
+            }));
+          }
+        } catch {
+          // Fallback to local state if offline
+        }
+      },
+
+      signInWithGoogle: async ({ email, name, avatar }) => {
         const cleanEmail = email.toLowerCase().trim();
         const admins = get().adminEmails.map((e) => e.toLowerCase());
         const whitelist = get().whitelistedEmails.map((e) => e.toLowerCase());
@@ -112,11 +147,36 @@ export const useAccessControl = create<AccessControlState>()(
           },
         }));
 
+        // Send to server backend to sync across all devices
+        try {
+          fetch("/api/access/request", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: cleanEmail, name: user.name, avatar }),
+          })
+            .then((r) => r.json())
+            .then((data) => {
+              if (data?.ok && data.status) {
+                set((state) => ({
+                  accessRequests: {
+                    ...state.accessRequests,
+                    [cleanEmail]: {
+                      ...newRequest,
+                      status: data.status,
+                    },
+                  },
+                }));
+              }
+            })
+            .catch(() => {});
+        } catch {}
+
         return { user, status, isAdmin };
       },
 
-      signInAsAdminWithPassword: (password: string) => {
-        if (password.trim() === MASTER_ADMIN_PASSWORD) {
+      signInAsAdminWithPassword: async (password: string) => {
+        const inputHash = await sha256Hex(password);
+        if (inputHash === MASTER_ADMIN_HASH) {
           const adminUser: AuthUser = {
             id: "usr_admin_master",
             email: MASTER_ADMIN_EMAIL,
@@ -139,6 +199,9 @@ export const useAccessControl = create<AccessControlState>()(
             },
           }));
 
+          // Sync with server
+          get().syncWithServer().catch(() => {});
+
           return { success: true, user: adminUser };
         }
         return { success: false, error: "Invalid administrator password" };
@@ -146,13 +209,20 @@ export const useAccessControl = create<AccessControlState>()(
 
       signOut: () => set({ currentUser: null }),
 
-      approveRequest: (email) => {
+      approveRequest: async (email) => {
         const clean = email.toLowerCase().trim();
         set((state) => {
           const req = state.accessRequests[clean];
-          if (!req) return state;
+          const updatedReq: AccessRequest = req
+            ? { ...req, status: "approved" as AccessStatus }
+            : {
+                id: `req_${Date.now()}`,
+                email: clean,
+                name: clean.split("@")[0],
+                requestedAt: Date.now(),
+                status: "approved",
+              };
 
-          const updatedReq = { ...req, status: "approved" as AccessStatus };
           const updatedWhitelist = Array.from(new Set([...state.whitelistedEmails, clean]));
 
           return {
@@ -163,9 +233,18 @@ export const useAccessControl = create<AccessControlState>()(
             whitelistedEmails: updatedWhitelist,
           };
         });
+
+        // Send approval to server
+        try {
+          fetch("/api/access/approve", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: clean }),
+          }).catch(() => {});
+        } catch {}
       },
 
-      rejectRequest: (email) => {
+      rejectRequest: async (email) => {
         const clean = email.toLowerCase().trim();
         set((state) => {
           const req = state.accessRequests[clean];
@@ -182,6 +261,15 @@ export const useAccessControl = create<AccessControlState>()(
             whitelistedEmails: updatedWhitelist,
           };
         });
+
+        // Send rejection to server
+        try {
+          fetch("/api/access/reject", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: clean }),
+          }).catch(() => {});
+        } catch {}
       },
 
       deleteRequest: (email) => {
@@ -196,19 +284,35 @@ export const useAccessControl = create<AccessControlState>()(
         });
       },
 
-      addWhitelistEntry: (entry) => {
+      addWhitelistEntry: async (entry) => {
         const clean = entry.toLowerCase().trim();
         if (!clean) return;
         set((state) => ({
           whitelistedEmails: Array.from(new Set([...state.whitelistedEmails, clean])),
         }));
+
+        try {
+          fetch("/api/access/whitelist", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "add", entry: clean }),
+          }).catch(() => {});
+        } catch {}
       },
 
-      removeWhitelistEntry: (entry) => {
+      removeWhitelistEntry: async (entry) => {
         const clean = entry.toLowerCase().trim();
         set((state) => ({
           whitelistedEmails: state.whitelistedEmails.filter((e) => e.toLowerCase() !== clean),
         }));
+
+        try {
+          fetch("/api/access/whitelist", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "remove", entry: clean }),
+          }).catch(() => {});
+        } catch {}
       },
 
       isApproved: (email) => {

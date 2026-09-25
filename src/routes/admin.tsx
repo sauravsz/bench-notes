@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
@@ -36,6 +36,7 @@ function AdminDashboard() {
   const accessRequests = useAccessControl((s) => s.accessRequests);
   const authRequired = useAccessControl((s) => s.authRequired);
   const setAuthRequired = useAccessControl((s) => s.setAuthRequired);
+  const syncWithServer = useAccessControl((s) => s.syncWithServer);
   const approveRequest = useAccessControl((s) => s.approveRequest);
   const rejectRequest = useAccessControl((s) => s.rejectRequest);
   const deleteRequest = useAccessControl((s) => s.deleteRequest);
@@ -44,6 +45,15 @@ function AdminDashboard() {
 
   const [newEmailInput, setNewEmailInput] = useState("");
   const [activeTab, setActiveTab] = useState<"pending" | "approved" | "whitelist">("pending");
+
+  // Real-time server sync every 3 seconds
+  useEffect(() => {
+    syncWithServer();
+    const interval = setInterval(() => {
+      syncWithServer();
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [syncWithServer]);
 
   // Non-Admin protection
   if (!currentUser || !isAdmin) {
