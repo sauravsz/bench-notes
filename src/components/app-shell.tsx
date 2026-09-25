@@ -9,20 +9,27 @@ import {
   Scale,
   Search,
   X,
+  Zap,
+  ZapOff,
 } from "lucide-react";
 import { topics, units } from "@/data";
 import { useProgress } from "@/lib/progress";
 import { useHighlights } from "@/lib/highlights";
 import { HighlightsDrawer } from "./highlights-drawer";
+import { Switch } from "./ui/switch";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
+import { toast } from "sonner";
 
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const studied = useProgress((s) => s.studied);
   const highlights = useHighlights((s) => s.highlights);
+  const autoHighlight = useHighlights((s) => s.autoHighlight);
+  const toggleAutoHighlight = useHighlights((s) => s.toggleAutoHighlight);
   const setNotebookOpen = useHighlights((s) => s.setNotebookOpen);
   const highlightsCount = Object.keys(highlights).length;
+
   return (
     <div className="flex flex-col gap-6 pb-8">
       <div>
@@ -111,6 +118,32 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
             </span>
           ) : null}
         </button>
+
+        {/* Global Auto-Highlight setting switch in sidebar */}
+        <div className="mt-3 flex items-center justify-between rounded-lg border border-line bg-surface px-3 py-2.5 shadow-2xs">
+          <div className="flex flex-col">
+            <span className="flex items-center gap-1.5 font-sans text-xs font-semibold text-ink">
+              <Zap className={cn("size-3.5", autoHighlight ? "fill-amber-500 text-amber-600" : "text-muted")} />
+              Auto-Highlight
+            </span>
+            <span className="text-[10px] text-muted">Instant selection (⇧H)</span>
+          </div>
+          <Switch
+            checked={autoHighlight}
+            onCheckedChange={(checked) => {
+              toggleAutoHighlight();
+              if (checked) {
+                toast.success("Auto-highlighting enabled", {
+                  description: "Selecting text will automatically highlight it.",
+                });
+              } else {
+                toast.info("Auto-highlighting disabled", {
+                  description: "Select text to open the highlight toolbar.",
+                });
+              }
+            }}
+          />
+        </div>
       </div>
 
       {units.map((unit) => {
@@ -160,10 +193,25 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const studied = useProgress((s) => s.studied);
   const highlights = useHighlights((s) => s.highlights);
+  const autoHighlight = useHighlights((s) => s.autoHighlight);
+  const toggleAutoHighlight = useHighlights((s) => s.toggleAutoHighlight);
   const notebookOpen = useHighlights((s) => s.notebookOpen);
   const setNotebookOpen = useHighlights((s) => s.setNotebookOpen);
   const highlightsCount = Object.keys(highlights).length;
   const done = topics.filter((t) => studied[t.slug]).length;
+
+  const handleHeaderToggleAuto = () => {
+    const next = toggleAutoHighlight();
+    if (next) {
+      toast.success("Auto-highlighting enabled (Shift+H)", {
+        description: "Selecting text will instantly create a highlight.",
+      });
+    } else {
+      toast.info("Auto-highlighting disabled (Shift+H)", {
+        description: "Select text to view highlight & note options.",
+      });
+    }
+  };
 
   return (
     <div className="min-h-dvh bg-bg text-ink">
@@ -191,28 +239,50 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </span>
             </span>
           </Link>
-          <div className="ml-auto flex items-center gap-3">
-            <p className="hidden font-sans text-xs tabular-nums text-muted sm:block">
+
+          <div className="ml-auto flex items-center gap-2 sm:gap-3">
+            {/* Quick Auto-Highlight Header Toggle Switch */}
+            <button
+              type="button"
+              onClick={handleHeaderToggleAuto}
+              title={`Auto-highlighting is ${autoHighlight ? "ON" : "OFF"}. Press Shift+H to toggle.`}
+              className={cn(
+                "flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium transition-all",
+                autoHighlight
+                  ? "bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-950/50 dark:text-amber-200 dark:border-amber-800 shadow-2xs"
+                  : "bg-bg-warm text-muted hover:text-ink border border-line",
+              )}
+            >
+              {autoHighlight ? (
+                <Zap className="size-3 fill-amber-500 text-amber-600" />
+              ) : (
+                <ZapOff className="size-3 text-muted" />
+              )}
+              <span className="hidden md:inline">Auto-Highlight</span>
+              <span className="font-semibold">{autoHighlight ? "ON" : "OFF"}</span>
+            </button>
+
+            <p className="hidden font-sans text-xs tabular-nums text-muted lg:block">
               {done}/{topics.length} studied
             </p>
             <button
               type="button"
               onClick={() => setNotebookOpen(true)}
-              className="relative inline-flex size-11 items-center justify-center rounded-md text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors"
+              className="relative inline-flex size-10 sm:size-11 items-center justify-center rounded-md text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors"
               aria-label="Open highlights notebook"
               title="Reader Highlights & Notes"
             >
-              <Highlighter className="size-5" strokeWidth={1.75} />
+              <Highlighter className="size-4.5 sm:size-5" strokeWidth={1.75} />
               {highlightsCount > 0 ? (
                 <span className="absolute right-2 top-2 size-2 rounded-full bg-accent ring-2 ring-surface" />
               ) : null}
             </button>
             <Link
               to="/search"
-              className="inline-flex size-11 items-center justify-center rounded-md text-ink-soft hover:bg-bg-warm hover:text-ink"
+              className="inline-flex size-10 sm:size-11 items-center justify-center rounded-md text-ink-soft hover:bg-bg-warm hover:text-ink"
               aria-label="Search notes"
             >
-              <Search className="size-5" strokeWidth={1.75} />
+              <Search className="size-4.5 sm:size-5" strokeWidth={1.75} />
             </Link>
           </div>
         </div>

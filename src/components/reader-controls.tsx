@@ -13,9 +13,9 @@ import {
   useHighlights,
   type HighlightColor,
 } from "@/lib/highlights";
+import { Switch } from "./ui/switch";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-
 export function ReaderControls({
   docId,
   docTitle,
@@ -87,36 +87,32 @@ export function ReaderControls({
 
   return (
     <div className="no-print my-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-line bg-surface p-2.5 shadow-xs">
-      <div className="flex flex-wrap items-center gap-2">
-        {/* Auto-highlight toggle button */}
-        <button
-          type="button"
-          onClick={handleToggleAuto}
-          title="Toggle Auto-Highlighting (Shortcut: Shift+H)"
-          className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium transition-all ${
-            autoHighlight
-              ? "bg-amber-100/80 text-amber-900 border border-amber-300/80 dark:bg-amber-950/40 dark:text-amber-200 dark:border-amber-800/80 shadow-xs"
-              : "bg-bg-warm text-muted hover:text-ink border border-line/60"
-          }`}
-        >
-          {autoHighlight ? (
-            <Zap className="size-3.5 fill-amber-500 text-amber-600" />
-          ) : (
-            <ZapOff className="size-3.5 text-muted" />
-          )}
-          <span>Auto-Highlight</span>
-          <span
-            className={`font-semibold text-[11px] ${
-              autoHighlight ? "text-amber-700 dark:text-amber-300" : "text-muted"
-            }`}
-          >
-            {autoHighlight ? "ON" : "OFF"}
+      <div className="flex flex-wrap items-center gap-2.5">
+        {/* Auto-highlight toggle button with switch */}
+        <div className="flex items-center gap-2 rounded-lg border border-line bg-bg-warm/50 px-2.5 py-1">
+          <span className="flex items-center gap-1.5 text-xs font-semibold text-ink">
+            <Zap className={`size-3.5 ${autoHighlight ? "fill-amber-500 text-amber-600" : "text-muted"}`} />
+            Auto-Highlight
+            <kbd className="hidden sm:inline-block rounded bg-black/5 dark:bg-white/10 px-1 py-0.2 text-[9px] text-muted">
+              ⇧H
+            </kbd>
           </span>
-          <kbd className="hidden sm:inline-block rounded bg-black/5 dark:bg-white/10 px-1 py-0.2 text-[9px] text-muted">
-            ⇧H
-          </kbd>
-        </button>
-
+          <Switch
+            checked={autoHighlight}
+            onCheckedChange={(checked) => {
+              toggleAutoHighlight();
+              if (checked) {
+                toast.success("Auto-highlighting enabled", {
+                  description: "Selecting text will automatically highlight it.",
+                });
+              } else {
+                toast.info("Auto-highlighting disabled", {
+                  description: "Select text to open the highlight toolbar.",
+                });
+              }
+            }}
+          />
+        </div>
         {/* Color Palette Picker */}
         <div className="flex items-center gap-1 rounded-lg bg-bg-warm/70 px-2 py-1 border border-line/40">
           <span className="text-[11px] font-medium text-muted mr-1 hidden sm:inline">

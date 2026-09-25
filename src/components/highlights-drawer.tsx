@@ -18,8 +18,9 @@ import {
   type HighlightColor,
   type HighlightItem,
 } from "@/lib/highlights";
+import { Switch } from "./ui/switch";
 import { Button } from "./ui/button";
-
+import { toast } from "sonner";
 export function HighlightsDrawer({
   currentDocId,
   onClose,
@@ -116,7 +117,6 @@ export function HighlightsDrawer({
             <X className="size-4" />
           </button>
         </div>
-
         {/* Auto-highlight toggle banner */}
         <div className="flex items-center justify-between bg-bg-warm/60 px-4 py-2.5 border-b border-line/60">
           <div className="flex items-center gap-2">
@@ -131,15 +131,25 @@ export function HighlightsDrawer({
               {autoHighlight ? "Enabled" : "Disabled"}
             </span>
           </div>
-          <button
-            type="button"
-            onClick={() => toggleAutoHighlight()}
-            className="text-xs font-medium text-accent hover:underline flex items-center gap-1"
-          >
-            Toggle (<kbd className="font-sans">⇧H</kbd>)
-          </button>
+          <div className="flex items-center gap-2">
+            <kbd className="hidden sm:inline-block font-sans text-[10px] text-muted">⇧H</kbd>
+            <Switch
+              checked={autoHighlight}
+              onCheckedChange={(checked) => {
+                toggleAutoHighlight();
+                if (checked) {
+                  toast.success("Auto-highlighting enabled", {
+                    description: "Selecting text will automatically highlight it.",
+                  });
+                } else {
+                  toast.info("Auto-highlighting disabled", {
+                    description: "Select text to open the highlight toolbar.",
+                  });
+                }
+              }}
+            />
+          </div>
         </div>
-
         {/* Filter / Search Bar */}
         <div className="p-4 border-b border-line/60 space-y-3">
           {/* Tabs */}
