@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
 import { adjacentTopics, getTopic } from "@/data";
 import { useProgress } from "@/lib/progress";
+import { useAppearance, TEXT_WIDTH_CLASSES } from "@/lib/appearance";
 import { ReaderView } from "@/components/reader-view";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/topic/$slug")({
   component: TopicPage,
@@ -18,7 +20,7 @@ function TopicPage() {
   const studied = useProgress((s) => s.studied[slug]);
   const toggleStudied = useProgress((s) => s.toggleStudied);
   const setLastSlug = useProgress((s) => s.setLastSlug);
-
+  const textWidth = useAppearance((s) => s.textWidth);
   const [progress, setProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
 
@@ -62,7 +64,7 @@ function TopicPage() {
       </div>
 
       <article className="px-4 py-8 sm:px-10 sm:py-10">
-      <div className="mx-auto max-w-2xl">
+        <div className={cn("mx-auto transition-all duration-200", TEXT_WIDTH_CLASSES[textWidth])}>
         <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-accent">
           {topic.unit}
         </p>

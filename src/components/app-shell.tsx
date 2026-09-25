@@ -6,8 +6,11 @@ import {
   Highlighter,
   Languages,
   Menu,
+  PanelLeft,
+  PanelLeftClose,
   Scale,
   Search,
+  Type,
   X,
   Zap,
   ZapOff,
@@ -15,7 +18,10 @@ import {
 import { topics, units } from "@/data";
 import { useProgress } from "@/lib/progress";
 import { useHighlights } from "@/lib/highlights";
+import { useAppearance, THEME_TONE_STYLES } from "@/lib/appearance";
+import { useReaderShortcuts } from "@/lib/use-reader-shortcuts";
 import { HighlightsDrawer } from "./highlights-drawer";
+import { AppearancePopover } from "./appearance-popover";
 import { Switch } from "./ui/switch";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
@@ -126,10 +132,10 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
         >
           <span className="flex items-center gap-2">
             <Highlighter className="size-4 shrink-0 text-accent" strokeWidth={1.75} />
-            Highlights
+            <span>Highlights</span>
           </span>
           {highlightsCount > 0 ? (
-            <span className="rounded-full bg-accent/15 px-2 py-0.5 text-[11px] font-semibold text-accent">
+            <span className="rounded-full bg-accent/15 px-2 py-0.5 font-sans text-[11px] font-bold text-accent">
               {highlightsCount}
             </span>
           ) : null}
@@ -180,9 +186,9 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
                       params={{ slug: topic.slug }}
                       onClick={onNavigate}
                       className={cn(
-                        "flex min-h-11 items-start gap-2 rounded-md px-3 py-2 text-sm leading-snug",
+                        "flex min-h-11 items-start gap-2 rounded-md px-3 py-2 text-sm leading-snug transition-colors",
                         active
-                          ? "bg-bg-warm text-ink"
+                          ? "bg-bg-warm font-semibold text-ink shadow-2xs"
                           : "text-ink-soft hover:bg-bg-warm hover:text-ink",
                       )}
                     >
@@ -206,6 +212,9 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 }
 
 export function AppShell({ children }: { children: React.ReactNode }) {
+  // Global Reader shortcuts (Cmd+B, Shift+H, Shift+<, Shift+>, Shift+-, Shift+=, Shift+:, Shift+")
+  useReaderShortcuts();
+
   const [open, setOpen] = useState(false);
   const studied = useProgress((s) => s.studied);
   const highlights = useHighlights((s) => s.highlights);
@@ -215,6 +224,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const setNotebookOpen = useHighlights((s) => s.setNotebookOpen);
   const highlightsCount = Object.keys(highlights).length;
   const done = topics.filter((t) => studied[t.slug]).length;
+
+  const sidebarCollapsed = useAppearance((s) => s.sidebarCollapsed);
+  const toggleSidebar = useAppearance((s) => s.toggleSidebar);
+  const appearanceMenuOpen = useAppearance((s) => s.appearanceMenuOpen);
+  const setAppearanceMenuOpen = useAppearance((s) => s.setAppearanceMenuOpen);
+  const themeTone = useAppearance((s) => s.themeTone);
 
   const handleHeaderToggleAuto = () => {
     const next = toggleAutoHighlight();
@@ -230,9 +245,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="min-h-dvh bg-bg text-ink">
+    <div
+      className="min-h-dvh bg-bg text-ink transition-colors duration-200"
+      style={{
+        backgroundColor: THEME_TONE_STYLES[themeTone]?.bg,
+        color: THEME_TONE_STYLES[themeTone]?.text,
+      }}
+    >
       <header className="no-print sticky top-0 z-30 border-b border-line bg-surface/80 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-[1400px] items-center gap-3 px-4 sm:h-16 sm:px-6">
+          {/* Mobile drawer toggle */}
           <Button
             variant="ghost"
             size="icon"
@@ -242,12 +264,28 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </Button>
+
+          {/* Desktop Sidebar Collapse Toggle (Cmd+B) */}
+          <button
+            type="button"
+            onClick={toggleSidebar}
+            className="hidden lg:inline-flex size-9 items-center justify-center rounded-lg border border-line bg-surface text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors"
+            title={sidebarCollapsed ? "Expand Sidebar (Cmd+B / [ )" : "Collapse Sidebar (Cmd+B / ] )"}
+            aria-label="Toggle Sidebar"
+          >
+            {sidebarCollapsed ? (
+              <PanelLeft className="size-4.5 text-accent" strokeWidth={1.75} />
+            ) : (
+              <PanelLeftClose className="size-4.5" strokeWidth={1.75} />
+            )}
+          </button>
+
           <Link to="/" className="flex min-w-0 items-center gap-2.5">
-            <span className="flex size-8 items-center justify-center rounded-md bg-accent text-accent-fg">
+            <span className="flex size-8 items-center justify-center rounded-md bg-accent text-accent-fg shadow-2xs">
               <Gavel className="size-4" strokeWidth={1.75} />
             </span>
             <span className="min-w-0">
-              <span className="block font-serif text-lg font-semibold leading-none tracking-tight">
+              <span className="block font-serif text-lg font-bold leading-none tracking-tight">
                 Bench Notes
               </span>
               <span className="mt-0.5 hidden font-sans text-[11px] uppercase tracking-[0.14em] text-muted sm:block">
@@ -278,27 +316,44 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <span className="font-semibold">{autoHighlight ? "ON" : "OFF"}</span>
             </button>
 
+            {/* Readwise Appearance Typography (Aa) Button */}
+            <button
+              type="button"
+              data-appearance-trigger
+              onClick={() => setAppearanceMenuOpen(!appearanceMenuOpen)}
+              className="relative inline-flex size-9 sm:size-10 items-center justify-center rounded-lg border border-line bg-surface text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors shadow-2xs"
+              aria-label="Reading appearance settings"
+              title="Reading Appearance & Width (Aa)"
+            >
+              <span className="font-serif text-sm font-bold tracking-tighter">Aa</span>
+            </button>
+
             <p className="hidden font-sans text-xs tabular-nums text-muted lg:block">
               {done}/{topics.length} studied
             </p>
+
+            {/* Notebook Button */}
             <button
               type="button"
               onClick={() => setNotebookOpen(true)}
-              className="relative inline-flex size-10 sm:size-11 items-center justify-center rounded-md text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors"
+              className="relative inline-flex size-9 sm:size-10 items-center justify-center rounded-lg border border-line bg-surface text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors shadow-2xs"
               aria-label="Open highlights notebook"
               title="Reader Highlights & Notes"
             >
-              <Highlighter className="size-4.5 sm:size-5" strokeWidth={1.75} />
+              <Highlighter className="size-4 sm:size-4.5" strokeWidth={1.75} />
               {highlightsCount > 0 ? (
-                <span className="absolute right-2 top-2 size-2 rounded-full bg-accent ring-2 ring-surface" />
+                <span className="absolute right-1.5 top-1.5 size-2 rounded-full bg-accent ring-2 ring-surface" />
               ) : null}
             </button>
+
+            {/* Search Link */}
             <Link
               to="/search"
-              className="inline-flex size-10 sm:size-11 items-center justify-center rounded-md text-ink-soft hover:bg-bg-warm hover:text-ink"
+              className="inline-flex size-9 sm:size-10 items-center justify-center rounded-lg border border-line bg-surface text-ink-soft hover:bg-bg-warm hover:text-ink shadow-2xs"
               aria-label="Search notes"
+              title="Search notes (Find)"
             >
-              <Search className="size-4.5 sm:size-5" strokeWidth={1.75} />
+              <Search className="size-4 sm:size-4.5" strokeWidth={1.75} />
             </Link>
           </div>
         </div>
@@ -310,6 +365,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
+      {/* Mobile Sidebar Overlay */}
       {open ? (
         <div className="no-print fixed inset-0 z-20 lg:hidden">
           <button
@@ -318,21 +374,36 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             aria-label="Close syllabus"
             onClick={() => setOpen(false)}
           />
-          <nav className="absolute inset-y-0 left-0 w-[min(20rem,88vw)] overflow-y-auto border-r border-line bg-surface px-2 pt-16">
+          <nav className="absolute inset-y-0 left-0 w-[min(20rem,88vw)] overflow-y-auto border-r border-line bg-surface px-2 pt-16 shadow-xl">
             <NavList onNavigate={() => setOpen(false)} />
           </nav>
         </div>
       ) : null}
 
-      <div className="mx-auto flex max-w-[1400px]">
-        <aside className="no-print sticky top-16 hidden h-[calc(100dvh-4rem)] w-[280px] shrink-0 overflow-y-auto border-r border-line px-2 pt-6 lg:block">
+      {/* Main Content Layout */}
+      <div className="mx-auto flex max-w-[1500px]">
+        {/* Desktop Sidebar (Collapsible with Cmd+B) */}
+        <aside
+          className={cn(
+            "no-print sticky top-16 h-[calc(100dvh-4rem)] w-[280px] shrink-0 overflow-y-auto border-r border-line px-2 pt-6 transition-all duration-200",
+            sidebarCollapsed ? "hidden" : "hidden lg:block",
+          )}
+        >
           <NavList />
         </aside>
-        <div className="min-w-0 flex-1">{children}</div>
+
+        {/* Content Area */}
+        <div className="min-w-0 flex-1 transition-all duration-200">{children}</div>
       </div>
 
+      {/* Highlights Slide-over Drawer */}
       {notebookOpen ? (
         <HighlightsDrawer onClose={() => setNotebookOpen(false)} />
+      ) : null}
+
+      {/* Readwise Appearance Popover */}
+      {appearanceMenuOpen ? (
+        <AppearancePopover onClose={() => setAppearanceMenuOpen(false)} />
       ) : null}
     </div>
   );

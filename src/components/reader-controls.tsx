@@ -13,6 +13,7 @@ import {
   useHighlights,
   type HighlightColor,
 } from "@/lib/highlights";
+import { useAppearance } from "@/lib/appearance";
 import { Switch } from "./ui/switch";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
@@ -33,7 +34,7 @@ export function ReaderControls({
   const currentColor = useHighlights((s) => s.currentColor);
   const setCurrentColor = useHighlights((s) => s.setCurrentColor);
   const setNotebookOpen = useHighlights((s) => s.setNotebookOpen);
-
+  const toggleAppearanceMenu = useAppearance((s) => s.toggleAppearanceMenu);
   const docHighlightsCount = Object.values(highlights).filter(
     (h) => h.docId === docId,
   ).length;
@@ -136,6 +137,17 @@ export function ReaderControls({
       </div>
 
       <div className="flex items-center gap-2">
+        {/* Readwise Appearance button */}
+        <button
+          type="button"
+          data-appearance-trigger
+          onClick={toggleAppearanceMenu}
+          className="h-8 inline-flex items-center gap-1 rounded-md border border-line bg-surface px-2.5 font-serif text-xs font-bold text-ink hover:bg-bg-warm transition-colors shadow-2xs"
+          title="Customize line width, font size & appearance (Aa)"
+        >
+          <span className="text-sm font-serif">Aa</span>
+        </button>
+
         {/* Notebook Drawer Button */}
         <Button
           size="sm"
@@ -151,7 +163,6 @@ export function ReaderControls({
             </span>
           ) : null}
         </Button>
-
         {/* Studied Toggle */}
         {onToggleStudied ? (
           <Button

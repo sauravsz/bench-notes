@@ -1,11 +1,17 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import type { NoteBlock } from "@/data/types";
 import { useHighlights, type HighlightColor } from "@/lib/highlights";
+import {
+  useAppearance,
+  LINE_HEIGHT_CLASSES,
+  FONT_FAMILY_CLASSES,
+} from "@/lib/appearance";
 import { NoteBody } from "./note-body";
 import { ReaderControls } from "./reader-controls";
 import { SelectionToolbar } from "./selection-toolbar";
 import { HighlightPopover } from "./highlight-popover";
 import { HighlightsDrawer } from "./highlights-drawer";
+import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
 export function ReaderView({
@@ -27,7 +33,9 @@ export function ReaderView({
   const addHighlight = useHighlights((s) => s.addHighlight);
   const notebookOpen = useHighlights((s) => s.notebookOpen);
   const setNotebookOpen = useHighlights((s) => s.setNotebookOpen);
-
+  const fontSize = useAppearance((s) => s.fontSize);
+  const lineSpacing = useAppearance((s) => s.lineSpacing);
+  const fontFamily = useAppearance((s) => s.fontFamily);
   // Manual selection toolbar state
   const [selectedText, setSelectedText] = useState("");
   const [selectedBlockIndex, setSelectedBlockIndex] = useState<number | undefined>(undefined);
@@ -173,11 +181,17 @@ export function ReaderView({
       />
 
       {/* Article Content Container */}
+      {/* Article Content Container with dynamic Reader appearance */}
       <div
         ref={containerRef}
         onMouseUp={handleMouseUp}
         onTouchEnd={handleMouseUp}
-        className="relative selection:bg-amber-300/40 dark:selection:bg-amber-700/40"
+        style={{ fontSize: `${fontSize}px` }}
+        className={cn(
+          "relative selection:bg-amber-300/40 dark:selection:bg-amber-700/40 transition-all duration-150",
+          LINE_HEIGHT_CLASSES[lineSpacing],
+          FONT_FAMILY_CLASSES[fontFamily],
+        )}
       >
         <NoteBody
           blocks={blocks}
@@ -185,7 +199,6 @@ export function ReaderView({
           onHighlightClick={handleHighlightClick}
         />
       </div>
-
       {/* Floating Selection Toolbar (Manual mode) */}
       {selectionRect && selectedText ? (
         <div data-selection-toolbar>

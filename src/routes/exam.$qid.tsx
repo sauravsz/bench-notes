@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
 import { adjacentExams, getExam, getTopic } from "@/data";
+import { useAppearance, TEXT_WIDTH_CLASSES } from "@/lib/appearance";
 import { ReaderView } from "@/components/reader-view";
-
+import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/exam/$qid")({
   component: ExamAnswer,
 });
@@ -15,7 +16,7 @@ function ExamAnswer() {
   const { prev, next } = adjacentExams(qid);
   const [progress, setProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
-
+  const textWidth = useAppearance((s) => s.textWidth);
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -57,7 +58,7 @@ function ExamAnswer() {
       </div>
 
     <article className="px-4 py-8 sm:px-10 sm:py-10">
-      <div className="mx-auto max-w-2xl">
+        <div className={cn("mx-auto transition-all duration-200", TEXT_WIDTH_CLASSES[textWidth])}>
         <Link
           to="/exam"
           className="no-print inline-flex min-h-11 items-center gap-2 text-sm text-ink-soft hover:text-ink"
