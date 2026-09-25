@@ -27,7 +27,7 @@ function ExamAnswer() {
           All questions
         </Link>
         <p className="mt-4 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-          Question {exam.number} · {exam.marks} marks
+          Question {exam.number}
         </p>
         <h1 className="mt-2 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
           {exam.title}

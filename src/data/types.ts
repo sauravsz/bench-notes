@@ -31,7 +31,7 @@ export type Topic = {
   number: number;
   title: string;
   unit: string;
-  marks: 14;
+  marks?: number;
   lecture?: string;
   summary: string;
   tags: string[];
@@ -43,7 +43,7 @@ export type ExamQuestion = {
   number: number;
   title: string;
   question: string;
-  marks: 14;
+  marks?: number;
   relatedSlugs: string[];
   blocks: NoteBlock[];
 };

@@ -58,8 +58,8 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
               : "text-ink-soft hover:bg-bg-warm hover:text-ink",
           )}
         >
-          <Scale className="size-4 shrink-0" strokeWidth={1.75} />
-          14-mark answers
+          <Scale className="size-4 shrink-0 text-accent" strokeWidth={1.75} />
+          Model Exam Answers
         </Link>
         <Link
           to="/glossary"

@@ -11,11 +11,10 @@ function ExamIndex() {
           Examination
         </p>
         <h1 className="mt-2 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-          14-mark model answers
+          Model Examination Answers
         </h1>
         <p className="mt-4 font-serif text-lg leading-relaxed text-ink-soft">
-          Six questions from the class outline, answered only from the lecture
-          transcript. Use the headings as the skeleton of a written answer.
+          Comprehensive university examination questions answered in complete analytical structure. Use the headings, statutory sections, and case citations as the skeleton of a written answer.
         </p>
         <ol className="mt-8 flex flex-col gap-3">
           {examQuestions.map((q) => (
@@ -26,7 +25,7 @@ function ExamIndex() {
                 className="block rounded-xl border border-line bg-surface p-5 shadow-[var(--shadow-border)] transition-[box-shadow] duration-150 hover:shadow-[var(--shadow-border-hover)]"
               >
                 <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-faint">
-                  Question {q.number} · {q.marks} marks
+                  Question {q.number}
                 </p>
                 <h2 className="mt-1 font-serif text-xl font-semibold leading-snug">
                   {q.title}
