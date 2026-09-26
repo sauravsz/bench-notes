@@ -2,8 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowRight, BookOpen, GraduationCap, Search, X } from "lucide-react";
 import { allCourses, searchGlobalNotes, type GlobalSearchHit } from "@/data/courses";
+import { useCurrentCourse } from "@/lib/current-course";
 import { cn } from "@/lib/utils";
-
 export const Route = createFileRoute("/search")({ component: SearchPage });
 
 const kindBadge: Record<string, { label: string; class: string }> = {
@@ -16,7 +16,7 @@ const kindBadge: Record<string, { label: string; class: string }> = {
 function SearchPage() {
   const [query, setQuery] = useState("");
   const [selectedCourseSlug, setSelectedCourseSlug] = useState<string>("all");
-
+  const setActiveCourseSlug = useCurrentCourse((s) => s.setActiveCourseSlug);
   const hits = useMemo(
     () =>
       searchGlobalNotes(
@@ -121,16 +121,20 @@ function SearchPage() {
 
         {/* Results List */}
         <ul className="space-y-3">
-          {hits.map((hit) => {
+          {hits.map((hit, idx) => {
             const badge = kindBadge[hit.kind] || {
               label: "Note",
               class: "bg-bg-warm text-ink",
             };
 
             return (
-              <li key={hit.href + hit.title}>
-                <a
-                  href={hit.href}
+              <li
+                key={hit.href + hit.title}
+                className={cn("ios-fade-up", idx < 8 ? `ios-stagger-${idx + 1}` : "")}
+              >
+                <Link
+                  to={hit.href}
+                  onClick={() => setActiveCourseSlug(hit.courseSlug)}
                   className="group block rounded-xl border border-line bg-surface p-4 shadow-2xs transition-all duration-200 ios-card"
                 >
                   <div className="flex items-center justify-between mb-2">
@@ -163,7 +167,7 @@ function SearchPage() {
                     <span>Open {badge.label}</span>
                     <ArrowRight className="size-3.5 ml-1 transition-transform duration-200 group-hover:translate-x-1" />
                   </div>
-                </a>
+                </Link>
               </li>
             );
           })}

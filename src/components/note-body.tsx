@@ -90,7 +90,8 @@ function renderWithHighlights(
 
 function parseInlineMarkdown(text: string): ReactNode[] {
   if (!text) return [];
-  const parts = text.split(/(\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_)/g);
+  // Matches markdown bold (**), italics (*), inline code (`), and markdown links ([text](url))
+  const parts = text.split(/(\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_|`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
   return parts.map((part, i) => {
     if (
       (part.startsWith("**") && part.endsWith("**") && part.length > 4) ||
@@ -107,9 +108,30 @@ function parseInlineMarkdown(text: string): ReactNode[] {
       (part.startsWith("_") && part.endsWith("_") && part.length > 2)
     ) {
       return (
-        <strong key={i} className="font-bold text-ink">
+        <em key={i} className="italic text-ink">
           {part.slice(1, -1)}
-        </strong>
+        </em>
+      );
+    }
+    if (part.startsWith("`") && part.endsWith("`") && part.length > 2) {
+      return (
+        <code key={i} className="rounded bg-bg-warm px-1.5 py-0.5 font-mono text-[0.88em] text-accent font-semibold border border-line/60">
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      return (
+        <a
+          key={i}
+          href={linkMatch[2]}
+          target={linkMatch[2].startsWith("http") ? "_blank" : undefined}
+          rel={linkMatch[2].startsWith("http") ? "noopener noreferrer" : undefined}
+          className="text-accent underline underline-offset-2 hover:text-accent-2 font-medium"
+        >
+          {linkMatch[1]}
+        </a>
       );
     }
     return <span key={i}>{part}</span>;
@@ -139,13 +161,16 @@ function Block({
   const render = (text: string) =>
     renderWithHighlights(text, blockSpecificHighlights, onHighlightClick);
   switch (block.type) {
-    case "h3":
-      return <h3>{render(block.text)}</h3>;
-    case "h4":
-      return <h4>{render(block.text)}</h4>;
+    case "h3": {
+      const headingId = `section-${blockIndex}-${block.text.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+      return <h3 id={headingId} className="scroll-mt-24">{render(block.text)}</h3>;
+    }
+    case "h4": {
+      const headingId = `concept-${blockIndex}-${block.text.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+      return <h4 id={headingId} className="scroll-mt-24">{render(block.text)}</h4>;
+    }
     case "p":
       return <p>{render(block.text)}</p>;
-    case "ul":
       return (
         <ul>
           {block.items.map((item, i) => (

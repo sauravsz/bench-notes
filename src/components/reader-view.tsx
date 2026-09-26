@@ -11,9 +11,9 @@ import { ReaderControls } from "./reader-controls";
 import { SelectionToolbar } from "./selection-toolbar";
 import { HighlightPopover } from "./highlight-popover";
 import { HighlightsDrawer } from "./highlights-drawer";
+import { TableOfContents } from "./table-of-contents";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-
 export function ReaderView({
   docId,
   docTitle,
@@ -43,7 +43,7 @@ export function ReaderView({
   // Clicked highlight popover state
   const [activeHighlightId, setActiveHighlightId] = useState<string | null>(null);
   const [popoverRect, setPopoverRect] = useState<DOMRect | null>(null);
-
+  const [tocOpen, setTocOpen] = useState(false);
   // Handle selection (Auto-highlight or Toolbar)
   const handleMouseUp = useCallback(
     (e: React.MouseEvent | React.TouchEvent) => {
@@ -169,6 +169,27 @@ export function ReaderView({
     setActiveHighlightId(id);
     setPopoverRect(target.getBoundingClientRect());
   };
+  const handleCopyNoteMarkdown = () => {
+    let md = `# ${docTitle}\n\n`;
+    for (const b of blocks) {
+      if (b.type === "h3") md += `### ${b.text}\n\n`;
+      else if (b.type === "h4") md += `#### ${b.text}\n\n`;
+      else if (b.type === "p") md += `${b.text}\n\n`;
+      else if (b.type === "ul") md += b.items.map((it) => `- ${it}`).join("\n") + "\n\n";
+      else if (b.type === "ol") md += b.items.map((it, idx) => `${idx + 1}. ${it}`).join("\n") + "\n\n";
+      else if (b.type === "callout") md += `> **${b.title}**\n> ${b.body}\n\n`;
+      else if (b.type === "def") md += `> **Definition: ${b.term}**\n> ${b.body}\n\n`;
+      else if (b.type === "section") md += `## ${b.heading}\n\n`;
+      else if (b.type === "table") {
+        md += `| ${b.headers.join(" | ")} |\n| ${b.headers.map(() => "---").join(" | ")} |\n`;
+        md += b.rows.map((row) => `| ${row.join(" | ")} |`).join("\n") + "\n\n";
+      }
+    }
+    navigator.clipboard.writeText(md);
+    toast.success("Note copied as Markdown", {
+      description: "Ready to paste in Obsidian, Notion, or text editor.",
+    });
+  };
 
   return (
     <div className="relative">
@@ -178,9 +199,9 @@ export function ReaderView({
         docTitle={docTitle}
         studied={studied}
         onToggleStudied={onToggleStudied}
+        onToggleToc={() => setTocOpen(!tocOpen)}
+        onCopyMarkdown={handleCopyNoteMarkdown}
       />
-
-      {/* Article Content Container */}
       {/* Article Content Container with dynamic Reader appearance */}
       <div
         ref={containerRef}
@@ -235,6 +256,12 @@ export function ReaderView({
           currentDocId={docId}
           onClose={() => setNotebookOpen(false)}
           onSelectHighlight={(id) => {
+            const h = highlights[id];
+            if (h && h.docId !== docId && h.docId.startsWith("topic:")) {
+              const slug = h.docId.replace("topic:", "");
+              window.location.href = `/topic/${slug}`;
+              return;
+            }
             setNotebookOpen(false);
             const el = document.querySelector(`[data-highlight-id="${id}"]`);
             if (el) {
@@ -245,6 +272,13 @@ export function ReaderView({
           }}
         />
       ) : null}
+
+      {/* Table of Contents Drawer */}
+      <TableOfContents
+        blocks={blocks}
+        isOpen={tocOpen}
+        onClose={() => setTocOpen(false)}
+      />
     </div>
   );
 }

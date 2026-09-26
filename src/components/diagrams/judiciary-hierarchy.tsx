@@ -19,7 +19,7 @@ export function JudiciaryHierarchyDiagram() {
 
       {/* Tier 1: Supreme Court */}
       <div className="mx-auto max-w-xl">
-        <div className="rounded-xl border-2 border-[#1E293B] bg-[#FFFFFF] p-4 text-center shadow-xs">
+        <div className="rounded-xl border-2 border-[#1E293B] bg-[#FFFFFF] p-4 text-center shadow-xs transition-all duration-200 ios-card">
           <div className="flex items-center justify-between pb-2 border-b border-[#E2E8F0] mb-2.5">
             <span className="rounded-md bg-[#1E293B] text-white px-2.5 py-0.5 font-sans text-[10px] font-bold uppercase tracking-widest">
               Tier 1 • Apex Constitutional Court
@@ -60,7 +60,7 @@ export function JudiciaryHierarchyDiagram() {
 
       {/* Tier 2: High Courts */}
       <div className="mx-auto max-w-xl">
-        <div className="rounded-xl border border-[#475569] bg-[#FFFFFF] p-3.5 text-center shadow-xs">
+        <div className="rounded-xl border border-[#475569] bg-[#FFFFFF] p-3.5 text-center shadow-xs transition-all duration-200 ios-card">
           <div className="flex items-center justify-between pb-1.5 border-b border-[#E2E8F0] mb-2">
             <span className="rounded-md bg-[#334155] text-white px-2.5 py-0.5 font-sans text-[10px] font-bold uppercase tracking-wider">
               Tier 2 • State / UT Apex Authority

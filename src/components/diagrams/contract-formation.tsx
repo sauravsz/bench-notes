@@ -18,7 +18,7 @@ export function ContractFormationDiagram() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Step 1: Promise Formation */}
-        <div className="rounded-xl border border-line bg-bg-warm/60 p-4 flex flex-col justify-between shadow-2xs">
+        <div className="rounded-xl border border-line bg-bg-warm/60 p-4 flex flex-col justify-between shadow-2xs transition-all duration-200 ios-card">
           <div>
             <div className="flex items-center justify-between pb-2.5 border-b border-line mb-3">
               <span className="rounded-md bg-accent px-2.5 py-0.5 font-sans text-[10px] font-bold uppercase tracking-wider text-white">
@@ -45,7 +45,7 @@ export function ContractFormationDiagram() {
         </div>
 
         {/* Step 2: Agreement Formation */}
-        <div className="rounded-xl border border-sky-300 dark:border-sky-800 bg-sky-50/70 dark:bg-sky-950/20 p-4 flex flex-col justify-between shadow-2xs">
+        <div className="rounded-xl border border-sky-300 dark:border-sky-800 bg-sky-50/70 dark:bg-sky-950/20 p-4 flex flex-col justify-between shadow-2xs transition-all duration-200 ios-card">
           <div>
             <div className="flex items-center justify-between pb-2.5 border-b border-sky-300 dark:border-sky-900 mb-3">
               <span className="rounded-md bg-sky-700 px-2.5 py-0.5 font-sans text-[10px] font-bold uppercase tracking-wider text-white">
@@ -72,7 +72,7 @@ export function ContractFormationDiagram() {
         </div>
 
         {/* Step 3: Contract Formation */}
-        <div className="rounded-xl border-2 border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/30 p-4 flex flex-col justify-between shadow-md">
+        <div className="rounded-xl border-2 border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/30 p-4 flex flex-col justify-between shadow-md transition-all duration-200 ios-card">
           <div>
             <div className="flex items-center justify-between pb-2.5 border-b border-emerald-300 dark:border-emerald-800 mb-3">
               <span className="rounded-md bg-emerald-700 px-2.5 py-0.5 font-sans text-[10px] font-bold uppercase tracking-wider text-white">

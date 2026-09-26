@@ -154,8 +154,8 @@ function MaximsPage() {
                 <div className="mt-3.5 pt-3 border-t border-line/60 flex items-center justify-between">
                   <Link
                     to="/topic/$slug"
-                    params={{ slug: "sources-maxims-foundations" }}
-                    className="inline-flex items-center gap-1 font-sans text-xs font-bold text-accent hover:underline"
+                    params={{ slug: maxim.topicSlug || "sources-maxims-foundations" }}
+                    className="inline-flex items-center gap-1 font-sans text-xs font-bold text-accent hover:underline transition-colors"
                   >
                     <span>Open related curriculum note</span>
                     <ArrowUpRight className="size-3.5" />

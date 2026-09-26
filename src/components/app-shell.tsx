@@ -490,7 +490,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* Highlights Slide-over Drawer */}
       {notebookOpen ? (
-        <HighlightsDrawer onClose={() => setNotebookOpen(false)} />
+        <HighlightsDrawer
+          onClose={() => setNotebookOpen(false)}
+          onSelectHighlight={(id) => {
+            setNotebookOpen(false);
+            const h = highlights[id];
+            if (h?.docId?.startsWith("topic:")) {
+              const slug = h.docId.replace("topic:", "");
+              window.location.href = `/topic/${slug}`;
+            } else if (h?.docId?.startsWith("exam:")) {
+              const qid = h.docId.replace("exam:", "");
+              window.location.href = `/exam/${qid}`;
+            }
+          }}
+        />
       ) : null}
 
       {/* Readwise Appearance Popover */}

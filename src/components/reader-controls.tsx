@@ -1,8 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   BookOpen,
   Check,
+  Clock,
+  Copy,
+  HelpCircle,
   Highlighter,
+  ListOrdered,
+  Printer,
   SlidersHorizontal,
   Sparkles,
   Zap,
@@ -16,18 +21,27 @@ import {
 import { useAppearance } from "@/lib/appearance";
 import { Switch } from "./ui/switch";
 import { Button } from "./ui/button";
+import { StudyTimer } from "./study-timer";
+import { ShortcutsDialog } from "./shortcuts-dialog";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 export function ReaderControls({
   docId,
   docTitle,
   studied,
   onToggleStudied,
+  onToggleToc,
+  onCopyMarkdown,
 }: {
   docId: string;
   docTitle: string;
   studied?: boolean;
   onToggleStudied?: () => void;
+  onToggleToc?: () => void;
+  onCopyMarkdown?: () => void;
 }) {
+  const [timerOpen, setTimerOpen] = useState(false);
+  const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const highlights = useHighlights((s) => s.highlights);
   const autoHighlight = useHighlights((s) => s.autoHighlight);
   const toggleAutoHighlight = useHighlights((s) => s.toggleAutoHighlight);
@@ -137,12 +151,65 @@ export function ReaderControls({
       </div>
 
       <div className="flex items-center gap-2">
+        {/* Table of Contents Button */}
+        {onToggleToc ? (
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={onToggleToc}
+            className="h-8 gap-1 rounded-xl text-xs font-medium ios-press"
+            title="Table of Contents & Section Navigator"
+          >
+            <ListOrdered className="size-3.5 text-accent" />
+            <span className="hidden md:inline">Outline</span>
+          </Button>
+        ) : null}
+
+        {/* Copy Markdown Button */}
+        {onCopyMarkdown ? (
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={onCopyMarkdown}
+            className="h-8 gap-1 rounded-xl text-xs font-medium ios-press"
+            title="Copy Note as Structured Markdown (for Notion/Obsidian)"
+          >
+            <Copy className="size-3.5 text-accent" />
+            <span className="hidden md:inline">Markdown</span>
+          </Button>
+        ) : null}
+
+        {/* Print Note Button */}
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => window.print()}
+          className="h-8 gap-1 rounded-xl text-xs font-medium ios-press"
+          title="Print or Export as Clean PDF Sheet"
+        >
+          <Printer className="size-3.5 text-accent" />
+          <span className="hidden md:inline">Print</span>
+        </Button>
+
+        {/* Study Sprint Timer */}
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => setTimerOpen(!timerOpen)}
+          className="h-8 gap-1 rounded-xl text-xs font-medium ios-press"
+          title="25-min Exam Revision Focus Timer"
+        >
+          <Clock className="size-3.5 text-amber-600" />
+          <span className="hidden md:inline">Timer</span>
+        </Button>
+
         {/* Readwise Appearance button */}
         <button
           type="button"
           data-appearance-trigger
           onClick={toggleAppearanceMenu}
-          className="h-8 inline-flex items-center gap-1 rounded-md border border-line bg-surface px-2.5 font-serif text-xs font-bold text-ink hover:bg-bg-warm transition-all duration-200 ios-press shadow-2xs"
+          className="h-8 inline-flex items-center gap-1 rounded-xl border border-line bg-surface px-2.5 font-serif text-xs font-bold text-ink hover:bg-bg-warm transition-all duration-200 ios-press shadow-2xs"
+          title="Customize line width, font size & appearance (Aa)"
         >
           <span className="text-sm font-serif">Aa</span>
         </button>
@@ -152,7 +219,7 @@ export function ReaderControls({
           size="sm"
           variant="outline"
           onClick={() => setNotebookOpen(true)}
-          className="h-8 gap-1.5 text-xs font-medium ios-press"
+          className="h-8 gap-1.5 rounded-xl text-xs font-medium ios-press"
         >
           <Highlighter className="size-3.5 text-accent" />
           <span>Notebook</span>
@@ -162,19 +229,34 @@ export function ReaderControls({
             </span>
           ) : null}
         </Button>
+
+        {/* Shortcuts Discovery */}
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={() => setShortcutsOpen(true)}
+          className="size-8 p-0 rounded-xl text-muted hover:text-ink ios-press hidden sm:inline-flex"
+          title="Keyboard shortcuts (?)"
+        >
+          <HelpCircle className="size-4" />
+        </Button>
+
         {/* Studied Toggle */}
         {onToggleStudied ? (
           <Button
             size="sm"
             variant={studied ? "default" : "outline"}
             onClick={onToggleStudied}
-            className={cn("h-8 gap-1.5 text-xs font-medium ios-press", studied ? "bg-studied hover:bg-studied/90" : "")}
+            className={cn("h-8 gap-1.5 rounded-xl text-xs font-medium ios-press", studied ? "bg-studied hover:bg-studied/90" : "")}
           >
             <Check className={cn("size-3.5", studied ? "ios-spring-pop" : "")} />
             {studied ? "Studied" : "Mark Studied"}
           </Button>
         ) : null}
       </div>
+
+      <StudyTimer isOpen={timerOpen} onClose={() => setTimerOpen(false)} />
+      <ShortcutsDialog isOpen={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
     </div>
   );
 }

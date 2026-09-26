@@ -374,14 +374,20 @@
   color: var(--color-faint);
 }
 
-.note-prose em {
-  font-style: normal;
+.note-prose em,
+.note-prose i {
+  font-style: italic;
+  color: var(--color-ink);
+}
+
+.note-prose strong,
+.note-prose b {
   font-weight: 700;
   color: var(--color-ink);
 }
 
 em, i {
-  font-style: normal;
+  font-style: italic;
 }
 
 .note-prose table {

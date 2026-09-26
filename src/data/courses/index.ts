@@ -35,6 +35,47 @@ export function getCourse(slugOrId: string): Course | undefined {
 export function coursesByCategory(category: CourseCategory): Course[] {
   return allCourses.filter((c) => c.category === category);
 }
+export function getTopicBySlug(slug: string) {
+  for (const c of allCourses) {
+    const found = c.topics.find((t) => t.slug === slug);
+    if (found) return { topic: found, course: c };
+  }
+  return undefined;
+}
+
+export function getExamById(id: string) {
+  for (const c of allCourses) {
+    const found = c.examQuestions.find((q) => q.id === id);
+    if (found) return { exam: found, course: c };
+  }
+  return undefined;
+}
+
+export function getAdjacentTopicsBySlug(slug: string) {
+  for (const c of allCourses) {
+    const idx = c.topics.findIndex((t) => t.slug === slug);
+    if (idx >= 0) {
+      return {
+        prev: idx > 0 ? c.topics[idx - 1] : undefined,
+        next: idx < c.topics.length - 1 ? c.topics[idx + 1] : undefined,
+      };
+    }
+  }
+  return {};
+}
+
+export function getAdjacentExamsById(id: string) {
+  for (const c of allCourses) {
+    const idx = c.examQuestions.findIndex((q) => q.id === id);
+    if (idx >= 0) {
+      return {
+        prev: idx > 0 ? c.examQuestions[idx - 1] : undefined,
+        next: idx < c.examQuestions.length - 1 ? c.examQuestions[idx + 1] : undefined,
+      };
+    }
+  }
+  return {};
+}
 
 export type GlobalSearchHit = {
   courseCode: string;
@@ -79,7 +120,7 @@ export function searchGlobalNotes(
           kind: "topic",
           title: topic.title,
           snippet: topic.summary,
-          href: course.slug === "business-laws" ? `/topic/${topic.slug}` : `/${course.slug}/topic/${topic.slug}`,
+          href: `/topic/${topic.slug}`,
         });
       }
     }
@@ -102,7 +143,7 @@ export function searchGlobalNotes(
           kind: "exam",
           title: `Question ${exam.number}: ${exam.title}`,
           snippet: exam.question,
-          href: course.slug === "business-laws" ? `/exam/${exam.id}` : `/${course.slug}/exam/${exam.id}`,
+          href: `/exam/${exam.id}`,
         });
       }
     }
@@ -119,7 +160,7 @@ export function searchGlobalNotes(
             kind: "glossary",
             title: entry.term,
             snippet: entry.body,
-            href: course.slug === "business-laws" ? `/glossary#${entry.id}` : `/${course.slug}/glossary#${entry.id}`,
+            href: `/glossary#${entry.id}`,
           });
         }
       }

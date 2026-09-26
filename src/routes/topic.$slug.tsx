@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUp, Clock } from "lucide-react";
 import { adjacentTopics, getTopic } from "@/data";
 import { useProgress } from "@/lib/progress";
 import { useAppearance, TEXT_WIDTH_CLASSES } from "@/lib/appearance";
@@ -24,6 +24,13 @@ function TopicPage() {
   const [progress, setProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
 
+  const totalWords = topic.blocks.reduce((acc, b) => {
+    if ("text" in b && typeof b.text === "string") return acc + b.text.split(/\s+/).length;
+    if ("body" in b && typeof b.body === "string") return acc + b.body.split(/\s+/).length;
+    if ("items" in b && Array.isArray(b.items)) return acc + b.items.join(" ").split(/\s+/).length;
+    return acc;
+  }, 0);
+  const readTimeMin = Math.max(1, Math.round(totalWords / 200));
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -65,9 +72,17 @@ function TopicPage() {
 
       <article className="px-4 py-8 sm:px-10 sm:py-10 ios-fade-up">
         <div className={cn("mx-auto transition-all duration-200", TEXT_WIDTH_CLASSES[textWidth])}>
-        <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-          {topic.unit}
-        </p>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+            {topic.unit}
+          </p>
+          <span className="inline-flex items-center gap-1.5 text-xs text-muted font-sans font-medium bg-bg-warm/60 px-2.5 py-0.5 rounded-full border border-line/60">
+            <Clock className="size-3 text-accent" />
+            <span>~{readTimeMin} min read</span>
+            <span>•</span>
+            <span>{totalWords.toLocaleString()} words</span>
+          </span>
+        </div>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
           <h1 className="font-serif text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
             {topic.title}

@@ -1,4 +1,5 @@
 import type { ExamQuestion, NoteBlock, Topic } from "./types";
+import { getTopicBySlug, getAdjacentTopicsBySlug, getExamById, getAdjacentExamsById } from "./courses";
 import { judiciaryTopics } from "./notes-judiciary";
 import { contractTopics } from "./notes-contract";
 import { constitutionTopics } from "./notes-constitution";
@@ -35,7 +36,11 @@ export function topicsByUnit(unit: string): Topic[] {
 }
 
 export function getTopic(slug: string): Topic | undefined {
-  return topics.find((t) => t.slug === slug);
+  const local = topics.find((t) => t.slug === slug);
+  if (local) return local;
+
+  const result = getTopicBySlug(slug);
+  return result?.topic;
 }
 
 export function adjacentTopics(slug: string): {
@@ -43,15 +48,22 @@ export function adjacentTopics(slug: string): {
   next?: Topic;
 } {
   const i = topics.findIndex((t) => t.slug === slug);
-  if (i < 0) return {};
-  return {
-    prev: i > 0 ? topics[i - 1] : undefined,
-    next: i < topics.length - 1 ? topics[i + 1] : undefined,
-  };
+  if (i >= 0) {
+    return {
+      prev: i > 0 ? topics[i - 1] : undefined,
+      next: i < topics.length - 1 ? topics[i + 1] : undefined,
+    };
+  }
+
+  return getAdjacentTopicsBySlug(slug);
 }
 
-export function getExam(id: string) {
-  return examQuestions.find((q) => q.id === id);
+export function getExam(id: string): ExamQuestion | undefined {
+  const local = examQuestions.find((q) => q.id === id);
+  if (local) return local;
+
+  const result = getExamById(id);
+  return result?.exam;
 }
 
 export function adjacentExams(id: string): {
@@ -59,13 +71,15 @@ export function adjacentExams(id: string): {
   next?: ExamQuestion;
 } {
   const i = examQuestions.findIndex((q) => q.id === id);
-  if (i < 0) return {};
-  return {
-    prev: i > 0 ? examQuestions[i - 1] : undefined,
-    next: i < examQuestions.length - 1 ? examQuestions[i + 1] : undefined,
-  };
-}
+  if (i >= 0) {
+    return {
+      prev: i > 0 ? examQuestions[i - 1] : undefined,
+      next: i < examQuestions.length - 1 ? examQuestions[i + 1] : undefined,
+    };
+  }
 
+  return getAdjacentExamsById(id);
+}
 function blockText(block: NoteBlock): string {
   switch (block.type) {
     case "h3":

@@ -12,11 +12,13 @@ export default defineEventHandler(async (event) => {
     return { ok: false, error: "Entry is required" };
   }
 
-  if (body.password) {
-    const hash = await sha256Hex(body.password);
-    if (hash !== ADMIN_PASSWORD_HASH) {
-      return { ok: false, error: "Unauthorized admin authentication" };
-    }
+  if (!body?.password) {
+    return { ok: false, error: "Admin authentication required" };
+  }
+
+  const hash = await sha256Hex(body.password);
+  if (hash !== ADMIN_PASSWORD_HASH) {
+    return { ok: false, error: "Unauthorized admin authentication" };
   }
 
   const store = getGlobalStore();
