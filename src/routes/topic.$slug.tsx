@@ -63,7 +63,7 @@ function TopicPage() {
         />
       </div>
 
-      <article className="px-4 py-8 sm:px-10 sm:py-10">
+      <article className="px-4 py-8 sm:px-10 sm:py-10 ios-fade-up">
         <div className={cn("mx-auto transition-all duration-200", TEXT_WIDTH_CLASSES[textWidth])}>
         <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-accent">
           {topic.unit}
@@ -97,9 +97,9 @@ function TopicPage() {
             <Link
               to="/topic/$slug"
               params={{ slug: prev.slug }}
-              className="flex min-h-11 max-w-xs items-center gap-2 rounded-md px-1 text-sm text-ink-soft hover:text-ink"
+              className="flex min-h-11 max-w-xs items-center gap-2 rounded-md px-1 text-sm text-ink-soft hover:text-ink transition-all duration-200 ios-press-subtle group"
             >
-              <ArrowLeft className="size-4 shrink-0" />
+              <ArrowLeft className="size-4 shrink-0 transition-transform duration-200 group-hover:-translate-x-1" />
               <span>
                 <span className="block text-[11px] uppercase tracking-[0.12em] text-faint">
                   Previous
@@ -114,7 +114,7 @@ function TopicPage() {
             <Link
               to="/topic/$slug"
               params={{ slug: next.slug }}
-              className="flex min-h-11 max-w-xs items-center justify-end gap-2 rounded-md px-1 text-right text-sm text-ink-soft hover:text-ink sm:ml-auto"
+              className="flex min-h-11 max-w-xs items-center justify-end gap-2 rounded-md px-1 text-right text-sm text-ink-soft hover:text-ink sm:ml-auto transition-all duration-200 ios-press-subtle group"
             >
               <span>
                 <span className="block text-[11px] uppercase tracking-[0.12em] text-faint">
@@ -122,7 +122,7 @@ function TopicPage() {
                 </span>
                 {next.title}
               </span>
-              <ArrowRight className="size-4 shrink-0" />
+              <ArrowRight className="size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
           ) : null}
         </nav>
@@ -134,7 +134,7 @@ function TopicPage() {
       <button
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="no-print fixed bottom-6 right-6 z-40 flex size-10 items-center justify-center rounded-full border border-line bg-surface/90 text-ink-soft shadow-md backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-bg-warm hover:text-ink hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className="no-print fixed bottom-6 right-6 z-40 flex size-10 items-center justify-center rounded-full border border-line bg-surface/90 text-ink-soft shadow-md backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-bg-warm hover:text-ink hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ios-scale-in ios-press"
         aria-label="Back to top"
       >
         <ArrowUp className="size-4" />

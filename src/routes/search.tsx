@@ -27,7 +27,7 @@ function SearchPage() {
   );
 
   return (
-    <main className="px-4 py-8 sm:px-10 sm:py-10">
+    <main className="px-4 py-8 sm:px-10 sm:py-10 ios-fade-up">
       <div className="mx-auto max-w-3xl space-y-6">
         {/* Header */}
         <div>
@@ -56,14 +56,14 @@ function SearchPage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search statutes, PESTLE, LPP, 7 Cs, Bullwhip, Consideration, Salomon..."
-            className="h-12 w-full rounded-xl border border-line bg-surface py-2 pl-12 pr-10 font-serif text-base text-ink shadow-sm outline-none placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/20"
+            className="h-12 w-full rounded-xl border border-line bg-surface py-2 pl-12 pr-10 font-serif text-base text-ink shadow-sm outline-none placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all duration-200"
             autoFocus
           />
           {query ? (
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="absolute right-3.5 top-3.5 text-muted hover:text-ink"
+              className="absolute right-3.5 top-3.5 text-muted hover:text-ink transition-all duration-200 ios-press"
             >
               <X className="size-5" />
             </button>
@@ -76,9 +76,9 @@ function SearchPage() {
             type="button"
             onClick={() => setSelectedCourseSlug("all")}
             className={cn(
-              "rounded-full px-3 py-1 font-sans text-xs font-semibold transition-all shrink-0",
+              "rounded-full px-3 py-1 font-sans text-xs font-semibold transition-all duration-200 shrink-0 ios-press",
               selectedCourseSlug === "all"
-                ? "bg-ink text-surface font-bold shadow-2xs"
+                ? "bg-ink text-surface font-bold shadow-2xs scale-105"
                 : "bg-bg-warm text-muted hover:text-ink",
             )}
           >
@@ -90,9 +90,9 @@ function SearchPage() {
               type="button"
               onClick={() => setSelectedCourseSlug(c.slug)}
               className={cn(
-                "rounded-full px-2.5 py-1 font-sans text-xs font-medium transition-all shrink-0 border",
+                "rounded-full px-2.5 py-1 font-sans text-xs font-medium transition-all duration-200 shrink-0 border ios-press",
                 selectedCourseSlug === c.slug
-                  ? "bg-accent text-white border-accent font-bold shadow-2xs"
+                  ? "bg-accent text-white border-accent font-bold shadow-2xs scale-105"
                   : "bg-surface text-muted border-line hover:text-ink",
               )}
             >
@@ -131,9 +131,9 @@ function SearchPage() {
               <li key={hit.href + hit.title}>
                 <a
                   href={hit.href}
-                  className="group block rounded-xl border border-line bg-surface p-4 shadow-2xs transition-all hover:border-line-strong hover:bg-bg-warm/30"
+                  className="group block rounded-xl border border-line bg-surface p-4 shadow-2xs transition-all duration-200 ios-card"
                 >
-                  <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <span className="rounded bg-bg-warm px-1.5 py-0.5 font-sans text-[10px] font-bold text-ink border border-line">
                         {hit.courseCode}
@@ -161,7 +161,7 @@ function SearchPage() {
 
                   <div className="mt-3 pt-2.5 border-t border-line/50 flex items-center justify-end text-xs font-bold text-accent group-hover:underline">
                     <span>Open {badge.label}</span>
-                    <ArrowRight className="size-3.5 ml-1" />
+                    <ArrowRight className="size-3.5 ml-1 transition-transform duration-200 group-hover:translate-x-1" />
                   </div>
                 </a>
               </li>

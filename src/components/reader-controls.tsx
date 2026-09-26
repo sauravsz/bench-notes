@@ -125,9 +125,9 @@ export function ReaderControls({
               type="button"
               onClick={() => setCurrentColor(c.id)}
               title={`${c.label} marker`}
-              className={`size-4 rounded-full transition-transform hover:scale-125 ${
+              className={`size-4 rounded-full transition-transform hover:scale-125 active:scale-95 ${
                 currentColor === c.id
-                  ? "ring-2 ring-primary ring-offset-1 scale-110"
+                  ? "ring-2 ring-primary ring-offset-1 scale-110 ios-spring-pop"
                   : "opacity-75 hover:opacity-100"
               }`}
               style={{ backgroundColor: c.dotColor }}
@@ -142,8 +142,7 @@ export function ReaderControls({
           type="button"
           data-appearance-trigger
           onClick={toggleAppearanceMenu}
-          className="h-8 inline-flex items-center gap-1 rounded-md border border-line bg-surface px-2.5 font-serif text-xs font-bold text-ink hover:bg-bg-warm transition-colors shadow-2xs"
-          title="Customize line width, font size & appearance (Aa)"
+          className="h-8 inline-flex items-center gap-1 rounded-md border border-line bg-surface px-2.5 font-serif text-xs font-bold text-ink hover:bg-bg-warm transition-all duration-200 ios-press shadow-2xs"
         >
           <span className="text-sm font-serif">Aa</span>
         </button>
@@ -153,7 +152,7 @@ export function ReaderControls({
           size="sm"
           variant="outline"
           onClick={() => setNotebookOpen(true)}
-          className="h-8 gap-1.5 text-xs font-medium"
+          className="h-8 gap-1.5 text-xs font-medium ios-press"
         >
           <Highlighter className="size-3.5 text-accent" />
           <span>Notebook</span>
@@ -169,9 +168,9 @@ export function ReaderControls({
             size="sm"
             variant={studied ? "default" : "outline"}
             onClick={onToggleStudied}
-            className="h-8 gap-1.5 text-xs font-medium"
+            className={cn("h-8 gap-1.5 text-xs font-medium ios-press", studied ? "bg-studied hover:bg-studied/90" : "")}
           >
-            <Check className="size-3.5" />
+            <Check className={cn("size-3.5", studied ? "ios-spring-pop" : "")} />
             {studied ? "Studied" : "Mark Studied"}
           </Button>
         ) : null}

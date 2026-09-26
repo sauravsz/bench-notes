@@ -96,9 +96,8 @@ export function HighlightsDrawer({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-xs animate-in fade-in duration-150">
-      <div className="flex h-full w-full max-w-md flex-col border-l border-line bg-surface shadow-2xl animate-in slide-in-from-right duration-200">
-        {/* Header */}
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-xs transition-opacity duration-300">
+      <div className="flex h-full w-full max-w-md flex-col border-l border-line bg-surface shadow-2xl animate-in slide-in-from-right duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
         <div className="flex items-center justify-between border-b border-line p-4">
           <div className="flex items-center gap-2">
             <Highlighter className="size-4 text-accent" />
@@ -158,9 +157,9 @@ export function HighlightsDrawer({
               <button
                 type="button"
                 onClick={() => setActiveTab("current")}
-                className={`flex-1 rounded-md py-1.5 transition-colors ${
+                className={`flex-1 rounded-md py-1.5 transition-all duration-200 ios-press-subtle ${
                   activeTab === "current"
-                    ? "bg-surface text-ink shadow-xs"
+                    ? "bg-surface text-ink font-bold shadow-xs scale-102"
                     : "text-muted hover:text-ink"
                 }`}
               >
@@ -169,9 +168,9 @@ export function HighlightsDrawer({
               <button
                 type="button"
                 onClick={() => setActiveTab("all")}
-                className={`flex-1 rounded-md py-1.5 transition-colors ${
+                className={`flex-1 rounded-md py-1.5 transition-all duration-200 ios-press-subtle ${
                   activeTab === "all"
-                    ? "bg-surface text-ink shadow-xs"
+                    ? "bg-surface text-ink font-bold shadow-xs scale-102"
                     : "text-muted hover:text-ink"
                 }`}
               >
@@ -197,9 +196,9 @@ export function HighlightsDrawer({
             <button
               type="button"
               onClick={() => setSelectedColor("all")}
-              className={`rounded-full px-2.5 py-0.5 text-[11px] font-medium transition-colors ${
+              className={`rounded-full px-2.5 py-0.5 text-[11px] font-medium transition-all duration-200 ios-press ${
                 selectedColor === "all"
-                  ? "bg-ink text-surface"
+                  ? "bg-ink text-surface scale-105 shadow-2xs font-bold"
                   : "bg-bg-warm text-muted hover:text-ink"
               }`}
             >
@@ -211,8 +210,8 @@ export function HighlightsDrawer({
                 type="button"
                 onClick={() => setSelectedColor(c.id)}
                 title={c.label}
-                className={`size-4.5 rounded-full transition-transform hover:scale-110 ${
-                  selectedColor === c.id ? "ring-2 ring-primary ring-offset-1 scale-110" : "opacity-70"
+                className={`size-4.5 rounded-full transition-all duration-200 hover:scale-115 active:scale-95 ${
+                  selectedColor === c.id ? "ring-2 ring-primary ring-offset-1 scale-110 ios-spring-pop" : "opacity-70"
                 }`}
                 style={{ backgroundColor: c.dotColor }}
               />
@@ -239,7 +238,7 @@ export function HighlightsDrawer({
                 <article
                   key={h.id}
                   onClick={() => onSelectHighlight?.(h.id)}
-                  className="group relative rounded-lg border border-line bg-surface p-3 transition-shadow hover:shadow-md cursor-pointer"
+                  className="group relative rounded-xl border border-line bg-surface p-3 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 active:scale-99 cursor-pointer"
                 >
                   <div className="flex items-center justify-between gap-2 mb-1.5">
                     <span className="font-sans text-[10px] font-medium uppercase tracking-wider text-muted flex items-center gap-1">
@@ -304,7 +303,7 @@ export function HighlightsDrawer({
             variant="outline"
             onClick={handleExportMarkdown}
             disabled={filteredList.length === 0}
-            className="flex-1 text-xs"
+            className="flex-1 text-xs ios-press"
           >
             {copied ? (
               <>

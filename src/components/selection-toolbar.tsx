@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Copy, Highlighter, MessageSquare, Tag } from "lucide-react";
 import { HIGHLIGHT_COLORS, useHighlights, type HighlightColor } from "@/lib/highlights";
+import { cn } from "@/lib/utils";
 
 export function SelectionToolbar({
   selectionRect,
@@ -64,13 +65,13 @@ export function SelectionToolbar({
         left: `${left}px`,
         zIndex: 50,
       }}
-      className="flex max-w-[calc(100vw-24px)] items-center gap-1 overflow-x-auto rounded-lg border border-line bg-surface p-1 shadow-lg animate-in fade-in zoom-in-95 duration-100"
+      className="flex max-w-[calc(100vw-24px)] items-center gap-1 overflow-x-auto rounded-xl border border-line bg-surface/95 backdrop-blur-md p-1 shadow-xl ios-scale-in"
     >
       <button
         type="button"
         onClick={() => onHighlight(currentColor)}
         title="Highlight (H)"
-        className="flex items-center gap-1.5 rounded-md px-2.5 py-1 font-sans text-xs font-medium text-ink hover:bg-bg-warm transition-colors"
+        className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-sans text-xs font-medium text-ink hover:bg-bg-warm transition-all duration-200 ios-press"
       >
         <Highlighter className="size-3.5 text-accent" />
         <span>Highlight</span>
@@ -90,8 +91,8 @@ export function SelectionToolbar({
               onHighlight(c.id);
             }}
             title={c.label}
-            className={`size-4 rounded-full transition-transform hover:scale-125 ${
-              currentColor === c.id ? "ring-2 ring-primary ring-offset-1" : ""
+            className={`size-4.5 rounded-full transition-all duration-200 hover:scale-125 active:scale-95 ${
+              currentColor === c.id ? "ring-2 ring-primary ring-offset-1 scale-110 ios-spring-pop" : ""
             }`}
             style={{ backgroundColor: c.dotColor }}
           />
@@ -104,7 +105,7 @@ export function SelectionToolbar({
         type="button"
         onClick={onAddNote}
         title="Add Note (N)"
-        className="flex items-center gap-1 rounded-md p-1.5 text-muted hover:bg-bg-warm hover:text-ink transition-colors"
+        className="flex items-center gap-1 rounded-lg p-1.5 text-muted hover:bg-bg-warm hover:text-ink transition-all duration-200 ios-press"
       >
         <MessageSquare className="size-3.5" />
       </button>
@@ -113,7 +114,10 @@ export function SelectionToolbar({
         type="button"
         onClick={handleCopy}
         title="Copy selected text"
-        className="flex items-center gap-1 rounded-md p-1.5 text-muted hover:bg-bg-warm hover:text-ink transition-colors"
+        className={cn(
+          "flex items-center gap-1 rounded-lg p-1.5 transition-all duration-200 ios-press",
+          copied ? "text-accent bg-accent/10 ios-spring-pop" : "text-muted hover:bg-bg-warm hover:text-ink"
+        )}
       >
         <Copy className="size-3.5" />
       </button>

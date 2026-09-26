@@ -42,7 +42,7 @@ function GlossaryPage() {
   }, [search, selectedLetter]);
 
   return (
-    <main className="px-4 py-8 sm:px-10 sm:py-10">
+    <main className="px-4 py-8 sm:px-10 sm:py-10 ios-fade-up">
       <div className="mx-auto max-w-3xl">
         <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-accent">
           Reference
@@ -83,9 +83,9 @@ function GlossaryPage() {
           <button
             type="button"
             onClick={() => setSelectedLetter("All")}
-            className={`rounded-lg px-2.5 py-1 text-xs font-sans font-bold transition-colors ${
+            className={`rounded-lg px-2.5 py-1 text-xs font-sans font-bold transition-all duration-200 ios-press ${
               selectedLetter === "All"
-                ? "bg-accent text-accent-fg shadow-xs"
+                ? "bg-accent text-accent-fg shadow-xs scale-105"
                 : "border border-line bg-surface text-ink-soft hover:border-line-strong hover:text-ink"
             }`}
           >
@@ -98,9 +98,9 @@ function GlossaryPage() {
                 key={letter}
                 type="button"
                 onClick={() => setSelectedLetter(isSelected ? "All" : letter)}
-                className={`min-w-7 rounded-lg px-2 py-1 text-center text-xs font-sans font-bold transition-colors ${
+                className={`min-w-7 rounded-lg px-2 py-1 text-center text-xs font-sans font-bold transition-all duration-200 ios-press ${
                   isSelected
-                    ? "bg-accent text-accent-fg shadow-xs"
+                    ? "bg-accent text-accent-fg shadow-xs scale-105"
                     : "border border-line bg-surface text-ink-soft hover:border-line-strong hover:text-ink"
                 }`}
               >
@@ -160,7 +160,7 @@ function GlossaryPage() {
               <li
                 key={entry.id}
                 id={entry.id}
-                className="scroll-mt-28 rounded-xl border border-line bg-surface p-5 transition-colors hover:border-line-strong"
+                className="scroll-mt-28 rounded-xl border border-line bg-surface p-5 transition-all duration-200 ios-card"
               >
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <h2 className="font-serif text-lg font-bold text-ink">

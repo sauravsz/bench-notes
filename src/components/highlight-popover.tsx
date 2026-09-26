@@ -134,8 +134,8 @@ export function HighlightPopover({
       style={!isMobile ? style : undefined}
       className={
         isMobile
-          ? "fixed bottom-0 left-0 right-0 z-50 w-full max-w-lg mx-auto rounded-t-2xl border-t border-line bg-surface p-4 shadow-2xl animate-in slide-in-from-bottom duration-200 max-h-[85vh] overflow-y-auto pb-safe font-sans"
-          : "w-80 rounded-xl border border-line bg-surface p-3.5 shadow-xl animate-in fade-in zoom-in-95 duration-150 font-sans"
+          ? "fixed bottom-0 left-0 right-0 z-50 w-full max-w-lg mx-auto rounded-t-2xl border-t border-line bg-surface/95 backdrop-blur-md p-4 shadow-2xl ios-sheet-enter max-h-[85vh] overflow-y-auto pb-safe font-sans"
+          : "w-80 rounded-xl border border-line bg-surface/95 backdrop-blur-md p-3.5 shadow-xl ios-scale-in font-sans"
       }
     >
       {isMobile && <div className="mx-auto -mt-1 mb-3 h-1.5 w-10 rounded-full bg-line" />}
@@ -148,10 +148,10 @@ export function HighlightPopover({
             type="button"
             onClick={handleCopy}
             title="Copy highlight text"
-            className="rounded p-1 text-muted hover:bg-bg-warm hover:text-ink transition-colors"
+            className="rounded p-1 text-muted hover:bg-bg-warm hover:text-ink transition-all duration-200 ios-press"
           >
             {copied ? (
-              <Check className="size-3.5 text-emerald-600" />
+              <Check className="size-3.5 text-emerald-600 ios-spring-pop" />
             ) : (
               <Copy className="size-3.5" />
             )}
@@ -160,14 +160,14 @@ export function HighlightPopover({
             type="button"
             onClick={handleDelete}
             title="Delete highlight"
-            className="rounded p-1 text-muted hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/30 transition-colors"
+            className="rounded p-1 text-muted hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/30 transition-all duration-200 ios-press"
           >
             <Trash2 className="size-3.5" />
           </button>
           <button
             type="button"
             onClick={onClose}
-            className="rounded p-1 text-muted hover:bg-bg-warm hover:text-ink transition-colors"
+            className="rounded p-1 text-muted hover:bg-bg-warm hover:text-ink transition-all duration-200 ios-press"
           >
             <X className="size-3.5" />
           </button>
@@ -186,9 +186,9 @@ export function HighlightPopover({
               type="button"
               onClick={() => handleColorChange(c.id)}
               title={c.label}
-              className={`size-5 rounded-full transition-transform hover:scale-110 ${
+              className={`size-5 rounded-full transition-all duration-200 hover:scale-115 active:scale-95 ${
                 highlight.color === c.id
-                  ? "ring-2 ring-primary ring-offset-1 scale-110"
+                  ? "ring-2 ring-primary ring-offset-1 scale-110 ios-spring-pop"
                   : "opacity-80 hover:opacity-100"
               }`}
               style={{ backgroundColor: c.dotColor }}

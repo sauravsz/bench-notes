@@ -52,18 +52,18 @@ function ExamAnswer() {
         aria-label="Reading progress"
       >
         <div
-          className="h-full bg-accent transition-[width] duration-75 ease-out"
+          className="h-full bg-accent transition-[width] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
           style={{ width: `${progress}%` }}
         />
       </div>
 
-    <article className="px-4 py-8 sm:px-10 sm:py-10">
+    <article className="px-4 py-8 sm:px-10 sm:py-10 ios-fade-up">
         <div className={cn("mx-auto transition-all duration-200", TEXT_WIDTH_CLASSES[textWidth])}>
         <Link
           to="/exam"
-          className="no-print inline-flex min-h-11 items-center gap-2 text-sm text-ink-soft hover:text-ink"
+          className="no-print inline-flex min-h-11 items-center gap-2 text-sm text-ink-soft hover:text-ink transition-all duration-200 ios-press-subtle group"
         >
-          <ArrowLeft className="size-4" />
+          <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-1" />
           All questions
         </Link>
         <p className="mt-4 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-accent">
@@ -104,9 +104,9 @@ function ExamAnswer() {
             <Link
               to="/exam/$qid"
               params={{ qid: prev.id }}
-              className="flex min-h-11 max-w-xs items-center gap-2 rounded-md px-1 text-sm text-ink-soft hover:text-ink"
+              className="flex min-h-11 max-w-xs items-center gap-2 rounded-md px-1 text-sm text-ink-soft hover:text-ink transition-all duration-200 ios-press-subtle group"
             >
-              <ArrowLeft className="size-4 shrink-0" />
+              <ArrowLeft className="size-4 shrink-0 transition-transform duration-200 group-hover:-translate-x-1" />
               <span>
                 <span className="block text-[11px] uppercase tracking-[0.12em] text-faint">
                   Previous
@@ -121,7 +121,7 @@ function ExamAnswer() {
             <Link
               to="/exam/$qid"
               params={{ qid: next.id }}
-              className="flex min-h-11 max-w-xs items-center justify-end gap-2 rounded-md px-1 text-right text-sm text-ink-soft hover:text-ink sm:ml-auto"
+              className="flex min-h-11 max-w-xs items-center justify-end gap-2 rounded-md px-1 text-right text-sm text-ink-soft hover:text-ink sm:ml-auto transition-all duration-200 ios-press-subtle group"
             >
               <span>
                 <span className="block text-[11px] uppercase tracking-[0.12em] text-faint">
@@ -129,7 +129,7 @@ function ExamAnswer() {
                 </span>
                 Question {next.number}: {next.title}
               </span>
-              <ArrowRight className="size-4 shrink-0" />
+              <ArrowRight className="size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
           ) : null}
         </nav>
@@ -140,7 +140,7 @@ function ExamAnswer() {
       <button
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="no-print fixed bottom-6 right-6 z-40 flex size-10 items-center justify-center rounded-full border border-line bg-surface/90 text-ink-soft shadow-md backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-bg-warm hover:text-ink hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className="no-print fixed bottom-6 right-6 z-40 flex size-10 items-center justify-center rounded-full border border-line bg-surface/90 text-ink-soft shadow-md backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-bg-warm hover:text-ink hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ios-scale-in ios-press"
         aria-label="Back to top"
       >
         <ArrowUp className="size-4" />

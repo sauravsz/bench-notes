@@ -96,7 +96,7 @@ function AdminDashboard() {
   };
 
   return (
-    <main className="px-4 py-8 sm:px-10 sm:py-10">
+    <main className="px-4 py-8 sm:px-10 sm:py-10 ios-fade-up">
       <div className="mx-auto max-w-4xl space-y-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-line pb-6">
@@ -120,11 +120,11 @@ function AdminDashboard() {
 
           {/* Quick Stats */}
           <div className="flex items-center gap-2">
-            <div className="rounded-xl border border-line bg-surface px-3 py-2 text-center shadow-2xs">
+            <div className="rounded-xl border border-line bg-surface px-3 py-2 text-center shadow-2xs transition-transform duration-200 hover:-translate-y-0.5">
               <span className="text-[10px] font-semibold text-muted block">Pending</span>
               <span className="font-serif text-lg font-bold text-amber-600">{pendingRequests.length}</span>
             </div>
-            <div className="rounded-xl border border-line bg-surface px-3 py-2 text-center shadow-2xs">
+            <div className="rounded-xl border border-line bg-surface px-3 py-2 text-center shadow-2xs transition-transform duration-200 hover:-translate-y-0.5">
               <span className="text-[10px] font-semibold text-muted block">Approved</span>
               <span className="font-serif text-lg font-bold text-emerald-600">{approvedRequests.length}</span>
             </div>
@@ -132,7 +132,7 @@ function AdminDashboard() {
         </div>
 
         {/* Global Protection Toggle Card */}
-        <div className="rounded-2xl border border-line bg-surface p-5 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="rounded-2xl border border-line bg-surface p-5 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-all duration-200 ios-card">
           <div className="space-y-1">
             <span className="font-serif text-base font-bold text-ink block">
               Google Sign-In & Verification Gate: {authRequired ? "ENFORCED (ACTIVE)" : "DISABLED"}
@@ -165,9 +165,9 @@ function AdminDashboard() {
             type="button"
             onClick={() => setActiveTab("pending")}
             className={cn(
-              "flex items-center gap-1.5 rounded-lg px-3 py-2 font-sans font-bold transition-all",
+              "flex items-center gap-1.5 rounded-lg px-3 py-2 font-sans font-bold transition-all duration-200 ios-press",
               activeTab === "pending"
-                ? "bg-ink text-surface shadow-2xs"
+                ? "bg-ink text-surface shadow-2xs scale-102"
                 : "text-muted hover:text-ink hover:bg-bg-warm",
             )}
           >
@@ -184,9 +184,9 @@ function AdminDashboard() {
             type="button"
             onClick={() => setActiveTab("approved")}
             className={cn(
-              "flex items-center gap-1.5 rounded-lg px-3 py-2 font-sans font-bold transition-all",
+              "flex items-center gap-1.5 rounded-lg px-3 py-2 font-sans font-bold transition-all duration-200 ios-press",
               activeTab === "approved"
-                ? "bg-ink text-surface shadow-2xs"
+                ? "bg-ink text-surface shadow-2xs scale-102"
                 : "text-muted hover:text-ink hover:bg-bg-warm",
             )}
           >
@@ -198,9 +198,9 @@ function AdminDashboard() {
             type="button"
             onClick={() => setActiveTab("whitelist")}
             className={cn(
-              "flex items-center gap-1.5 rounded-lg px-3 py-2 font-sans font-bold transition-all",
+              "flex items-center gap-1.5 rounded-lg px-3 py-2 font-sans font-bold transition-all duration-200 ios-press",
               activeTab === "whitelist"
-                ? "bg-ink text-surface shadow-2xs"
+                ? "bg-ink text-surface shadow-2xs scale-102"
                 : "text-muted hover:text-ink hover:bg-bg-warm",
             )}
           >

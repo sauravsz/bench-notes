@@ -72,8 +72,8 @@ export function GoogleLoginDialog({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150">
-      <div className="w-full max-w-md rounded-2xl border border-line bg-surface p-6 shadow-2xl animate-in zoom-in-95 duration-150 space-y-5">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 transition-opacity duration-300">
+      <div className="w-full max-w-md rounded-2xl border border-line bg-surface p-6 shadow-2xl ios-scale-in space-y-5">
         {/* Header */}
         <div className="text-center space-y-1.5">
           <div className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-accent/15 text-accent shadow-2xs">
@@ -93,9 +93,9 @@ export function GoogleLoginDialog({
             type="button"
             onClick={() => setActiveTab("student")}
             className={cn(
-              "flex-1 rounded-lg py-2 transition-all flex items-center justify-center gap-1.5",
+              "flex-1 rounded-lg py-2 transition-all duration-200 ios-press-subtle flex items-center justify-center gap-1.5",
               activeTab === "student"
-                ? "bg-surface text-ink font-bold shadow-xs"
+                ? "bg-surface text-ink font-bold shadow-xs scale-102"
                 : "text-muted hover:text-ink",
             )}
           >
@@ -106,9 +106,9 @@ export function GoogleLoginDialog({
             type="button"
             onClick={() => setActiveTab("admin")}
             className={cn(
-              "flex-1 rounded-lg py-2 transition-all flex items-center justify-center gap-1.5",
+              "flex-1 rounded-lg py-2 transition-all duration-200 ios-press-subtle flex items-center justify-center gap-1.5",
               activeTab === "admin"
-                ? "bg-surface text-ink font-bold shadow-xs"
+                ? "bg-surface text-ink font-bold shadow-xs scale-102"
                 : "text-muted hover:text-ink",
             )}
           >
@@ -171,7 +171,7 @@ export function GoogleLoginDialog({
               type="button"
               onClick={handleStudentAuth}
               disabled={!emailInput}
-              className="w-full h-10 font-sans text-xs font-bold gap-2 shadow-sm"
+              className="w-full h-10 font-sans text-xs font-bold gap-2 shadow-sm ios-press"
             >
               <LogIn className="size-4" />
               Sign in with Google
@@ -213,7 +213,7 @@ export function GoogleLoginDialog({
               type="button"
               onClick={handleAdminAuth}
               disabled={!adminPasswordInput}
-              className="w-full h-10 font-sans text-xs font-bold gap-2 bg-primary hover:bg-primary/90 text-white shadow-sm"
+              className="w-full h-10 font-sans text-xs font-bold gap-2 bg-primary hover:bg-primary/90 text-white shadow-sm ios-press"
             >
               <ShieldCheck className="size-4" />
               Unlock Administrator Access
@@ -230,7 +230,7 @@ export function GoogleLoginDialog({
             <button
               type="button"
               onClick={onClose}
-              className="text-xs font-medium text-muted hover:text-ink"
+              className="text-xs font-medium text-muted hover:text-ink transition-all duration-200 ios-press"
             >
               Close
             </button>

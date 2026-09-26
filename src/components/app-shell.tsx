@@ -54,7 +54,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           to="/"
           onClick={onNavigate}
           className={cn(
-            "flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-medium transition-colors",
+            "flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-medium transition-all duration-200 ios-press-subtle",
             pathname === "/"
               ? "bg-bg-warm font-semibold text-ink shadow-2xs"
               : "text-ink-soft hover:bg-bg-warm hover:text-ink",
@@ -67,7 +67,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           to="/exam"
           onClick={onNavigate}
           className={cn(
-            "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-colors",
+            "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-all duration-200 ios-press-subtle",
             pathname.startsWith("/exam")
               ? "bg-bg-warm font-semibold text-ink shadow-2xs"
               : "text-ink-soft hover:bg-bg-warm hover:text-ink",
@@ -87,7 +87,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
             to="/glossary"
             onClick={onNavigate}
             className={cn(
-              "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-colors",
+              "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-all duration-200 ios-press-subtle",
               pathname.startsWith("/glossary")
                 ? "bg-bg-warm font-semibold text-ink shadow-2xs"
                 : "text-ink-soft hover:bg-bg-warm hover:text-ink",
@@ -108,7 +108,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
             to="/maxims"
             onClick={onNavigate}
             className={cn(
-              "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-colors",
+              "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-all duration-200 ios-press-subtle",
               pathname.startsWith("/maxims")
                 ? "bg-bg-warm font-semibold text-ink shadow-2xs"
                 : "text-ink-soft hover:bg-bg-warm hover:text-ink",
@@ -128,7 +128,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           to="/search"
           onClick={onNavigate}
           className={cn(
-            "flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-medium transition-colors",
+            "flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-medium transition-all duration-200 ios-press-subtle",
             pathname === "/search"
               ? "bg-bg-warm font-semibold text-ink shadow-2xs"
               : "text-ink-soft hover:bg-bg-warm hover:text-ink",
@@ -143,7 +143,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
             to="/admin"
             onClick={onNavigate}
             className={cn(
-              "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-colors",
+              "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium transition-all duration-200 ios-press-subtle",
               pathname === "/admin"
                 ? "bg-primary/15 font-bold text-primary shadow-2xs"
                 : "text-primary hover:bg-primary/10",
@@ -165,7 +165,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
             onNavigate?.();
             setNotebookOpen(true);
           }}
-          className="flex w-full min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors text-left"
+          className="flex w-full min-h-11 items-center justify-between rounded-md px-3 text-sm font-medium text-ink-soft hover:bg-bg-warm hover:text-ink transition-all duration-200 ios-press-subtle text-left"
         >
           <span className="flex items-center gap-2">
             <Highlighter className="size-4 shrink-0 text-accent" strokeWidth={1.75} />
@@ -223,7 +223,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
                       params={{ slug: topic.slug }}
                       onClick={onNavigate}
                       className={cn(
-                        "flex min-h-11 items-start gap-2 rounded-md px-3 py-2 text-sm leading-snug transition-colors",
+                        "flex min-h-11 items-start gap-2 rounded-md px-3 py-2 text-sm leading-snug transition-all duration-200 ios-press-subtle",
                         active
                           ? "bg-bg-warm font-semibold text-ink shadow-2xs"
                           : "text-ink-soft hover:bg-bg-warm hover:text-ink",
@@ -234,7 +234,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
                       </span>
                       <span className="flex-1">{topic.title}</span>
                       {studied[topic.slug] ? (
-                        <span className="mt-1 size-1.5 shrink-0 rounded-full bg-studied" />
+                        <span className="mt-1 size-1.5 shrink-0 rounded-full bg-studied ios-spring-pop" />
                       ) : null}
                     </Link>
                   </li>
@@ -299,15 +299,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <button
             type="button"
             onClick={toggleSidebar}
-            className="flex items-center gap-2 rounded-xl border border-line bg-surface/90 backdrop-blur-md px-3 py-2 text-xs font-bold text-ink shadow-lg hover:bg-bg-warm hover:text-accent transition-all duration-150 ring-1 ring-black/5"
+            className="flex size-9 items-center justify-center rounded-xl border border-line bg-surface/90 backdrop-blur-md text-ink shadow-lg hover:bg-bg-warm hover:text-accent transition-all duration-150 ring-1 ring-black/5"
             title="Restore Navigation Bar & Sidebar (Cmd+B / [ )"
             aria-label="Restore Top Bar & Sidebar"
           >
-            <PanelLeft className="size-4 text-accent" strokeWidth={1.75} />
-            <span className="hidden sm:inline">Show Navigation & Sidebar</span>
-            <kbd className="hidden sm:inline-block rounded bg-bg-warm px-1.5 py-0.5 text-[10px] text-muted font-mono">
-              ⌘B
-            </kbd>
+            <PanelLeft className="size-4.5 text-accent" strokeWidth={1.75} />
           </button>
         </div>
       ) : null}
@@ -357,7 +353,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               onClick={handleHeaderToggleAuto}
               title={`Auto-highlighting is ${autoHighlight ? "ON" : "OFF"}. Press Shift+H to toggle.`}
               className={cn(
-                "flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium transition-all",
+                "flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium transition-all duration-200 ios-press",
                 autoHighlight
                   ? "bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-950/50 dark:text-amber-200 dark:border-amber-800 shadow-2xs"
                   : "bg-bg-warm text-muted hover:text-ink border border-line",
@@ -377,7 +373,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               type="button"
               data-appearance-trigger
               onClick={() => setAppearanceMenuOpen(!appearanceMenuOpen)}
-              className="relative inline-flex size-9 sm:size-10 items-center justify-center rounded-lg border border-line bg-surface text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors shadow-2xs"
+              className="relative inline-flex size-9 sm:size-10 items-center justify-center rounded-lg border border-line bg-surface text-ink-soft hover:bg-bg-warm hover:text-ink transition-all duration-200 ios-press shadow-2xs"
               aria-label="Reading appearance settings"
               title="Reading Appearance & Width (Aa)"
             >
@@ -392,20 +388,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <button
               type="button"
               onClick={() => setNotebookOpen(true)}
-              className="relative inline-flex size-9 sm:size-10 items-center justify-center rounded-lg border border-line bg-surface text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors shadow-2xs"
+              className="relative inline-flex size-9 sm:size-10 items-center justify-center rounded-lg border border-line bg-surface text-ink-soft hover:bg-bg-warm hover:text-ink transition-all duration-200 ios-press shadow-2xs"
               aria-label="Open highlights notebook"
               title="Reader Highlights & Notes"
             >
               <Highlighter className="size-4 sm:size-4.5" strokeWidth={1.75} />
               {highlightsCount > 0 ? (
-                <span className="absolute right-1.5 top-1.5 size-2 rounded-full bg-accent ring-2 ring-surface" />
+                <span className="absolute right-1.5 top-1.5 size-2 rounded-full bg-accent ring-2 ring-surface ios-pulse-soft" />
               ) : null}
             </button>
 
             {/* Search Link */}
             <Link
               to="/search"
-              className="inline-flex size-9 sm:size-10 items-center justify-center rounded-lg border border-line bg-surface text-ink-soft hover:bg-bg-warm hover:text-ink shadow-2xs"
+              className="inline-flex size-9 sm:size-10 items-center justify-center rounded-lg border border-line bg-surface text-ink-soft hover:bg-bg-warm hover:text-ink shadow-2xs transition-all duration-200 ios-press"
               aria-label="Search notes"
               title="Search notes (Find)"
             >
@@ -418,7 +414,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 {isAdmin && (
                   <Link
                     to="/admin"
-                    className="hidden sm:inline-flex items-center gap-1 rounded-lg bg-primary px-2.5 py-1 font-sans text-xs font-bold text-white shadow-2xs hover:bg-primary/90 transition-colors"
+                    className="hidden sm:inline-flex items-center gap-1 rounded-lg bg-primary px-2.5 py-1 font-sans text-xs font-bold text-white shadow-2xs hover:bg-primary/90 transition-all duration-200 ios-press"
                     title="Open Administrator Verification Panel"
                   >
                     <ShieldCheck className="size-3.5" />
@@ -433,7 +429,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                       toast.info("Signed out");
                     }
                   }}
-                  className="inline-flex size-9 sm:size-10 items-center justify-center rounded-lg border border-line bg-surface font-sans text-xs font-bold text-ink hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/30 transition-colors shadow-2xs"
+                  className="inline-flex size-9 sm:size-10 items-center justify-center rounded-lg border border-line bg-surface font-sans text-xs font-bold text-ink hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/30 transition-all duration-200 ios-press shadow-2xs"
                   title={`Signed in as ${currentUser.email}. Click to sign out.`}
                 >
                   {currentUser.email.charAt(0).toUpperCase()}
@@ -444,7 +440,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 type="button"
                 size="sm"
                 onClick={() => setLoginModalOpen(true)}
-                className="h-9 px-3 text-xs font-bold gap-1.5 shadow-2xs"
+                className="h-9 px-3 text-xs font-bold gap-1.5 shadow-2xs ios-press"
               >
                 <User className="size-3.5" />
                 <span>Sign In</span>
@@ -454,7 +450,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
         <div className="h-0.5 bg-line">
           <div
-            className="h-full bg-accent transition-[width] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]"
+            className="h-full bg-accent transition-[width] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{
               width: `${(done / (activeCourse.topics.length || 1)) * 100}%`,
             }}
@@ -464,14 +460,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Sidebar Overlay */}
       {open ? (
-        <div className="no-print fixed inset-0 z-20 lg:hidden">
+        <div className="no-print fixed inset-0 z-40 lg:hidden">
           <button
             type="button"
-            className="absolute inset-0 bg-ink/30"
+            className="absolute inset-0 bg-ink/30 backdrop-blur-xs transition-opacity duration-300"
             aria-label="Close syllabus"
             onClick={() => setOpen(false)}
           />
-          <nav className="absolute inset-y-0 left-0 w-[min(20rem,88vw)] overflow-y-auto border-r border-line bg-surface px-2 pt-16 shadow-xl">
+          <nav className="absolute inset-y-0 left-0 w-[min(20rem,88vw)] overflow-y-auto border-r border-line bg-surface px-3 pt-16 shadow-xl ios-drawer-enter">
             <NavList onNavigate={() => setOpen(false)} />
           </nav>
         </div>

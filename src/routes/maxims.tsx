@@ -45,7 +45,7 @@ function MaximsPage() {
   };
 
   return (
-    <main className="px-4 py-8 sm:px-10 sm:py-10">
+    <main className="px-4 py-8 sm:px-10 sm:py-10 ios-fade-up">
       <div className="mx-auto max-w-3xl">
         <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-accent">
           Reference
@@ -120,11 +120,11 @@ function MaximsPage() {
               <li
                 key={maxim.id}
                 id={maxim.id}
-                className="scroll-mt-28 rounded-xl border border-line bg-surface p-5 transition-colors hover:border-line-strong"
+                className="scroll-mt-28 rounded-xl border border-line bg-surface p-5 transition-all duration-200 ios-card"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h2 className="font-serif text-xl font-bold tracking-tight text-ink">
+                    <h2 className="font-serif text-lg font-bold text-ink italic">
                       {maxim.latin}
                     </h2>
                     <p className="mt-1 font-serif text-base font-bold text-accent">
@@ -134,13 +134,13 @@ function MaximsPage() {
                   <button
                     type="button"
                     onClick={() => handleCopy(maxim)}
-                    className="shrink-0 inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-2.5 py-1.5 text-xs font-sans font-bold text-ink-soft hover:border-line-strong hover:text-ink transition-colors focus:outline-none focus:ring-1 focus:ring-accent"
+                    className="shrink-0 inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-2.5 py-1.5 text-xs font-sans font-bold text-ink-soft hover:border-line-strong hover:text-ink transition-all duration-200 ios-press"
                     title="Copy Latin maxim and English meaning"
                     aria-label={`Copy ${maxim.latin}`}
                   >
                     {copiedId === maxim.id ? (
                       <>
-                        <Check className="size-3.5 text-accent" />
+                        <Check className="size-3.5 text-accent ios-spring-pop" />
                         <span className="text-accent">Copied</span>
                       </>
                     ) : (

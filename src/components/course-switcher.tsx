@@ -64,7 +64,7 @@ export function CourseSwitcher({
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex min-h-9 items-center gap-2 rounded-lg border border-line bg-surface px-2.5 py-1 text-xs font-medium text-ink shadow-2xs hover:bg-bg-warm transition-all"
+        className="flex min-h-9 items-center gap-2 rounded-lg border border-line bg-surface px-2.5 py-1 text-xs font-medium text-ink shadow-2xs hover:bg-bg-warm transition-all duration-200 ios-press"
         title="Switch MBA Course / Subject"
       >
         <span className="flex size-5 items-center justify-center rounded bg-primary text-white font-sans text-[10px] font-bold">
@@ -73,12 +73,12 @@ export function CourseSwitcher({
         <span className="font-bold text-ink max-w-[140px] sm:max-w-[200px] truncate">
           {activeCourse.code} · {activeCourse.title}
         </span>
-        <ChevronDown className={cn("size-3.5 text-muted transition-transform", open ? "rotate-180" : "")} />
+        <ChevronDown className={cn("size-3.5 text-muted transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]", open ? "rotate-180" : "")} />
       </button>
 
       {/* Dropdown Menu */}
       {open ? (
-        <div className="fixed sm:absolute left-4 right-4 sm:left-0 sm:right-auto top-16 sm:top-full z-50 mt-1 sm:w-96 rounded-2xl border border-line bg-surface p-3 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+        <div className="fixed sm:absolute left-4 right-4 sm:left-0 sm:right-auto top-16 sm:top-full z-50 mt-1 sm:w-96 rounded-2xl border border-line bg-surface/95 backdrop-blur-md p-3 shadow-2xl ios-scale-in">
           {/* Header */}
           <div className="flex items-center justify-between pb-2 border-b border-line mb-2">
             <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-muted flex items-center gap-1.5">
@@ -129,10 +129,10 @@ export function CourseSwitcher({
                           type="button"
                           onClick={() => handleSelectCourse(c)}
                           className={cn(
-                            "flex w-full items-start justify-between rounded-xl p-2.5 text-left transition-all",
+                            "flex w-full items-start justify-between rounded-xl p-2.5 text-left transition-all duration-200 ios-press-subtle",
                             isSelected
                               ? "bg-accent/10 border border-accent/40 shadow-2xs"
-                              : "hover:bg-bg-warm border border-transparent",
+                              : "hover:bg-bg-warm border border-transparent hover:-translate-y-0.5",
                           )}
                         >
                           <div className="min-w-0 flex-1 pr-2">
@@ -165,7 +165,7 @@ export function CourseSwitcher({
 
                           <div className="shrink-0 flex items-center pt-1">
                             {isSelected ? (
-                              <Check className="size-4 text-accent font-bold" />
+                              <Check className="size-4 text-accent font-bold ios-spring-pop" />
                             ) : doneCount > 0 ? (
                               <span className="text-[10px] font-bold text-studied">
                                 {doneCount}/{c.topics.length}

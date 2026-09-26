@@ -50,7 +50,7 @@ function Dashboard() {
       : allCourses.filter((c) => c.category === selectedCategory);
 
   return (
-    <main className="px-4 py-8 sm:px-10 sm:py-12">
+    <main className="px-4 py-8 sm:px-10 sm:py-12 ios-fade-up">
       <div className="mx-auto max-w-4xl space-y-12">
         {/* Hero Section */}
         <section className="space-y-6">
@@ -73,7 +73,7 @@ function Dashboard() {
           </div>
 
           {/* Active Course Mastery Card */}
-          <div className="rounded-2xl border border-line bg-surface p-6 shadow-sm transition-all duration-200">
+          <div className="rounded-2xl border border-line bg-surface p-6 shadow-sm transition-all duration-300 ios-card">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
@@ -100,7 +100,7 @@ function Dashboard() {
                   <Link
                     to="/topic/$slug"
                     params={{ slug: resumeTopic.slug }}
-                    className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-2.5 font-sans text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-accent/90 hover:shadow"
+                    className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-2.5 font-sans text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-accent/90 hover:shadow ios-press group"
                   >
                     <span>
                       {lastSlug ? "Resume Studying" : "Start Reading"}
@@ -113,7 +113,7 @@ function Dashboard() {
                   <button
                     type="button"
                     onClick={() => setConfirmReset(true)}
-                    className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-surface px-3.5 py-2.5 font-sans text-xs font-medium text-muted transition-colors hover:bg-bg-warm hover:text-ink"
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-surface px-3.5 py-2.5 font-sans text-xs font-medium text-muted transition-all duration-200 hover:bg-bg-warm hover:text-ink ios-press"
                     title="Reset completion progress"
                   >
                     <RotateCcw className="size-3.5" />
@@ -127,14 +127,14 @@ function Dashboard() {
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="rounded bg-destructive px-2 py-1 font-sans text-xs font-bold text-white transition-opacity hover:opacity-90"
+                      className="rounded bg-destructive px-2 py-1 font-sans text-xs font-bold text-white transition-all duration-200 ios-press"
                     >
                       Yes
                     </button>
                     <button
                       type="button"
                       onClick={() => setConfirmReset(false)}
-                      className="rounded border border-line bg-surface px-2 py-1 font-sans text-xs font-medium text-ink-soft hover:bg-surface/80"
+                      className="rounded border border-line bg-surface px-2 py-1 font-sans text-xs font-medium text-ink-soft hover:bg-surface/80 transition-all duration-200 ios-press"
                     >
                       Cancel
                     </button>
@@ -147,7 +147,7 @@ function Dashboard() {
             <div className="mt-5 space-y-2">
               <div className="h-2 w-full overflow-hidden rounded-full bg-bg-warm">
                 <div
-                  className="h-full bg-accent transition-all duration-300 ease-out"
+                  className="h-full bg-accent transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
                   style={{ width: `${masteryPercentage}%` }}
                 />
               </div>
@@ -155,19 +155,19 @@ function Dashboard() {
 
             {/* Quick Stat Counter Badges */}
             <div className="mt-6 grid grid-cols-2 gap-3 border-t border-line/60 pt-4 sm:grid-cols-4">
-              <div className="rounded-xl bg-bg-warm/50 p-3">
+              <div className="rounded-xl bg-bg-warm/50 p-3 transition-transform duration-200 hover:-translate-y-0.5">
                 <span className="font-sans text-xs font-medium text-muted block">Curriculum Units</span>
                 <span className="font-serif text-xl font-bold text-ink">{activeCourse.units.length} Units</span>
               </div>
-              <div className="rounded-xl bg-bg-warm/50 p-3">
+              <div className="rounded-xl bg-bg-warm/50 p-3 transition-transform duration-200 hover:-translate-y-0.5">
                 <span className="font-sans text-xs font-medium text-muted block">Structured Notes</span>
                 <span className="font-serif text-xl font-bold text-ink">{activeCourse.topics.length} Modules</span>
               </div>
-              <div className="rounded-xl bg-bg-warm/50 p-3">
+              <div className="rounded-xl bg-bg-warm/50 p-3 transition-transform duration-200 hover:-translate-y-0.5">
                 <span className="font-sans text-xs font-medium text-muted block">Question Bank</span>
                 <span className="font-serif text-xl font-bold text-ink">{activeCourse.examQuestions.length} Model Answers</span>
               </div>
-              <div className="rounded-xl bg-bg-warm/50 p-3">
+              <div className="rounded-xl bg-bg-warm/50 p-3 transition-transform duration-200 hover:-translate-y-0.5">
                 <span className="font-sans text-xs font-medium text-muted block">Subject Dictionary</span>
                 <span className="font-serif text-xl font-bold text-ink">
                   {activeCourse.glossary ? activeCourse.glossary.length : 0} Terms
@@ -196,9 +196,9 @@ function Dashboard() {
                   type="button"
                   onClick={() => setSelectedCategory(cat)}
                   className={cn(
-                    "rounded-full px-3 py-1 font-sans text-xs font-medium transition-all",
+                    "rounded-full px-3 py-1 font-sans text-xs font-medium transition-all duration-200 ios-press",
                     selectedCategory === cat
-                      ? "bg-ink text-surface font-bold shadow-2xs"
+                      ? "bg-ink text-surface font-bold shadow-2xs scale-105"
                       : "bg-bg-warm text-muted hover:text-ink",
                   )}
                 >
@@ -218,9 +218,9 @@ function Dashboard() {
                   key={c.id}
                   onClick={() => setActiveCourseSlug(c.slug)}
                   className={cn(
-                    "flex flex-col justify-between rounded-xl border p-4 transition-all duration-150 cursor-pointer shadow-2xs",
+                    "flex flex-col justify-between rounded-xl border p-4 transition-all duration-250 cursor-pointer shadow-2xs ios-card group",
                     isSelected
-                      ? "border-accent bg-accent/5 ring-2 ring-accent/30"
+                      ? "border-accent bg-accent/5 ring-2 ring-accent/30 shadow-sm"
                       : "border-line bg-surface hover:border-line-strong hover:bg-bg-warm/30",
                   )}
                 >
@@ -305,7 +305,7 @@ function Dashboard() {
                           key={topic.id}
                           to="/topic/$slug"
                           params={{ slug: topic.slug }}
-                          className="group flex flex-col justify-between rounded-xl border border-line bg-surface p-4 transition-all duration-150 hover:border-line-strong hover:bg-bg-warm/30 shadow-2xs"
+                          className="group flex flex-col justify-between rounded-xl border border-line bg-surface p-4 transition-all duration-250 hover:border-line-strong hover:bg-bg-warm/30 shadow-2xs ios-card"
                         >
                           <div className="space-y-1.5">
                             <div className="flex items-start justify-between gap-2">
@@ -313,7 +313,7 @@ function Dashboard() {
                                 Topic {String(topic.number).padStart(2, "0")}
                               </span>
                               {isStudied && (
-                                <span className="inline-flex items-center gap-1 rounded-full bg-studied/15 px-2 py-0.5 font-sans text-[11px] font-bold text-studied">
+                                <span className="inline-flex items-center gap-1 rounded-full bg-studied/15 px-2 py-0.5 font-sans text-[11px] font-bold text-studied ios-spring-pop">
                                   <CheckCircle2 className="size-3" /> Studied
                                 </span>
                               )}
@@ -330,7 +330,7 @@ function Dashboard() {
                             <span className="font-sans font-medium text-muted">
                               {topic.blocks.length} sections
                             </span>
-                            <span className="inline-flex items-center gap-1 font-sans font-bold text-accent transition-transform duration-150 group-hover:translate-x-0.5">
+                            <span className="inline-flex items-center gap-1 font-sans font-bold text-accent transition-transform duration-200 group-hover:translate-x-1">
                               Read Note <ArrowRight className="size-3" />
                             </span>
                           </div>
@@ -370,7 +370,7 @@ function Dashboard() {
                 key={exam.id}
                 to="/exam/$qid"
                 params={{ qid: exam.id }}
-                className="group flex flex-col justify-between rounded-xl border border-line bg-surface p-4 transition-all duration-150 hover:border-line-strong hover:bg-bg-warm/30 shadow-2xs"
+                className="group flex flex-col justify-between rounded-xl border border-line bg-surface p-4 transition-all duration-250 hover:border-line-strong hover:bg-bg-warm/30 shadow-2xs ios-card"
               >
                 <div>
                   <span className="rounded-md bg-accent/10 px-2 py-0.5 font-sans text-xs font-bold text-accent">
@@ -385,7 +385,7 @@ function Dashboard() {
                 </div>
                 <div className="mt-3 flex items-center justify-between border-t border-line/50 pt-2.5 text-xs">
                   <span className="font-sans text-[11px] text-muted">Model Answer</span>
-                  <span className="font-sans font-bold text-accent group-hover:underline flex items-center gap-1">
+                  <span className="font-sans font-bold text-accent group-hover:underline flex items-center gap-1 transition-transform duration-200 group-hover:translate-x-0.5">
                     Study Answer <ArrowRight className="size-3" />
                   </span>
                 </div>

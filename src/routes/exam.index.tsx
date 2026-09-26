@@ -7,7 +7,7 @@ function ExamIndex() {
   const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
   const examQuestions = activeCourse.examQuestions;
   return (
-    <main className="px-4 py-8 sm:px-10 sm:py-10">
+    <main className="px-4 py-8 sm:px-10 sm:py-10 ios-fade-up">
       <div className="mx-auto max-w-2xl">
         <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-accent">
           Examination
@@ -24,7 +24,7 @@ function ExamIndex() {
               <Link
                 to="/exam/$qid"
                 params={{ qid: q.id }}
-                className="block rounded-xl border border-line bg-surface p-5 shadow-[var(--shadow-border)] transition-[box-shadow] duration-150 hover:shadow-[var(--shadow-border-hover)]"
+                className="block rounded-xl border border-line bg-surface p-5 shadow-2xs transition-all duration-200 ios-card group"
               >
                 <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-faint">
                   Question {q.number}

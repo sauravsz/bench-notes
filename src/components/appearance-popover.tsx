@@ -96,7 +96,7 @@ export function AppearancePopover({ onClose }: { onClose: () => void }) {
   return (
     <div
       ref={popoverRef}
-      className="fixed right-4 top-16 z-50 w-80 sm:w-88 rounded-2xl border border-line bg-surface p-4 shadow-2xl animate-in fade-in zoom-in-95 duration-150"
+      className="fixed right-4 top-16 z-50 w-80 sm:w-88 rounded-2xl border border-line bg-surface/95 backdrop-blur-md p-4 shadow-2xl ios-scale-in"
     >
       {/* Header */}
       <div className="flex items-center justify-between pb-3 border-b border-line/60">
@@ -111,16 +111,16 @@ export function AppearancePopover({ onClose }: { onClose: () => void }) {
             type="button"
             onClick={resetAppearance}
             title="Reset to defaults"
-            className="rounded p-1 text-muted hover:bg-bg-warm hover:text-ink transition-colors"
-          >
-            <RotateCcw className="size-3.5" />
+          className="rounded p-1 text-muted hover:bg-bg-warm hover:text-ink transition-all duration-200 ios-press"
+        >
+          <RotateCcw className="size-3.5" />
           </button>
           <button
             type="button"
             onClick={onClose}
-            className="rounded p-1 text-muted hover:bg-bg-warm hover:text-ink transition-colors"
-          >
-            <X className="size-3.5" />
+          className="rounded p-1 text-muted hover:bg-bg-warm hover:text-ink transition-all duration-200 ios-press"
+        >
+          <X className="size-3.5" />
           </button>
         </div>
       </div>
@@ -143,9 +143,9 @@ export function AppearancePopover({ onClose }: { onClose: () => void }) {
                 key={opt.id}
                 type="button"
                 onClick={() => setTextWidth(opt.id)}
-                className={`rounded-md py-1.5 font-sans text-[11px] font-medium transition-all ${
+                className={`rounded-md py-1.5 font-sans text-[11px] font-medium transition-all duration-200 ios-press-subtle ${
                   textWidth === opt.id
-                    ? "bg-surface text-ink font-bold shadow-xs ring-1 ring-accent/30"
+                    ? "bg-surface text-ink font-bold shadow-xs ring-1 ring-accent/30 scale-102"
                     : "text-muted hover:text-ink"
                 }`}
               >
@@ -171,7 +171,7 @@ export function AppearancePopover({ onClose }: { onClose: () => void }) {
               type="button"
               onClick={decreaseFontSize}
               disabled={fontSize <= 13}
-              className="flex size-7 items-center justify-center rounded-lg border border-line bg-surface hover:bg-bg-warm disabled:opacity-40 transition-colors"
+              className="flex size-7 items-center justify-center rounded-lg border border-line bg-surface hover:bg-bg-warm disabled:opacity-40 transition-all duration-200 ios-press"
             >
               <Minus className="size-3.5" />
             </button>
@@ -187,7 +187,7 @@ export function AppearancePopover({ onClose }: { onClose: () => void }) {
               type="button"
               onClick={increaseFontSize}
               disabled={fontSize >= 28}
-              className="flex size-7 items-center justify-center rounded-lg border border-line bg-surface hover:bg-bg-warm disabled:opacity-40 transition-colors"
+              className="flex size-7 items-center justify-center rounded-lg border border-line bg-surface hover:bg-bg-warm disabled:opacity-40 transition-all duration-200 ios-press"
             >
               <Plus className="size-3.5" />
             </button>
@@ -211,9 +211,9 @@ export function AppearancePopover({ onClose }: { onClose: () => void }) {
                 key={opt.id}
                 type="button"
                 onClick={() => setLineSpacing(opt.id)}
-                className={`rounded-md py-1.5 font-sans text-[11px] font-medium transition-all ${
+                className={`rounded-md py-1.5 font-sans text-[11px] font-medium transition-all duration-200 ios-press-subtle ${
                   lineSpacing === opt.id
-                    ? "bg-surface text-ink font-bold shadow-xs ring-1 ring-accent/30"
+                    ? "bg-surface text-ink font-bold shadow-xs ring-1 ring-accent/30 scale-102"
                     : "text-muted hover:text-ink"
                 }`}
               >
@@ -234,7 +234,7 @@ export function AppearancePopover({ onClose }: { onClose: () => void }) {
                 key={f.id}
                 type="button"
                 onClick={() => setFontFamily(f.id)}
-                className={`flex items-center justify-between rounded-lg border p-2 text-left transition-all ${
+                className={`flex items-center justify-between rounded-lg border p-2 text-left transition-all duration-200 ios-press-subtle ${
                   fontFamily === f.id
                     ? "border-accent bg-accent/10 text-ink font-bold shadow-2xs"
                     : "border-line bg-surface text-ink-soft hover:bg-bg-warm"
@@ -242,7 +242,7 @@ export function AppearancePopover({ onClose }: { onClose: () => void }) {
               >
                 <span className={`text-xs ${f.fontClass}`}>{f.label}</span>
                 {fontFamily === f.id ? (
-                  <Check className="size-3 text-accent" />
+                  <Check className="size-3 text-accent ios-spring-pop" />
                 ) : null}
               </button>
             ))}
@@ -260,14 +260,16 @@ export function AppearancePopover({ onClose }: { onClose: () => void }) {
                 key={t.id}
                 type="button"
                 onClick={() => setThemeTone(t.id)}
-                className={`flex flex-col items-center gap-1 rounded-lg border p-1.5 transition-all ${
+                className={`flex flex-col items-center gap-1 rounded-lg border p-1.5 transition-all duration-200 ios-press ${
                   themeTone === t.id
-                    ? "ring-2 ring-accent scale-102 shadow-xs font-bold"
-                    : "border-line/80 hover:scale-102"
+                    ? "ring-2 ring-accent scale-105 shadow-xs font-bold bg-accent/5"
+                    : "border-line/80 hover:scale-102 hover:bg-bg-warm"
                 }`}
               >
                 <div
-                  className="size-5 rounded-full border shadow-2xs"
+                  className={`size-5 rounded-full border shadow-2xs transition-transform duration-200 ${
+                    themeTone === t.id ? "scale-110" : ""
+                  }`}
                   style={{ backgroundColor: t.bg, borderColor: t.border }}
                 />
                 <span className="text-[10px] text-ink text-center leading-tight">

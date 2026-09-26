@@ -27,15 +27,7 @@ export function useReaderShortcuts() {
       // 1. Cmd + B / Ctrl + B -> Toggle Sidebar
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "b") {
         e.preventDefault();
-        const next = toggleSidebar();
-        if (next) {
-          toast.info("Distraction-free mode", {
-            description: "Top bar & Sidebar hidden. Press Cmd+B or use restore button to expand.",
-            duration: 1800,
-          });
-        } else {
-          toast.info("Top bar & Sidebar restored", { duration: 1500 });
-        }
+        toggleSidebar();
         return;
       }
 
