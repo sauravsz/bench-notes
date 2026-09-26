@@ -330,7 +330,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <button
             type="button"
             onClick={toggleSidebar}
-            className="hidden lg:inline-flex size-9 items-center justify-center rounded-lg border border-line bg-surface text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors"
+            className="hidden lg:inline-flex size-9 items-center justify-center rounded-xl border border-line bg-surface text-ink-soft hover:bg-bg-warm hover:text-ink transition-colors"
             title={sidebarCollapsed ? "Expand Sidebar (Cmd+B / [ )" : "Collapse Sidebar (Cmd+B / ] )"}
             aria-label="Toggle Sidebar"
           >
@@ -440,7 +440,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 type="button"
                 size="sm"
                 onClick={() => setLoginModalOpen(true)}
-                className="h-9 px-3 text-xs font-bold gap-1.5 shadow-2xs ios-press"
+                className="h-9 px-3 text-xs font-bold gap-1.5 shadow-2xs ios-press rounded-xl"
               >
                 <User className="size-3.5" />
                 <span>Sign In</span>
@@ -448,9 +448,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             )}
           </div>
         </div>
-        <div className="h-0.5 bg-line">
+        <div className="h-1 bg-line/60 rounded-full overflow-hidden mx-auto max-w-[1400px]">
           <div
-            className="h-full bg-accent transition-[width] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            className="h-full rounded-full bg-accent transition-[width] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{
               width: `${(done / (activeCourse.topics.length || 1)) * 100}%`,
             }}

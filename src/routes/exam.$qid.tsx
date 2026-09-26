@@ -44,7 +44,7 @@ function ExamAnswer() {
     <>
       {/* Reading scroll progress bar */}
       <div
-        className="no-print pointer-events-none fixed top-0 left-0 right-0 z-50 h-[3px] bg-line/30"
+        className="no-print pointer-events-none fixed top-0 left-0 right-0 z-50 h-[3.5px] bg-line/30 overflow-hidden"
         role="progressbar"
         aria-valuenow={Math.round(progress)}
         aria-valuemin={0}
@@ -52,7 +52,7 @@ function ExamAnswer() {
         aria-label="Reading progress"
       >
         <div
-          className="h-full bg-accent transition-[width] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className="h-full rounded-r-full bg-accent transition-[width] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
           style={{ width: `${progress}%` }}
         />
       </div>

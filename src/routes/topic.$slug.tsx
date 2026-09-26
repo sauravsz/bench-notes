@@ -50,7 +50,7 @@ function TopicPage() {
     <>
       {/* Reading scroll progress bar */}
       <div
-        className="no-print pointer-events-none fixed top-0 left-0 right-0 z-50 h-[3px] bg-line/30"
+        className="no-print pointer-events-none fixed top-0 left-0 right-0 z-50 h-[3.5px] bg-line/30 overflow-hidden"
         role="progressbar"
         aria-valuenow={Math.round(progress)}
         aria-valuemin={0}
@@ -58,7 +58,7 @@ function TopicPage() {
         aria-label="Reading progress"
       >
         <div
-          className="h-full bg-accent transition-[width] duration-75 ease-out"
+          className="h-full rounded-r-full bg-accent transition-[width] duration-100 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
