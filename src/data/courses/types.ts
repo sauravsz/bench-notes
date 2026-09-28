@@ -11,7 +11,13 @@ export type DiagramKind =
   | "consumer-decision"
   | "sales-funnel"
   | "tqm-house"
-  | "supply-chain-flow";
+  | "supply-chain-flow"
+  | "pdi-context-grid"
+  | "minto-pyramid"
+  | "scqa-framework"
+  | "rvu-model"
+  | "stress-mindset-grid"
+  | "geometric-stage-space";
 
 export type NoteBlock =
   | { type: "h3"; text: string }

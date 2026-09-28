@@ -5,6 +5,12 @@ import { ContractClassificationDiagram } from "./contract-classification";
 import { FreeConsentMapDiagram } from "./free-consent-map";
 import { DischargeRemediesDiagram } from "./discharge-remedies";
 import { CompanyTypesMapDiagram } from "./company-types-map";
+import { PdiContextGridDiagram } from "./pdi-context-grid";
+import { MintoPyramidDiagram } from "./minto-pyramid";
+import { ScqaFrameworkDiagram } from "./scqa-framework";
+import { RvuModelDiagram } from "./rvu-model";
+import { StressMindsetGridDiagram } from "./stress-mindset-grid";
+import { GeometricStageSpaceDiagram } from "./geometric-stage-space";
 
 export function DiagramRenderer({
   kind,
@@ -29,6 +35,18 @@ export function DiagramRenderer({
         return <DischargeRemediesDiagram />;
       case "company-types":
         return <CompanyTypesMapDiagram />;
+      case "pdi-context-grid":
+        return <PdiContextGridDiagram />;
+      case "minto-pyramid":
+        return <MintoPyramidDiagram />;
+      case "scqa-framework":
+        return <ScqaFrameworkDiagram />;
+      case "rvu-model":
+        return <RvuModelDiagram />;
+      case "stress-mindset-grid":
+        return <StressMindsetGridDiagram />;
+      case "geometric-stage-space":
+        return <GeometricStageSpaceDiagram />;
       default:
         return null;
     }

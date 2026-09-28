@@ -4,7 +4,13 @@ export type DiagramKind =
   | "contract-classification"
   | "free-consent"
   | "discharge-remedies"
-  | "company-types";
+  | "company-types"
+  | "pdi-context-grid"
+  | "minto-pyramid"
+  | "scqa-framework"
+  | "rvu-model"
+  | "stress-mindset-grid"
+  | "geometric-stage-space";
 
 export type NoteBlock =
   | { type: "h3"; text: string }
