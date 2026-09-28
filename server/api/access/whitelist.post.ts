@@ -1,23 +1,23 @@
-import { defineEventHandler, readBody } from "h3";
-import { getGlobalStore, ADMIN_PASSWORD_HASH, sha256Hex } from "../../store";
+import { defineEventHandler, readBody, getHeader } from "h3";
+import { getGlobalStore, validateAdminAuth } from "../../store";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody<{
     action: "add" | "remove";
     entry: string;
     password?: string;
+    adminToken?: string;
   }>(event);
 
   if (!body?.entry) {
     return { ok: false, error: "Entry is required" };
   }
 
-  if (!body?.password) {
-    return { ok: false, error: "Admin authentication required" };
-  }
+  const authHeader = getHeader(event, "authorization");
+  const candidate = body.password || body.adminToken || authHeader;
+  const isAuthorized = await validateAdminAuth(candidate);
 
-  const hash = await sha256Hex(body.password);
-  if (hash !== ADMIN_PASSWORD_HASH) {
+  if (!isAuthorized) {
     return { ok: false, error: "Unauthorized admin authentication" };
   }
 

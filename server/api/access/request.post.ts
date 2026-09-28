@@ -6,6 +6,7 @@ export default defineEventHandler(async (event) => {
     email: string;
     name?: string;
     avatar?: string;
+    accessCode?: string;
   }>(event);
 
   if (!body?.email || !body.email.includes("@")) {
@@ -17,7 +18,7 @@ export default defineEventHandler(async (event) => {
     email: body.email,
     name: body.name || body.email.split("@")[0],
     avatar: body.avatar,
-    status: "pending",
+    accessCode: body.accessCode,
   });
 
   return {
