@@ -92,35 +92,35 @@ function AdminDashboard() {
     };
 
     return (
-      <main className="min-h-screen px-4 py-16 sm:px-10 flex items-center justify-center bg-[#f4f0e6]">
-        <div className="w-full max-w-md rounded-3xl border border-[#d6cfbe] bg-[#fffcf7] p-8 text-center space-y-6 shadow-2xl">
-          <div className="mx-auto flex size-16 items-center justify-center rounded-2xl bg-[#2f4553] text-white shadow-md">
-            <ShieldCheck className="size-8" strokeWidth={1.75} />
+      <main className="min-h-screen px-4 py-16 sm:px-10 flex items-center justify-center bg-[#090909]">
+        <div className="w-full max-w-md rounded-[28px] border border-[#262626] bg-[#141414] p-8 text-center space-y-6 shadow-2xl">
+          <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-[#1c1c1c] border border-[#262626] text-white shadow-md">
+            <ShieldCheck className="size-7 text-[#0099ff]" strokeWidth={2} />
           </div>
           
           <div className="space-y-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#ebd9c2] px-3 py-0.5 text-xs font-bold uppercase tracking-wider text-[#bf7538]">
-              <Lock className="size-3.5" />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1c1c1c] border border-[#262626] px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#999999]">
+              <Lock className="size-3.5 text-[#0099ff]" />
               Restricted Area
             </span>
-            <h1 className="font-serif text-2xl font-bold text-[#1c2826]">
+            <h1 className="font-display text-2xl font-bold tracking-tight text-white">
               Administrator Login
             </h1>
-            <p className="font-sans text-xs text-[#636c78] leading-relaxed">
+            <p className="font-sans text-xs text-[#999999] leading-relaxed">
               Enter master password to access student verification, whitelist controls, and security settings.
             </p>
           </div>
 
           <div className="space-y-3 pt-2">
             <div className="relative">
-              <KeyRound className="absolute left-3.5 top-3 h-4 w-4 text-[#88909b]" />
+              <KeyRound className="absolute left-3.5 top-3 h-4 w-4 text-[#666666]" />
               <input
                 type="password"
                 placeholder="Enter admin password (default: admin)"
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleDirectAdminLogin()}
-                className="w-full rounded-xl border border-[#cfc4b0] bg-white pl-10 pr-4 py-2.5 text-sm text-[#1c2826] placeholder:text-[#a09c94] focus:border-[#2f4553] focus:outline-none focus:ring-1 focus:ring-[#2f4553]"
+                className="w-full rounded-full border border-[#262626] bg-[#090909] pl-10 pr-4 py-2.5 text-xs text-white placeholder:text-[#666666] focus:border-[#0099ff] focus:outline-none"
               />
             </div>
 
@@ -128,17 +128,17 @@ function AdminDashboard() {
               type="button"
               onClick={handleDirectAdminLogin}
               disabled={isLoggingIn || !passwordInput.trim()}
-              className="w-full bg-[#2f4553] hover:bg-[#20313c] text-white font-medium py-2.5 rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 text-sm"
+              className="w-full bg-white hover:bg-white/90 text-black font-bold py-2.5 rounded-full shadow-xs transition-all flex items-center justify-center gap-2 text-xs ios-press"
             >
               <Lock className="size-4" />
               {isLoggingIn ? "Verifying..." : "Unlock Administrator Panel"}
             </Button>
           </div>
 
-          <div className="pt-2 border-t border-[#e6dfce]">
+          <div className="pt-3 border-t border-[#1f1f1f]">
             <Link
               to="/"
-              className="inline-flex items-center gap-1.5 font-sans text-xs font-semibold text-[#636c78] hover:text-[#1c2826] transition-colors"
+              className="inline-flex items-center gap-1.5 font-sans text-xs font-semibold text-[#999999] hover:text-white transition-colors"
             >
               <ArrowLeft className="size-3.5" />
               Return to Syllabus
@@ -201,24 +201,24 @@ function AdminDashboard() {
   };
 
   return (
-    <main className="px-4 py-8 sm:px-10 sm:py-10 animate-in fade-in duration-200">
-      <div className="mx-auto max-w-4xl space-y-8">
+    <main className="px-4 py-8 sm:px-10 sm:py-12 animate-in fade-in duration-200 bg-[#090909]">
+      <div className="mx-auto max-w-5xl space-y-8">
         {/* Header Ribbon */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[#e2d8c5] pb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[#262626] pb-6">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#2f4553] text-[#fffcf7] px-2.5 py-0.5 font-sans text-xs font-bold">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1c1c1c] border border-[#262626] text-[#0099ff] px-3 py-0.5 font-mono text-xs font-bold">
                 <ShieldCheck className="size-3.5" />
                 Administrator Panel
               </span>
-              <span className="font-sans text-xs text-[#636c78]">
+              <span className="font-mono text-xs text-[#999999]">
                 Master: <strong>{currentUser.email}</strong>
               </span>
             </div>
-            <h1 className="font-serif text-3xl font-bold tracking-tight text-[#1c2826] sm:text-4xl">
+            <h1 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
               User Access & Verification Gate
             </h1>
-            <p className="mt-1 font-sans text-xs text-[#636c78]">
+            <p className="mt-1 font-sans text-xs text-[#999999]">
               Verify student Google accounts, manage whitelist domains, and configure instant access passcodes.
             </p>
           </div>
@@ -231,18 +231,18 @@ function AdminDashboard() {
               size="sm"
               onClick={handleManualSync}
               disabled={isSyncing}
-              className="border-[#d6cfbe] text-[#2f4553] text-xs h-9"
+              className="border-[#262626] bg-[#141414] text-white hover:bg-[#1c1c1c] text-xs h-9 rounded-full"
             >
-              <RefreshCw className={`size-3.5 mr-1.5 ${isSyncing ? "animate-spin" : ""}`} />
+              <RefreshCw className={`size-3.5 mr-1.5 ${isSyncing ? "animate-spin text-[#0099ff]" : ""}`} />
               Sync
             </Button>
-            <div className="rounded-xl border border-[#d6cfbe] bg-[#fffcf7] px-3 py-1.5 text-center shadow-2xs">
-              <span className="text-[10px] font-semibold text-[#88909b] block">Pending</span>
-              <span className="font-serif text-base font-bold text-[#bf7538]">{pendingRequests.length}</span>
+            <div className="rounded-xl border border-[#262626] bg-[#141414] px-3.5 py-1.5 text-center shadow-2xs">
+              <span className="text-[10px] font-mono text-[#666666] block">Pending</span>
+              <span className="font-display text-base font-bold text-amber-400">{pendingRequests.length}</span>
             </div>
-            <div className="rounded-xl border border-[#d6cfbe] bg-[#fffcf7] px-3 py-1.5 text-center shadow-2xs">
-              <span className="text-[10px] font-semibold text-[#88909b] block">Approved</span>
-              <span className="font-serif text-base font-bold text-emerald-700">{approvedRequests.length}</span>
+            <div className="rounded-xl border border-[#262626] bg-[#141414] px-3.5 py-1.5 text-center shadow-2xs">
+              <span className="text-[10px] font-mono text-[#666666] block">Approved</span>
+              <span className="font-display text-base font-bold text-[#22c55e]">{approvedRequests.length}</span>
             </div>
           </div>
         </div>
@@ -250,10 +250,10 @@ function AdminDashboard() {
         {/* Quick Invite Link & Protection Card */}
         <div className="grid gap-4 sm:grid-cols-2">
           {/* Protection Toggle */}
-          <div className="rounded-2xl border border-[#d6cfbe] bg-[#fffcf7] p-5 shadow-xs flex flex-col justify-between space-y-3">
+          <div className="rounded-[20px] border border-[#262626] bg-[#141414] p-5 shadow-xs flex flex-col justify-between space-y-3">
             <div>
               <div className="flex items-center justify-between">
-                <span className="font-serif text-sm font-bold text-[#1c2826]">
+                <span className="font-display text-sm font-bold text-white">
                   Google Verification Gate
                 </span>
                 <Switch
@@ -268,28 +268,28 @@ function AdminDashboard() {
                   }}
                 />
               </div>
-              <p className="font-sans text-xs text-[#636c78] mt-1">
+              <p className="font-sans text-xs text-[#999999] mt-1">
                 {authRequired
                   ? "Active: All students must authenticate with Google and be approved."
                   : "Off: Anyone with link can view notes without authentication."}
               </p>
             </div>
-            <div className="text-[11px] text-[#88909b] flex items-center gap-1.5">
+            <div className="text-[11px] text-[#666666] font-mono flex items-center gap-1.5">
               <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
               Live Server Sync Active (cross-device sync)
             </div>
           </div>
 
           {/* Instant Invite Link & Passcode */}
-          <div className="rounded-2xl border border-[#d6cfbe] bg-[#fbf8f0] p-5 shadow-xs flex flex-col justify-between space-y-3">
+          <div className="rounded-[20px] border border-[#262626] bg-[#141414] p-5 shadow-xs flex flex-col justify-between space-y-3">
             <div>
               <div className="flex items-center justify-between">
-                <span className="font-serif text-sm font-bold text-[#1c2826] flex items-center gap-1.5">
-                  <Ticket className="size-4 text-[#bf7538]" />
-                  Instant Passcode: <code className="bg-[#ebd9c2] px-1.5 py-0.5 rounded text-[#bf7538]">BENCH2026</code>
+                <span className="font-display text-sm font-bold text-white flex items-center gap-1.5">
+                  <Ticket className="size-4 text-[#0099ff]" />
+                  Instant Passcode: <code className="bg-[#1c1c1c] border border-[#262626] px-2 py-0.5 rounded-full text-[#0099ff] font-mono text-xs">BENCH2026</code>
                 </span>
               </div>
-              <p className="font-sans text-xs text-[#636c78] mt-1">
+              <p className="font-sans text-xs text-[#999999] mt-1">
                 Share this passcode or instant link with cohort students for 1-click verification bypass.
               </p>
             </div>
@@ -298,7 +298,7 @@ function AdminDashboard() {
               size="sm"
               variant="outline"
               onClick={copyInviteLink}
-              className="border-[#cfc4b0] text-[#2f4553] text-xs w-full bg-white hover:bg-[#ebd9c2]/40 gap-1.5"
+              className="border-[#262626] bg-[#1c1c1c] hover:bg-[#262626] text-white text-xs w-full rounded-full gap-1.5"
             >
               <Copy className="size-3.5" />
               Copy Instant Invite Link
@@ -306,22 +306,22 @@ function AdminDashboard() {
           </div>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex items-center gap-2 border-b border-[#e2d8c5] pb-1 text-xs">
+        {/* Tab Navigation (Framer Pills) */}
+        <div className="flex items-center gap-2 border-b border-[#262626] pb-2 text-xs">
           <button
             type="button"
             onClick={() => setActiveTab("pending")}
             className={cn(
-              "flex items-center gap-1.5 rounded-lg px-3 py-2 font-sans font-bold transition-all",
+              "flex items-center gap-1.5 rounded-full px-4 py-2 font-sans font-bold transition-all",
               activeTab === "pending"
-                ? "bg-[#2f4553] text-[#fffcf7] shadow-2xs"
-                : "text-[#636c78] hover:text-[#1c2826] hover:bg-[#ebd9c2]/50",
+                ? "bg-white text-black shadow-xs"
+                : "bg-[#141414] text-[#999999] border border-[#262626] hover:text-white",
             )}
           >
             <Clock className="size-3.5" />
             <span>Pending Requests</span>
             {pendingRequests.length > 0 && (
-              <span className="rounded-full bg-[#bf7538] text-white px-1.5 py-0.2 text-[10px]">
+              <span className="rounded-full bg-amber-500 text-white px-2 py-0.2 text-[10px]">
                 {pendingRequests.length}
               </span>
             )}
@@ -331,10 +331,10 @@ function AdminDashboard() {
             type="button"
             onClick={() => setActiveTab("approved")}
             className={cn(
-              "flex items-center gap-1.5 rounded-lg px-3 py-2 font-sans font-bold transition-all",
+              "flex items-center gap-1.5 rounded-full px-4 py-2 font-sans font-bold transition-all",
               activeTab === "approved"
-                ? "bg-[#2f4553] text-[#fffcf7] shadow-2xs"
-                : "text-[#636c78] hover:text-[#1c2826] hover:bg-[#ebd9c2]/50",
+                ? "bg-white text-black shadow-xs"
+                : "bg-[#141414] text-[#999999] border border-[#262626] hover:text-white",
             )}
           >
             <CheckCircle2 className="size-3.5" />
@@ -345,10 +345,10 @@ function AdminDashboard() {
             type="button"
             onClick={() => setActiveTab("whitelist")}
             className={cn(
-              "flex items-center gap-1.5 rounded-lg px-3 py-2 font-sans font-bold transition-all",
+              "flex items-center gap-1.5 rounded-full px-4 py-2 font-sans font-bold transition-all",
               activeTab === "whitelist"
-                ? "bg-[#2f4553] text-[#fffcf7] shadow-2xs"
-                : "text-[#636c78] hover:text-[#1c2826] hover:bg-[#ebd9c2]/50",
+                ? "bg-white text-black shadow-xs"
+                : "bg-[#141414] text-[#999999] border border-[#262626] hover:text-white",
             )}
           >
             <UserPlus className="size-3.5" />
@@ -365,7 +365,7 @@ function AdminDashboard() {
                   type="button"
                   size="sm"
                   onClick={handleApproveAllPending}
-                  className="bg-emerald-700 hover:bg-emerald-800 text-white text-xs gap-1.5"
+                  className="bg-[#22c55e] hover:bg-[#16a34a] text-black font-bold text-xs gap-1.5 rounded-full px-4"
                 >
                   <Check className="size-3.5" />
                   Approve All Pending ({pendingRequests.length})
@@ -374,12 +374,12 @@ function AdminDashboard() {
             )}
 
             {pendingRequests.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-[#d6cfbe] p-10 text-center space-y-2 bg-[#fbf8f0]">
-                <CheckCircle2 className="mx-auto size-8 text-emerald-700/60" />
-                <p className="font-serif text-base font-bold text-[#1c2826]">
+              <div className="rounded-[20px] border border-dashed border-[#262626] p-10 text-center space-y-2 bg-[#141414]">
+                <CheckCircle2 className="mx-auto size-8 text-[#22c55e]/60" />
+                <p className="font-display text-base font-bold text-white">
                   No Pending Access Requests
                 </p>
-                <p className="font-sans text-xs text-[#636c78] max-w-sm mx-auto">
+                <p className="font-sans text-xs text-[#999999] max-w-sm mx-auto">
                   When students sign in with Google, their verification requests will appear here for 1-click approval.
                 </p>
               </div>
@@ -388,22 +388,22 @@ function AdminDashboard() {
                 {pendingRequests.map((req) => (
                   <div
                     key={req.email}
-                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-xl border border-[#e1d5c0] bg-[#fffcf7] p-4 shadow-2xs"
+                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-[18px] border border-[#262626] bg-[#141414] p-4 shadow-2xs"
                   >
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="font-serif text-base font-bold text-[#1c2826]">
+                        <span className="font-display text-base font-bold text-white">
                           {req.name || req.email.split("@")[0]}
                         </span>
-                        <span className="rounded bg-[#ebd9c2] text-[#bf7538] px-2 py-0.2 text-[10px] font-bold">
+                        <span className="rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-400 px-2 py-0.2 text-[10px] font-bold">
                           Pending Approval
                         </span>
                       </div>
-                      <p className="font-sans text-xs font-semibold text-[#bf7538] flex items-center gap-1 font-mono">
+                      <p className="font-mono text-xs font-semibold text-[#0099ff] flex items-center gap-1">
                         <Mail className="size-3.5" />
                         {req.email}
                       </p>
-                      <span className="font-sans text-[10px] text-[#88909b] block">
+                      <span className="font-mono text-[10px] text-[#666666] block">
                         Requested: {new Date(req.requestedAt).toLocaleString()}
                       </span>
                     </div>
@@ -416,7 +416,7 @@ function AdminDashboard() {
                           await approveRequest(req.email);
                           toast.success(`Approved access for ${req.email}`);
                         }}
-                        className="h-8 gap-1 font-sans text-xs font-bold bg-emerald-700 hover:bg-emerald-800 text-white"
+                        className="h-8 gap-1 font-sans text-xs font-bold bg-[#22c55e] hover:bg-[#16a34a] text-black rounded-full px-3.5"
                       >
                         <Check className="size-3.5" />
                         Approve & Verify
@@ -429,7 +429,7 @@ function AdminDashboard() {
                           await rejectRequest(req.email);
                           toast.error(`Declined access for ${req.email}`);
                         }}
-                        className="h-8 gap-1 font-sans text-xs font-semibold text-rose-600 hover:bg-rose-50 border-rose-200"
+                        className="h-8 gap-1 font-sans text-xs font-semibold text-rose-400 hover:bg-rose-950/40 border border-rose-800/40 rounded-full px-3.5"
                       >
                         <X className="size-3.5" />
                         Decline
@@ -446,9 +446,9 @@ function AdminDashboard() {
         {activeTab === "approved" && (
           <div className="space-y-4">
             {approvedRequests.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-[#d6cfbe] p-10 text-center space-y-2 bg-[#fbf8f0]">
-                <Users className="mx-auto size-8 text-[#88909b]/60" />
-                <p className="font-serif text-base font-bold text-[#1c2826]">
+              <div className="rounded-[20px] border border-dashed border-[#262626] p-10 text-center space-y-2 bg-[#141414]">
+                <Users className="mx-auto size-8 text-[#666666]" />
+                <p className="font-display text-base font-bold text-white">
                   No Approved Student Accounts Yet
                 </p>
               </div>
@@ -457,22 +457,22 @@ function AdminDashboard() {
                 {approvedRequests.map((req) => (
                   <div
                     key={req.email}
-                    className="flex items-center justify-between rounded-xl border border-[#e1d5c0] bg-[#fffcf7] p-3.5 shadow-2xs"
+                    className="flex items-center justify-between rounded-[18px] border border-[#262626] bg-[#141414] p-4 shadow-2xs"
                   >
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-serif text-sm font-bold text-[#1c2826]">
+                        <span className="font-display text-sm font-bold text-white">
                           {req.name}
                         </span>
-                        <span className="rounded bg-emerald-100 text-emerald-800 px-2 py-0.2 text-[10px] font-bold">
+                        <span className="rounded-full bg-[#22c55e]/15 border border-[#22c55e]/30 text-[#22c55e] px-2.5 py-0.2 text-[10px] font-bold">
                           Verified Student
                         </span>
                       </div>
-                      <p className="font-sans text-xs text-[#636c78] mt-0.5 font-mono">
+                      <p className="font-mono text-xs text-[#999999] mt-0.5">
                         {req.email}
                       </p>
                       {req.note && (
-                        <p className="font-sans text-[10px] text-[#88909b] italic">
+                        <p className="font-sans text-[10px] text-[#666666] italic">
                           {req.note}
                         </p>
                       )}
@@ -487,14 +487,14 @@ function AdminDashboard() {
                           await rejectRequest(req.email);
                           toast.info(`Revoked access for ${req.email}`);
                         }}
-                        className="h-7 text-xs text-rose-600 hover:bg-rose-50 border-rose-200"
+                        className="h-7 text-xs text-rose-400 hover:bg-rose-950/40 border-rose-800/40 rounded-full px-3"
                       >
                         Revoke Access
                       </Button>
                       <button
                         type="button"
                         onClick={() => deleteRequest(req.email)}
-                        className="rounded p-1 text-[#88909b] hover:text-rose-600 transition-colors"
+                        className="rounded-full p-1.5 text-[#666666] hover:text-rose-400 transition-colors"
                         title="Delete record"
                       >
                         <Trash2 className="size-3.5" />
@@ -509,13 +509,13 @@ function AdminDashboard() {
 
         {/* Tab 3: Pre-Approved Whitelist Manager */}
         {activeTab === "whitelist" && (
-          <div className="space-y-5">
+          <div className="space-y-6">
             {/* Add Whitelist Card */}
-            <div className="rounded-2xl border border-[#d6cfbe] bg-[#fffcf7] p-5 shadow-xs space-y-3">
-              <span className="font-serif text-sm font-bold text-[#1c2826] block">
+            <div className="rounded-[20px] border border-[#262626] bg-[#141414] p-5 shadow-xs space-y-3">
+              <span className="font-display text-sm font-bold text-white block">
                 Add Pre-Approved Student Email or University Domain
               </span>
-              <p className="font-sans text-xs text-[#636c78] leading-relaxed">
+              <p className="font-sans text-xs text-[#999999] leading-relaxed">
                 Enter an individual student's Google email (e.g. <code>student@gmail.com</code>) or an entire college domain (e.g. <code>@iima.ac.in</code> or <code>@gmail.com</code>). Anyone matching these entries gets instant verified access upon login. You can paste multiple emails separated by commas.
               </p>
 
@@ -531,13 +531,13 @@ function AdminDashboard() {
                     }
                   }}
                   placeholder="e.g. student@gmail.com, @iima.ac.in"
-                  className="h-10 flex-1 rounded-xl border border-[#cfc4b0] bg-white px-3 font-sans text-xs text-[#1c2826] placeholder:text-[#a09c94] focus:border-[#2f4553] focus:outline-none"
+                  className="h-10 flex-1 rounded-full border border-[#262626] bg-[#090909] px-4 font-sans text-xs text-white placeholder:text-[#666666] focus:border-[#0099ff] focus:outline-none"
                 />
                 <Button
                   type="button"
                   onClick={handleAddWhitelist}
                   disabled={!newEmailInput.trim()}
-                  className="h-10 px-4 font-sans text-xs font-bold gap-1.5 bg-[#2f4553] hover:bg-[#20313c] text-white rounded-xl"
+                  className="h-10 px-5 font-sans text-xs font-bold gap-1.5 bg-white text-black hover:bg-white/90 rounded-full"
                 >
                   <Plus className="size-4" />
                   Add to Whitelist
@@ -546,11 +546,11 @@ function AdminDashboard() {
             </div>
 
             {/* Whitelist Entries */}
-            <div className="space-y-2">
-              <span className="font-sans text-xs font-bold text-[#1c2826] block">
+            <div className="space-y-3">
+              <span className="font-display text-xs font-bold text-white block">
                 Active Pre-Approved Whitelist Entries:
               </span>
-              <div className="grid gap-2 sm:grid-cols-2">
+              <div className="grid gap-3 sm:grid-cols-2">
                 {whitelistedEmails.map((entry) => {
                   const isDomain = entry.startsWith("@");
                   const isAdminEntry = adminEmails.includes(entry.toLowerCase());
@@ -558,19 +558,19 @@ function AdminDashboard() {
                   return (
                     <div
                       key={entry}
-                      className="flex items-center justify-between rounded-xl border border-[#e1d5c0] bg-[#fffcf7] p-3 shadow-2xs"
+                      className="flex items-center justify-between rounded-[18px] border border-[#262626] bg-[#141414] p-3.5 shadow-2xs"
                     >
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2.5">
                         {isDomain ? (
-                          <Globe className="size-4 text-sky-600" />
+                          <Globe className="size-4 text-[#0099ff]" />
                         ) : (
-                          <Mail className="size-4 text-[#bf7538]" />
+                          <Mail className="size-4 text-[#999999]" />
                         )}
                         <div>
-                          <span className="font-sans text-xs font-bold text-[#1c2826] block font-mono">
+                          <span className="font-mono text-xs font-bold text-white block">
                             {entry}
                           </span>
-                          <span className="font-sans text-[10px] text-[#88909b]">
+                          <span className="font-sans text-[10px] text-[#666666]">
                             {isAdminEntry
                               ? "Admin Master Account"
                               : isDomain
@@ -587,13 +587,13 @@ function AdminDashboard() {
                             await removeWhitelistEntry(entry);
                             toast.info(`Removed ${entry} from whitelist`);
                           }}
-                          className="rounded p-1 text-[#88909b] hover:text-rose-600 transition-colors"
+                          className="rounded-full p-1.5 text-[#666666] hover:text-rose-400 transition-colors"
                           title="Remove from whitelist"
                         >
                           <Trash2 className="size-3.5" />
                         </button>
                       ) : (
-                        <span className="rounded bg-[#2f4553] text-white px-2 py-0.5 text-[9px] font-bold">
+                        <span className="rounded-full bg-[#1c1c1c] border border-[#262626] text-white px-2 py-0.5 text-[9px] font-bold font-mono">
                           Admin
                         </span>
                       )}

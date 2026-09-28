@@ -128,7 +128,7 @@ export function GoogleLoginDialog({
 
         googleBtnRef.current.innerHTML = "";
         window.google.accounts.id.renderButton(googleBtnRef.current, {
-          theme: "outline",
+          theme: "filled_black",
           size: "large",
           text: "continue_with",
           shape: "pill",
@@ -230,24 +230,24 @@ export function GoogleLoginDialog({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-xl p-4 animate-in fade-in duration-200">
       <div
-        className="w-full max-w-md overflow-hidden rounded-2xl bg-[#fffcf7] border border-[#d6cfbe] shadow-2xl transition-all"
+        className="w-full max-w-md overflow-hidden rounded-[28px] bg-[#141414] border border-[#262626] shadow-2xl transition-all"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Ribbon */}
-        <div className="border-b border-[#e6dfce] bg-[#f7f2e6] px-6 py-5">
+        <div className="border-b border-[#262626] bg-[#181818] px-6 py-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#2f4553] text-[#fffcf7] shadow-xs">
-                <ShieldCheck className="h-5 w-5" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1c1c1c] border border-[#262626] text-white shadow-xs">
+                <ShieldCheck className="h-5 w-5 text-[#0099ff]" />
               </div>
               <div>
-                <h3 className="font-serif text-lg font-bold tracking-tight text-[#1c2826]">
+                <h3 className="font-display text-lg font-bold tracking-tight text-white">
                   Bench Notes
                 </h3>
-                <p className="text-xs text-[#636c78]">
-                  Academic Suite Identity & Access Gate
+                <p className="font-mono text-xs text-[#999999]">
+                  Academic Suite Identity Gate
                 </p>
               </div>
             </div>
@@ -255,36 +255,36 @@ export function GoogleLoginDialog({
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-lg p-1.5 text-[#88909b] hover:bg-[#eadecc] hover:text-[#1c2826] transition-colors"
+                className="rounded-full p-1.5 text-[#666666] hover:bg-[#1c1c1c] hover:text-white transition-colors"
               >
                 ✕
               </button>
             )}
           </div>
 
-          {/* Navigation Tabs */}
-          <div className="mt-4 flex rounded-lg bg-[#ebd9c2]/50 p-1 border border-[#e1d5c2]">
+          {/* Navigation Tabs (Framer Pill Switcher) */}
+          <div className="mt-4 flex rounded-full bg-[#1c1c1c] p-1 border border-[#262626]">
             <button
               type="button"
               onClick={() => setActiveTab("student")}
               className={cn(
-                "flex flex-1 items-center justify-center gap-2 rounded-md py-1.5 text-xs font-semibold transition-all",
+                "flex flex-1 items-center justify-center gap-2 rounded-full py-1.5 text-xs font-semibold transition-all",
                 activeTab === "student"
-                  ? "bg-[#fffcf7] text-[#1c2826] shadow-xs"
-                  : "text-[#68707a] hover:text-[#1c2826]",
+                  ? "bg-white text-black shadow-xs"
+                  : "text-[#999999] hover:text-white",
               )}
             >
               <LogIn className="h-3.5 w-3.5" />
-              Student Google Access
+              Student Google
             </button>
             <button
               type="button"
               onClick={() => setActiveTab("admin")}
               className={cn(
-                "flex flex-1 items-center justify-center gap-2 rounded-md py-1.5 text-xs font-semibold transition-all",
+                "flex flex-1 items-center justify-center gap-2 rounded-full py-1.5 text-xs font-semibold transition-all",
                 activeTab === "admin"
-                  ? "bg-[#fffcf7] text-[#1c2826] shadow-xs"
-                  : "text-[#68707a] hover:text-[#1c2826]",
+                  ? "bg-white text-black shadow-xs"
+                  : "text-[#999999] hover:text-white",
               )}
             >
               <KeyRound className="h-3.5 w-3.5" />
@@ -297,10 +297,10 @@ export function GoogleLoginDialog({
         <div className="p-6">
           {activeTab === "student" ? (
             <div className="space-y-4">
-              <div className="rounded-xl border border-[#e0d6c4] bg-[#fbf8f0] p-4 text-xs text-[#4b5563] space-y-1">
-                <div className="flex items-center gap-1.5 font-semibold text-[#1c2826]">
-                  <Sparkles className="h-4 w-4 text-[#bf7538]" />
-                  Protected Study Notes Access
+              <div className="rounded-[18px] border border-[#262626] bg-[#1c1c1c]/70 p-4 text-xs text-[#999999] space-y-1">
+                <div className="flex items-center gap-1.5 font-bold text-white">
+                  <Sparkles className="h-4 w-4 text-[#0099ff]" />
+                  Protected MBA Academic Notes
                 </div>
                 <p>
                   Sign in with your Google Account. Access is verified to prevent unauthorized distribution of academic materials.
@@ -313,10 +313,10 @@ export function GoogleLoginDialog({
               {/* Divider */}
               <div className="relative my-3">
                 <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t border-[#e2d8c5]" />
+                  <span className="w-full border-t border-[#262626]" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-[#fffcf7] px-2 text-[#88909b] font-mono text-[10px]">
+                  <span className="bg-[#141414] px-2 text-[#666666] font-mono text-[10px]">
                     Google Identity Sign-In
                   </span>
                 </div>
@@ -325,51 +325,51 @@ export function GoogleLoginDialog({
               {/* Fast Google Email Form */}
               <div className="space-y-3">
                 <div>
-                  <label className="block text-xs font-semibold text-[#2f4553] mb-1">
+                  <label className="block text-xs font-semibold text-white mb-1.5">
                     Google Email Address
                   </label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-2.5 h-4 w-4 text-[#88909b]" />
+                    <Mail className="absolute left-3.5 top-2.5 h-4 w-4 text-[#666666]" />
                     <input
                       type="email"
                       placeholder="student@gmail.com or @college.edu"
                       value={emailInput}
                       onChange={(e) => setEmailInput(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && handleStudentAuth()}
-                      className="w-full rounded-lg border border-[#cfc4b0] bg-white pl-9 pr-3 py-2 text-sm text-[#1c2826] placeholder:text-[#a09c94] focus:border-[#2f4553] focus:outline-none focus:ring-1 focus:ring-[#2f4553]"
+                      className="w-full rounded-full border border-[#262626] bg-[#090909] pl-10 pr-4 py-2 text-xs text-white placeholder:text-[#666666] focus:border-[#0099ff] focus:outline-none"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#2f4553] mb-1">
-                    Student / Cohort Name <span className="font-normal text-[#88909b]">(Optional)</span>
+                  <label className="block text-xs font-semibold text-white mb-1.5">
+                    Student / Cohort Name <span className="font-normal text-[#666666]">(Optional)</span>
                   </label>
                   <div className="relative">
-                    <User className="absolute left-3 top-2.5 h-4 w-4 text-[#88909b]" />
+                    <User className="absolute left-3.5 top-2.5 h-4 w-4 text-[#666666]" />
                     <input
                       type="text"
                       placeholder="Your Full Name"
                       value={nameInput}
                       onChange={(e) => setNameInput(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && handleStudentAuth()}
-                      className="w-full rounded-lg border border-[#cfc4b0] bg-white pl-9 pr-3 py-2 text-sm text-[#1c2826] placeholder:text-[#a09c94] focus:border-[#2f4553] focus:outline-none focus:ring-1 focus:ring-[#2f4553]"
+                      className="w-full rounded-full border border-[#262626] bg-[#090909] pl-10 pr-4 py-2 text-xs text-white placeholder:text-[#666666] focus:border-[#0099ff] focus:outline-none"
                     />
                   </div>
                 </div>
 
                 {/* Optional Passcode Unlock Field */}
                 {showPasscodeOption ? (
-                  <div className="rounded-lg border border-[#e1d5c0] bg-[#f9f5eb] p-3 space-y-2">
+                  <div className="rounded-[18px] border border-[#262626] bg-[#1c1c1c] p-3.5 space-y-2">
                     <div className="flex items-center justify-between">
-                      <label className="text-xs font-semibold text-[#2f4553] flex items-center gap-1.5">
-                        <Ticket className="h-3.5 w-3.5 text-[#bf7538]" />
+                      <label className="text-xs font-semibold text-white flex items-center gap-1.5">
+                        <Ticket className="h-3.5 w-3.5 text-[#0099ff]" />
                         Cohort Passcode / Access Token
                       </label>
                       <button
                         type="button"
                         onClick={() => setShowPasscodeOption(false)}
-                        className="text-[11px] text-[#88909b] hover:underline"
+                        className="text-[11px] text-[#666666] hover:text-white"
                       >
                         Hide
                       </button>
@@ -380,14 +380,14 @@ export function GoogleLoginDialog({
                         placeholder="e.g. BENCH2026"
                         value={passcodeInput}
                         onChange={(e) => setPasscodeInput(e.target.value.toUpperCase())}
-                        className="flex-1 rounded-md border border-[#cfc4b0] bg-white px-3 py-1.5 text-xs font-mono tracking-wider uppercase text-[#1c2826]"
+                        className="flex-1 rounded-full border border-[#262626] bg-[#090909] px-3.5 py-1.5 text-xs font-mono tracking-wider uppercase text-white focus:border-[#0099ff] focus:outline-none"
                       />
                       <Button
                         type="button"
                         size="sm"
                         onClick={handlePasscodeDirectUnlock}
                         disabled={isSubmitting || !passcodeInput.trim()}
-                        className="bg-[#2f4553] text-white hover:bg-[#20313c] text-xs px-3"
+                        className="bg-white text-black hover:bg-white/90 text-xs px-4 rounded-full font-bold"
                       >
                         Unlock
                       </Button>
@@ -397,7 +397,7 @@ export function GoogleLoginDialog({
                   <button
                     type="button"
                     onClick={() => setShowPasscodeOption(true)}
-                    className="text-xs text-[#bf7538] hover:text-[#9c5923] flex items-center gap-1 font-medium transition-colors"
+                    className="text-xs text-[#0099ff] hover:underline flex items-center gap-1 font-medium transition-colors"
                   >
                     <Ticket className="h-3.5 w-3.5" />
                     Have an instant access passcode? Enter code
@@ -408,7 +408,7 @@ export function GoogleLoginDialog({
                   type="button"
                   onClick={handleStudentAuth}
                   disabled={isSubmitting || !emailInput.trim()}
-                  className="w-full bg-[#bf7538] hover:bg-[#a6622b] text-white font-medium py-2.5 rounded-lg shadow-xs transition-all flex items-center justify-center gap-2 text-sm mt-2"
+                  className="w-full bg-white hover:bg-white/90 text-black font-bold py-2.5 rounded-full shadow-sm transition-all flex items-center justify-center gap-2 text-xs mt-2 ios-press"
                 >
                   <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -423,9 +423,9 @@ export function GoogleLoginDialog({
           ) : (
             /* Admin Portal Form */
             <div className="space-y-4">
-              <div className="rounded-xl border border-[#e0d6c4] bg-[#fbf8f0] p-4 text-xs text-[#4b5563] space-y-1">
-                <div className="flex items-center gap-1.5 font-semibold text-[#1c2826]">
-                  <Shield className="h-4 w-4 text-[#2f4553]" />
+              <div className="rounded-[18px] border border-[#262626] bg-[#1c1c1c]/70 p-4 text-xs text-[#999999] space-y-1">
+                <div className="flex items-center gap-1.5 font-bold text-white">
+                  <Shield className="h-4 w-4 text-[#0099ff]" />
                   Master Administrator Access
                 </div>
                 <p>
@@ -434,18 +434,18 @@ export function GoogleLoginDialog({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#2f4553] mb-1">
+                <label className="block text-xs font-semibold text-white mb-1.5">
                   Master Password
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-2.5 h-4 w-4 text-[#88909b]" />
+                  <Lock className="absolute left-3.5 top-2.5 h-4 w-4 text-[#666666]" />
                   <input
                     type="password"
                     placeholder="Enter admin password (default: admin)"
                     value={adminPasswordInput}
                     onChange={(e) => setAdminPasswordInput(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleAdminAuth()}
-                    className="w-full rounded-lg border border-[#cfc4b0] bg-white pl-9 pr-3 py-2 text-sm text-[#1c2826] placeholder:text-[#a09c94] focus:border-[#2f4553] focus:outline-none focus:ring-1 focus:ring-[#2f4553]"
+                    className="w-full rounded-full border border-[#262626] bg-[#090909] pl-10 pr-4 py-2 text-xs text-white placeholder:text-[#666666] focus:border-[#0099ff] focus:outline-none"
                   />
                 </div>
               </div>
@@ -454,7 +454,7 @@ export function GoogleLoginDialog({
                 type="button"
                 onClick={handleAdminAuth}
                 disabled={isSubmitting || !adminPasswordInput}
-                className="w-full bg-[#2f4553] hover:bg-[#20313c] text-white font-medium py-2.5 rounded-lg shadow-xs transition-all flex items-center justify-center gap-2 text-sm"
+                className="w-full bg-white hover:bg-white/90 text-black font-bold py-2.5 rounded-full shadow-sm transition-all flex items-center justify-center gap-2 text-xs ios-press"
               >
                 <Lock className="h-4 w-4" />
                 {isSubmitting ? "Verifying Credentials..." : "Unlock Administrator Panel"}
@@ -464,10 +464,10 @@ export function GoogleLoginDialog({
         </div>
 
         {/* Footer */}
-        <div className="border-t border-[#e6dfce] bg-[#fbf8f0] px-6 py-3 text-center">
-          <p className="text-[11px] text-[#88909b] flex items-center justify-center gap-1">
-            <CheckCircle2 className="h-3 w-3 text-[#2f4553]" />
-            Bench Notes Verification System • IIM Ahmedabad Academic Suite
+        <div className="border-t border-[#262626] bg-[#181818] px-6 py-3 text-center">
+          <p className="font-mono text-[11px] text-[#666666] flex items-center justify-center gap-1.5">
+            <CheckCircle2 className="h-3 w-3 text-[#22c55e]" />
+            Bench Notes Verification • MBA Academic Suite
           </p>
         </div>
       </div>

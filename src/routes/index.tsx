@@ -4,12 +4,14 @@ import {
   ArrowRight,
   BookOpen,
   CheckCircle2,
+  Clock,
   GraduationCap,
   Languages,
   RotateCcw,
   Scale,
   Search,
   Sparkles,
+  Ticket,
 } from "lucide-react";
 import { allCourses, courseCategories, type Course } from "@/data/courses";
 import { useCurrentCourse } from "@/lib/current-course";
@@ -37,7 +39,7 @@ function Dashboard() {
 
   const resumeTopic =
     (lastSlug && activeCourse.topics.find((t) => t.slug === lastSlug)) ||
-    activeCourse.topics[0] || { slug: "nature-scope-business-environment", title: "Overview" };
+    activeCourse.topics[0] || { slug: "midsem-foundational-legal-maxims", title: "Overview" };
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -59,133 +61,133 @@ function Dashboard() {
       : allCourses.filter((c) => c.category === selectedCategory);
 
   return (
-    <main className="px-4 py-8 sm:px-10 sm:py-12 ios-fade-up">
-      <div className="mx-auto max-w-4xl space-y-12">
-        {/* Hero Section */}
+    <main className="px-4 py-10 sm:px-10 sm:py-16 ios-fade-up bg-[#090909]">
+      <div className="mx-auto max-w-5xl space-y-16">
+        {/* Poster-grade Hero Statement */}
         <section className="space-y-6">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2.5 py-0.5 font-sans text-xs font-bold text-accent">
-                <GraduationCap className="size-3.5" />
-                MBA Academic Suite
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1c1c1c] border border-[#262626] px-3 py-1 text-xs font-medium text-[#999999]">
+                <GraduationCap className="size-3.5 text-[#0099ff]" />
+                MBA Academic Revision Artboard
               </span>
-              <span className="font-sans text-xs font-semibold text-muted">
-                8 Papers Enrolled
+              <span className="rounded-full bg-[#141414] border border-[#262626] px-2.5 py-0.5 text-xs font-mono text-[#666666]">
+                8 Papers
               </span>
             </div>
-            <h1 className="font-serif text-3xl font-bold tracking-tight text-ink sm:text-5xl">
-              Bench Notes
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.04em] text-white leading-[0.95]">
+              Bench Notes.
             </h1>
-            <p className="mt-2 font-serif text-lg leading-relaxed text-ink-soft sm:text-xl">
-              Digital lecture desk and structured examination revision suite for all core and elective MBA papers.
+            <p className="font-sans text-base sm:text-lg text-[#999999] leading-relaxed max-w-2xl">
+              High-yield lecture briefs, complete model examination answers, Latin maxims, and case law precedents on an artboard canvas.
             </p>
           </div>
 
-          {/* Active Course Mastery Card */}
-          {/* ⭐ Dedicated Mid Sem Important 603 Quick Access Banner */}
-          <div className="rounded-2xl border-2 border-amber-400 bg-amber-50/70 p-5 shadow-xs transition-all duration-200 ios-card">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-amber-600 text-white px-2.5 py-0.5 font-sans text-xs font-bold">
-                    <span>⭐</span> Mid Sem Master Notes
+          {/* ⭐ Signature Gradient Atmosphere Spotlight Card: 603 Mid-Sem Master Modules */}
+          <div className="relative overflow-hidden rounded-[28px] spotlight-violet p-6 sm:p-8 text-white shadow-2xl transition-all duration-300">
+            <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div className="space-y-3 max-w-xl">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur-md px-3 py-0.5 text-xs font-bold text-white border border-white/20">
+                    <Sparkles className="size-3.5" />
+                    Mid Sem Important
                   </span>
-                  <span className="font-sans text-xs font-bold text-amber-900">
-                    Paper 603 · Business Laws (LR Ma'am)
+                  <span className="font-mono text-xs font-semibold text-white/80">
+                    Paper 603 · Business Laws
                   </span>
                 </div>
-                <h2 className="font-serif text-xl font-bold text-ink">
-                  Mid Sem Important Revision Modules (9 High-Yield Topics)
+                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.03em] leading-tight text-white">
+                  9 Master Examination Modules Ready.
                 </h2>
-                <p className="font-sans text-xs text-muted max-w-xl">
-                  Complete academic-style master notes with definitions, 6 foundational Latin maxims, Companies Act 2013 revamp analysis, and Indian Contract Act breach remedies.
+                <p className="font-sans text-sm text-white/85 leading-relaxed">
+                  Complete academic master notes covering 6 foundational Latin maxims, Companies Act 2013 revamp analysis, and Indian Contract Act breach remedies.
                 </p>
               </div>
-              <div className="flex flex-wrap items-center gap-2 shrink-0">
+
+              <div className="flex flex-wrap items-center gap-3 shrink-0">
                 <Link
                   to="/topic/$slug"
                   params={{ slug: "midsem-foundational-legal-maxims" }}
                   onClick={() => setActiveCourseSlug("business-laws")}
-                  className="inline-flex items-center gap-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white px-4 py-2.5 font-sans text-xs font-bold shadow-sm transition-all ios-press"
+                  className="inline-flex items-center gap-2 rounded-full bg-white text-black hover:bg-white/90 px-6 py-3 font-sans text-xs font-bold shadow-lg transition-all ios-press"
                 >
-                  <span>Study Mid-Sem Notes</span>
+                  <span>Study 603 Mid-Sem Notes</span>
                   <ArrowRight className="size-3.5" />
                 </Link>
                 {activeCourseSlug !== "business-laws" && (
                   <button
                     type="button"
                     onClick={() => setActiveCourseSlug("business-laws")}
-                    className="inline-flex items-center gap-1.5 rounded-xl border border-amber-400/80 bg-white px-3 py-2 font-sans text-xs font-semibold text-amber-900 hover:bg-amber-100/60 transition-all ios-press"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-md border border-white/20 px-4 py-3 font-sans text-xs font-semibold text-white transition-all ios-press"
                   >
-                    Switch to 603
+                    Switch to Paper 603
                   </button>
                 )}
               </div>
             </div>
           </div>
 
-          <div className="rounded-2xl border border-line bg-surface p-6 shadow-sm transition-all duration-300 ios-card">
+          {/* Active Course Progress Card (Charcoal Surface) */}
+          <div className="rounded-[24px] border border-[#262626] bg-[#141414] p-6 sm:p-8 space-y-6">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <div className="flex items-center gap-2">
-                  <span className="rounded bg-accent text-white px-2 py-0.5 font-sans text-xs font-bold">
+                  <span className="rounded-full bg-[#1c1c1c] border border-[#262626] text-white px-2.5 py-0.5 font-mono text-xs font-bold">
                     Paper {activeCourse.code}
                   </span>
-                  <span className="font-serif text-base font-bold text-ink">
+                  <span className="font-display text-lg font-bold text-white">
                     {activeCourse.title}
                   </span>
                 </div>
                 <div className="flex items-baseline gap-3">
-                  <span className="font-serif text-4xl font-bold text-ink">
+                  <span className="font-display text-4xl sm:text-5xl font-bold text-white tracking-[-0.03em]">
                     {masteryPercentage}%
                   </span>
-                  <span className="font-sans text-sm font-medium text-ink-soft">
-                    syllabus mastered ({doneCount} of {activeCourse.topics.length} topics)
+                  <span className="font-sans text-sm text-[#999999]">
+                    completed ({doneCount} of {activeCourse.topics.length} topics mastered)
                   </span>
                 </div>
               </div>
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-3">
-                {activeCourse.topics.length > 0 ? (
+                {activeCourse.topics.length > 0 && (
                   <Link
                     to="/topic/$slug"
                     params={{ slug: resumeTopic.slug }}
-                    className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-2.5 font-sans text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-accent/90 hover:shadow ios-press group"
+                    className="inline-flex items-center gap-2 rounded-full bg-white text-black hover:bg-white/90 px-5 py-2.5 font-sans text-xs font-bold shadow-sm transition-all ios-press"
                   >
-                    <span>
-                      {lastSlug ? "Resume Studying" : "Start Reading"}
-                    </span>
-                    <ArrowRight className="size-4" />
+                    <span>{lastSlug ? "Resume Studying" : "Start Reading"}</span>
+                    <ArrowRight className="size-3.5" />
                   </Link>
-                ) : null}
+                )}
 
                 {!confirmReset ? (
                   <button
                     type="button"
                     onClick={() => setConfirmReset(true)}
-                    className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-surface px-3.5 py-2.5 font-sans text-xs font-medium text-muted transition-all duration-200 hover:bg-bg-warm hover:text-ink ios-press"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[#262626] bg-[#1c1c1c] px-3.5 py-2.5 font-sans text-xs font-medium text-[#999999] hover:text-white transition-all ios-press"
                     title="Reset completion progress"
                   >
                     <RotateCcw className="size-3.5" />
                     <span>Reset</span>
                   </button>
                 ) : (
-                  <div className="flex items-center gap-2 rounded-xl border border-line bg-bg-warm px-3 py-1.5">
-                    <span className="font-sans text-xs font-semibold text-ink">
+                  <div className="flex items-center gap-2 rounded-full border border-[#262626] bg-[#1c1c1c] px-3 py-1.5">
+                    <span className="font-sans text-xs font-semibold text-white">
                       Reset?
                     </span>
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="rounded bg-destructive px-2 py-1 font-sans text-xs font-bold text-white transition-all duration-200 ios-press"
+                      className="rounded-full bg-rose-600 px-2.5 py-0.5 font-sans text-xs font-bold text-white transition-all"
                     >
                       Yes
                     </button>
                     <button
                       type="button"
                       onClick={() => setConfirmReset(false)}
-                      className="rounded border border-line bg-surface px-2 py-1 font-sans text-xs font-medium text-ink-soft hover:bg-surface/80 transition-all duration-200 ios-press"
+                      className="rounded-full border border-[#262626] px-2.5 py-0.5 font-sans text-xs text-[#999999] hover:text-white transition-all"
                     >
                       Cancel
                     </button>
@@ -195,32 +197,30 @@ function Dashboard() {
             </div>
 
             {/* Progress Bar */}
-            <div className="mt-5 space-y-2">
-              <div className="h-2 w-full overflow-hidden rounded-full bg-bg-warm">
-                <div
-                  className="h-full bg-accent transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                  style={{ width: `${masteryPercentage}%` }}
-                />
-              </div>
+            <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#1c1c1c]">
+              <div
+                className="h-full bg-[#0099ff] transition-all duration-500 ease-out"
+                style={{ width: `${masteryPercentage}%` }}
+              />
             </div>
 
-            {/* Quick Stat Counter Badges */}
-            <div className="mt-6 grid grid-cols-2 gap-3 border-t border-line/60 pt-4 sm:grid-cols-4">
-              <div className="rounded-xl bg-bg-warm/50 p-3 transition-transform duration-200 hover:-translate-y-0.5">
-                <span className="font-sans text-xs font-medium text-muted block">Curriculum Units</span>
-                <span className="font-serif text-xl font-bold text-ink">{activeCourse.units.length} Units</span>
+            {/* Stat Counters */}
+            <div className="grid grid-cols-2 gap-3 border-t border-[#1a1a1a] pt-5 sm:grid-cols-4">
+              <div className="rounded-xl bg-[#1c1c1c]/60 border border-[#262626] p-3.5">
+                <span className="font-sans text-xs font-medium text-[#999999] block">Curriculum Units</span>
+                <span className="font-display text-xl font-bold text-white">{activeCourse.units.length} Units</span>
               </div>
-              <div className="rounded-xl bg-bg-warm/50 p-3 transition-transform duration-200 hover:-translate-y-0.5">
-                <span className="font-sans text-xs font-medium text-muted block">Structured Notes</span>
-                <span className="font-serif text-xl font-bold text-ink">{activeCourse.topics.length} Modules</span>
+              <div className="rounded-xl bg-[#1c1c1c]/60 border border-[#262626] p-3.5">
+                <span className="font-sans text-xs font-medium text-[#999999] block">Structured Notes</span>
+                <span className="font-display text-xl font-bold text-white">{activeCourse.topics.length} Modules</span>
               </div>
-              <div className="rounded-xl bg-bg-warm/50 p-3 transition-transform duration-200 hover:-translate-y-0.5">
-                <span className="font-sans text-xs font-medium text-muted block">Question Bank</span>
-                <span className="font-serif text-xl font-bold text-ink">{activeCourse.examQuestions.length} Model Answers</span>
+              <div className="rounded-xl bg-[#1c1c1c]/60 border border-[#262626] p-3.5">
+                <span className="font-sans text-xs font-medium text-[#999999] block">Question Bank</span>
+                <span className="font-display text-xl font-bold text-white">{activeCourse.examQuestions.length} Qs</span>
               </div>
-              <div className="rounded-xl bg-bg-warm/50 p-3 transition-transform duration-200 hover:-translate-y-0.5">
-                <span className="font-sans text-xs font-medium text-muted block">Subject Dictionary</span>
-                <span className="font-serif text-xl font-bold text-ink">
+              <div className="rounded-xl bg-[#1c1c1c]/60 border border-[#262626] p-3.5">
+                <span className="font-sans text-xs font-medium text-[#999999] block">Subject Dictionary</span>
+                <span className="font-display text-xl font-bold text-white">
                   {activeCourse.glossary ? activeCourse.glossary.length : 0} Terms
                 </span>
               </div>
@@ -229,28 +229,28 @@ function Dashboard() {
         </section>
 
         {/* Master Curriculum Selector (All 8 Papers) */}
-        <section className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-line pb-3">
+        <section className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[#262626] pb-4">
             <div>
-              <h2 className="font-serif text-2xl font-bold text-ink">
+              <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-[-0.03em] text-white">
                 All MBA Curriculum Papers
               </h2>
-              <p className="text-xs text-muted">
+              <p className="text-xs text-[#999999] mt-1">
                 Select any subject to switch active syllabus, model answers, and reading notes.
               </p>
             </div>
             {/* Category Filter Pills */}
-            <div className="flex items-center gap-1 text-xs">
+            <div className="flex items-center gap-1.5 text-xs">
               {["All", ...courseCategories].map((cat) => (
                 <button
                   key={cat}
                   type="button"
                   onClick={() => setSelectedCategory(cat)}
                   className={cn(
-                    "rounded-full px-3 py-1 font-sans text-xs font-medium transition-all duration-200 ios-press",
+                    "rounded-full px-3.5 py-1.5 font-sans text-xs font-medium transition-all duration-200 ios-press",
                     selectedCategory === cat
-                      ? "bg-ink text-surface font-bold shadow-2xs scale-105"
-                      : "bg-bg-warm text-muted hover:text-ink",
+                      ? "bg-white text-black font-bold shadow-xs"
+                      : "bg-[#141414] text-[#999999] border border-[#262626] hover:text-white",
                   )}
                 >
                   {cat}
@@ -259,59 +259,58 @@ function Dashboard() {
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {filteredCourses.map((c) => {
               const isSelected = c.slug === activeCourseSlug;
-              const done = c.topics.filter((t) => studied[t.slug]).length;
+              const hasMidSem = c.slug === "business-laws";
 
               return (
                 <div
                   key={c.id}
                   onClick={() => setActiveCourseSlug(c.slug)}
                   className={cn(
-                    "flex flex-col justify-between rounded-xl border p-4 transition-all duration-250 cursor-pointer shadow-2xs ios-card group",
+                    "flex flex-col justify-between rounded-[20px] p-5 transition-all duration-200 cursor-pointer shadow-xs group",
                     isSelected
-                      ? "border-accent bg-accent/5 ring-2 ring-accent/30 shadow-sm"
-                      : "border-line bg-surface hover:border-line-strong hover:bg-bg-warm/30",
+                      ? "bg-[#1c1c1c] border-2 border-[#0099ff] ring-1 ring-[#0099ff]/30 shadow-lg"
+                      : "bg-[#141414] border border-[#262626] hover:border-[#383838] hover:bg-[#181818]",
                   )}
                 >
-                  <div>
-                    <div className="flex items-center justify-between gap-1 mb-2">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-1">
                       <span
                         className={cn(
-                          "rounded px-2 py-0.5 font-sans text-xs font-bold",
+                          "rounded-full px-2.5 py-0.5 font-mono text-xs font-bold",
                           isSelected
-                            ? "bg-accent text-white"
-                            : "bg-bg-warm text-ink border border-line",
+                            ? "bg-[#0099ff] text-white"
+                            : "bg-[#1c1c1c] text-[#999999] border border-[#262626]",
                         )}
                       >
                         {c.code}
                       </span>
-                      <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-muted">
+                      <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#666666]">
                         {c.category}
                       </span>
                     </div>
-                    <h3 className="font-serif text-base font-bold text-ink leading-snug">
+                    <h3 className="font-display text-base font-bold text-white leading-snug">
                       {c.title}
                     </h3>
-                    <p className="mt-1.5 line-clamp-2 font-sans text-xs text-ink-soft leading-relaxed">
+                    <p className="line-clamp-2 text-xs text-[#999999] leading-relaxed">
                       {c.description}
                     </p>
-                  </div>
-
-                  <div className="mt-4 pt-3 border-t border-line/60 flex items-center justify-between text-xs">
-                    <span className="font-sans text-[11px] text-muted">
-                      {c.topics.length} Notes • {c.examQuestions.length} Qs
-                    </span>
-                    {isSelected ? (
-                      <span className="font-sans text-xs font-bold text-accent">
-                        Active Paper
-                      </span>
-                    ) : (
-                      <span className="font-sans text-xs font-semibold text-muted group-hover:text-ink">
-                        Switch →
+                    {hasMidSem && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-400 px-2 py-0.5 text-[10px] font-bold">
+                        ⭐ Mid Sem Ready
                       </span>
                     )}
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-[#262626] flex items-center justify-between text-xs">
+                    <span className="font-sans text-[11px] text-[#666666]">
+                      {c.topics.length} topics
+                    </span>
+                    <span className={cn("font-sans font-bold", isSelected ? "text-[#0099ff]" : "text-[#999999] group-hover:text-white")}>
+                      {isSelected ? "Active ✓" : "Switch →"}
+                    </span>
                   </div>
                 </div>
               );
@@ -320,45 +319,54 @@ function Dashboard() {
         </section>
 
         {/* Active Subject Unit Syllabus Breakdown */}
-        <section className="space-y-6">
-          <div className="border-b border-line pb-3">
-            <h2 className="font-serif text-2xl font-bold text-ink">
-              {activeCourse.code} · {activeCourse.title} Syllabus
+        <section className="space-y-8">
+          <div className="border-b border-[#262626] pb-4">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-[-0.03em] text-white">
+              Paper {activeCourse.code} · {activeCourse.title} Syllabus
             </h2>
-            <p className="mt-1 font-sans text-xs text-muted">
-              Unit-wise lecture notes and core examination modules for this paper.
+            <p className="mt-1 font-sans text-xs text-[#999999]">
+              Unit-wise lecture notes, structured answers, and core modules.
             </p>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-10">
             {activeCourse.units.map((unit, idx) => {
-              const unitTopics = activeCourse.topics.filter(
-                (t) => t.unit === unit,
-              );
+              const unitTopics = activeCourse.topics.filter((t) => t.unit === unit);
               if (unitTopics.length === 0) return null;
               const isMidSemUnit = unit === "Mid Sem Important";
 
               return (
-                <div key={unit} className={cn("space-y-3", isMidSemUnit && "rounded-2xl border-2 border-amber-400/80 bg-amber-50/30 p-5 shadow-xs")}>
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <span className={cn(
-                        "flex size-6 items-center justify-center rounded-full font-sans text-xs font-bold",
-                        isMidSemUnit ? "bg-amber-600 text-white" : "bg-accent/15 text-accent"
-                      )}>
+                <div
+                  key={unit}
+                  className={cn(
+                    "space-y-4",
+                    isMidSemUnit && "rounded-[24px] border border-[#262626] bg-[#141414] p-6 shadow-sm",
+                  )}
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-2.5">
+                      <span
+                        className={cn(
+                          "flex size-6 items-center justify-center rounded-full font-mono text-xs font-bold",
+                          isMidSemUnit
+                            ? "bg-white text-black"
+                            : "bg-[#1c1c1c] text-[#999999] border border-[#262626]",
+                        )}
+                      >
                         {isMidSemUnit ? "★" : idx + 1}
                       </span>
-                      <h3 className="font-serif text-lg font-bold text-ink">
+                      <h3 className="font-display text-xl font-bold text-white tracking-[-0.02em]">
                         {unit}
                       </h3>
                     </div>
                     {isMidSemUnit && (
-                      <span className="rounded-full bg-amber-200/80 text-amber-900 border border-amber-300 px-2.5 py-0.5 text-xs font-bold font-sans">
-                        9 High-Yield Exam Modules
+                      <span className="rounded-full bg-[#0099ff]/15 text-[#0099ff] border border-[#0099ff]/30 px-3 py-0.5 text-xs font-bold">
+                        9 Master Examination Modules
                       </span>
                     )}
                   </div>
-                  <div className="grid gap-3 sm:grid-cols-2">
+
+                  <div className="grid gap-4 sm:grid-cols-2">
                     {unitTopics.map((topic) => {
                       const isStudied = studied[topic.slug];
                       return (
@@ -366,32 +374,32 @@ function Dashboard() {
                           key={topic.id}
                           to="/topic/$slug"
                           params={{ slug: topic.slug }}
-                          className="group flex flex-col justify-between rounded-xl border border-line bg-surface p-4 transition-all duration-250 hover:border-line-strong hover:bg-bg-warm/30 shadow-2xs ios-card"
+                          className="group flex flex-col justify-between rounded-[18px] border border-[#262626] bg-[#141414] p-5 transition-all duration-200 hover:border-[#383838] hover:bg-[#181818] shadow-2xs ios-card"
                         >
-                          <div className="space-y-1.5">
+                          <div className="space-y-2">
                             <div className="flex items-start justify-between gap-2">
-                              <span className="font-sans text-xs font-bold tabular-nums text-muted">
-                                Topic {String(topic.number).padStart(2, "0")}
+                              <span className="font-mono text-xs font-bold text-[#666666]">
+                                #{String(topic.number).padStart(2, "0")}
                               </span>
                               {isStudied && (
-                                <span className="inline-flex items-center gap-1 rounded-full bg-studied/15 px-2 py-0.5 font-sans text-[11px] font-bold text-studied ios-spring-pop">
-                                  <CheckCircle2 className="size-3" /> Studied
+                                <span className="inline-flex items-center gap-1 rounded-full bg-[#22c55e]/15 border border-[#22c55e]/30 px-2 py-0.5 font-sans text-[10px] font-bold text-[#22c55e]">
+                                  <CheckCircle2 className="size-3" /> Mastered
                                 </span>
                               )}
                             </div>
-                            <h4 className="font-serif text-base font-bold text-ink group-hover:text-accent">
+                            <h4 className="font-display text-base font-bold text-white group-hover:text-[#0099ff] transition-colors leading-snug">
                               {topic.title}
                             </h4>
-                            <p className="line-clamp-2 font-serif text-xs leading-relaxed text-ink-soft">
+                            <p className="line-clamp-2 text-xs text-[#999999] leading-relaxed">
                               {topic.summary}
                             </p>
                           </div>
 
-                          <div className="mt-3 flex items-center justify-between border-t border-line/50 pt-2.5 text-xs">
-                            <span className="font-sans font-medium text-muted">
+                          <div className="mt-4 flex items-center justify-between border-t border-[#1f1f1f] pt-3 text-xs">
+                            <span className="font-sans text-[11px] text-[#666666]">
                               {topic.blocks.length} sections
                             </span>
-                            <span className="inline-flex items-center gap-1 font-sans font-bold text-accent transition-transform duration-200 group-hover:translate-x-1">
+                            <span className="inline-flex items-center gap-1 font-sans font-bold text-[#0099ff] group-hover:translate-x-1 transition-transform">
                               Read Note <ArrowRight className="size-3" />
                             </span>
                           </div>
@@ -405,48 +413,48 @@ function Dashboard() {
           </div>
         </section>
 
-        {/* Active Subject Model Exam Answers */}
-        <section className="space-y-4">
-          <div className="flex flex-col gap-1 border-b border-line pb-3 sm:flex-row sm:items-baseline sm:justify-between">
+        {/* Model Exam Answers Section */}
+        <section className="space-y-6">
+          <div className="flex flex-col gap-1 border-b border-[#262626] pb-4 sm:flex-row sm:items-baseline sm:justify-between">
             <div>
-              <h2 className="font-serif text-2xl font-bold text-ink">
-                {activeCourse.code} Model Examination Answers
+              <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-[-0.03em] text-white">
+                Paper {activeCourse.code} Model Exam Answers
               </h2>
-              <p className="mt-1 font-sans text-xs text-muted">
+              <p className="mt-1 font-sans text-xs text-[#999999]">
                 {activeCourse.examQuestions.length} complete model university exam answers.
               </p>
             </div>
             <Link
               to="/exam"
-              className="inline-flex items-center gap-1 font-sans text-xs font-bold text-accent hover:underline"
+              className="inline-flex items-center gap-1 text-xs font-bold text-[#0099ff] hover:underline"
             >
-              <span>View All Question Bank</span>
+              <span>View Full Question Bank</span>
               <ArrowRight className="size-3.5" />
             </Link>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {activeCourse.examQuestions.slice(0, 6).map((exam) => (
               <Link
                 key={exam.id}
                 to="/exam/$qid"
                 params={{ qid: exam.id }}
-                className="group flex flex-col justify-between rounded-xl border border-line bg-surface p-4 transition-all duration-250 hover:border-line-strong hover:bg-bg-warm/30 shadow-2xs ios-card"
+                className="group flex flex-col justify-between rounded-[18px] border border-[#262626] bg-[#141414] p-5 transition-all duration-200 hover:border-[#383838] hover:bg-[#181818] shadow-2xs ios-card"
               >
-                <div>
-                  <span className="rounded-md bg-accent/10 px-2 py-0.5 font-sans text-xs font-bold text-accent">
+                <div className="space-y-2">
+                  <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#0099ff]">
                     Question {exam.number}
                   </span>
-                  <h3 className="mt-2 font-serif text-base font-bold text-ink group-hover:text-accent">
+                  <h3 className="font-display text-base font-bold text-white group-hover:text-[#0099ff] transition-colors leading-snug">
                     {exam.title}
                   </h3>
-                  <p className="mt-1 line-clamp-2 font-serif text-xs text-ink-soft leading-relaxed">
+                  <p className="line-clamp-2 text-xs text-[#999999] leading-relaxed">
                     {exam.question}
                   </p>
                 </div>
-                <div className="mt-3 flex items-center justify-between border-t border-line/50 pt-2.5 text-xs">
-                  <span className="font-sans text-[11px] text-muted">Model Answer</span>
-                  <span className="font-sans font-bold text-accent group-hover:underline flex items-center gap-1 transition-transform duration-200 group-hover:translate-x-0.5">
+                <div className="mt-4 flex items-center justify-between border-t border-[#1f1f1f] pt-3 text-xs">
+                  <span className="font-mono text-[11px] text-[#666666]">Model Answer</span>
+                  <span className="font-sans font-bold text-[#0099ff] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                     Study Answer <ArrowRight className="size-3" />
                   </span>
                 </div>

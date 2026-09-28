@@ -20,7 +20,7 @@ function GlossaryPage() {
       }
     }
     return Array.from(set).sort();
-  }, []);
+  }, [glossary]);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -39,154 +39,109 @@ function GlossaryPage() {
         const bodyMatch = entry.body.toLowerCase().includes(q);
         return termMatch || sectionMatch || bodyMatch;
       });
-  }, [search, selectedLetter]);
+  }, [glossary, search, selectedLetter]);
 
   return (
-    <main className="px-4 py-8 sm:px-10 sm:py-10 ios-fade-up">
-      <div className="mx-auto max-w-3xl">
-        <p className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-          Reference
-        </p>
-        <h1 className="mt-2 font-serif text-3xl font-bold tracking-tight sm:text-4xl text-ink">
-          Legal terms and definitions
-        </h1>
-        <p className="mt-3 font-serif text-base text-ink-soft">
-          Indian Contract Act terminology and doctrine glosses from lecture.
-        </p>
-
-        {/* Search filter input */}
-        <div className="mt-6">
-          <label className="flex min-h-11 items-center gap-2.5 rounded-xl border border-line bg-surface px-3.5 shadow-[var(--shadow-border)] focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20 transition-all">
-            <Search className="size-4 shrink-0 text-faint" strokeWidth={2} />
-            <input
-              type="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search terms, sections, or definitions..."
-              className="h-11 w-full bg-transparent font-serif text-base text-ink outline-none placeholder:text-faint"
-            />
-            {search && (
-              <button
-                type="button"
-                onClick={() => setSearch("")}
-                className="rounded-md p-1 text-faint hover:text-ink transition-colors"
-                aria-label="Clear search"
-              >
-                <X className="size-4" />
-              </button>
-            )}
-          </label>
-        </div>
-
-        {/* Alphabetical letter filter pill buttons */}
-        <div className="mt-4 flex flex-wrap items-center gap-1.5" role="toolbar" aria-label="Filter terms by first letter">
-          <button
-            type="button"
-            onClick={() => setSelectedLetter("All")}
-            className={`rounded-lg px-2.5 py-1 text-xs font-sans font-bold transition-all duration-200 ios-press ${
-              selectedLetter === "All"
-                ? "bg-accent text-accent-fg shadow-xs scale-105"
-                : "border border-line bg-surface text-ink-soft hover:border-line-strong hover:text-ink"
-            }`}
-          >
-            All
-          </button>
-          {letters.map((letter) => {
-            const isSelected = selectedLetter === letter;
-            return (
-              <button
-                key={letter}
-                type="button"
-                onClick={() => setSelectedLetter(isSelected ? "All" : letter)}
-                className={`min-w-7 rounded-lg px-2 py-1 text-center text-xs font-sans font-bold transition-all duration-200 ios-press ${
-                  isSelected
-                    ? "bg-accent text-accent-fg shadow-xs scale-105"
-                    : "border border-line bg-surface text-ink-soft hover:border-line-strong hover:text-ink"
-                }`}
-              >
-                {letter}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Count and reset */}
-        <div className="mt-3 flex items-center justify-between text-xs font-sans text-muted">
-          <p>
-            Showing {filtered.length} of {glossary.length} {filtered.length === 1 ? "term" : "terms"}
-            {selectedLetter !== "All" && (
-              <span className="ml-1 font-bold text-accent">
-                (Letter {selectedLetter})
-              </span>
-            )}
+    <main className="px-4 py-8 sm:px-10 sm:py-12 ios-fade-up bg-[#090909]">
+      <div className="mx-auto max-w-3xl space-y-8">
+        <header className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1c1c1c] border border-[#262626] px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#0099ff]">
+              Paper {activeCourse.code} · Dictionary
+            </span>
+            <span className="font-mono text-xs text-[#666666]">
+              {glossary.length} Defined Terms
+            </span>
+          </div>
+          <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-white">
+            Glossary & Definitions
+          </h1>
+          <p className="font-sans text-sm sm:text-base text-[#999999] leading-relaxed">
+            Statutory definitions, legal doctrines, and technical terms for {activeCourse.title}.
           </p>
-          {(search || selectedLetter !== "All") && (
+        </header>
+
+        {/* Search Input Bar */}
+        <div className="relative">
+          <Search className="pointer-events-none absolute left-4 top-3.5 size-4 text-[#666666]" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search defined terms, statutory sections, definitions..."
+            className="w-full rounded-full border border-[#262626] bg-[#141414] py-3 pl-11 pr-10 font-sans text-sm text-white placeholder:text-[#666666] focus:border-[#0099ff] focus:outline-none"
+          />
+          {search && (
             <button
               type="button"
-              onClick={() => {
-                setSearch("");
-                setSelectedLetter("All");
-              }}
-              className="font-bold text-accent hover:underline"
+              onClick={() => setSearch("")}
+              className="absolute right-3.5 top-3 text-[#666666] hover:text-white"
             >
-              Reset filters
+              <X className="size-4" />
             </button>
           )}
         </div>
 
-        {/* Term listing / Empty state */}
-        {filtered.length === 0 ? (
-          <div className="mt-8 rounded-xl border border-dashed border-line bg-surface p-8 text-center">
-            <p className="font-serif text-lg font-bold text-ink">
-              No matching terms found
-            </p>
-            <p className="mt-1 font-serif text-sm text-muted">
-              Try searching for a different word, doctrine, or section number.
-            </p>
+        {/* Alphabetical Filter Pills */}
+        <div className="flex flex-wrap gap-1.5">
+          {["All", ...letters].map((letter) => (
             <button
+              key={letter}
               type="button"
-              onClick={() => {
-                setSearch("");
-                setSelectedLetter("All");
-              }}
-              className="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-3 py-1.5 font-sans text-xs font-bold text-ink hover:bg-surface-2 transition-colors"
+              onClick={() => setSelectedLetter(letter)}
+              className={`rounded-full px-3 py-1 font-mono text-xs font-bold transition-all ${
+                selectedLetter === letter
+                  ? "bg-white text-black shadow-xs"
+                  : "bg-[#141414] text-[#999999] border border-[#262626] hover:text-white"
+              }`}
             >
-              Reset all filters
+              {letter}
             </button>
-          </div>
-        ) : (
-          <ul className="mt-6 flex flex-col gap-3">
-            {filtered.map((entry) => (
-              <li
+          ))}
+        </div>
+
+        {/* Glossary Terms List */}
+        <div className="space-y-4">
+          {filtered.length === 0 ? (
+            <div className="rounded-[20px] border border-dashed border-[#262626] p-10 text-center text-[#999999] bg-[#141414]">
+              No glossary terms matching "{search}".
+            </div>
+          ) : (
+            filtered.map((entry) => (
+              <article
                 key={entry.id}
                 id={entry.id}
-                className="scroll-mt-28 rounded-xl border border-line bg-surface p-5 transition-all duration-200 ios-card"
+                className="rounded-[20px] border border-[#262626] bg-[#141414] p-5 sm:p-6 transition-all duration-200 hover:border-[#383838] shadow-xs"
               >
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h2 className="font-serif text-lg font-bold text-ink">
+                  <h2 className="font-display text-lg sm:text-xl font-bold text-white tracking-[-0.02em]">
                     {entry.term}
                   </h2>
-                  <span className="font-sans text-xs font-bold tracking-wide text-accent bg-accent/10 px-2 py-0.5 rounded">
-                    {entry.section}
-                  </span>
+                  {entry.section && (
+                    <span className="font-mono text-xs font-bold text-[#0099ff]">
+                      {entry.section}
+                    </span>
+                  )}
                 </div>
-                <p className="mt-2.5 font-serif text-[0.98rem] leading-relaxed text-ink-soft">
+                <p className="mt-2 font-sans text-xs sm:text-sm leading-relaxed text-[#cccccc]">
                   {entry.body}
                 </p>
-                <div className="mt-3.5 pt-3 border-t border-line/60 flex items-center justify-between">
-                  <Link
-                    to="/topic/$slug"
-                    params={{ slug: entry.topicSlug }}
-                    className="inline-flex items-center gap-1 font-sans text-xs font-bold text-accent hover:underline"
-                  >
-                    <span>Open related note</span>
-                    <ArrowUpRight className="size-3.5" />
-                  </Link>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
+                {entry.topicSlug && (
+                  <div className="mt-3 pt-3 border-t border-[#1f1f1f]">
+                    <Link
+                      to="/topic/$slug"
+                      params={{ slug: entry.topicSlug }}
+                      className="inline-flex items-center gap-1 font-mono text-xs text-[#0099ff] hover:underline"
+                    >
+                      <span>Read in Context</span>
+                      <ArrowUpRight className="size-3" />
+                    </Link>
+                  </div>
+                )}
+              </article>
+            ))
+          )}
+        </div>
       </div>
     </main>
   );

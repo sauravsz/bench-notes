@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Check, ChevronDown, Folder, GraduationCap, Layers, Search, Sparkles } from "lucide-react";
+import { Check, ChevronDown, GraduationCap, Search, Sparkles } from "lucide-react";
 import { allCourses, courseCategories, type Course } from "@/data/courses";
 import { useCurrentCourse } from "@/lib/current-course";
 import { useProgress } from "@/lib/progress";
@@ -64,39 +64,39 @@ export function CourseSwitcher({
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex min-h-9 items-center gap-2 rounded-lg border border-line bg-surface px-2.5 py-1 text-xs font-medium text-ink shadow-2xs hover:bg-bg-warm transition-all duration-200 ios-press"
+        className="flex min-h-9 items-center gap-2 rounded-full border border-[#262626] bg-[#141414] px-3.5 py-1.5 text-xs font-medium text-white shadow-xs hover:bg-[#1c1c1c] transition-all ios-press"
         title="Switch MBA Course / Subject"
       >
-        <span className="flex size-5 items-center justify-center rounded bg-primary text-white font-sans text-[10px] font-bold">
+        <span className="flex size-4.5 items-center justify-center rounded-full bg-[#0099ff] text-white font-mono text-[9px] font-bold">
           {activeCourse.code.split(" ")[0]}
         </span>
-        <span className="font-bold text-ink max-w-[140px] sm:max-w-[200px] truncate">
+        <span className="font-bold text-white max-w-[140px] sm:max-w-[200px] truncate">
           {activeCourse.code} · {activeCourse.title}
         </span>
-        <ChevronDown className={cn("size-3.5 text-muted transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]", open ? "rotate-180" : "")} />
+        <ChevronDown className={cn("size-3.5 text-[#999999] transition-transform duration-200", open ? "rotate-180" : "")} />
       </button>
 
       {/* Dropdown Menu */}
       {open ? (
-        <div className="fixed sm:absolute left-4 right-4 sm:left-0 sm:right-auto top-16 sm:top-full z-50 mt-1 sm:w-96 rounded-2xl border border-line bg-surface/95 backdrop-blur-md p-3 shadow-2xl ios-scale-in">
+        <div className="fixed sm:absolute left-4 right-4 sm:left-0 sm:right-auto top-16 sm:top-full z-50 mt-2 sm:w-96 rounded-[20px] border border-[#262626] bg-[#141414] p-4 shadow-2xl ios-scale-in">
           {/* Header */}
-          <div className="flex items-center justify-between pb-2 border-b border-line mb-2">
-            <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-muted flex items-center gap-1.5">
-              <GraduationCap className="size-3.5 text-accent" />
+          <div className="flex items-center justify-between pb-3 border-b border-[#262626] mb-3">
+            <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-[#999999] flex items-center gap-1.5">
+              <GraduationCap className="size-3.5 text-[#0099ff]" />
               MBA Curriculum Subjects
             </span>
-            <span className="text-[10px] font-medium text-muted">8 Papers Enrolled</span>
+            <span className="text-[10px] font-mono text-[#666666]">8 Papers Enrolled</span>
           </div>
 
           {/* Search Input */}
-          <div className="relative mb-2.5">
-            <Search className="absolute left-2.5 top-2 size-3.5 text-muted" />
+          <div className="relative mb-3">
+            <Search className="absolute left-3 top-2.5 size-3.5 text-[#666666]" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search paper code or subject name..."
-              className="w-full rounded-lg border border-line bg-bg-warm/60 py-1 pl-8 pr-2 font-sans text-xs text-ink placeholder:text-muted/60 focus:border-accent focus:outline-none"
+              placeholder="Search paper code or title..."
+              className="w-full rounded-full border border-[#262626] bg-[#090909] py-1.5 pl-8 pr-3 text-xs text-white placeholder:text-[#666666] focus:border-[#0099ff] focus:outline-none"
               autoFocus
             />
           </div>
@@ -110,15 +110,14 @@ export function CourseSwitcher({
               if (categoryCourses.length === 0) return null;
 
               return (
-                <div key={category} className="space-y-1">
-                  <span className="px-2 font-sans text-[10px] font-bold uppercase tracking-widest text-faint block">
-                    {category === "Core"
-                      ? "Core MBA Papers"
-                      : `${category} Elective Papers`}
+                <div key={category} className="space-y-1.5">
+                  <span className="px-2 font-mono text-[10px] font-bold uppercase tracking-widest text-[#666666] block">
+                    {category === "Core" ? "Core MBA Papers" : `${category} Electives`}
                   </span>
                   <div className="space-y-1">
                     {categoryCourses.map((c) => {
                       const isSelected = c.slug === activeCourseSlug;
+                      const hasMidSem = c.slug === "business-laws";
                       const doneCount = c.topics.filter(
                         (t) => studied[t.slug],
                       ).length;
@@ -129,32 +128,37 @@ export function CourseSwitcher({
                           type="button"
                           onClick={() => handleSelectCourse(c)}
                           className={cn(
-                            "flex w-full items-start justify-between rounded-xl p-2.5 text-left transition-all duration-200 ios-press-subtle",
+                            "flex w-full items-start justify-between rounded-[14px] p-3 text-left transition-all duration-200 ios-press-subtle",
                             isSelected
-                              ? "bg-accent/10 border border-accent/40 shadow-2xs"
-                              : "hover:bg-bg-warm border border-transparent hover:-translate-y-0.5",
+                              ? "bg-[#1c1c1c] border border-[#0099ff]/50 shadow-xs"
+                              : "hover:bg-[#1c1c1c] border border-transparent",
                           )}
                         >
                           <div className="min-w-0 flex-1 pr-2">
                             <div className="flex items-center gap-2">
                               <span
                                 className={cn(
-                                  "rounded px-1.5 py-0.2 font-sans text-[10px] font-bold",
+                                  "rounded-full px-2 py-0.2 font-mono text-[10px] font-bold",
                                   isSelected
-                                    ? "bg-accent text-white"
-                                    : "bg-bg-warm text-ink border border-line",
+                                    ? "bg-[#0099ff] text-white"
+                                    : "bg-[#090909] text-[#999999] border border-[#262626]",
                                 )}
                               >
                                 {c.code}
                               </span>
-                              <span className="font-serif text-xs font-bold text-ink truncate">
+                              <span className="font-display text-xs font-bold text-white truncate">
                                 {c.title}
                               </span>
+                              {hasMidSem && (
+                                <span className="rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-400 px-1.5 py-0.2 text-[9px] font-bold">
+                                  ⭐ Mid Sem
+                                </span>
+                              )}
                             </div>
-                            <p className="mt-1 line-clamp-1 font-sans text-[11px] text-muted">
+                            <p className="mt-1 line-clamp-1 text-[11px] text-[#999999]">
                               {c.description}
                             </p>
-                            <div className="mt-1 flex items-center gap-2 text-[10px] text-faint">
+                            <div className="mt-1 flex items-center gap-2 text-[10px] text-[#666666] font-mono">
                               <span>{c.units.length} Units</span>
                               <span>•</span>
                               <span>{c.topics.length} Notes</span>
@@ -165,9 +169,9 @@ export function CourseSwitcher({
 
                           <div className="shrink-0 flex items-center pt-1">
                             {isSelected ? (
-                              <Check className="size-4 text-accent font-bold ios-spring-pop" />
+                              <Check className="size-4 text-[#0099ff] font-bold" />
                             ) : doneCount > 0 ? (
-                              <span className="text-[10px] font-bold text-studied">
+                              <span className="text-[10px] font-mono font-bold text-[#22c55e]">
                                 {doneCount}/{c.topics.length}
                               </span>
                             ) : null}

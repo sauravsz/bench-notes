@@ -1,62 +1,70 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #f4f0e6;
-  --color-bg-warm: #ebe4d4;
-  --color-surface: #fffcf7;
-  --color-surface-2: #f7f1e6;
-  --color-ink: #1c1915;
-  --color-ink-soft: #3a342c;
-  --color-muted: #6b6459;
-  --color-faint: #8a8276;
-  --color-line: #ddd6c8;
-  --color-line-strong: #c9c0ae;
-  --color-accent: #2f4553;
-  --color-accent-2: #3d5a6c;
-  --color-accent-fg: #f4f0e6;
-  --color-mark: #5c3d3d;
-  --color-studied: #3f5344;
+  --color-canvas: #090909;
+  --color-surface-1: #141414;
+  --color-surface-2: #1c1c1c;
+  --color-hairline: #262626;
+  --color-hairline-soft: #1a1a1a;
+  --color-primary: #ffffff;
+  --color-on-primary: #000000;
+  --color-accent-blue: #0099ff;
+  --color-ink: #ffffff;
+  --color-ink-muted: #999999;
+  --color-gradient-magenta: #d44df0;
+  --color-gradient-violet: #6a4cf5;
+  --color-gradient-orange: #ff7a3d;
+  --color-gradient-coral: #ff5577;
+  --color-semantic-success: #22c55e;
 
-  --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
-  --font-sans: "Source Sans 3", "Source Sans Pro", "Segoe UI", system-ui, sans-serif;
-  --font-serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  /* Aliases for app components */
+  --color-bg: #090909;
+  --color-bg-warm: #141414;
+  --color-surface: #141414;
+  --color-surface-2: #1c1c1c;
+  --color-ink-soft: #b3b3b3;
+  --color-muted: #999999;
+  --color-faint: #555555;
+  --color-line: #262626;
+  --color-line-strong: #333333;
+  --color-accent: #0099ff;
+  --color-accent-2: #007acc;
+  --color-accent-fg: #ffffff;
+  --color-mark: #ff5577;
+  --color-studied: #22c55e;
+
+  --font-display: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Plus Jakarta Sans", "Inter", sans-serif;
 
   --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
-
-  --shadow-border:
-    0px 0px 0px 1px rgba(28, 25, 21, 0.06),
-    0px 1px 2px -1px rgba(28, 25, 21, 0.06),
-    0px 2px 4px 0px rgba(28, 25, 21, 0.04);
-  --shadow-border-hover:
-    0px 0px 0px 1px rgba(28, 25, 21, 0.1),
-    0px 1px 2px -1px rgba(28, 25, 21, 0.08),
-    0px 4px 10px 0px rgba(28, 25, 21, 0.06);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 15px;
+  --radius-xl: 20px;
+  --radius-xxl: 30px;
+  --radius-pill: 100px;
+  --radius-full: 9999px;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-spring-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring-bouncy: cubic-bezier(0.68, -0.4, 0.27, 1.45);
   --ease-ios-press: cubic-bezier(0.2, 0, 0, 1);
-  --ease-ios: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: var(--color-bg);
-    color: var(--color-ink);
+    background-color: #090909;
+    color: #ffffff;
+    color-scheme: dark;
   }
 
   body {
     font-family: var(--font-sans);
-    background: var(--color-bg);
-    color: var(--color-ink);
+    background-color: #090909;
+    color: #ffffff;
   }
 
   button:not(:disabled),
@@ -66,6 +74,7 @@
 
   h1, h2, h3 {
     text-wrap: balance;
+    letter-spacing: -0.03em;
   }
 
   p {
@@ -73,19 +82,19 @@
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--color-accent) 22%, white);
-    color: var(--color-ink);
+    background: rgba(0, 153, 255, 0.3);
+    color: #ffffff;
   }
 
-  /* Custom Rounded Pill Scrollbars (iOS / macOS Style) */
+  /* Custom Framer Dark Scrollbars */
   * {
     scrollbar-width: thin;
-    scrollbar-color: var(--color-line-strong) transparent;
+    scrollbar-color: #262626 transparent;
   }
 
   ::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
@@ -93,25 +102,23 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: var(--color-line-strong);
+    background-color: #262626;
     border-radius: 9999px;
-    border: 1.5px solid transparent;
-    background-clip: padding-box;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-muted);
+    background-color: #444444;
   }
 }
 
 /* ==========================================================================
-   iOS & SwiftUI Purposeful Animation System
+   Framer Kinetic Animation & Interaction Classes
    ========================================================================== */
 
-@keyframes iosFadeUp {
+@keyframes framerFadeUp {
   0% {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(18px);
   }
   100% {
     opacity: 1;
@@ -119,211 +126,100 @@
   }
 }
 
-@keyframes iosFadeDown {
+@keyframes framerScaleIn {
   0% {
     opacity: 0;
-    transform: translateY(-10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes iosScaleIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.94);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes iosSpringPop {
-  0% {
-    transform: scale(1);
-  }
-  40% {
-    transform: scale(1.22);
-  }
-  75% {
     transform: scale(0.96);
   }
   100% {
+    opacity: 1;
     transform: scale(1);
   }
 }
 
-@keyframes iosPulseSoft {
+@keyframes framerGlowPulse {
   0%, 100% {
-    opacity: 1;
+    opacity: 0.8;
     transform: scale(1);
   }
   50% {
-    opacity: 0.65;
-    transform: scale(1.08);
-  }
-}
-
-@keyframes iosShimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-@keyframes iosDrawerSlideIn {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes iosSheetSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1.02);
   }
 }
 
-@keyframes iosRubberBand {
-  0% {
-    transform: scale3d(1, 1, 1);
-  }
-  30% {
-    transform: scale3d(1.15, 0.85, 1);
-  }
-  40% {
-    transform: scale3d(0.85, 1.15, 1);
-  }
-  50% {
-    transform: scale3d(1.08, 0.92, 1);
-  }
-  65% {
-    transform: scale3d(0.96, 1.04, 1);
-  }
-  75% {
-    transform: scale3d(1.02, 0.98, 1);
-  }
-  100% {
-    transform: scale3d(1, 1, 1);
-  }
-}
-
-/* Reusable Animation Classes */
 .ios-fade-up {
-  animation: iosFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.ios-fade-down {
-  animation: iosFadeDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: framerFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .ios-scale-in {
-  animation: iosScaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: framerScaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-.ios-spring-pop {
-  animation: iosSpringPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-
-.ios-pulse-soft {
-  animation: iosPulseSoft 2.4s ease-in-out infinite;
-}
-
-.ios-rubber-band {
-  animation: iosRubberBand 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-
-/* Stagger Utilities for Content Lists & Grids */
-.ios-stagger-1 { animation-delay: 35ms; }
-.ios-stagger-2 { animation-delay: 70ms; }
-.ios-stagger-3 { animation-delay: 105ms; }
-.ios-stagger-4 { animation-delay: 140ms; }
-.ios-stagger-5 { animation-delay: 175ms; }
-.ios-stagger-6 { animation-delay: 210ms; }
-.ios-stagger-7 { animation-delay: 245ms; }
-.ios-stagger-8 { animation-delay: 280ms; }
-
-/* Interactive Tactile Press Feedback (SwiftUI scaleEffect) */
+/* Tactile press feedback */
 .ios-press {
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.2s ease;
-  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), opacity 0.15s ease;
 }
 
 .ios-press:active {
-  transform: scale(0.96);
-  filter: brightness(0.96);
+  transform: scale(0.97);
 }
 
 .ios-press-subtle {
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.15s ease, color 0.15s ease;
-  will-change: transform;
+  transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
 .ios-press-subtle:active {
-  transform: scale(0.98);
+  transform: scale(0.985);
 }
 
-/* iOS Spring Card Micro-Interactions */
+/* Framer Dark Cards */
 .ios-card {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease;
-  will-change: transform, box-shadow;
+  background-color: #141414;
+  border: 1px solid #262626;
+  border-radius: 20px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.25s ease;
 }
 
 .ios-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 24px -6px rgba(28, 25, 21, 0.08), 0 6px 12px -4px rgba(28, 25, 21, 0.04);
+  border-color: #383838;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
 }
 
-.ios-card:active {
-  transform: translateY(0) scale(0.985);
-  transition-duration: 0.12s;
+/* Gradient Spotlight Card Signatures */
+.spotlight-violet {
+  background: linear-gradient(135deg, #6a4cf5 0%, #3e26b3 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
 }
 
-/* iOS Segmented Control Pill Transition */
-.ios-segmented-pill {
-  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, color 0.2s ease, box-shadow 0.25s ease;
+.spotlight-magenta {
+  background: linear-gradient(135deg, #d44df0 0%, #8618a5 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
 }
 
-/* iOS Drawer & Sheet Physics */
-.ios-drawer-enter {
-  animation: iosDrawerSlideIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+.spotlight-orange {
+  background: linear-gradient(135deg, #ff7a3d 0%, #c2410c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
 }
 
-.ios-sheet-enter {
-  animation: iosSheetSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+.spotlight-dark-gradient {
+  background: linear-gradient(145deg, #181818 0%, #0d0d0d 100%);
+  border: 1px solid #262626;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
+/* Note Prose Styles for Reading Surface */
 .note-prose h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: 1.35rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-  color: var(--color-ink);
+  font-weight: 700;
+  color: #ffffff;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--color-line);
+  letter-spacing: -0.025em;
 }
 
 .note-prose h3:first-child {
@@ -331,35 +227,27 @@
 }
 
 .note-prose h4 {
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.35;
-  color: var(--color-ink-soft);
-  margin-top: 1.4rem;
+  color: #e6e6e6;
+  margin-top: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
 .note-prose p {
-  font-family: var(--font-serif);
-  font-size: 1.0625rem;
-  line-height: 1.65;
-  color: var(--color-ink-soft);
-  margin-bottom: 0.85rem;
+  color: #d1d1d1;
+  line-height: 1.68;
+  margin-bottom: 1rem;
+  font-size: 0.96rem;
 }
 
 .note-prose ul,
 .note-prose ol {
-  font-family: var(--font-serif);
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  color: var(--color-ink-soft);
-  margin: 0 0 1rem 0;
-  padding-left: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.25rem;
+  color: #d1d1d1;
+  line-height: 1.65;
 }
 
 .note-prose ul {
@@ -370,97 +258,56 @@
   list-style: decimal;
 }
 
+.note-prose li {
+  margin-bottom: 0.45rem;
+}
+
 .note-prose li::marker {
-  color: var(--color-faint);
+  color: #0099ff;
+}
+
+.note-prose strong,
+.note-prose b {
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .note-prose em,
 .note-prose i {
   font-style: italic;
-  color: var(--color-ink);
-}
-
-.note-prose strong,
-.note-prose b {
-  font-weight: 700;
-  color: var(--color-ink);
-}
-
-em, i {
-  font-style: italic;
+  color: #b3b3b3;
 }
 
 .note-prose table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.92rem;
-  margin: 0.5rem 0 1.25rem;
-  font-family: var(--font-sans);
+  margin: 1.5rem 0;
+  font-size: 0.88rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #262626;
 }
 
 .note-prose th {
-  text-align: left;
+  background-color: #1c1c1c;
+  color: #ffffff;
   font-weight: 600;
-  color: var(--color-ink);
-  padding: 0.55rem 0.7rem;
-  border-bottom: 1px solid var(--color-line-strong);
-  background: var(--color-surface-2);
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #262626;
 }
 
 .note-prose td {
-  padding: 0.55rem 0.7rem;
-  border-bottom: 1px solid var(--color-line);
-  color: var(--color-ink-soft);
-  vertical-align: top;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #1a1a1a;
+  background-color: #141414;
+  color: #cccccc;
 }
 
-.note-tree {
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  line-height: 1.55;
-  color: var(--color-ink-soft);
-  background: var(--color-surface-2);
-  border: 1px solid var(--color-line);
-  border-radius: 12px;
-  padding: 1rem 1.1rem;
-  margin: 0.4rem 0 1.2rem;
-  overflow-x: auto;
-  white-space: pre;
+.note-prose tr:last-child td {
+  border-bottom: none;
 }
 
-@media print {
-  header, nav, aside, footer, button, .no-print, [role="navigation"], [data-no-print] {
-    display: none !important;
-  }
-  body, html {
-    background: #ffffff !important;
-    color: #000000 !important;
-    font-size: 11pt !important;
-  }
-  main {
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-shadow: none !important;
-    border: none !important;
-  }
-  .note-prose {
-    color: #000000 !important;
-    font-size: 11pt !important;
-  }
-  .note-tree {
-    background: #fdfdfd !important;
-    border: 1px solid #d0d0d0 !important;
-    color: #000000 !important;
-    page-break-inside: avoid;
-  }
-  table, tr, td, th {
-    page-break-inside: avoid;
-    border-color: #d0d0d0 !important;
-    color: #000000 !important;
-  }
-  article, section, .border, [class*="border-"] {
-    page-break-inside: avoid;
-  }
+.note-prose tr:hover td {
+  background-color: #1a1a1a;
 }

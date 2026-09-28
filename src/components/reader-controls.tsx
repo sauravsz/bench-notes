@@ -25,6 +25,7 @@ import { StudyTimer } from "./study-timer";
 import { ShortcutsDialog } from "./shortcuts-dialog";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+
 export function ReaderControls({
   docId,
   docTitle,
@@ -56,33 +57,28 @@ export function ReaderControls({
   // Global Shift + H keyboard shortcut
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
+      const target = e.target as HTMLElement | null;
       if (
-        (e.key.toLowerCase() === "h" || e.code === "KeyH") &&
-        e.shiftKey &&
-        !e.metaKey &&
-        !e.ctrlKey
+        target?.tagName === "INPUT" ||
+        target?.tagName === "TEXTAREA" ||
+        target?.isContentEditable
       ) {
-        // Prevent typing in inputs
-        if (
-          e.target instanceof HTMLInputElement ||
-          e.target instanceof HTMLTextAreaElement
-        ) {
-          return;
-        }
+        return;
+      }
+      if (e.shiftKey && (e.key === "H" || e.key === "h")) {
         e.preventDefault();
         const next = toggleAutoHighlight();
         if (next) {
           toast.success("Auto-highlighting enabled", {
-            description: "Selecting any text will automatically highlight it.",
+            description: "Selecting text will automatically highlight it.",
           });
         } else {
           toast.info("Auto-highlighting disabled", {
-            description: "Select text to open the highlight toolbar.",
+            description: "Text selection will not auto-highlight.",
           });
         }
       }
     }
-
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [toggleAutoHighlight]);
@@ -90,173 +86,171 @@ export function ReaderControls({
   const handleToggleAuto = () => {
     const next = toggleAutoHighlight();
     if (next) {
-      toast.success("Auto-highlighting enabled (Shift+H)", {
-        description: "Selecting text will automatically create a highlight.",
-      });
+      toast.success("Auto-highlighting enabled (Shift+H)");
     } else {
-      toast.info("Auto-highlighting disabled (Shift+H)", {
-        description: "Hold Option/Alt to copy without highlighting.",
-      });
+      toast.info("Auto-highlighting disabled (Shift+H)");
     }
   };
 
   return (
-    <div className="no-print my-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-line bg-surface p-2.5 shadow-xs">
-      <div className="flex flex-wrap items-center gap-2.5">
-        {/* Auto-highlight toggle button with switch */}
-        <div className="flex items-center gap-2 rounded-lg border border-line bg-bg-warm/50 px-2.5 py-1">
-          <span className="flex items-center gap-1.5 text-xs font-semibold text-ink">
-            <Zap className={`size-3.5 ${autoHighlight ? "fill-amber-500 text-amber-600" : "text-muted"}`} />
-            Auto-Highlight
-            <kbd className="hidden sm:inline-block rounded bg-black/5 dark:bg-white/10 px-1 py-0.2 text-[9px] text-muted">
-              ⇧H
-            </kbd>
-          </span>
+    <div className="no-print my-4 flex flex-wrap items-center justify-between gap-3 rounded-[20px] border border-[#262626] bg-[#141414] p-3 shadow-xs">
+      {/* Left Group: Studied Check & Auto-Highlight Toggle */}
+      <div className="flex flex-wrap items-center gap-2">
+        {onToggleStudied ? (
+          <button
+            type="button"
+            onClick={onToggleStudied}
+            className={cn(
+              "inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-xs font-bold transition-all duration-200 ios-press",
+              studied
+                ? "bg-[#22c55e]/20 text-[#22c55e] border border-[#22c55e]/40 shadow-xs"
+                : "bg-[#1c1c1c] text-[#999999] hover:text-white border border-[#262626]",
+            )}
+            title="Mark note as studied / unstudied (M)"
+          >
+            <Check className={cn("size-3.5", studied ? "stroke-[2.5]" : "")} />
+            <span>{studied ? "Studied ✓" : "Mark Studied"}</span>
+          </button>
+        ) : null}
+
+        {/* Auto-Highlight Switch Pill */}
+        <div className="flex items-center gap-2 rounded-full border border-[#262626] bg-[#1c1c1c] px-3 py-1 text-xs">
+          <button
+            type="button"
+            onClick={handleToggleAuto}
+            className="flex items-center gap-1.5 font-sans font-medium text-white hover:text-[#0099ff] transition-colors"
+            title="Toggle instant auto-highlighting (Shift+H)"
+          >
+            {autoHighlight ? (
+              <Zap className="size-3 fill-[#0099ff] text-[#0099ff]" />
+            ) : (
+              <ZapOff className="size-3 text-[#666666]" />
+            )}
+            <span className="hidden sm:inline">Auto-Highlight</span>
+          </button>
           <Switch
             checked={autoHighlight}
-            onCheckedChange={(checked) => {
-              toggleAutoHighlight();
-              if (checked) {
-                toast.success("Auto-highlighting enabled", {
-                  description: "Selecting text will automatically highlight it.",
-                });
-              } else {
-                toast.info("Auto-highlighting disabled", {
-                  description: "Select text to open the highlight toolbar.",
-                });
-              }
-            }}
+            onCheckedChange={handleToggleAuto}
           />
         </div>
-        {/* Color Palette Picker */}
-        <div className="flex items-center gap-1 rounded-lg bg-bg-warm/70 px-2 py-1 border border-line/40">
-          <span className="text-[11px] font-medium text-muted mr-1 hidden sm:inline">
-            Color:
-          </span>
-          {HIGHLIGHT_COLORS.map((c) => (
-            <button
-              key={c.id}
-              type="button"
-              onClick={() => setCurrentColor(c.id)}
-              title={`${c.label} marker`}
-              className={`size-4 rounded-full transition-transform hover:scale-125 active:scale-95 ${
-                currentColor === c.id
-                  ? "ring-2 ring-primary ring-offset-1 scale-110 ios-spring-pop"
-                  : "opacity-75 hover:opacity-100"
-              }`}
-              style={{ backgroundColor: c.dotColor }}
-            />
-          ))}
-        </div>
+
+        {/* Color Palette Selector */}
+        {autoHighlight ? (
+          <div className="flex items-center gap-1 pl-1">
+            {HIGHLIGHT_COLORS.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => setCurrentColor(c.id)}
+                title={`Active highlight color: ${c.label}`}
+                className={cn(
+                  "size-4.5 rounded-full transition-all duration-150 hover:scale-115 active:scale-95",
+                  currentColor === c.id
+                    ? "ring-2 ring-white ring-offset-2 ring-offset-[#141414] scale-110"
+                    : "opacity-70 hover:opacity-100",
+                )}
+                style={{ backgroundColor: c.dotColor }}
+              />
+            ))}
+          </div>
+        ) : null}
       </div>
 
-      <div className="flex items-center gap-2">
+      {/* Right Group: Reader Tool Buttons */}
+      <div className="flex items-center gap-1.5">
         {/* Table of Contents Button */}
         {onToggleToc ? (
-          <Button
-            size="sm"
-            variant="outline"
+          <button
+            type="button"
             onClick={onToggleToc}
-            className="h-8 gap-1 rounded-xl text-xs font-medium ios-press"
-            title="Table of Contents & Section Navigator"
+            className="inline-flex size-8 items-center justify-center rounded-full border border-[#262626] bg-[#1c1c1c] text-[#999999] hover:bg-[#262626] hover:text-white transition-all ios-press"
+            title="Table of contents (T)"
           >
-            <ListOrdered className="size-3.5 text-accent" />
-            <span className="hidden md:inline">Outline</span>
-          </Button>
+            <ListOrdered className="size-3.5" />
+          </button>
         ) : null}
 
-        {/* Copy Markdown Button */}
-        {onCopyMarkdown ? (
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={onCopyMarkdown}
-            className="h-8 gap-1 rounded-xl text-xs font-medium ios-press"
-            title="Copy Note as Structured Markdown (for Notion/Obsidian)"
-          >
-            <Copy className="size-3.5 text-accent" />
-            <span className="hidden md:inline">Markdown</span>
-          </Button>
-        ) : null}
-
-        {/* Print Note Button */}
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={() => window.print()}
-          className="h-8 gap-1 rounded-xl text-xs font-medium ios-press"
-          title="Print or Export as Clean PDF Sheet"
-        >
-          <Printer className="size-3.5 text-accent" />
-          <span className="hidden md:inline">Print</span>
-        </Button>
-
-        {/* Study Sprint Timer */}
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={() => setTimerOpen(!timerOpen)}
-          className="h-8 gap-1 rounded-xl text-xs font-medium ios-press"
-          title="25-min Exam Revision Focus Timer"
-        >
-          <Clock className="size-3.5 text-amber-600" />
-          <span className="hidden md:inline">Timer</span>
-        </Button>
-
-        {/* Readwise Appearance button */}
+        {/* Appearance Popover Trigger (Aa) */}
         <button
           type="button"
           data-appearance-trigger
           onClick={toggleAppearanceMenu}
-          className="h-8 inline-flex items-center gap-1 rounded-xl border border-line bg-surface px-2.5 font-serif text-xs font-bold text-ink hover:bg-bg-warm transition-all duration-200 ios-press shadow-2xs"
-          title="Customize line width, font size & appearance (Aa)"
+          className="inline-flex size-8 items-center justify-center rounded-full border border-[#262626] bg-[#1c1c1c] text-[#999999] hover:bg-[#262626] hover:text-white transition-all ios-press"
+          title="Reading appearance & width (Aa)"
         >
-          <span className="text-sm font-serif">Aa</span>
+          <SlidersHorizontal className="size-3.5" />
         </button>
 
-        {/* Notebook Drawer Button */}
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={() => setNotebookOpen(true)}
-          className="h-8 gap-1.5 rounded-xl text-xs font-medium ios-press"
+        {/* Focus Timer / Stopwatch */}
+        <button
+          type="button"
+          onClick={() => setTimerOpen(true)}
+          className="inline-flex size-8 items-center justify-center rounded-full border border-[#262626] bg-[#1c1c1c] text-[#999999] hover:bg-[#262626] hover:text-white transition-all ios-press"
+          title="Focus timer & Pomodoro (F)"
         >
-          <Highlighter className="size-3.5 text-accent" />
-          <span>Notebook</span>
-          {docHighlightsCount > 0 ? (
-            <span className="rounded-full bg-accent/15 px-1.5 py-0.2 text-[10px] font-semibold text-accent">
+          <Clock className="size-3.5" />
+        </button>
+
+        {/* Notebook Highlights Button */}
+        <button
+          type="button"
+          onClick={() => setNotebookOpen(true)}
+          className="relative inline-flex size-8 items-center justify-center rounded-full border border-[#262626] bg-[#1c1c1c] text-[#999999] hover:bg-[#262626] hover:text-white transition-all ios-press"
+          title="Open highlights notebook (H)"
+        >
+          <Highlighter className="size-3.5" />
+          {docHighlightsCount > 0 && (
+            <span className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full bg-[#0099ff] text-[9px] font-bold text-white">
               {docHighlightsCount}
             </span>
-          ) : null}
-        </Button>
+          )}
+        </button>
 
-        {/* Shortcuts Discovery */}
-        <Button
-          size="sm"
-          variant="ghost"
+        {/* Copy Clean Markdown */}
+        {onCopyMarkdown ? (
+          <button
+            type="button"
+            onClick={onCopyMarkdown}
+            className="inline-flex size-8 items-center justify-center rounded-full border border-[#262626] bg-[#1c1c1c] text-[#999999] hover:bg-[#262626] hover:text-white transition-all ios-press"
+            title="Copy clean markdown"
+          >
+            <Copy className="size-3.5" />
+          </button>
+        ) : null}
+
+        {/* Print / Save PDF Button */}
+        <button
+          type="button"
+          onClick={() => window.print()}
+          className="inline-flex size-8 items-center justify-center rounded-full border border-[#262626] bg-[#1c1c1c] text-[#999999] hover:bg-[#262626] hover:text-white transition-all ios-press"
+          title="Print or export as PDF (Cmd+P)"
+        >
+          <Printer className="size-3.5" />
+        </button>
+
+        {/* Keyboard Shortcuts Dialog */}
+        <button
+          type="button"
           onClick={() => setShortcutsOpen(true)}
-          className="size-8 p-0 rounded-xl text-muted hover:text-ink ios-press hidden sm:inline-flex"
+          className="inline-flex size-8 items-center justify-center rounded-full border border-[#262626] bg-[#1c1c1c] text-[#999999] hover:bg-[#262626] hover:text-white transition-all ios-press"
           title="Keyboard shortcuts (?)"
         >
-          <HelpCircle className="size-4" />
-        </Button>
-
-        {/* Studied Toggle */}
-        {onToggleStudied ? (
-          <Button
-            size="sm"
-            variant={studied ? "default" : "outline"}
-            onClick={onToggleStudied}
-            className={cn("h-8 gap-1.5 rounded-xl text-xs font-medium ios-press", studied ? "bg-studied hover:bg-studied/90" : "")}
-          >
-            <Check className={cn("size-3.5", studied ? "ios-spring-pop" : "")} />
-            {studied ? "Studied" : "Mark Studied"}
-          </Button>
-        ) : null}
+          <HelpCircle className="size-3.5" />
+        </button>
       </div>
 
-      <StudyTimer isOpen={timerOpen} onClose={() => setTimerOpen(false)} />
-      <ShortcutsDialog isOpen={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
+      {/* Focus Timer Modal */}
+      {timerOpen ? (
+        <StudyTimer
+          docTitle={docTitle}
+          onClose={() => setTimerOpen(false)}
+        />
+      ) : null}
+
+      {/* Shortcuts Guide Dialog */}
+      {shortcutsOpen ? (
+        <ShortcutsDialog onClose={() => setShortcutsOpen(false)} />
+      ) : null}
     </div>
   );
 }

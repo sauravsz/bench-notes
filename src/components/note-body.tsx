@@ -3,6 +3,7 @@ import type { NoteBlock } from "@/data/types";
 import { HIGHLIGHT_COLORS, useHighlights, type HighlightItem } from "@/lib/highlights";
 import { DiagramRenderer } from "./diagrams/diagram-renderer";
 import { cn } from "@/lib/utils";
+
 function renderWithHighlights(
   rawText: string,
   docHighlights: HighlightItem[],
@@ -10,17 +11,14 @@ function renderWithHighlights(
 ): ReactNode[] {
   if (!rawText) return [];
 
-  // Filter highlights that exist within rawText
   const activeHighlights = docHighlights.filter(
     (h) => h.text && rawText.includes(h.text),
   );
 
   if (activeHighlights.length === 0) {
-    // Normal inline markdown parser
     return parseInlineMarkdown(rawText);
   }
 
-  // Sort by length descending to match longest phrases first
   activeHighlights.sort((a, b) => b.text.length - a.text.length);
 
   type Segment =
@@ -56,7 +54,7 @@ function renderWithHighlights(
         (c) => c.id === seg.highlight.color,
       );
       const bgClass =
-        colorConfig?.bgClass || "bg-yellow-200/70 text-ink border-b-2 border-yellow-400";
+        colorConfig?.bgClass || "bg-[#0099ff]/30 text-white border-b border-[#0099ff]";
 
       return (
         <mark
@@ -67,9 +65,9 @@ function renderWithHighlights(
             onHighlightClick?.(seg.highlight.id, e);
           }}
           className={cn(
-            "cursor-pointer rounded-xs px-0.5 py-0.2 transition-all hover:brightness-95",
+            "cursor-pointer rounded-xs px-1 py-0.5 transition-all hover:brightness-125",
             bgClass,
-            seg.highlight.note ? "ring-1 ring-accent/60" : "",
+            seg.highlight.note ? "ring-1 ring-[#0099ff]" : "",
           )}
           title={
             seg.highlight.note
@@ -79,7 +77,7 @@ function renderWithHighlights(
         >
           {parseInlineMarkdown(seg.highlight.text)}
           {seg.highlight.note ? (
-            <span className="ml-1 inline-block size-1.5 rounded-full bg-accent align-middle" />
+            <span className="ml-1 inline-block size-1.5 rounded-full bg-[#0099ff] align-middle" />
           ) : null}
         </mark>
       );
@@ -90,7 +88,6 @@ function renderWithHighlights(
 
 function parseInlineMarkdown(text: string): ReactNode[] {
   if (!text) return [];
-  // Matches markdown bold (**), italics (*), inline code (`), and markdown links ([text](url))
   const parts = text.split(/(\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_|`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
   return parts.map((part, i) => {
     if (
@@ -98,7 +95,7 @@ function parseInlineMarkdown(text: string): ReactNode[] {
       (part.startsWith("__") && part.endsWith("__") && part.length > 4)
     ) {
       return (
-        <strong key={i} className="font-bold text-ink">
+        <strong key={i} className="font-bold text-white">
           {part.slice(2, -2)}
         </strong>
       );
@@ -108,14 +105,17 @@ function parseInlineMarkdown(text: string): ReactNode[] {
       (part.startsWith("_") && part.endsWith("_") && part.length > 2)
     ) {
       return (
-        <em key={i} className="italic text-ink">
+        <em key={i} className="italic text-[#b3b3b3]">
           {part.slice(1, -1)}
         </em>
       );
     }
     if (part.startsWith("`") && part.endsWith("`") && part.length > 2) {
       return (
-        <code key={i} className="rounded bg-bg-warm px-1.5 py-0.5 font-mono text-[0.88em] text-accent font-semibold border border-line/60">
+        <code
+          key={i}
+          className="rounded-md border border-[#262626] bg-[#1c1c1c] px-1.5 py-0.5 font-mono text-[12px] text-[#0099ff]"
+        >
           {part.slice(1, -1)}
         </code>
       );
@@ -128,7 +128,7 @@ function parseInlineMarkdown(text: string): ReactNode[] {
           href={linkMatch[2]}
           target={linkMatch[2].startsWith("http") ? "_blank" : undefined}
           rel={linkMatch[2].startsWith("http") ? "noopener noreferrer" : undefined}
-          className="text-accent underline underline-offset-2 hover:text-accent-2 font-medium"
+          className="text-[#0099ff] underline underline-offset-2 hover:text-[#33adff] font-medium transition-colors"
         >
           {linkMatch[1]}
         </a>
@@ -160,19 +160,21 @@ function Block({
 
   const render = (text: string) =>
     renderWithHighlights(text, blockSpecificHighlights, onHighlightClick);
+
   switch (block.type) {
     case "h3": {
       const headingId = `section-${blockIndex}-${block.text.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
-      return <h3 id={headingId} className="scroll-mt-24">{render(block.text)}</h3>;
+      return <h3 id={headingId} className="scroll-mt-24 font-display text-xl sm:text-2xl font-bold tracking-[-0.03em] text-white mt-8 mb-3">{render(block.text)}</h3>;
     }
     case "h4": {
       const headingId = `concept-${blockIndex}-${block.text.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
-      return <h4 id={headingId} className="scroll-mt-24">{render(block.text)}</h4>;
+      return <h4 id={headingId} className="scroll-mt-24 font-display text-base sm:text-lg font-bold text-[#e6e6e6] mt-6 mb-2">{render(block.text)}</h4>;
     }
     case "p":
-      return <p>{render(block.text)}</p>;
+      return <p className="font-sans text-sm sm:text-base leading-relaxed text-[#d1d1d1] mb-4">{render(block.text)}</p>;
+    case "ul":
       return (
-        <ul>
+        <ul className="space-y-2 mb-5 pl-5 list-disc text-sm sm:text-base text-[#d1d1d1] leading-relaxed">
           {block.items.map((item, i) => (
             <li key={i}>{render(item)}</li>
           ))}
@@ -180,7 +182,7 @@ function Block({
       );
     case "ol":
       return (
-        <ol>
+        <ol className="space-y-2 mb-5 pl-5 list-decimal text-sm sm:text-base text-[#d1d1d1] leading-relaxed">
           {block.items.map((item, i) => (
             <li key={i}>{render(item)}</li>
           ))}
@@ -188,25 +190,25 @@ function Block({
       );
     case "table":
       return (
-        <div className="mb-5 overflow-x-auto rounded-lg border border-line">
+        <div className="mb-6 overflow-x-auto rounded-[18px] border border-[#262626] bg-[#141414]">
           {block.caption ? (
-            <p className="m-0 border-b border-line bg-surface-2 px-3 py-2 text-sm text-muted">
+            <p className="m-0 border-b border-[#262626] bg-[#1c1c1c] px-4 py-2.5 font-mono text-xs font-semibold text-[#999999]">
               {render(block.caption)}
             </p>
           ) : null}
-          <table>
+          <table className="w-full text-left text-xs sm:text-sm">
             <thead>
-              <tr>
+              <tr className="border-b border-[#262626] bg-[#1c1c1c]">
                 {block.headers.map((h) => (
-                  <th key={h}>{render(h)}</th>
+                  <th key={h} className="px-4 py-3 font-display font-bold text-white">{render(h)}</th>
                 ))}
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-[#1a1a1a]">
               {block.rows.map((row, i) => (
-                <tr key={i}>
+                <tr key={i} className="hover:bg-[#181818] transition-colors">
                   {row.map((cell, j) => (
-                    <td key={j}>{render(cell)}</td>
+                    <td key={j} className="px-4 py-3 text-[#cccccc] leading-relaxed">{render(cell)}</td>
                   ))}
                 </tr>
               ))}
@@ -216,12 +218,12 @@ function Block({
       );
     case "quote":
       return (
-        <blockquote className="my-4 border-l-2 border-accent/40 bg-surface-2 px-4 py-3">
-          <p className="mb-1 font-serif text-[1.05rem] font-medium text-ink">
+        <blockquote className="my-5 rounded-r-[18px] border-l-2 border-[#0099ff] bg-[#141414] px-5 py-4">
+          <p className="mb-1 text-sm sm:text-base font-medium text-white italic leading-relaxed">
             {render(block.text)}
           </p>
           {block.cite ? (
-            <footer className="font-sans text-sm font-semibold text-muted">
+            <footer className="font-mono text-xs text-[#999999] mt-2">
               — {render(block.cite)}
             </footer>
           ) : null}
@@ -229,36 +231,36 @@ function Block({
       );
     case "def":
       return (
-        <article className="mb-3 rounded-lg border border-line bg-surface px-4 py-3">
-          <header className="mb-1 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-            <h4 className="m-0 border-0 p-0 font-sans text-sm font-semibold tracking-tight text-ink">
+        <article className="mb-4 rounded-[18px] border border-[#262626] bg-[#141414] p-5">
+          <header className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
+            <h4 className="m-0 font-display text-sm sm:text-base font-bold text-white">
               {render(block.term)}
             </h4>
             {block.section ? (
-              <span className="font-sans text-xs uppercase tracking-[0.12em] text-faint">
+              <span className="font-mono text-xs font-bold text-[#0099ff]">
                 {block.section}
               </span>
             ) : null}
           </header>
-          <p className="mb-0 text-[1.02rem] leading-relaxed">{render(block.body)}</p>
+          <p className="mb-0 text-xs sm:text-sm leading-relaxed text-[#cccccc]">{render(block.body)}</p>
         </article>
       );
     case "maxim":
       return (
-        <article className="mb-3 rounded-lg border border-line bg-surface-2 px-4 py-3">
-          <p className="mb-1 font-serif text-[1.05rem] font-bold text-ink">
+        <article className="mb-4 rounded-[18px] border border-[#262626] bg-[#141414] p-5">
+          <p className="mb-1 font-display text-base font-bold text-white tracking-[-0.01em]">
             {render(block.latin)}
           </p>
-          <p className="mb-0 text-[0.98rem] text-ink-soft">{render(block.meaning)}</p>
+          <p className="mb-0 text-xs sm:text-sm text-[#999999] leading-relaxed">{render(block.meaning)}</p>
         </article>
       );
     case "callout":
       return (
-        <aside className="mb-4 rounded-lg border border-line bg-bg-warm px-4 py-3">
-          <p className="mb-1 font-sans text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+        <aside className="mb-5 rounded-[18px] border border-[#262626] bg-[#181818] p-5">
+          <p className="mb-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#0099ff]">
             {render(block.label)}
           </p>
-          <p className="mb-0 text-[1.02rem]">{render(block.body)}</p>
+          <p className="mb-0 text-xs sm:text-sm leading-relaxed text-[#d1d1d1]">{render(block.body)}</p>
         </aside>
       );
     case "diagram":
@@ -271,13 +273,13 @@ function Block({
       );
     case "tree":
       return (
-        <div className="my-5 rounded-xl border border-line bg-surface p-4 shadow-xs">
+        <div className="my-5 rounded-[18px] border border-[#262626] bg-[#141414] p-5 shadow-xs">
           {block.title ? (
-            <p className="mb-2 font-sans text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+            <p className="mb-2 font-mono text-xs font-bold uppercase tracking-wider text-[#0099ff]">
               {render(block.title)}
             </p>
           ) : null}
-          <pre className="note-tree m-0 p-3 rounded-lg bg-bg-warm/70 font-mono text-xs leading-relaxed text-ink-soft overflow-x-auto">{block.lines.join("\n")}</pre>
+          <pre className="m-0 p-4 rounded-xl bg-[#090909] border border-[#262626] font-mono text-xs leading-relaxed text-[#cccccc] overflow-x-auto">{block.lines.join("\n")}</pre>
         </div>
       );
     default:

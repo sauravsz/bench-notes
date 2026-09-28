@@ -14,11 +14,11 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: APP_NAME },
-      { name: "theme-color", content: "#2F4553" },
+      { name: "theme-color", content: "#090909" },
       {
         name: "description",
         content:
-          "Business Law 303 exam notes from LR Ma'am's lectures — 14-mark answers, definitions, and maxims.",
+          "MBA Business Law (Paper 603) and core curriculum interactive examination and lecture revision suite.",
       },
     ],
     links: [
@@ -28,16 +28,16 @@ export const Route = createRootRoute({
       { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap",
       },
     ],
   }),
   component: () => (
-    <html lang="en" className="antialiased" suppressHydrationWarning>
+    <html lang="en" className="dark bg-[#090909] text-white antialiased" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="min-h-screen bg-[#090909] text-white selection:bg-[#0099ff]/30 selection:text-white">
         <PreviewHostBridge />
         <AuthProvider>
           <VerificationGuard>
@@ -45,7 +45,7 @@ export const Route = createRootRoute({
               <Outlet />
             </AppShell>
           </VerificationGuard>
-          <Toaster position="bottom-right" richColors />
+          <Toaster position="bottom-right" theme="dark" richColors />
         </AuthProvider>
         <Scripts />
       </body>

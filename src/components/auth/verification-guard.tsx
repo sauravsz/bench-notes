@@ -102,46 +102,46 @@ export function VerificationGuard({ children }: { children: ReactNode }) {
     }
   };
 
-  // 1. Not signed in: Hard Blur Background + Centered Gate Modal
+  // 1. Not signed in: Dark Canvas + Centered Gate Card
   if (!currentUser) {
     return (
-      <div className="relative min-h-screen overflow-hidden">
+      <div className="relative min-h-screen overflow-hidden bg-[#090909]">
         {/* Hard-blurred background content */}
         <div
           aria-hidden="true"
-          className="pointer-events-none select-none filter blur-xl opacity-30 contrast-125 scale-102 transition-all duration-300"
+          className="pointer-events-none select-none filter blur-2xl opacity-15 scale-102 transition-all duration-300"
         >
           {children}
         </div>
 
-        {/* Hard Blur Backdrop Overlay */}
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-2xl">
-          <div className="w-full max-w-md rounded-3xl border border-[#e6dfce] bg-[#fffcf7] p-8 shadow-2xl text-center space-y-6 animate-in fade-in zoom-in-95 duration-200">
-            <div className="mx-auto flex size-16 items-center justify-center rounded-2xl bg-[#2f4553] text-[#fffcf7] shadow-md">
-              <Lock className="size-8" strokeWidth={1.75} />
+        {/* Backdrop Overlay */}
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl">
+          <div className="w-full max-w-md rounded-[28px] border border-[#262626] bg-[#141414] p-8 shadow-2xl text-center space-y-6 animate-in fade-in zoom-in-95 duration-200">
+            <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-[#1c1c1c] border border-[#262626] text-white shadow-md">
+              <Lock className="size-6 text-[#0099ff]" strokeWidth={2} />
             </div>
 
             <div className="space-y-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#ebd9c2] px-3 py-0.5 font-sans text-xs font-bold uppercase tracking-wider text-[#bf7538]">
-                <GraduationCap className="size-3.5" />
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1c1c1c] border border-[#262626] px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#999999]">
+                <GraduationCap className="size-3.5 text-[#0099ff]" />
                 MBA Academic Suite
               </span>
-              <h1 className="font-serif text-3xl font-bold tracking-tight text-[#1c2826]">
+              <h1 className="font-display text-3xl font-bold tracking-[-0.03em] text-white">
                 Bench Notes
               </h1>
-              <p className="font-sans text-xs text-[#636c78] leading-relaxed max-w-xs mx-auto">
-                Access is restricted to verified MBA cohort students. Authenticate with your Google account to unlock case notes & syllabus.
+              <p className="font-sans text-xs text-[#999999] leading-relaxed max-w-xs mx-auto">
+                Access is restricted to verified MBA cohort students. Authenticate with your Google account to unlock notes & syllabus.
               </p>
             </div>
 
-            <div className="pt-2 space-y-2.5">
+            <div className="pt-2 space-y-3">
               <Button
                 type="button"
                 onClick={() => {
                   setLoginModalTab("student");
                   setShowLoginModal(true);
                 }}
-                className="w-full h-11 bg-[#bf7538] hover:bg-[#a6622b] text-white font-sans text-sm font-bold gap-2 shadow-sm rounded-xl"
+                className="w-full h-11 bg-white text-black hover:bg-white/90 font-sans text-xs font-bold gap-2 shadow-sm rounded-full transition-all ios-press"
               >
                 <LogIn className="size-4" />
                 Sign in with Google
@@ -153,15 +153,15 @@ export function VerificationGuard({ children }: { children: ReactNode }) {
                   setLoginModalTab("admin");
                   setShowLoginModal(true);
                 }}
-                className="w-full py-2 font-sans text-xs font-semibold text-[#636c78] hover:text-[#1c2826] flex items-center justify-center gap-1.5 transition-colors"
+                className="w-full py-2 font-sans text-xs font-semibold text-[#999999] hover:text-white flex items-center justify-center gap-1.5 transition-colors"
               >
                 <KeyRound className="size-3.5" />
                 <span>Administrator Access Portal</span>
               </button>
             </div>
 
-            <div className="pt-4 border-t border-[#e6dfce] text-[11px] text-[#88909b]">
-              <p>Student accounts require 1-time verification to prevent unauthorized access.</p>
+            <div className="pt-4 border-t border-[#1f1f1f] text-[11px] text-[#666666]">
+              <p>Student accounts require 1-time verification to protect academic material.</p>
             </div>
           </div>
         </div>
@@ -175,7 +175,7 @@ export function VerificationGuard({ children }: { children: ReactNode }) {
     );
   }
 
-  // 2. Signed in, but NOT approved (Pending Verification Gate with Hard Blur)
+  // 2. Signed in, but NOT approved (Pending Verification Gate)
   const approved = isApproved(currentUser.email);
   const admin = isAdmin(currentUser.email);
 
@@ -184,77 +184,77 @@ export function VerificationGuard({ children }: { children: ReactNode }) {
     const isRejected = userReq?.status === "rejected";
 
     return (
-      <div className="relative min-h-screen overflow-hidden">
+      <div className="relative min-h-screen overflow-hidden bg-[#090909]">
         {/* Hard-blurred background content */}
         <div
           aria-hidden="true"
-          className="pointer-events-none select-none filter blur-xl opacity-30 contrast-125 scale-102 transition-all duration-300"
+          className="pointer-events-none select-none filter blur-2xl opacity-15 scale-102 transition-all duration-300"
         >
           {children}
         </div>
 
-        {/* Hard Blur Backdrop Overlay */}
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-2xl">
-          <div className="w-full max-w-lg rounded-3xl border border-[#e6dfce] bg-[#fffcf7] p-8 shadow-2xl text-center space-y-6 animate-in fade-in zoom-in-95 duration-200">
-            <div className="mx-auto flex size-16 items-center justify-center rounded-2xl bg-[#ebd9c2] text-[#bf7538] shadow-md">
+        {/* Backdrop Overlay */}
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl">
+          <div className="w-full max-w-lg rounded-[28px] border border-[#262626] bg-[#141414] p-8 shadow-2xl text-center space-y-6 animate-in fade-in zoom-in-95 duration-200">
+            <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-[#1c1c1c] border border-[#262626] text-white shadow-md">
               {isRejected ? (
-                <ShieldAlert className="size-8 text-rose-600" strokeWidth={1.75} />
+                <ShieldAlert className="size-6 text-rose-500" strokeWidth={2} />
               ) : (
-                <Clock className="size-8 text-[#bf7538] animate-pulse" strokeWidth={1.75} />
+                <Clock className="size-6 text-[#0099ff] animate-pulse" strokeWidth={2} />
               )}
             </div>
 
             <div className="space-y-2">
               <span
-                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-0.5 font-sans text-xs font-bold uppercase tracking-wider ${
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider ${
                   isRejected
-                    ? "bg-rose-100 text-rose-900 border border-rose-200"
-                    : "bg-[#ebd9c2] text-[#bf7538] border border-[#d6cfbe]"
+                    ? "bg-rose-950/60 text-rose-300 border border-rose-800/40"
+                    : "bg-[#1c1c1c] text-[#0099ff] border border-[#0099ff]/30"
                 }`}
               >
                 {isRejected ? "Access Denied" : "Verification Pending"}
               </span>
 
-              <h2 className="font-serif text-2xl font-bold tracking-tight text-[#1c2826]">
+              <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-[-0.03em] text-white">
                 {isRejected ? "Account Not Authorized" : "Awaiting Administrator Approval"}
               </h2>
 
-              <div className="rounded-xl bg-[#fbf8f0] p-4 border border-[#e6dfce] my-4 text-left space-y-1.5 shadow-2xs">
+              <div className="rounded-[18px] bg-[#1c1c1c] p-4 border border-[#262626] my-4 text-left space-y-2 shadow-2xs">
                 <div className="flex items-center gap-2">
-                  <span className="font-sans text-xs font-bold text-[#1c2826]">Google ID:</span>
-                  <span className="font-sans text-xs text-[#bf7538] font-bold font-mono">{currentUser.email}</span>
+                  <span className="font-mono text-xs font-bold text-[#999999]">Google ID:</span>
+                  <span className="font-mono text-xs text-[#0099ff] font-bold">{currentUser.email}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="font-sans text-xs font-bold text-[#1c2826]">Name:</span>
-                  <span className="font-sans text-xs text-[#4b5563]">{currentUser.name}</span>
+                  <span className="font-mono text-xs font-bold text-[#999999]">Name:</span>
+                  <span className="font-sans text-xs text-white">{currentUser.name}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="font-sans text-xs font-bold text-[#1c2826]">Status:</span>
-                  <span className={`font-sans text-xs font-bold ${isRejected ? "text-rose-700" : "text-[#bf7538]"}`}>
-                    {isRejected ? "Declined by Administrator" : "Request Submitted • Polling for approval..."}
+                  <span className="font-mono text-xs font-bold text-[#999999]">Status:</span>
+                  <span className={`font-sans text-xs font-bold ${isRejected ? "text-rose-400" : "text-amber-400"}`}>
+                    {isRejected ? "Declined by Administrator" : "Request Queued • Auto-checking status..."}
                   </span>
                 </div>
               </div>
 
-              <p className="font-sans text-xs text-[#636c78] leading-relaxed max-w-md mx-auto">
+              <p className="font-sans text-xs text-[#999999] leading-relaxed max-w-md mx-auto">
                 {isRejected
                   ? "Your access request was declined by the administrator. Contact your cohort lead if you believe this is in error."
-                  : "Your Google identity is queued for verification. Once the administrator approves your email, this screen will automatically unlock."}
+                  : "Your Google identity is registered. Once the administrator approves your email from the Admin panel, this screen will instantly unlock."}
               </p>
             </div>
 
             {/* Passcode Unlock Drawer */}
             {showPasscodeField ? (
-              <div className="rounded-xl border border-[#e1d5c0] bg-[#f9f5eb] p-3.5 space-y-2 text-left animate-in fade-in">
+              <div className="rounded-[18px] border border-[#262626] bg-[#1c1c1c] p-4 space-y-2.5 text-left animate-in fade-in">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-semibold text-[#2f4553] flex items-center gap-1.5">
-                    <Ticket className="h-3.5 w-3.5 text-[#bf7538]" />
+                  <label className="text-xs font-semibold text-white flex items-center gap-1.5">
+                    <Ticket className="h-3.5 w-3.5 text-[#0099ff]" />
                     Enter Instant Unlock Passcode
                   </label>
                   <button
                     type="button"
                     onClick={() => setShowPasscodeField(false)}
-                    className="text-[11px] text-[#88909b] hover:underline"
+                    className="text-[11px] text-[#666666] hover:text-white"
                   >
                     Cancel
                   </button>
@@ -266,13 +266,13 @@ export function VerificationGuard({ children }: { children: ReactNode }) {
                     value={passcodeInput}
                     onChange={(e) => setPasscodeInput(e.target.value.toUpperCase())}
                     onKeyDown={(e) => e.key === "Enter" && handlePasscodeUnlock()}
-                    className="flex-1 rounded-md border border-[#cfc4b0] bg-white px-3 py-1.5 text-xs font-mono tracking-wider uppercase text-[#1c2826]"
+                    className="flex-1 rounded-full border border-[#262626] bg-[#090909] px-4 py-2 text-xs font-mono tracking-wider uppercase text-white focus:border-[#0099ff] focus:outline-none"
                   />
                   <Button
                     type="button"
                     size="sm"
                     onClick={handlePasscodeUnlock}
-                    className="bg-[#2f4553] text-white hover:bg-[#20313c] text-xs px-3"
+                    className="bg-white text-black hover:bg-white/90 text-xs px-4 rounded-full font-bold"
                   >
                     Unlock
                   </Button>
@@ -282,7 +282,7 @@ export function VerificationGuard({ children }: { children: ReactNode }) {
               <button
                 type="button"
                 onClick={() => setShowPasscodeField(true)}
-                className="text-xs text-[#bf7538] hover:underline flex items-center justify-center gap-1 mx-auto font-medium"
+                className="text-xs text-[#0099ff] hover:underline flex items-center justify-center gap-1 mx-auto font-medium"
               >
                 <Ticket className="h-3.5 w-3.5" />
                 Have an access passcode? Enter code
@@ -297,7 +297,7 @@ export function VerificationGuard({ children }: { children: ReactNode }) {
                 size="sm"
                 onClick={handleManualCheckStatus}
                 disabled={isCheckingStatus}
-                className="w-full sm:w-auto text-xs border-[#d6cfbe] text-[#2f4553]"
+                className="w-full sm:w-auto text-xs border-[#262626] bg-[#1c1c1c] text-white rounded-full hover:bg-[#262626]"
               >
                 <RefreshCw className={`size-3.5 mr-1.5 ${isCheckingStatus ? "animate-spin" : ""}`} />
                 {isCheckingStatus ? "Checking..." : "Check Status Now"}
@@ -307,7 +307,7 @@ export function VerificationGuard({ children }: { children: ReactNode }) {
                 variant="outline"
                 size="sm"
                 onClick={signOut}
-                className="w-full sm:w-auto text-xs border-[#d6cfbe] text-[#636c78]"
+                className="w-full sm:w-auto text-xs border-[#262626] bg-[#1c1c1c] text-[#999999] rounded-full hover:text-white hover:bg-[#262626]"
               >
                 <LogOut className="size-3.5 mr-1.5" />
                 Switch Account
@@ -319,7 +319,7 @@ export function VerificationGuard({ children }: { children: ReactNode }) {
                   setLoginModalTab("admin");
                   setShowLoginModal(true);
                 }}
-                className="w-full sm:w-auto text-xs font-bold bg-[#2f4553] text-white hover:bg-[#20313c]"
+                className="w-full sm:w-auto text-xs font-bold bg-white text-black hover:bg-white/90 rounded-full"
               >
                 <KeyRound className="size-3.5 mr-1.5" />
                 Admin Portal
