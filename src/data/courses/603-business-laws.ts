@@ -1,5 +1,12 @@
 import type { Course } from "./types";
-import { topics } from "../index";
+import { midSemImportantTopics } from "../notes-midsem";
+import { judiciaryTopics } from "../notes-judiciary";
+import { contractTopics } from "../notes-contract";
+import { constitutionTopics } from "../notes-constitution";
+import { offerTopics } from "../notes-offer";
+import { consentTopics } from "../notes-consent";
+import { dischargeTopics } from "../notes-discharge";
+import { companiesTopics } from "../notes-companies";
 import { examQuestions } from "../exam-answers";
 import { glossary } from "../glossary";
 import { maxims } from "../maxims";
@@ -24,7 +31,16 @@ export const businessLawsCourse: Course = {
     "Discharge, Breach and Remedies",
     "Companies Act, 2013",
   ],
-  topics,
+  topics: [
+    ...midSemImportantTopics,
+    ...judiciaryTopics,
+    ...contractTopics,
+    ...constitutionTopics,
+    ...offerTopics,
+    ...consentTopics,
+    ...dischargeTopics,
+    ...companiesTopics,
+  ],
   examQuestions,
   glossary,
   maxims,

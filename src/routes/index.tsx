@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -38,6 +38,15 @@ function Dashboard() {
   const resumeTopic =
     (lastSlug && activeCourse.topics.find((t) => t.slug === lastSlug)) ||
     activeCourse.topics[0] || { slug: "nature-scope-business-environment", title: "Overview" };
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const courseParam = params.get("course");
+    if (courseParam === "603" || courseParam === "business-laws") {
+      setActiveCourseSlug("business-laws");
+    }
+  }, [setActiveCourseSlug]);
 
   const handleReset = () => {
     resetProgress();
@@ -285,18 +294,28 @@ function Dashboard() {
                 (t) => t.unit === unit,
               );
               if (unitTopics.length === 0) return null;
+              const isMidSemUnit = unit === "Mid Sem Important";
 
               return (
-                <div key={unit} className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="flex size-6 items-center justify-center rounded-full bg-accent/15 font-sans text-xs font-bold text-accent">
-                      {idx + 1}
-                    </span>
-                    <h3 className="font-serif text-lg font-bold text-ink">
-                      {unit}
-                    </h3>
+                <div key={unit} className={cn("space-y-3", isMidSemUnit && "rounded-2xl border-2 border-amber-400/80 bg-amber-50/30 p-5 shadow-xs")}>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className={cn(
+                        "flex size-6 items-center justify-center rounded-full font-sans text-xs font-bold",
+                        isMidSemUnit ? "bg-amber-600 text-white" : "bg-accent/15 text-accent"
+                      )}>
+                        {isMidSemUnit ? "★" : idx + 1}
+                      </span>
+                      <h3 className="font-serif text-lg font-bold text-ink">
+                        {unit}
+                      </h3>
+                    </div>
+                    {isMidSemUnit && (
+                      <span className="rounded-full bg-amber-200/80 text-amber-900 border border-amber-300 px-2.5 py-0.5 text-xs font-bold font-sans">
+                        9 High-Yield Exam Modules
+                      </span>
+                    )}
                   </div>
-
                   <div className="grid gap-3 sm:grid-cols-2">
                     {unitTopics.map((topic) => {
                       const isStudied = studied[topic.slug];

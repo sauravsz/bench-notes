@@ -207,10 +207,15 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 
       {activeCourse.units.map((unit) => {
         const list = activeCourse.topics.filter((t) => t.unit === unit);
+        const isMidSem = unit === "Mid Sem Important";
         return (
-          <div key={unit}>
-            <p className="mb-1 px-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-faint">
-              {unit}
+          <div key={unit} className={cn(isMidSem && "rounded-lg bg-amber-500/10 p-1.5 border border-amber-400/40")}>
+            <p className={cn(
+              "mb-1 px-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em]",
+              isMidSem ? "text-amber-800 font-bold flex items-center gap-1" : "text-faint"
+            )}>
+              {isMidSem && <span>⭐</span>}
+              <span>{unit}</span>
             </p>
             <ul className="flex flex-col">
               {list.map((topic) => {
