@@ -83,10 +83,57 @@ function Dashboard() {
             </p>
           </div>
 
-          {/* ⭐ Signature Gradient Atmosphere Spotlight Card: 603 Mid-Sem Master Modules */}
-          <div className="relative overflow-hidden rounded-[28px] spotlight-violet p-6 sm:p-8 text-white shadow-2xl transition-all duration-300">
-            <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-              <div className="space-y-3 max-w-xl">
+          {/* ⭐ Dual Master Spotlight Cards */}
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            {/* Spotlight 1: Paper 602 Business Communications */}
+            <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#0284C7] via-[#0369A1] to-[#0F172A] p-6 sm:p-7 text-white shadow-2xl transition-all duration-300 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur-md px-3 py-0.5 text-xs font-bold text-white border border-white/20">
+                    <Sparkles className="size-3.5" />
+                    19 Master Modules
+                  </span>
+                  <span className="font-mono text-xs font-semibold text-white/80">
+                    Paper 602 · Business Communications
+                  </span>
+                </div>
+                <h2 className="font-display text-xl sm:text-2xl font-bold tracking-[-0.03em] leading-tight text-white">
+                  19 High-Yield 14-Mark Master Modules Ready.
+                </h2>
+                <p className="font-sans text-xs sm:text-sm text-white/85 leading-relaxed">
+                  Comprehensive notes covering Minto Pyramid Principle, SCQA tension modeling, RVU venture pitch architecture, cross-cultural PDI matrices, and high-pressure stagecraft.
+                </p>
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <Link
+                  to="/topic/$slug"
+                  params={{ slug: "corporate-clarity-ocean-of-data" }}
+                  onClick={() => setActiveCourseSlug("business-communications")}
+                  className="inline-flex items-center gap-2 rounded-full bg-white text-[#0369A1] hover:bg-white/90 px-5 py-2.5 font-sans text-xs font-bold shadow-md transition-all ios-press"
+                >
+                  <span>Study 602 Master Notes</span>
+                  <ArrowRight className="size-3.5" />
+                </Link>
+                {activeCourseSlug !== "business-communications" ? (
+                  <button
+                    type="button"
+                    onClick={() => setActiveCourseSlug("business-communications")}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-md border border-white/20 px-4 py-2.5 font-sans text-xs font-semibold text-white transition-all ios-press"
+                  >
+                    Set Active
+                  </button>
+                ) : (
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-white/90 bg-white/10 px-3 py-1.5 rounded-full">
+                    <CheckCircle2 className="size-3.5 text-sky-300" /> Active Course
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Spotlight 2: Paper 603 Business Laws */}
+            <div className="relative overflow-hidden rounded-[28px] spotlight-violet p-6 sm:p-7 text-white shadow-2xl transition-all duration-300 flex flex-col justify-between">
+              <div className="space-y-3">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur-md px-3 py-0.5 text-xs font-bold text-white border border-white/20">
                     <Sparkles className="size-3.5" />
@@ -96,37 +143,40 @@ function Dashboard() {
                     Paper 603 · Business Laws
                   </span>
                 </div>
-                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.03em] leading-tight text-white">
+                <h2 className="font-display text-xl sm:text-2xl font-bold tracking-[-0.03em] leading-tight text-white">
                   9 Master Examination Modules Ready.
                 </h2>
-                <p className="font-sans text-sm text-white/85 leading-relaxed">
-                  Complete academic master notes covering 6 foundational Latin maxims, Companies Act 2013 revamp analysis, and Indian Contract Act breach remedies.
+                <p className="font-sans text-xs sm:text-sm text-white/85 leading-relaxed">
+                  Academic master notes covering 6 foundational Latin maxims, Companies Act 2013 revamp analysis, and Indian Contract Act breach remedies.
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <div className="mt-6 flex flex-wrap items-center gap-3">
                 <Link
                   to="/topic/$slug"
                   params={{ slug: "midsem-foundational-legal-maxims" }}
                   onClick={() => setActiveCourseSlug("business-laws")}
-                  className="inline-flex items-center gap-2 rounded-full bg-white text-black hover:bg-white/90 px-6 py-3 font-sans text-xs font-bold shadow-lg transition-all ios-press"
+                  className="inline-flex items-center gap-2 rounded-full bg-white text-black hover:bg-white/90 px-5 py-2.5 font-sans text-xs font-bold shadow-md transition-all ios-press"
                 >
                   <span>Study 603 Mid-Sem Notes</span>
                   <ArrowRight className="size-3.5" />
                 </Link>
-                {activeCourseSlug !== "business-laws" && (
+                {activeCourseSlug !== "business-laws" ? (
                   <button
                     type="button"
                     onClick={() => setActiveCourseSlug("business-laws")}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-md border border-white/20 px-4 py-3 font-sans text-xs font-semibold text-white transition-all ios-press"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-md border border-white/20 px-4 py-2.5 font-sans text-xs font-semibold text-white transition-all ios-press"
                   >
-                    Switch to Paper 603
+                    Set Active
                   </button>
+                ) : (
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-white/90 bg-white/10 px-3 py-1.5 rounded-full">
+                    <CheckCircle2 className="size-3.5 text-emerald-300" /> Active Course
+                  </span>
                 )}
               </div>
             </div>
           </div>
-
           {/* Active Course Progress Card (Charcoal Surface) */}
           <div className="rounded-[24px] border border-[#262626] bg-[#141414] p-6 sm:p-8 space-y-6">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
@@ -262,7 +312,8 @@ function Dashboard() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {filteredCourses.map((c) => {
               const isSelected = c.slug === activeCourseSlug;
-              const hasMidSem = c.slug === "business-laws";
+              const is602 = c.slug === "business-communications";
+              const is603 = c.slug === "business-laws";
 
               return (
                 <div
@@ -297,9 +348,14 @@ function Dashboard() {
                     <p className="line-clamp-2 text-xs text-[#999999] leading-relaxed">
                       {c.description}
                     </p>
-                    {hasMidSem && (
+                    {is602 && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-sky-500/15 border border-sky-500/40 text-sky-400 px-2 py-0.5 text-[10px] font-bold">
+                        ⭐ 19 Master Modules Ready
+                      </span>
+                    )}
+                    {is603 && (
                       <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-400 px-2 py-0.5 text-[10px] font-bold">
-                        ⭐ Mid Sem Ready
+                        ⭐ 9 Mid Sem Modules Ready
                       </span>
                     )}
                   </div>
