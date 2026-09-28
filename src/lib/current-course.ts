@@ -22,11 +22,11 @@ export const useCurrentCourse = create<CurrentCourseState>()(
 
       getActiveCourse: () => {
         const slug = get().activeCourseSlug;
-        return getCourse(slug) || allCourses[2]; // Default to 603 Business Laws
+        return getCourse(slug) || allCourses.find((c) => c.slug === "business-laws") || allCourses[2];
       },
     }),
     {
-      name: "bench-notes-active-course-v1",
+      name: "bench-notes-active-course-v2",
     },
   ),
 );

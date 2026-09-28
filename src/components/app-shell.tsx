@@ -35,6 +35,7 @@ import { toast } from "sonner";
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
+  const setActiveCourseSlug = useCurrentCourse((s) => s.setActiveCourseSlug);
   const currentUser = useAccessControl((s) => s.currentUser);
   const isAdmin = useAccessControl((s) => s.isAdmin(s.currentUser?.email));
   const studied = useProgress((s) => s.studied);
@@ -62,6 +63,33 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
         >
           <BookOpen className="size-4 shrink-0 text-accent" strokeWidth={1.75} />
           <span>Syllabus ({activeCourse.code})</span>
+        </Link>
+        <Link
+          to="/topic/$slug"
+          params={{ slug: "midsem-foundational-legal-maxims" }}
+          onClick={() => {
+            setActiveCourseSlug("business-laws");
+            onNavigate?.();
+          }}
+          className={cn(
+            "flex min-h-11 items-center justify-between rounded-md px-3 text-sm font-bold transition-all duration-200 ios-press-subtle my-1",
+            pathname.startsWith("/topic/midsem-")
+              ? "bg-amber-600 text-white shadow-xs"
+              : "bg-amber-500/15 text-amber-900 hover:bg-amber-500/25 border border-amber-300/80",
+          )}
+        >
+          <span className="flex items-center gap-2">
+            <span className="text-amber-600">⭐</span>
+            <span>Mid Sem Important (603)</span>
+          </span>
+          <span className={cn(
+            "rounded-full px-2 py-0.5 font-sans text-[10px] font-bold",
+            pathname.startsWith("/topic/midsem-")
+              ? "bg-white text-amber-700"
+              : "bg-amber-600 text-white"
+          )}>
+            9 Notes
+          </span>
         </Link>
         <Link
           to="/exam"

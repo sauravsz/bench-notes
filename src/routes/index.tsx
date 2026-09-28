@@ -82,6 +82,48 @@ function Dashboard() {
           </div>
 
           {/* Active Course Mastery Card */}
+          {/* ⭐ Dedicated Mid Sem Important 603 Quick Access Banner */}
+          <div className="rounded-2xl border-2 border-amber-400 bg-amber-50/70 p-5 shadow-xs transition-all duration-200 ios-card">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-amber-600 text-white px-2.5 py-0.5 font-sans text-xs font-bold">
+                    <span>⭐</span> Mid Sem Master Notes
+                  </span>
+                  <span className="font-sans text-xs font-bold text-amber-900">
+                    Paper 603 · Business Laws (LR Ma'am)
+                  </span>
+                </div>
+                <h2 className="font-serif text-xl font-bold text-ink">
+                  Mid Sem Important Revision Modules (9 High-Yield Topics)
+                </h2>
+                <p className="font-sans text-xs text-muted max-w-xl">
+                  Complete academic-style master notes with definitions, 6 foundational Latin maxims, Companies Act 2013 revamp analysis, and Indian Contract Act breach remedies.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <Link
+                  to="/topic/$slug"
+                  params={{ slug: "midsem-foundational-legal-maxims" }}
+                  onClick={() => setActiveCourseSlug("business-laws")}
+                  className="inline-flex items-center gap-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white px-4 py-2.5 font-sans text-xs font-bold shadow-sm transition-all ios-press"
+                >
+                  <span>Study Mid-Sem Notes</span>
+                  <ArrowRight className="size-3.5" />
+                </Link>
+                {activeCourseSlug !== "business-laws" && (
+                  <button
+                    type="button"
+                    onClick={() => setActiveCourseSlug("business-laws")}
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-amber-400/80 bg-white px-3 py-2 font-sans text-xs font-semibold text-amber-900 hover:bg-amber-100/60 transition-all ios-press"
+                  >
+                    Switch to 603
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
           <div className="rounded-2xl border border-line bg-surface p-6 shadow-sm transition-all duration-300 ios-card">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="space-y-2">
