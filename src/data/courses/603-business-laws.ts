@@ -15,7 +15,7 @@ export const businessLawsCourse: Course = {
   instructor: "LR Ma'am",
   accentColor: "#B45309",
   units: [
-    "Mid Term Important",
+    "Mid Sem Important",
     "Judiciary and Legal System",
     "Indian Contract Act, 1872",
     "Constitution and Legal Environment",

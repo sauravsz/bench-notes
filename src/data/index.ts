@@ -7,13 +7,13 @@ import { offerTopics } from "./notes-offer";
 import { consentTopics } from "./notes-consent";
 import { dischargeTopics } from "./notes-discharge";
 import { companiesTopics } from "./notes-companies";
-import { midTermImportantTopics } from "./notes-midterm";
+import { midSemImportantTopics } from "./notes-midsem";
 import { examQuestions } from "./exam-answers";
 import { glossary } from "./glossary";
 import { maxims } from "./maxims";
 
 export const topics: Topic[] = [
-  ...midTermImportantTopics,
+  ...midSemImportantTopics,
   ...judiciaryTopics,
   ...contractTopics,
   ...constitutionTopics,
@@ -24,7 +24,7 @@ export const topics: Topic[] = [
 ];
 
 export const units = [
-  "Mid Term Important",
+  "Mid Sem Important",
   "Judiciary and Legal System",
   "Indian Contract Act, 1872",
   "Constitution and Legal Environment",
