@@ -83,103 +83,43 @@ function Dashboard() {
             </p>
           </div>
 
-          {/* Active Course Progress Card (Charcoal Surface) */}
-          <div className="rounded-[24px] border border-[#262626] bg-[#141414] p-6 sm:p-8 space-y-6">
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2">
-                  <span className="rounded-full bg-[#1c1c1c] border border-[#262626] text-white px-2.5 py-0.5 font-mono text-xs font-bold">
-                    Paper {activeCourse.code}
-                  </span>
-                  <span className="font-display text-lg font-bold text-white">
-                    {activeCourse.title}
-                  </span>
-                </div>
-                <div className="flex items-baseline gap-3">
-                  <span className="font-display text-4xl sm:text-5xl font-bold text-white tracking-[-0.03em]">
-                    {masteryPercentage}%
-                  </span>
-                  <span className="font-sans text-sm text-[#999999]">
-                    completed ({doneCount} of {activeCourse.topics.length} topics mastered)
-                  </span>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3">
-                {activeCourse.topics.length > 0 && (
-                  <Link
-                    to="/topic/$slug"
-                    params={{ slug: resumeTopic.slug }}
-                    className="inline-flex items-center gap-2 rounded-full bg-white text-black hover:bg-white/90 px-5 py-2.5 font-sans text-xs font-bold shadow-sm transition-all ios-press"
-                  >
-                    <span>{lastSlug ? "Resume Studying" : "Start Reading"}</span>
-                    <ArrowRight className="size-3.5" />
-                  </Link>
-                )}
-
-                {!confirmReset ? (
-                  <button
-                    type="button"
-                    onClick={() => setConfirmReset(true)}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-[#262626] bg-[#1c1c1c] px-3.5 py-2.5 font-sans text-xs font-medium text-[#999999] hover:text-white transition-all ios-press"
-                    title="Reset completion progress"
-                  >
-                    <RotateCcw className="size-3.5" />
-                    <span>Reset</span>
-                  </button>
-                ) : (
-                  <div className="flex items-center gap-2 rounded-full border border-[#262626] bg-[#1c1c1c] px-3 py-1.5">
-                    <span className="font-sans text-xs font-semibold text-white">
-                      Reset?
-                    </span>
-                    <button
-                      type="button"
-                      onClick={handleReset}
-                      className="rounded-full bg-rose-600 px-2.5 py-0.5 font-sans text-xs font-bold text-white transition-all"
-                    >
-                      Yes
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setConfirmReset(false)}
-                      className="rounded-full border border-[#262626] px-2.5 py-0.5 font-sans text-xs text-[#999999] hover:text-white transition-all"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#1c1c1c]">
-              <div
-                className="h-full bg-[#0099ff] transition-all duration-500 ease-out"
-                style={{ width: `${masteryPercentage}%` }}
-              />
-            </div>
-
-            {/* Stat Counters */}
-            <div className="grid grid-cols-2 gap-3 border-t border-[#1a1a1a] pt-5 sm:grid-cols-4">
-              <div className="rounded-xl bg-[#1c1c1c]/60 border border-[#262626] p-3.5">
-                <span className="font-sans text-xs font-medium text-[#999999] block">Curriculum Units</span>
-                <span className="font-display text-xl font-bold text-white">{activeCourse.units.length} Units</span>
-              </div>
-              <div className="rounded-xl bg-[#1c1c1c]/60 border border-[#262626] p-3.5">
-                <span className="font-sans text-xs font-medium text-[#999999] block">Structured Notes</span>
-                <span className="font-display text-xl font-bold text-white">{activeCourse.topics.length} Modules</span>
-              </div>
-              <div className="rounded-xl bg-[#1c1c1c]/60 border border-[#262626] p-3.5">
-                <span className="font-sans text-xs font-medium text-[#999999] block">Question Bank</span>
-                <span className="font-display text-xl font-bold text-white">{activeCourse.examQuestions.length} Qs</span>
-              </div>
-              <div className="rounded-xl bg-[#1c1c1c]/60 border border-[#262626] p-3.5">
-                <span className="font-sans text-xs font-medium text-[#999999] block">Subject Dictionary</span>
-                <span className="font-display text-xl font-bold text-white">
-                  {activeCourse.glossary ? activeCourse.glossary.length : 0} Terms
+          {/* Tip 3: Streamlined Minimal Course Header Track */}
+          <div className="rounded-2xl border border-[#262626] bg-[#121212]/80 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs font-bold text-[#0099ff]">
+                  Paper {activeCourse.code}
+                </span>
+                <span className="text-[#666666]">·</span>
+                <span className="font-display text-sm sm:text-base font-bold text-white">
+                  {activeCourse.title}
                 </span>
               </div>
+              <div className="flex items-center gap-2.5 text-xs text-[#999999]">
+                <span>{doneCount} of {activeCourse.topics.length} Modules Mastered</span>
+                <span className="text-[#666666]">·</span>
+                <span className="font-mono text-[#0099ff] font-semibold">{masteryPercentage}%</span>
+              </div>
+            </div>
+
+            {/* Micro Progress Bar & Quick Action */}
+            <div className="flex items-center gap-3 sm:w-64">
+              <div className="h-1 flex-1 overflow-hidden rounded-full bg-[#1c1c1c]">
+                <div
+                  className="h-full bg-[#0099ff] transition-all duration-500 ease-out"
+                  style={{ width: `${masteryPercentage}%` }}
+                />
+              </div>
+              {activeCourse.topics.length > 0 && (
+                <Link
+                  to="/topic/$slug"
+                  params={{ slug: resumeTopic.slug }}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white text-black hover:bg-white/90 px-3.5 py-1.5 font-sans text-xs font-bold transition-all shrink-0"
+                >
+                  <span>{lastSlug ? "Resume" : "Start"}</span>
+                  <ArrowRight className="size-3" />
+                </Link>
+              )}
             </div>
           </div>
         </section>
@@ -328,7 +268,8 @@ function Dashboard() {
                     )}
                   </div>
 
-                  <div className="grid gap-4 sm:grid-cols-2">
+                  {/* Tip 2: Streamlined Typographic Divided List */}
+                  <div className="divide-y divide-[#1f1f1f] rounded-2xl border border-[#262626] bg-[#121212]/50 overflow-hidden">
                     {unitTopics.map((topic) => {
                       const isStudied = studied[topic.slug];
                       return (
@@ -336,34 +277,30 @@ function Dashboard() {
                           key={topic.id}
                           to="/topic/$slug"
                           params={{ slug: topic.slug }}
-                          className="group flex flex-col justify-between rounded-[18px] border border-[#262626] bg-[#141414] p-5 transition-all duration-200 hover:border-[#383838] hover:bg-[#181818] shadow-2xs ios-card"
+                          className="group flex items-center justify-between px-5 py-4 transition-all duration-150 hover:bg-[#181818]"
                         >
-                          <div className="space-y-2">
-                            <div className="flex items-start justify-between gap-2">
-                              <span className="font-mono text-xs font-bold text-[#666666]">
-                                #{String(topic.number).padStart(2, "0")}
-                              </span>
-                              {isStudied && (
-                                <span className="inline-flex items-center gap-1 rounded-full bg-[#22c55e]/15 border border-[#22c55e]/30 px-2 py-0.5 font-sans text-[10px] font-bold text-[#22c55e]">
-                                  <CheckCircle2 className="size-3" /> Mastered
-                                </span>
-                              )}
+                          <div className="flex items-center gap-3.5 min-w-0 pr-4">
+                            <span className="font-mono text-xs text-[#666666] w-6 shrink-0">
+                              {String(topic.number).padStart(2, "0")}
+                            </span>
+                            <div className="min-w-0">
+                              <h4 className="font-display text-sm font-semibold text-white group-hover:text-[#0099ff] transition-colors truncate">
+                                {topic.title}
+                              </h4>
+                              <p className="font-sans text-xs text-[#888888] truncate hidden sm:block mt-0.5">
+                                {topic.summary}
+                              </p>
                             </div>
-                            <h4 className="font-display text-base font-bold text-white group-hover:text-[#0099ff] transition-colors leading-snug">
-                              {topic.title}
-                            </h4>
-                            <p className="line-clamp-2 text-xs text-[#999999] leading-relaxed">
-                              {topic.summary}
-                            </p>
                           </div>
 
-                          <div className="mt-4 flex items-center justify-between border-t border-[#1f1f1f] pt-3 text-xs">
-                            <span className="font-sans text-[11px] text-[#666666]">
-                              {topic.blocks.length} sections
+                          <div className="flex items-center gap-3 shrink-0 text-xs">
+                            <span className="font-sans text-[11px] text-[#666666] hidden md:inline">
+                              {topic.marks ? `${topic.marks} Marks` : `${topic.blocks.length} sections`}
                             </span>
-                            <span className="inline-flex items-center gap-1 font-sans font-bold text-[#0099ff] group-hover:translate-x-1 transition-transform">
-                              Read Note <ArrowRight className="size-3" />
-                            </span>
+                            {isStudied && (
+                              <span className="size-2 rounded-full bg-[#22c55e]" title="Mastered" />
+                            )}
+                            <ArrowRight className="size-3.5 text-[#666666] group-hover:text-[#0099ff] group-hover:translate-x-0.5 transition-all" />
                           </div>
                         </Link>
                       );
@@ -395,30 +332,34 @@ function Dashboard() {
             </Link>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            {activeCourse.examQuestions.slice(0, 6).map((exam) => (
+          {/* Tip 2: Streamlined Model Exam Answers List */}
+          <div className="divide-y divide-[#1f1f1f] rounded-2xl border border-[#262626] bg-[#121212]/50 overflow-hidden">
+            {activeCourse.examQuestions.slice(0, 8).map((exam) => (
               <Link
                 key={exam.id}
                 to="/exam/$qid"
                 params={{ qid: exam.id }}
-                className="group flex flex-col justify-between rounded-[18px] border border-[#262626] bg-[#141414] p-5 transition-all duration-200 hover:border-[#383838] hover:bg-[#181818] shadow-2xs ios-card"
+                className="group flex items-center justify-between px-5 py-4 transition-all duration-150 hover:bg-[#181818]"
               >
-                <div className="space-y-2">
-                  <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#0099ff]">
-                    Question {exam.number}
+                <div className="flex items-center gap-3.5 min-w-0 pr-4">
+                  <span className="font-mono text-xs font-semibold text-[#0099ff] w-8 shrink-0">
+                    Q{exam.number}
                   </span>
-                  <h3 className="font-display text-base font-bold text-white group-hover:text-[#0099ff] transition-colors leading-snug">
-                    {exam.title}
-                  </h3>
-                  <p className="line-clamp-2 text-xs text-[#999999] leading-relaxed">
-                    {exam.question}
-                  </p>
+                  <div className="min-w-0">
+                    <h4 className="font-display text-sm font-semibold text-white group-hover:text-[#0099ff] transition-colors truncate">
+                      {exam.title}
+                    </h4>
+                    <p className="font-sans text-xs text-[#888888] truncate hidden sm:block mt-0.5">
+                      {exam.question}
+                    </p>
+                  </div>
                 </div>
-                <div className="mt-4 flex items-center justify-between border-t border-[#1f1f1f] pt-3 text-xs">
-                  <span className="font-mono text-[11px] text-[#666666]">Model Answer</span>
-                  <span className="font-sans font-bold text-[#0099ff] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                    Study Answer <ArrowRight className="size-3" />
+
+                <div className="flex items-center gap-3 shrink-0 text-xs">
+                  <span className="font-sans text-[11px] text-[#666666] hidden md:inline">
+                    {exam.marks ? `${exam.marks} Marks` : "Model Answer"}
                   </span>
+                  <ArrowRight className="size-3.5 text-[#666666] group-hover:text-[#0099ff] group-hover:translate-x-0.5 transition-all" />
                 </div>
               </Link>
             ))}

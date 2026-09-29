@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   BookOpen,
+  ChevronDown,
   Gavel,
   Highlighter,
   Languages,
@@ -42,10 +43,16 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const studied = useProgress((s) => s.studied);
   const highlights = useHighlights((s) => s.highlights);
   const autoHighlight = useHighlights((s) => s.autoHighlight);
-  const toggleAutoHighlight = useHighlights((s) => s.toggleAutoHighlight);
   const setNotebookOpen = useHighlights((s) => s.setNotebookOpen);
   const highlightsCount = Object.keys(highlights).length;
+  const [collapsedUnits, setCollapsedUnits] = useState<Record<string, boolean>>({});
 
+  const toggleUnit = (unit: string) => {
+    setCollapsedUnits((prev) => ({
+      ...prev,
+      [unit]: !prev[unit],
+    }));
+  };
   return (
     <div className="flex flex-col gap-6 pb-8">
       {/* Primary Navigation Band */}
@@ -242,50 +249,68 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
         </button>
       </div>
 
-      {/* Course Curriculum Units Breakdown */}
-      {activeCourse.units.map((unit) => {
+      {/* Course Curriculum Units Breakdown with Collapsible Accordion */}
+      {activeCourse.units.map((unit, idx) => {
         const list = activeCourse.topics.filter((t) => t.unit === unit);
-        const isMidSem = unit === "Mid Sem Important";
+        if (list.length === 0) return null;
+        const isCurrentUnit = list.some((t) => pathname === `/topic/${t.slug}`);
+        // Default open if it is the current unit being viewed or the first unit, unless user toggled
+        const isCollapsed = collapsedUnits[unit] ?? (!isCurrentUnit && idx > 0);
+
         return (
-          <div key={unit} className={cn("space-y-1.5", isMidSem && "rounded-2xl bg-[#141414] p-3 border border-[#262626]")}>
-            <p
-              className={cn(
-                "mb-1 px-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em]",
-                isMidSem ? "text-[#0099ff] font-bold flex items-center gap-1.5" : "text-[#999999]",
-              )}
+          <div key={unit} className="space-y-1">
+            <button
+              type="button"
+              onClick={() => toggleUnit(unit)}
+              className="w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-left hover:bg-[#141414] transition-colors group"
             >
-              {isMidSem && <span>⭐</span>}
-              <span>{unit}</span>
-            </p>
-            <ul className="flex flex-col space-y-0.5">
-              {list.map((topic) => {
-                const href = `/topic/${topic.slug}`;
-                const active = pathname === href;
-                return (
-                  <li key={topic.id}>
-                    <Link
-                      to="/topic/$slug"
-                      params={{ slug: topic.slug }}
-                      onClick={onNavigate}
-                      className={cn(
-                        "flex min-h-9 items-center gap-2 rounded-lg px-3 py-1.5 text-xs leading-snug transition-all duration-200 ios-press-subtle",
-                        active
-                          ? "bg-[#1c1c1c] font-semibold text-white border border-[#262626]"
-                          : "text-[#b3b3b3] hover:bg-[#141414] hover:text-white",
-                      )}
-                    >
-                      <span className="w-5 shrink-0 font-mono text-[11px] text-[#666666]">
-                        {String(topic.number).padStart(2, "0")}
-                      </span>
-                      <span className="flex-1 truncate">{topic.title}</span>
-                      {studied[topic.slug] ? (
-                        <span className="size-1.5 shrink-0 rounded-full bg-[#22c55e]" />
-                      ) : null}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+              <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-[#999999] group-hover:text-white truncate">
+                {unit}
+              </span>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <span className="font-mono text-[10px] text-[#666666] bg-[#1a1a1a] px-1.5 py-0.5 rounded">
+                  {list.length}
+                </span>
+                <ChevronDown
+                  className={cn(
+                    "size-3 text-[#666666] group-hover:text-white transition-transform duration-200",
+                    isCollapsed ? "-rotate-90" : "rotate-0",
+                  )}
+                />
+              </div>
+            </button>
+
+            {!isCollapsed && (
+              <ul className="flex flex-col space-y-0.5 pl-1 transition-all">
+                {list.map((topic) => {
+                  const href = `/topic/${topic.slug}`;
+                  const active = pathname === href;
+                  return (
+                    <li key={topic.id}>
+                      <Link
+                        to="/topic/$slug"
+                        params={{ slug: topic.slug }}
+                        onClick={onNavigate}
+                        className={cn(
+                          "flex min-h-8 items-center gap-2 rounded-lg px-2.5 py-1 text-xs leading-snug transition-all duration-150",
+                          active
+                            ? "bg-[#1c1c1c] font-semibold text-white border border-[#262626]"
+                            : "text-[#a0a0a0] hover:bg-[#141414] hover:text-white",
+                        )}
+                      >
+                        <span className="w-4 shrink-0 font-mono text-[10px] text-[#666666]">
+                          {String(topic.number).padStart(2, "0")}
+                        </span>
+                        <span className="flex-1 truncate">{topic.title}</span>
+                        {studied[topic.slug] ? (
+                          <span className="size-1.5 shrink-0 rounded-full bg-[#22c55e]" />
+                        ) : null}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </div>
         );
       })}
