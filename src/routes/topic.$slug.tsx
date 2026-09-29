@@ -2,7 +2,9 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUp, Clock, Sparkles } from "lucide-react";
 import { adjacentTopics, getTopic } from "@/data";
+import { getTopicBySlug } from "@/data/courses";
 import { useProgress } from "@/lib/progress";
+import { useCurrentCourse } from "@/lib/current-course";
 import { useAppearance, TEXT_WIDTH_CLASSES } from "@/lib/appearance";
 import { ReaderView } from "@/components/reader-view";
 import { cn } from "@/lib/utils";
@@ -20,6 +22,7 @@ function TopicPage() {
   const studied = useProgress((s) => s.studied[slug]);
   const toggleStudied = useProgress((s) => s.toggleStudied);
   const setLastSlug = useProgress((s) => s.setLastSlug);
+  const setActiveCourseSlug = useCurrentCourse((s) => s.setActiveCourseSlug);
   const textWidth = useAppearance((s) => s.textWidth);
   const [progress, setProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -46,9 +49,12 @@ function TopicPage() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [slug]);
+    setLastSlug(slug);
+    const hit = getTopicBySlug(slug);
+    if (hit) {
+      setActiveCourseSlug(hit.course.slug);
+    }
+  }, [slug, setLastSlug, setActiveCourseSlug]);
 
   useEffect(() => {
     setLastSlug(slug);

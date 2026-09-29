@@ -36,16 +36,21 @@ export function coursesByCategory(category: CourseCategory): Course[] {
   return allCourses.filter((c) => c.category === category);
 }
 export function getTopicBySlug(slug: string) {
+  const cleanSlug =
+    slug === "comm-01" || slug === "process-and-7cs-communication"
+      ? "corporate-clarity-ocean-of-data"
+      : slug;
   for (const c of allCourses) {
-    const found = c.topics.find((t) => t.slug === slug);
+    const found = c.topics.find((t) => t.slug === cleanSlug);
     if (found) return { topic: found, course: c };
   }
   return undefined;
 }
 
 export function getExamById(id: string) {
+  const cleanId = id === "comm-q1" ? "602-eq-1" : id;
   for (const c of allCourses) {
-    const found = c.examQuestions.find((q) => q.id === id);
+    const found = c.examQuestions.find((q) => q.id === cleanId);
     if (found) return { exam: found, course: c };
   }
   return undefined;

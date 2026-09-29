@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, ArrowUp, Scale } from "lucide-react";
 import { adjacentExams, getExam, getTopic } from "@/data";
+import { getExamById } from "@/data/courses";
+import { useCurrentCourse } from "@/lib/current-course";
 import { useAppearance, TEXT_WIDTH_CLASSES } from "@/lib/appearance";
 import { ReaderView } from "@/components/reader-view";
 import { cn } from "@/lib/utils";
-
 export const Route = createFileRoute("/exam/$qid")({
   component: ExamAnswer,
 });
@@ -18,6 +19,7 @@ function ExamAnswer() {
   const [progress, setProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const textWidth = useAppearance((s) => s.textWidth);
+  const setActiveCourseSlug = useCurrentCourse((s) => s.setActiveCourseSlug);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,8 +36,12 @@ function ExamAnswer() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
+    const hit = getExamById(qid);
+    if (hit) {
+      setActiveCourseSlug(hit.course.slug);
+    }
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [qid]);
+  }, [qid, setActiveCourseSlug]);
 
   const related = exam.relatedSlugs
     .map((slug) => getTopic(slug))
