@@ -327,8 +327,8 @@ function Dashboard() {
                     )}
                   </div>
 
-                  {/* Tip 2: Streamlined Typographic Divided List */}
-                  <div className="divide-y divide-[#1f1f1f] rounded-2xl border border-[#262626] bg-[#121212]/50 overflow-hidden">
+                  {/* Aesthetic 2-Column Module Card Grid */}
+                  <div className="grid gap-3.5 sm:grid-cols-2">
                     {unitTopics.map((topic) => {
                       const isStudied = studied[topic.slug];
                       return (
@@ -336,30 +336,42 @@ function Dashboard() {
                           key={topic.id}
                           to="/topic/$slug"
                           params={{ slug: topic.slug }}
-                          className="group flex items-center justify-between px-5 py-4 transition-all duration-150 hover:bg-[#181818]"
+                          className="group flex flex-col justify-between rounded-[20px] border border-[#262626] bg-[#141414] p-5 transition-all duration-200 hover:border-[#383838] hover:bg-[#181818] hover:-translate-y-0.5 shadow-2xs"
                         >
-                          <div className="flex items-center gap-3.5 min-w-0 pr-4">
-                            <span className="font-mono text-xs text-[#666666] w-6 shrink-0">
-                              {String(topic.number).padStart(2, "0")}
-                            </span>
-                            <div className="min-w-0">
-                              <h4 className="font-display text-sm font-semibold text-white group-hover:text-[#0099ff] transition-colors truncate">
-                                {topic.title}
-                              </h4>
-                              <p className="font-sans text-xs text-[#888888] truncate hidden sm:block mt-0.5">
-                                {topic.summary}
-                              </p>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="flex size-7 items-center justify-center rounded-full bg-[#1c1c1c] border border-[#262626] font-mono text-xs font-bold text-[#999999] group-hover:text-white group-hover:border-[#0099ff]/50 transition-colors">
+                                {String(topic.number).padStart(2, "0")}
+                              </span>
+                              <div className="flex items-center gap-2">
+                                {topic.marks && (
+                                  <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#999999]">
+                                    {topic.marks} Marks
+                                  </span>
+                                )}
+                                {isStudied && (
+                                  <span className="inline-flex items-center gap-1 rounded-full bg-[#22c55e]/15 border border-[#22c55e]/30 px-2 py-0.5 font-sans text-[10px] font-bold text-[#22c55e]">
+                                    <CheckCircle2 className="size-3" /> Mastered
+                                  </span>
+                                )}
+                              </div>
                             </div>
+
+                            <h4 className="font-display text-base font-bold text-white group-hover:text-[#0099ff] transition-colors leading-snug">
+                              {topic.title}
+                            </h4>
+                            <p className="font-sans text-xs text-[#999999] line-clamp-2 leading-relaxed">
+                              {topic.summary}
+                            </p>
                           </div>
 
-                          <div className="flex items-center gap-3 shrink-0 text-xs">
-                            <span className="font-sans text-[11px] text-[#666666] hidden md:inline">
-                              {topic.marks ? `${topic.marks} Marks` : `${topic.blocks.length} sections`}
+                          <div className="mt-4 pt-3 border-t border-[#1f1f1f] flex items-center justify-between text-xs">
+                            <span className="font-mono text-[11px] text-[#666666]">
+                              {topic.blocks.length} Sections
                             </span>
-                            {isStudied && (
-                              <span className="size-2 rounded-full bg-[#22c55e]" title="Mastered" />
-                            )}
-                            <ArrowRight className="size-3.5 text-[#666666] group-hover:text-[#0099ff] group-hover:translate-x-0.5 transition-all" />
+                            <span className="inline-flex items-center gap-1 font-sans font-bold text-[#0099ff] group-hover:translate-x-1 transition-transform">
+                              Read Note <ArrowRight className="size-3" />
+                            </span>
                           </div>
                         </Link>
                       );
@@ -391,34 +403,43 @@ function Dashboard() {
             </Link>
           </div>
 
-          {/* Tip 2: Streamlined Model Exam Answers List */}
-          <div className="divide-y divide-[#1f1f1f] rounded-2xl border border-[#262626] bg-[#121212]/50 overflow-hidden">
+          {/* Aesthetic 2-Column Model Exam Question Bento Cards */}
+          <div className="grid gap-4 sm:grid-cols-2">
             {activeCourse.examQuestions.slice(0, 8).map((exam) => (
               <Link
                 key={exam.id}
                 to="/exam/$qid"
                 params={{ qid: exam.id }}
-                className="group flex items-center justify-between px-5 py-4 transition-all duration-150 hover:bg-[#181818]"
+                className="group flex flex-col justify-between rounded-[22px] border border-[#262626] bg-[#141414] p-5 sm:p-6 transition-all duration-200 hover:border-[#383838] hover:bg-[#181818] hover:-translate-y-1 shadow-xs"
               >
-                <div className="flex items-center gap-3.5 min-w-0 pr-4">
-                  <span className="font-mono text-xs font-semibold text-[#0099ff] w-8 shrink-0">
-                    Q{exam.number}
-                  </span>
-                  <div className="min-w-0">
-                    <h4 className="font-display text-sm font-semibold text-white group-hover:text-[#0099ff] transition-colors truncate">
-                      {exam.title}
-                    </h4>
-                    <p className="font-sans text-xs text-[#888888] truncate hidden sm:block mt-0.5">
+                <div className="space-y-2.5">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-3 py-0.5 font-mono text-xs font-bold text-[#0099ff]">
+                      Question {exam.number}
+                    </span>
+                    <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#999999]">
+                      {exam.marks ? `${exam.marks} Marks Answer` : "Model Solution"}
+                    </span>
+                  </div>
+
+                  <h3 className="font-display text-base sm:text-lg font-bold text-white group-hover:text-[#0099ff] transition-colors leading-snug">
+                    {exam.title}
+                  </h3>
+
+                  <div className="rounded-xl bg-[#090909]/60 p-3 border border-[#1f1f1f]">
+                    <p className="font-sans text-xs text-[#888888] leading-relaxed line-clamp-2">
                       {exam.question}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 shrink-0 text-xs">
-                  <span className="font-sans text-[11px] text-[#666666] hidden md:inline">
-                    {exam.marks ? `${exam.marks} Marks` : "Model Answer"}
+                <div className="mt-4 pt-3 border-t border-[#1f1f1f] flex items-center justify-between text-xs">
+                  <span className="font-mono text-[11px] text-[#666666]">
+                    {exam.blocks.length} Answer Sections
                   </span>
-                  <ArrowRight className="size-3.5 text-[#666666] group-hover:text-[#0099ff] group-hover:translate-x-0.5 transition-all" />
+                  <span className="inline-flex items-center gap-1 font-sans font-bold text-[#0099ff] group-hover:translate-x-1 transition-transform">
+                    Study Solution <ArrowRight className="size-3" />
+                  </span>
                 </div>
               </Link>
             ))}
