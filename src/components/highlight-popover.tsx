@@ -7,6 +7,42 @@ import {
 } from "@/lib/highlights";
 import { Button } from "./ui/button";
 
+function calculateInitialCoords(targetRect?: DOMRect | null) {
+  if (typeof window === "undefined" || !targetRect) return null;
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+  const popoverWidth = 320;
+  const popoverHeight = 320;
+
+  const articleEl = document.querySelector("article");
+  const articleRect = articleEl?.getBoundingClientRect();
+
+  const minLeft = articleRect ? Math.max(16, articleRect.left + 12) : 16;
+  const maxRight = articleRect
+    ? Math.min(articleRect.right - 12, screenWidth - 290)
+    : (screenWidth >= 1280 ? screenWidth - 290 : screenWidth - 16);
+
+  const idealLeft = targetRect.left + targetRect.width / 2 - popoverWidth / 2;
+  const left = Math.max(minLeft, Math.min(idealLeft, maxRight - popoverWidth));
+
+  const spaceAbove = targetRect.top;
+  const spaceBelow = screenHeight - targetRect.bottom;
+
+  let top: number;
+  if (spaceAbove >= popoverHeight + 16) {
+    top = targetRect.top - popoverHeight - 8;
+  } else if (spaceBelow >= popoverHeight + 16) {
+    top = targetRect.bottom + 8;
+  } else {
+    top =
+      spaceAbove > spaceBelow
+        ? Math.max(64, targetRect.top - popoverHeight - 8)
+        : Math.min(screenHeight - popoverHeight - 16, targetRect.bottom + 8);
+  }
+
+  return { top: Math.round(top), left: Math.round(left) };
+}
+
 export function HighlightPopover({
   highlightId,
   onClose,
@@ -25,7 +61,9 @@ export function HighlightPopover({
   const [copied, setCopied] = useState(false);
   const [showNoteInput, setShowNoteInput] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
-  const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
+  const [coords, setCoords] = useState<{ top: number; left: number } | null>(
+    () => calculateInitialCoords(targetRect),
+  );
 
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== "undefined" ? window.innerWidth < 640 : false,
@@ -72,7 +110,6 @@ export function HighlightPopover({
   // Close or reposition on scroll
   useEffect(() => {
     function handleScroll() {
-      // Re-find target element bounding rect if possible or close
       const el = document.querySelector(`[data-highlight-id="${highlightId}"]`);
       if (el) {
         const newRect = el.getBoundingClientRect();
@@ -90,8 +127,8 @@ export function HighlightPopover({
     }
 
     const popoverEl = popoverRef.current;
-    const popoverWidth = popoverEl?.offsetWidth || 320;
-    const popoverHeight = popoverEl?.offsetHeight || 320;
+    const popoverWidth = popoverEl ? popoverEl.offsetWidth : 320;
+    const popoverHeight = popoverEl ? popoverEl.offsetHeight : 320;
 
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
@@ -100,9 +137,7 @@ export function HighlightPopover({
     const articleEl = document.querySelector("article");
     const articleRect = articleEl?.getBoundingClientRect();
 
-    const minLeft = articleRect
-      ? Math.max(16, articleRect.left + 12)
-      : 16;
+    const minLeft = articleRect ? Math.max(16, articleRect.left + 12) : 16;
     const maxRight = articleRect
       ? Math.min(articleRect.right - 12, screenWidth - 290)
       : (screenWidth >= 1280 ? screenWidth - 290 : screenWidth - 16);

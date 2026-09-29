@@ -164,10 +164,9 @@ export function ReaderView({
     setPopoverRect(selectionRect);
   };
 
-  const handleHighlightClick = (id: string, e: React.MouseEvent) => {
-    const target = e.currentTarget as HTMLElement;
+  const handleHighlightClick = (id: string, rect: DOMRect) => {
     setActiveHighlightId(id);
-    setPopoverRect(target.getBoundingClientRect());
+    setPopoverRect(rect);
   };
   const handleCopyNoteMarkdown = () => {
     let md = `# ${docTitle}\n\n`;

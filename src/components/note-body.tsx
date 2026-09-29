@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 function renderWithHighlights(
   rawText: string,
   docHighlights: HighlightItem[],
-  onHighlightClick?: (id: string, e: React.MouseEvent) => void,
+  onHighlightClick?: (id: string, rect: DOMRect) => void,
 ): ReactNode[] {
   if (!rawText) return [];
 
@@ -62,7 +62,8 @@ function renderWithHighlights(
           data-highlight-id={seg.highlight.id}
           onClick={(e) => {
             e.stopPropagation();
-            onHighlightClick?.(seg.highlight.id, e);
+            const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+            onHighlightClick?.(seg.highlight.id, rect);
           }}
           className={cn(
             "cursor-pointer rounded-xs px-1 py-0.5 transition-all hover:brightness-125",
@@ -147,7 +148,7 @@ function Block({
   block: NoteBlock;
   blockIndex: number;
   docHighlights: HighlightItem[];
-  onHighlightClick?: (id: string, e: React.MouseEvent) => void;
+  onHighlightClick?: (id: string, rect: DOMRect) => void;
 }) {
   const blockSpecificHighlights = useMemo(() => {
     return docHighlights.filter((h) => {
@@ -296,7 +297,7 @@ export function NoteBody({
   blocks: NoteBlock[];
   docId?: string;
   className?: string;
-  onHighlightClick?: (id: string, e: React.MouseEvent) => void;
+  onHighlightClick?: (id: string, rect: DOMRect) => void;
 }) {
   const highlights = useHighlights((s) => s.highlights);
 
