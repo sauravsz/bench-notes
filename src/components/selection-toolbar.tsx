@@ -24,12 +24,16 @@ export function SelectionToolbar({
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
         onClose();
-      } else if (e.key.toLowerCase() === "h" && !e.metaKey && !e.ctrlKey && !e.shiftKey) {
-        e.preventDefault();
-        onHighlight();
-      } else if (e.key.toLowerCase() === "n" && !e.metaKey && !e.ctrlKey) {
-        e.preventDefault();
-        onAddNote();
+      } else if (e.key === "h" || e.key === "H") {
+        if (!e.metaKey && !e.ctrlKey) {
+          e.preventDefault();
+          onHighlight();
+        }
+      } else if (e.key === "n" || e.key === "N") {
+        if (!e.metaKey && !e.ctrlKey) {
+          e.preventDefault();
+          onAddNote();
+        }
       }
     }
     window.addEventListener("keydown", handleKeyDown);
@@ -38,16 +42,20 @@ export function SelectionToolbar({
 
   if (!selectionRect || !selectedText) return null;
 
-  const toolbarWidth = 260;
-  const screenWidth = typeof window !== "undefined" ? window.innerWidth : 360;
+  const toolbarWidth = 270;
+  const screenWidth = typeof window !== "undefined" ? window.innerWidth : 1024;
   const screenHeight = typeof window !== "undefined" ? window.innerHeight : 800;
 
+  // On desktop screens (>=1280px), account for the 280px right-rail TOC
+  const maxRightBound = screenWidth >= 1280 ? screenWidth - 290 : screenWidth - 16;
+
   const idealLeft = selectionRect.left + selectionRect.width / 2 - toolbarWidth / 2;
-  const left = Math.max(12, Math.min(idealLeft, screenWidth - toolbarWidth - 12));
+  const left = Math.max(16, Math.min(idealLeft, maxRightBound - toolbarWidth));
   const top =
-    selectionRect.top < 56
+    selectionRect.top < 60
       ? Math.min(screenHeight - 56, selectionRect.bottom + 8)
-      : Math.max(12, selectionRect.top - 48);
+      : Math.max(16, selectionRect.top - 50);
+
   const handleCopy = () => {
     navigator.clipboard.writeText(selectedText);
     setCopied(true);
@@ -59,30 +67,29 @@ export function SelectionToolbar({
 
   return (
     <div
+      data-selection-toolbar
       style={{
         position: "fixed",
         top: `${top}px`,
         left: `${left}px`,
-        zIndex: 50,
+        zIndex: 95,
       }}
-      className="flex max-w-[calc(100vw-24px)] items-center gap-1 overflow-x-auto rounded-xl border border-line bg-surface/95 backdrop-blur-md p-1 shadow-xl ios-scale-in"
+      className="flex items-center gap-1.5 rounded-full border border-[#262626] bg-[#141414]/95 p-1.5 shadow-[0_16px_40px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-150 font-sans"
     >
+      {/* Primary Highlight button */}
       <button
         type="button"
         onClick={() => onHighlight(currentColor)}
-        title="Highlight (H)"
-        className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-sans text-xs font-medium text-ink hover:bg-bg-warm transition-all duration-200 ios-press"
+        className="flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-black hover:bg-white/90 transition-all ios-press"
+        title="Highlight selection (H)"
       >
-        <Highlighter className="size-3.5 text-accent" />
+        <Highlighter className="size-3.5 text-black" strokeWidth={2.2} />
         <span>Highlight</span>
-        <kbd className="text-[10px] text-muted opacity-80">H</kbd>
       </button>
 
-      <div className="h-4 w-px bg-line" />
-
-      {/* Color options */}
-      <div className="flex items-center gap-1 px-1">
-        {HIGHLIGHT_COLORS.slice(0, 3).map((c) => (
+      {/* Color Picker dots */}
+      <div className="flex items-center gap-1 px-1 border-x border-[#262626]">
+        {HIGHLIGHT_COLORS.map((c) => (
           <button
             key={c.id}
             type="button"
@@ -90,34 +97,34 @@ export function SelectionToolbar({
               setCurrentColor(c.id);
               onHighlight(c.id);
             }}
-            title={c.label}
-            className={`size-4.5 rounded-full transition-all duration-200 hover:scale-125 active:scale-95 ${
-              currentColor === c.id ? "ring-2 ring-primary ring-offset-1 scale-110 ios-spring-pop" : ""
-            }`}
+            title={`Highlight ${c.label}`}
+            className={cn(
+              "size-4 rounded-full transition-all duration-150 hover:scale-125 active:scale-95",
+              currentColor === c.id
+                ? "ring-2 ring-white ring-offset-1 ring-offset-[#141414] scale-110"
+                : "opacity-70 hover:opacity-100",
+            )}
             style={{ backgroundColor: c.dotColor }}
           />
         ))}
       </div>
 
-      <div className="h-4 w-px bg-line" />
-
+      {/* Add Note / Annotation */}
       <button
         type="button"
         onClick={onAddNote}
-        title="Add Note (N)"
-        className="flex items-center gap-1 rounded-lg p-1.5 text-muted hover:bg-bg-warm hover:text-ink transition-all duration-200 ios-press"
+        className="flex size-7 items-center justify-center rounded-full text-[#999999] hover:bg-[#1c1c1c] hover:text-white transition-all ios-press"
+        title="Add note / annotation (N)"
       >
-        <MessageSquare className="size-3.5" />
+        <MessageSquare className="size-3.5 text-[#0099ff]" />
       </button>
 
+      {/* Copy Plain Text */}
       <button
         type="button"
         onClick={handleCopy}
+        className="flex size-7 items-center justify-center rounded-full text-[#999999] hover:bg-[#1c1c1c] hover:text-white transition-all ios-press"
         title="Copy selected text"
-        className={cn(
-          "flex items-center gap-1 rounded-lg p-1.5 transition-all duration-200 ios-press",
-          copied ? "text-accent bg-accent/10 ios-spring-pop" : "text-muted hover:bg-bg-warm hover:text-ink"
-        )}
       >
         <Copy className="size-3.5" />
       </button>

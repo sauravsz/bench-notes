@@ -56,7 +56,7 @@ export function RightRailToc({
   return (
     <aside
       className={cn(
-        "no-print sticky top-20 hidden h-[calc(100dvh-6rem)] w-64 shrink-0 overflow-y-auto pl-6 pr-2 xl:block",
+        "no-print sticky top-20 z-10 hidden h-[calc(100dvh-6rem)] w-64 shrink-0 overflow-y-auto pl-6 pr-2 xl:block",
         className,
       )}
     >
