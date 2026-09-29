@@ -1,47 +1,21 @@
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
-import { Check, Copy, Hash, MessageSquare, Trash2, X } from "lucide-react";
+import {
+  Check,
+  Copy,
+  Hash,
+  MessageSquare,
+  MoreHorizontal,
+  Palette,
+  Tag,
+  Trash2,
+  X,
+} from "lucide-react";
 import {
   HIGHLIGHT_COLORS,
   useHighlights,
   type HighlightColor,
 } from "@/lib/highlights";
-import { Button } from "./ui/button";
-
-function calculateInitialCoords(targetRect?: DOMRect | null) {
-  if (typeof window === "undefined" || !targetRect) return null;
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
-  const popoverWidth = 320;
-  const popoverHeight = 320;
-
-  const articleEl = document.querySelector("article");
-  const articleRect = articleEl?.getBoundingClientRect();
-
-  const minLeft = articleRect ? Math.max(16, articleRect.left + 12) : 16;
-  const maxRight = articleRect
-    ? Math.min(articleRect.right - 12, screenWidth - 290)
-    : (screenWidth >= 1280 ? screenWidth - 290 : screenWidth - 16);
-
-  const idealLeft = targetRect.left + targetRect.width / 2 - popoverWidth / 2;
-  const left = Math.max(minLeft, Math.min(idealLeft, maxRight - popoverWidth));
-
-  const spaceAbove = targetRect.top;
-  const spaceBelow = screenHeight - targetRect.bottom;
-
-  let top: number;
-  if (spaceAbove >= popoverHeight + 16) {
-    top = targetRect.top - popoverHeight - 8;
-  } else if (spaceBelow >= popoverHeight + 16) {
-    top = targetRect.bottom + 8;
-  } else {
-    top =
-      spaceAbove > spaceBelow
-        ? Math.max(64, targetRect.top - popoverHeight - 8)
-        : Math.min(screenHeight - popoverHeight - 16, targetRect.bottom + 8);
-  }
-
-  return { top: Math.round(top), left: Math.round(left) };
-}
+import { cn } from "@/lib/utils";
 
 export function HighlightPopover({
   highlightId,
@@ -56,33 +30,31 @@ export function HighlightPopover({
   const updateHighlight = useHighlights((s) => s.updateHighlight);
   const removeHighlight = useHighlights((s) => s.removeHighlight);
 
-  const [note, setNote] = useState("");
+  const [activeMenu, setActiveMenu] = useState<"none" | "note" | "tags" | "colors">("none");
+  const [noteText, setNoteText] = useState("");
   const [tagInput, setTagInput] = useState("");
   const [copied, setCopied] = useState(false);
-  const [showNoteInput, setShowNoteInput] = useState(false);
+  const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
+
   const popoverRef = useRef<HTMLDivElement>(null);
-  const [coords, setCoords] = useState<{ top: number; left: number } | null>(
-    () => calculateInitialCoords(targetRect),
-  );
-
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth < 640 : false,
-  );
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 640);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const noteTextareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (highlight) {
-      setNote(highlight.note || "");
-      setShowNoteInput(Boolean(highlight.note));
+      setNoteText(highlight.note || "");
+      // If a note already exists, open the note card by default on click
+      if (highlight.note) {
+        setActiveMenu("note");
+      }
     }
   }, [highlight]);
+
+  // Focus note textarea when note card opens
+  useEffect(() => {
+    if (activeMenu === "note") {
+      setTimeout(() => noteTextareaRef.current?.focus(), 50);
+    }
+  }, [activeMenu]);
 
   // Click outside & Escape listener
   useEffect(() => {
@@ -107,80 +79,62 @@ export function HighlightPopover({
     };
   }, [onClose]);
 
-  // Close or reposition on scroll
-  useEffect(() => {
-    function handleScroll() {
-      const el = document.querySelector(`[data-highlight-id="${highlightId}"]`);
-      if (el) {
-        const newRect = el.getBoundingClientRect();
-        computePosition(newRect);
-      }
-    }
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [highlightId]);
-
-  const computePosition = (rect: DOMRect | null | undefined) => {
-    if (isMobile || !rect) {
-      setCoords(null);
-      return;
-    }
-
-    const popoverEl = popoverRef.current;
-    const popoverWidth = popoverEl ? popoverEl.offsetWidth : 320;
-    const popoverHeight = popoverEl ? popoverEl.offsetHeight : 320;
+  // Reposition on scroll/resize
+  const computePosition = () => {
+    if (!targetRect) return;
 
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
+    const toolbarWidth = 190;
 
-    // Determine article reading boundaries to avoid Right-Rail TOC collision
     const articleEl = document.querySelector("article");
     const articleRect = articleEl?.getBoundingClientRect();
 
-    const minLeft = articleRect ? Math.max(16, articleRect.left + 12) : 16;
+    const minLeft = articleRect ? Math.max(16, articleRect.left + 8) : 16;
     const maxRight = articleRect
-      ? Math.min(articleRect.right - 12, screenWidth - 290)
-      : (screenWidth >= 1280 ? screenWidth - 290 : screenWidth - 16);
+      ? Math.min(articleRect.right - 8, screenWidth - 280)
+      : (screenWidth >= 1280 ? screenWidth - 280 : screenWidth - 16);
 
-    // Horizontal position: center on highlight, clamped strictly inside article canvas
-    const idealLeft = rect.left + rect.width / 2 - popoverWidth / 2;
-    const left = Math.max(minLeft, Math.min(idealLeft, maxRight - popoverWidth));
+    // Center toolbar horizontally over the highlight
+    const idealLeft = targetRect.left + targetRect.width / 2 - toolbarWidth / 2;
+    const left = Math.max(minLeft, Math.min(idealLeft, maxRight - toolbarWidth));
 
-    // Vertical position: direct adjacency (8px gap)
-    const spaceAbove = rect.top;
-    const spaceBelow = screenHeight - rect.bottom;
-
+    // Place directly adjacent above (if room) or below
     let top: number;
-    // If enough space above, position immediately above highlight
-    if (spaceAbove >= popoverHeight + 16) {
-      top = rect.top - popoverHeight - 8;
-    } else if (spaceBelow >= popoverHeight + 16) {
-      // Otherwise, position immediately below highlight
-      top = rect.bottom + 8;
+    if (targetRect.top >= 60) {
+      top = targetRect.top - 46;
     } else {
-      // If constrained on both sides, position where there is more space
-      if (spaceAbove > spaceBelow) {
-        top = Math.max(64, rect.top - popoverHeight - 8);
-      } else {
-        top = Math.min(screenHeight - popoverHeight - 16, rect.bottom + 8);
-      }
+      top = targetRect.bottom + 8;
     }
 
     setCoords({ top: Math.round(top), left: Math.round(left) });
   };
 
   useLayoutEffect(() => {
-    computePosition(targetRect);
-  }, [targetRect, isMobile, showNoteInput, highlight?.tags]);
+    computePosition();
+  }, [targetRect]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", computePosition, { passive: true });
+    window.addEventListener("resize", computePosition);
+    return () => {
+      window.removeEventListener("scroll", computePosition);
+      window.removeEventListener("resize", computePosition);
+    };
+  }, [targetRect]);
 
   if (!highlight) return null;
 
-  const handleColorChange = (color: HighlightColor) => {
+  const colorConfig = HIGHLIGHT_COLORS.find((c) => c.id === highlight.color);
+
+  const handleColorSelect = (color: HighlightColor) => {
     updateHighlight(highlightId, { color });
+    setActiveMenu("none");
   };
 
   const handleSaveNote = () => {
-    updateHighlight(highlightId, { note: note.trim() });
+    updateHighlight(highlightId, { note: noteText.trim() });
+    setActiveMenu("none");
   };
 
   const handleAddTag = () => {
@@ -203,7 +157,7 @@ export function HighlightPopover({
   const handleCopy = () => {
     navigator.clipboard.writeText(highlight.text);
     setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    setTimeout(() => setCopied(false), 1200);
   };
 
   const handleDelete = () => {
@@ -211,150 +165,160 @@ export function HighlightPopover({
     onClose();
   };
 
-  const popoverStyle: React.CSSProperties = {
+  const style: React.CSSProperties = {
     position: "fixed",
     zIndex: 100,
-    top: coords ? `${coords.top}px` : (targetRect ? `${Math.max(64, targetRect.bottom + 8)}px` : "50%"),
+    top: coords ? `${coords.top}px` : (targetRect ? `${Math.max(16, targetRect.top - 46)}px` : "50%"),
     left: coords ? `${coords.left}px` : (targetRect ? `${Math.max(16, targetRect.left)}px` : "50%"),
     transform: !coords && !targetRect ? "translate(-50%, -50%)" : undefined,
   };
 
-  const content = (
+  return (
     <div
       ref={popoverRef}
-      style={!isMobile ? popoverStyle : undefined}
-      className={
-        isMobile
-          ? "fixed bottom-0 left-0 right-0 z-[100] w-full max-w-lg mx-auto rounded-t-[28px] border-t border-[#262626] bg-[#141414] backdrop-blur-2xl p-5 shadow-2xl ios-sheet-enter max-h-[85vh] overflow-y-auto pb-safe font-sans"
-          : "w-80 rounded-[22px] border border-[#262626] bg-[#141414]/95 backdrop-blur-2xl p-4 shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.06)] ios-scale-in font-sans"
-      }
+      style={style}
+      className="flex flex-col items-center animate-in fade-in zoom-in-95 duration-150 font-sans"
     >
-      {isMobile && (
-        <div className="mx-auto -mt-1 mb-3 h-1.5 w-10 rounded-full bg-[#262626]" />
+      {/* 1. Sleek Readwise Floating Action Pill */}
+      <div className="flex items-center gap-1 rounded-full border border-[#333333] bg-[#1c1c1c]/95 px-2 py-1.5 shadow-[0_12px_32px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-xl">
+        {/* Color / Delete circle */}
+        <button
+          type="button"
+          onClick={() => setActiveMenu(activeMenu === "colors" ? "none" : "colors")}
+          className="flex size-5.5 items-center justify-center rounded-full transition-transform hover:scale-110 active:scale-95 shadow-xs"
+          style={{ backgroundColor: colorConfig?.dotColor || "#eab308" }}
+          title={`Color: ${colorConfig?.label}. Click to change color.`}
+        >
+          <X
+            className="size-3 text-black/70 hover:text-black transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDelete();
+            }}
+          />
+        </button>
+
+        {/* Note Icon (with indicator dot if note exists) */}
+        <button
+          type="button"
+          onClick={() => setActiveMenu(activeMenu === "note" ? "none" : "note")}
+          className={cn(
+            "relative flex size-7 items-center justify-center rounded-full transition-all ios-press",
+            activeMenu === "note"
+              ? "bg-[#2d3748] text-white"
+              : "text-[#999999] hover:bg-[#262626] hover:text-white",
+          )}
+          title="Add or view note"
+        >
+          <MessageSquare className="size-3.5" />
+          {highlight.note ? (
+            <span className="absolute right-1 top-1 size-1.5 rounded-full bg-[#0099ff]" />
+          ) : null}
+        </button>
+
+        {/* Tag Icon */}
+        <button
+          type="button"
+          onClick={() => setActiveMenu(activeMenu === "tags" ? "none" : "tags")}
+          className={cn(
+            "relative flex size-7 items-center justify-center rounded-full transition-all ios-press",
+            activeMenu === "tags"
+              ? "bg-[#2d3748] text-white"
+              : "text-[#999999] hover:bg-[#262626] hover:text-white",
+          )}
+          title="Add tags"
+        >
+          <Tag className="size-3.5" />
+          {highlight.tags && highlight.tags.length > 0 ? (
+            <span className="absolute right-1 top-1 size-1.5 rounded-full bg-amber-400" />
+          ) : null}
+        </button>
+
+        {/* Copy Icon */}
+        <button
+          type="button"
+          onClick={handleCopy}
+          className="flex size-7 items-center justify-center rounded-full text-[#999999] hover:bg-[#262626] hover:text-white transition-all ios-press"
+          title="Copy highlighted text"
+        >
+          {copied ? (
+            <Check className="size-3.5 text-[#22c55e]" />
+          ) : (
+            <Copy className="size-3.5" />
+          )}
+        </button>
+
+        {/* Delete Icon */}
+        <button
+          type="button"
+          onClick={handleDelete}
+          className="flex size-7 items-center justify-center rounded-full text-[#999999] hover:bg-rose-950/50 hover:text-rose-400 transition-all ios-press"
+          title="Delete highlight"
+        >
+          <Trash2 className="size-3.5" />
+        </button>
+      </div>
+
+      {/* 2. Readwise Note Submenu Popover Card (Image #2) */}
+      {activeMenu === "note" && (
+        <div className="mt-2 w-72 rounded-[18px] border border-[#333333] bg-[#1c1c1c] p-3.5 shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-150">
+          <textarea
+            ref={noteTextareaRef}
+            value={noteText}
+            onChange={(e) => setNoteText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSaveNote();
+              }
+            }}
+            placeholder="Add a note..."
+            rows={3}
+            className="w-full resize-none bg-transparent font-sans text-xs leading-relaxed text-white placeholder:text-[#666666] focus:outline-none"
+          />
+          <div className="mt-2.5 flex items-center justify-end gap-2 border-t border-[#262626] pt-2">
+            <button
+              type="button"
+              onClick={() => setActiveMenu("none")}
+              className="px-2.5 py-1 text-xs font-medium text-[#999999] hover:text-white transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleSaveNote}
+              className="rounded-md bg-[#2d3748] hover:bg-[#3b475a] px-3 py-1 font-sans text-xs font-semibold text-white transition-all ios-press"
+            >
+              Save
+            </button>
+          </div>
+        </div>
       )}
 
-      {/* Header */}
-      <div className="flex items-center justify-between pb-2.5 border-b border-[#262626]">
-        <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#999999]">
-          Highlight Actions
-        </span>
-        <div className="flex items-center gap-1">
-          <button
-            type="button"
-            onClick={handleCopy}
-            title="Copy highlight text"
-            className="rounded-full p-1.5 text-[#666666] hover:bg-[#1c1c1c] hover:text-white transition-colors"
-          >
-            {copied ? (
-              <Check className="size-3.5 text-[#22c55e]" />
-            ) : (
-              <Copy className="size-3.5" />
-            )}
-          </button>
-          <button
-            type="button"
-            onClick={handleDelete}
-            title="Delete highlight"
-            className="rounded-full p-1.5 text-[#666666] hover:bg-rose-950/40 hover:text-rose-400 transition-colors"
-          >
-            <Trash2 className="size-3.5" />
-          </button>
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-full p-1.5 text-[#666666] hover:bg-[#1c1c1c] hover:text-white transition-colors"
-          >
-            <X className="size-3.5" />
-          </button>
-        </div>
-      </div>
-
-      {/* Snippet Preview */}
-      <div className="my-2.5 max-h-20 overflow-y-auto rounded-[14px] bg-[#090909] p-2.5 font-sans text-xs leading-relaxed text-[#cccccc] border-l-2 border-[#0099ff] border-y border-r border-[#262626]">
-        “{highlight.text}”
-      </div>
-
-      {/* Color Picker */}
-      <div className="flex items-center justify-between gap-1 py-1">
-        <span className="text-[11px] font-mono font-medium text-[#999999]">Color:</span>
-        <div className="flex items-center gap-1.5">
-          {HIGHLIGHT_COLORS.map((c) => (
-            <button
-              key={c.id}
-              type="button"
-              onClick={() => handleColorChange(c.id)}
-              title={c.label}
-              className={`size-5 rounded-full transition-all duration-150 hover:scale-115 active:scale-95 ${
-                highlight.color === c.id
-                  ? "ring-2 ring-white ring-offset-2 ring-offset-[#141414] scale-110"
-                  : "opacity-70 hover:opacity-100"
-              }`}
-              style={{ backgroundColor: c.dotColor }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Note Section */}
-      <div className="mt-2.5 pt-2.5 border-t border-[#262626]">
-        {showNoteInput ? (
-          <div>
-            <label className="block mb-1.5 text-[11px] font-mono text-[#999999]">
-              Annotation:
-            </label>
-            <textarea
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-              onBlur={handleSaveNote}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  handleSaveNote();
-                }
-              }}
-              placeholder="Add note or memory cue (Enter to save)..."
-              rows={2}
-              className="w-full resize-none rounded-[14px] border border-[#262626] bg-[#090909] px-3 py-2 text-xs text-white placeholder:text-[#666666] focus:border-[#0099ff] focus:outline-none"
-              autoFocus
-            />
-          </div>
-        ) : (
-          <button
-            type="button"
-            onClick={() => setShowNoteInput(true)}
-            className="flex items-center gap-1.5 text-xs font-medium text-[#0099ff] hover:underline py-0.5"
-          >
-            <MessageSquare className="size-3.5" />
-            Add note or annotation
-          </button>
-        )}
-      </div>
-
-      {/* Tags Section */}
-      <div className="mt-2.5 pt-2.5 border-t border-[#262626]">
-        {highlight.tags && highlight.tags.length > 0 ? (
-          <div className="flex flex-wrap gap-1 mb-2">
-            {highlight.tags.map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center gap-1 rounded-full bg-[#1c1c1c] border border-[#262626] px-2 py-0.2 text-[10px] font-mono text-[#999999]"
-              >
-                #{tag}
-                <button
-                  type="button"
-                  onClick={() => handleRemoveTag(tag)}
-                  className="text-[#666666] hover:text-rose-400"
+      {/* 3. Readwise Tag Submenu Popover Card */}
+      {activeMenu === "tags" && (
+        <div className="mt-2 w-72 rounded-[18px] border border-[#333333] bg-[#1c1c1c] p-3 shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-150 space-y-2">
+          {highlight.tags && highlight.tags.length > 0 ? (
+            <div className="flex flex-wrap gap-1">
+              {highlight.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center gap-1 rounded-full bg-[#141414] border border-[#262626] px-2 py-0.5 text-[10px] font-mono text-[#999999]"
                 >
-                  ×
-                </button>
-              </span>
-            ))}
-          </div>
-        ) : null}
+                  #{tag}
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveTag(tag)}
+                    className="text-[#666666] hover:text-rose-400"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+          ) : null}
 
-        <div className="flex items-center gap-1.5">
-          <div className="relative flex-1">
-            <Hash className="absolute left-2.5 top-2 size-3 text-[#666666]" />
+          <div className="flex items-center gap-1.5">
             <input
               type="text"
               value={tagInput}
@@ -366,34 +330,41 @@ export function HighlightPopover({
                 }
               }}
               placeholder="Add tag (e.g. 14-mark)..."
-              className="w-full rounded-full border border-[#262626] bg-[#090909] py-1 pl-7 pr-2 font-sans text-xs text-white placeholder:text-[#666666] focus:border-[#0099ff] focus:outline-none"
+              className="flex-1 rounded-md border border-[#262626] bg-[#090909] px-2.5 py-1 text-xs text-white placeholder:text-[#666666] focus:border-[#0099ff] focus:outline-none"
+              autoFocus
             />
+            <button
+              type="button"
+              onClick={handleAddTag}
+              disabled={!tagInput.trim()}
+              className="rounded-md bg-[#2d3748] hover:bg-[#3b475a] px-2.5 py-1 text-xs font-semibold text-white transition-all"
+            >
+              Add
+            </button>
           </div>
-          <Button
-            type="button"
-            size="sm"
-            onClick={handleAddTag}
-            disabled={!tagInput.trim()}
-            className="h-7 px-3 text-xs rounded-full bg-white text-black hover:bg-white/90 font-bold"
-          >
-            Add
-          </Button>
         </div>
-      </div>
+      )}
+
+      {/* 4. Inline Color Palette Switcher */}
+      {activeMenu === "colors" && (
+        <div className="mt-2 flex items-center gap-1.5 rounded-full border border-[#333333] bg-[#1c1c1c] p-1.5 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+          {HIGHLIGHT_COLORS.map((c) => (
+            <button
+              key={c.id}
+              type="button"
+              onClick={() => handleColorSelect(c.id)}
+              title={c.label}
+              className={cn(
+                "size-5 rounded-full transition-transform hover:scale-120 active:scale-95",
+                highlight.color === c.id
+                  ? "ring-2 ring-white ring-offset-1 ring-offset-[#1c1c1c] scale-110"
+                  : "opacity-80 hover:opacity-100",
+              )}
+              style={{ backgroundColor: c.dotColor }}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
-
-  if (isMobile) {
-    return (
-      <>
-        <div
-          className="fixed inset-0 z-[95] bg-black/60 backdrop-blur-sm animate-in fade-in duration-150"
-          onClick={onClose}
-        />
-        {content}
-      </>
-    );
-  }
-
-  return content;
 }
