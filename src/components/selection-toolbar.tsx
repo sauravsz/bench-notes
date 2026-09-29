@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Copy, Highlighter, MessageSquare, Tag, Check } from "lucide-react";
 import { HIGHLIGHT_COLORS, useHighlights, type HighlightColor } from "@/lib/highlights";
 import { cn } from "@/lib/utils";
@@ -19,6 +20,11 @@ export function SelectionToolbar({
   const currentColor = useHighlights((s) => s.currentColor);
   const setCurrentColor = useHighlights((s) => s.setCurrentColor);
   const [copied, setCopied] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -40,11 +46,10 @@ export function SelectionToolbar({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onHighlight, onAddNote, onClose]);
 
-  if (!selectionRect || !selectedText) return null;
+  if (!selectionRect || !selectedText || !mounted) return null;
 
   const toolbarWidth = 240;
   const screenWidth = typeof window !== "undefined" ? window.innerWidth : 1024;
-  const screenHeight = typeof window !== "undefined" ? window.innerHeight : 800;
 
   // Determine article boundaries to avoid Right-Rail TOC collision
   const articleEl = typeof document !== "undefined" ? document.querySelector("article") : null;
@@ -58,7 +63,7 @@ export function SelectionToolbar({
   const idealLeft = selectionRect.left + selectionRect.width / 2 - toolbarWidth / 2;
   const left = Math.max(minLeft, Math.min(idealLeft, maxRight - toolbarWidth));
   const top =
-    selectionRect.top < 60
+    selectionRect.top < 52
       ? selectionRect.bottom + 8
       : selectionRect.top - 46;
 
@@ -73,16 +78,16 @@ export function SelectionToolbar({
 
   const activeColorConfig = HIGHLIGHT_COLORS.find((c) => c.id === currentColor);
 
-  return (
+  const content = (
     <div
       data-selection-toolbar
       style={{
         position: "fixed",
-        top: `${top}px`,
-        left: `${left}px`,
-        zIndex: 95,
+        top: `${Math.round(top)}px`,
+        left: `${Math.round(left)}px`,
+        zIndex: 9999,
       }}
-      className="flex items-center gap-1 rounded-full border border-[#333333] bg-[#1c1c1c]/95 p-1.5 shadow-[0_12px_32px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-150 font-sans"
+      className="flex items-center gap-1 rounded-full border border-[#333333] bg-[#1c1c1c]/95 p-1.5 shadow-[0_12px_32px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-150 font-sans"
     >
       {/* Primary Highlight button */}
       <button
@@ -145,4 +150,6 @@ export function SelectionToolbar({
       </button>
     </div>
   );
+
+  return createPortal(content, document.body);
 }

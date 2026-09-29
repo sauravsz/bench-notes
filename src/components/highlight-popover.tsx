@@ -1,10 +1,10 @@
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import {
   Check,
   Copy,
   Hash,
   MessageSquare,
-  MoreHorizontal,
   Palette,
   Tag,
   Trash2,
@@ -38,18 +38,21 @@ export function HighlightPopover({
 
   const popoverRef = useRef<HTMLDivElement>(null);
   const noteTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (highlight) {
       setNoteText(highlight.note || "");
-      // If a note already exists, open the note card by default on click
       if (highlight.note) {
         setActiveMenu("note");
       }
     }
   }, [highlight]);
 
-  // Focus note textarea when note card opens
   useEffect(() => {
     if (activeMenu === "note") {
       setTimeout(() => noteTextareaRef.current?.focus(), 50);
@@ -79,13 +82,12 @@ export function HighlightPopover({
     };
   }, [onClose]);
 
-  // Reposition on scroll/resize
+  // Compute position relative to the true browser viewport
   const computePosition = () => {
     if (!targetRect) return;
 
     const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const toolbarWidth = 190;
+    const toolbarWidth = 200;
 
     const articleEl = document.querySelector("article");
     const articleRect = articleEl?.getBoundingClientRect();
@@ -95,13 +97,13 @@ export function HighlightPopover({
       ? Math.min(articleRect.right - 8, screenWidth - 280)
       : (screenWidth >= 1280 ? screenWidth - 280 : screenWidth - 16);
 
-    // Center toolbar horizontally over the highlight
+    // Center toolbar horizontally over the clicked highlight
     const idealLeft = targetRect.left + targetRect.width / 2 - toolbarWidth / 2;
     const left = Math.max(minLeft, Math.min(idealLeft, maxRight - toolbarWidth));
 
-    // Place directly adjacent above (if room) or below
+    // Position directly adjacent: 8px above if room, or 8px below
     let top: number;
-    if (targetRect.top >= 60) {
+    if (targetRect.top >= 52) {
       top = targetRect.top - 46;
     } else {
       top = targetRect.bottom + 8;
@@ -123,7 +125,7 @@ export function HighlightPopover({
     };
   }, [targetRect]);
 
-  if (!highlight) return null;
+  if (!highlight || !mounted) return null;
 
   const colorConfig = HIGHLIGHT_COLORS.find((c) => c.id === highlight.color);
 
@@ -165,29 +167,32 @@ export function HighlightPopover({
     onClose();
   };
 
+  const topPos = coords?.top ?? (targetRect ? Math.max(16, targetRect.top - 46) : 60);
+  const leftPos = coords?.left ?? (targetRect ? Math.max(16, targetRect.left) : 60);
+
   const style: React.CSSProperties = {
     position: "fixed",
-    zIndex: 100,
-    top: coords ? `${coords.top}px` : (targetRect ? `${Math.max(16, targetRect.top - 46)}px` : "50%"),
-    left: coords ? `${coords.left}px` : (targetRect ? `${Math.max(16, targetRect.left)}px` : "50%"),
-    transform: !coords && !targetRect ? "translate(-50%, -50%)" : undefined,
+    zIndex: 9999,
+    top: `${topPos}px`,
+    left: `${leftPos}px`,
   };
 
-  return (
+  const content = (
     <div
       ref={popoverRef}
       style={style}
+      data-highlight-popover
       className="flex flex-col items-center animate-in fade-in zoom-in-95 duration-150 font-sans"
     >
       {/* 1. Sleek Readwise Floating Action Pill */}
-      <div className="flex items-center gap-1 rounded-full border border-[#333333] bg-[#1c1c1c]/95 px-2 py-1.5 shadow-[0_12px_32px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-xl">
-        {/* Color / Delete circle */}
+      <div className="flex items-center gap-1 rounded-full border border-[#333333] bg-[#1c1c1c]/95 px-2 py-1.5 shadow-[0_12px_32px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-xl">
+        {/* Color circle / Delete trigger */}
         <button
           type="button"
           onClick={() => setActiveMenu(activeMenu === "colors" ? "none" : "colors")}
           className="flex size-5.5 items-center justify-center rounded-full transition-transform hover:scale-110 active:scale-95 shadow-xs"
           style={{ backgroundColor: colorConfig?.dotColor || "#eab308" }}
-          title={`Color: ${colorConfig?.label}. Click to change color.`}
+          title={`Color: ${colorConfig?.label}. Click to switch color.`}
         >
           <X
             className="size-3 text-black/70 hover:text-black transition-colors"
@@ -208,7 +213,7 @@ export function HighlightPopover({
               ? "bg-[#2d3748] text-white"
               : "text-[#999999] hover:bg-[#262626] hover:text-white",
           )}
-          title="Add or view note"
+          title="Add or edit note"
         >
           <MessageSquare className="size-3.5" />
           {highlight.note ? (
@@ -259,7 +264,7 @@ export function HighlightPopover({
         </button>
       </div>
 
-      {/* 2. Readwise Note Submenu Popover Card (Image #2) */}
+      {/* 2. Readwise Note Submenu Popover Card */}
       {activeMenu === "note" && (
         <div className="mt-2 w-72 rounded-[18px] border border-[#333333] bg-[#1c1c1c] p-3.5 shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-150">
           <textarea
@@ -367,4 +372,6 @@ export function HighlightPopover({
       )}
     </div>
   );
+
+  return createPortal(content, document.body);
 }
