@@ -46,15 +46,21 @@ export function SelectionToolbar({
   const screenWidth = typeof window !== "undefined" ? window.innerWidth : 1024;
   const screenHeight = typeof window !== "undefined" ? window.innerHeight : 800;
 
-  // On desktop screens (>=1280px), account for the 280px right-rail TOC
-  const maxRightBound = screenWidth >= 1280 ? screenWidth - 290 : screenWidth - 16;
+  // Determine article boundaries to avoid Right-Rail TOC collision
+  const articleEl = typeof document !== "undefined" ? document.querySelector("article") : null;
+  const articleRect = articleEl?.getBoundingClientRect();
+
+  const minLeft = articleRect ? Math.max(16, articleRect.left + 12) : 16;
+  const maxRight = articleRect
+    ? Math.min(articleRect.right - 12, screenWidth - 290)
+    : (screenWidth >= 1280 ? screenWidth - 290 : screenWidth - 16);
 
   const idealLeft = selectionRect.left + selectionRect.width / 2 - toolbarWidth / 2;
-  const left = Math.max(16, Math.min(idealLeft, maxRightBound - toolbarWidth));
+  const left = Math.max(minLeft, Math.min(idealLeft, maxRight - toolbarWidth));
   const top =
     selectionRect.top < 60
-      ? Math.min(screenHeight - 56, selectionRect.bottom + 8)
-      : Math.max(16, selectionRect.top - 50);
+      ? selectionRect.bottom + 8
+      : selectionRect.top - 50;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(selectedText);

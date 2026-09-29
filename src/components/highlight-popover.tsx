@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { Check, Copy, Hash, MessageSquare, Trash2, X } from "lucide-react";
 import {
   HIGHLIGHT_COLORS,
@@ -25,6 +25,8 @@ export function HighlightPopover({
   const [copied, setCopied] = useState(false);
   const [showNoteInput, setShowNoteInput] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
+  const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
+
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== "undefined" ? window.innerWidth < 640 : false,
   );
@@ -67,6 +69,75 @@ export function HighlightPopover({
     };
   }, [onClose]);
 
+  // Close or reposition on scroll
+  useEffect(() => {
+    function handleScroll() {
+      // Re-find target element bounding rect if possible or close
+      const el = document.querySelector(`[data-highlight-id="${highlightId}"]`);
+      if (el) {
+        const newRect = el.getBoundingClientRect();
+        computePosition(newRect);
+      }
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [highlightId]);
+
+  const computePosition = (rect: DOMRect | null | undefined) => {
+    if (isMobile || !rect) {
+      setCoords(null);
+      return;
+    }
+
+    const popoverEl = popoverRef.current;
+    const popoverWidth = popoverEl?.offsetWidth || 320;
+    const popoverHeight = popoverEl?.offsetHeight || 320;
+
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    // Determine article reading boundaries to avoid Right-Rail TOC collision
+    const articleEl = document.querySelector("article");
+    const articleRect = articleEl?.getBoundingClientRect();
+
+    const minLeft = articleRect
+      ? Math.max(16, articleRect.left + 12)
+      : 16;
+    const maxRight = articleRect
+      ? Math.min(articleRect.right - 12, screenWidth - 290)
+      : (screenWidth >= 1280 ? screenWidth - 290 : screenWidth - 16);
+
+    // Horizontal position: center on highlight, clamped strictly inside article canvas
+    const idealLeft = rect.left + rect.width / 2 - popoverWidth / 2;
+    const left = Math.max(minLeft, Math.min(idealLeft, maxRight - popoverWidth));
+
+    // Vertical position: direct adjacency (8px gap)
+    const spaceAbove = rect.top;
+    const spaceBelow = screenHeight - rect.bottom;
+
+    let top: number;
+    // If enough space above, position immediately above highlight
+    if (spaceAbove >= popoverHeight + 16) {
+      top = rect.top - popoverHeight - 8;
+    } else if (spaceBelow >= popoverHeight + 16) {
+      // Otherwise, position immediately below highlight
+      top = rect.bottom + 8;
+    } else {
+      // If constrained on both sides, position where there is more space
+      if (spaceAbove > spaceBelow) {
+        top = Math.max(64, rect.top - popoverHeight - 8);
+      } else {
+        top = Math.min(screenHeight - popoverHeight - 16, rect.bottom + 8);
+      }
+    }
+
+    setCoords({ top: Math.round(top), left: Math.round(left) });
+  };
+
+  useLayoutEffect(() => {
+    computePosition(targetRect);
+  }, [targetRect, isMobile, showNoteInput, highlight?.tags]);
+
   if (!highlight) return null;
 
   const handleColorChange = (color: HighlightColor) => {
@@ -105,64 +176,22 @@ export function HighlightPopover({
     onClose();
   };
 
-  // Smart Adaptive Positioning Mathematics
-  const popoverWidth = 320;
-  const estimatedHeight = 350;
-  const screenWidth = typeof window !== "undefined" ? window.innerWidth : 1024;
-  const screenHeight = typeof window !== "undefined" ? window.innerHeight : 800;
-
-  // On desktop screens (>=1280px), account for the 280px right-rail TOC
-  const maxRightBound =
-    screenWidth >= 1280 ? screenWidth - 290 : screenWidth - 16;
-
-  const style: React.CSSProperties = {
+  const popoverStyle: React.CSSProperties = {
     position: "fixed",
     zIndex: 100,
+    top: coords ? `${coords.top}px` : (targetRect ? `${Math.max(64, targetRect.bottom + 8)}px` : "50%"),
+    left: coords ? `${coords.left}px` : (targetRect ? `${Math.max(16, targetRect.left)}px` : "50%"),
+    transform: !coords && !targetRect ? "translate(-50%, -50%)" : undefined,
   };
-
-  if (!isMobile) {
-    if (targetRect) {
-      // Horizontal positioning with right-rail avoidance
-      const idealLeft =
-        targetRect.left + targetRect.width / 2 - popoverWidth / 2;
-      const left = Math.max(
-        16,
-        Math.min(idealLeft, maxRightBound - popoverWidth),
-      );
-
-      // Vertical positioning: check if there is enough space below vs above
-      const spaceBelow = screenHeight - targetRect.bottom;
-      const spaceAbove = targetRect.top;
-
-      let top: number;
-      if (spaceBelow < estimatedHeight + 20 && spaceAbove > spaceBelow) {
-        // Place ABOVE target
-        top = Math.max(64, targetRect.top - estimatedHeight - 10);
-      } else {
-        // Place BELOW target
-        top = Math.max(
-          64,
-          Math.min(targetRect.bottom + 10, screenHeight - estimatedHeight - 16),
-        );
-      }
-
-      style.top = `${top}px`;
-      style.left = `${left}px`;
-    } else {
-      style.top = "50%";
-      style.left = "50%";
-      style.transform = "translate(-50%, -50%)";
-    }
-  }
 
   const content = (
     <div
       ref={popoverRef}
-      style={!isMobile ? style : undefined}
+      style={!isMobile ? popoverStyle : undefined}
       className={
         isMobile
           ? "fixed bottom-0 left-0 right-0 z-[100] w-full max-w-lg mx-auto rounded-t-[28px] border-t border-[#262626] bg-[#141414] backdrop-blur-2xl p-5 shadow-2xl ios-sheet-enter max-h-[85vh] overflow-y-auto pb-safe font-sans"
-          : "w-80 rounded-[22px] border border-[#262626] bg-[#141414] backdrop-blur-2xl p-4 shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.06)] ios-scale-in font-sans"
+          : "w-80 rounded-[22px] border border-[#262626] bg-[#141414]/95 backdrop-blur-2xl p-4 shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.06)] ios-scale-in font-sans"
       }
     >
       {isMobile && (
