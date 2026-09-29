@@ -1238,12 +1238,13 @@ export const businessEnvironmentCourse: Course = {
       "id": "601-topic-13",
       "slug": "strategies-to-control-price-rise-india",
       "number": 13,
-      "title": "Strategies and Policy Objectives to Control Price Rise (Inflation) in India",
+      "title": "[HRL] Strategies and Policy Objectives to Control Price Rise (Inflation) in India",
       "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
       "marks": 14,
-      "lecture": "Lecture 6: Price Stability & Inflation Management",
+      "lecture": "Faculty HRL: Lecture 6: Price Stability & Inflation Management",
       "summary": "Analyzing monetary, fiscal, supply-side, and administrative strategies deployed by the Government of India and the Reserve Bank of India to contain headline and core inflation.",
       "tags": [
+        "HRL",
         "Price Rise",
         "Inflation Control",
         "Monetary Tightening",
@@ -1316,12 +1317,13 @@ export const businessEnvironmentCourse: Course = {
       "id": "601-topic-14",
       "slug": "monetary-policy-reforms-continuous-growth",
       "number": 14,
-      "title": "Monetary Policy Reforms and Architecture to Ensure Continuous Economic Growth",
+      "title": "[HRL] Monetary Policy Reforms and Architecture to Ensure Continuous Economic Growth",
       "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
       "marks": 14,
-      "lecture": "Lecture 6: Monetary Architecture & Growth Dynamics",
+      "lecture": "Faculty HRL: Lecture 6: Monetary Architecture & Growth Dynamics",
       "summary": "Suggested policy shifts in RBI's monetary framework: agile rate calibration, targeted credit deployment, external benchmarking, and liquidity management to sustain long-term growth.",
       "tags": [
+        "HRL",
         "Monetary Policy",
         "RBI Reforms",
         "Economic Growth",
@@ -1391,12 +1393,13 @@ export const businessEnvironmentCourse: Course = {
       "id": "601-topic-15",
       "slug": "fiscal-policy-promoter-hindrance-economic-development",
       "number": 15,
-      "title": "Fiscal Policy: Mechanisms of Economic Promotion vs. Growth Hindrance",
+      "title": "[HRL] Fiscal Policy: Mechanisms of Economic Promotion vs. Growth Hindrance",
       "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
       "marks": 14,
-      "lecture": "Lecture 6: Fiscal Strategy & Public Finance",
+      "lecture": "Faculty HRL: Lecture 6: Fiscal Strategy & Public Finance",
       "summary": "Analyzing how government taxation, public expenditure, and debt management promote economic development, contrasted with the hindrances of crowding out, deficits, and debt traps.",
       "tags": [
+        "HRL",
         "Fiscal Policy",
         "Public Expenditure",
         "CapEx Multiplier",
@@ -1466,12 +1469,13 @@ export const businessEnvironmentCourse: Course = {
       "id": "601-topic-16",
       "slug": "controlling-corruption-ease-of-doing-business",
       "number": 16,
-      "title": "Strategies to Control Corruption and Promote Ease of Doing Business in India",
+      "title": "[HRL] Strategies to Control Corruption and Promote Ease of Doing Business in India",
       "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
       "marks": 14,
-      "lecture": "Lecture 7: Governance, Transparency & Business Regulations",
+      "lecture": "Faculty HRL: Lecture 7: Governance, Transparency & Business Regulations",
       "summary": "Institutional, technological, and regulatory measures to eliminate bureaucratic corruption, streamline business compliance, and accelerate investment approvals.",
       "tags": [
+        "HRL",
         "Corruption Control",
         "Ease of Doing Business",
         "Single Window System",
@@ -1549,12 +1553,13 @@ export const businessEnvironmentCourse: Course = {
       "id": "601-topic-17",
       "slug": "strategic-measures-attract-fdi-india",
       "number": 17,
-      "title": "Strategic Measures and Policy Reforms to Attract Foreign Direct Investment (FDI) into India",
+      "title": "[HRL] Strategic Measures and Policy Reforms to Attract Foreign Direct Investment (FDI) into India",
       "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
       "marks": 14,
-      "lecture": "Lecture 7: Foreign Capital & Investment Policy",
+      "lecture": "Faculty HRL: Lecture 7: Foreign Capital & Investment Policy",
       "summary": "Analyzing sectoral liberalization, Production Linked Incentive (PLI) schemes, plug-and-play industrial infrastructure, and Bilateral Investment Treaties to attract global FDI.",
       "tags": [
+        "HRL",
         "FDI",
         "Foreign Direct Investment",
         "PLI Schemes",
@@ -1632,12 +1637,13 @@ export const businessEnvironmentCourse: Course = {
       "id": "601-topic-18",
       "slug": "macroeconomic-interconnectedness-matrix-india",
       "number": 18,
-      "title": "The Macroeconomic Interconnectedness Matrix: Oil, Gold, Markets, Forex, and Policy Web",
+      "title": "[HRL] The Macroeconomic Interconnectedness Matrix: Oil, Gold, Markets, Forex, and Policy Web",
       "unit": "Macro Interconnectedness, Governance & Comparative Country PESTLE",
       "marks": 14,
-      "lecture": "Lecture 8: Macroeconomic System Dynamics",
+      "lecture": "Faculty HRL: Lecture 8: Macroeconomic System Dynamics",
       "summary": "Analyzing the multi-dimensional interconnected web linking Crude Oil, Gold, Stock Markets, FII, DII, FDI, Exchange Rates, Monetary/Fiscal Policies, and Forex Reserves.",
       "tags": [
+        "HRL",
         "Macro Interconnectedness",
         "Crude Oil",
         "Gold",
@@ -1723,12 +1729,13 @@ export const businessEnvironmentCourse: Course = {
       "id": "601-topic-19",
       "slug": "action-plans-improve-global-governance-indices",
       "number": 19,
-      "title": "Strategic Action Plans to Improve Key Global Governance and Development Indices",
+      "title": "[HRL] Strategic Action Plans to Improve Key Global Governance and Development Indices",
       "unit": "Macro Interconnectedness, Governance & Comparative Country PESTLE",
       "marks": 14,
-      "lecture": "Lecture 8: Global Indices & National Competitiveness",
+      "lecture": "Faculty HRL: Lecture 8: Global Indices & National Competitiveness",
       "summary": "Concrete policy roadmaps to improve India's ranking across the Human Development Index (HDI), Political Stability Index, Corruption Perceptions Index, and Ease of Doing Business.",
       "tags": [
+        "HRL",
         "Global Indices",
         "HDI Improvement",
         "Political Stability",
@@ -1795,12 +1802,13 @@ export const businessEnvironmentCourse: Course = {
       "id": "601-topic-20",
       "slug": "critical-evaluation-india-monetary-policy-post-covid",
       "number": 20,
-      "title": "Critical Evaluation of India's Monetary Policy Since COVID-2019",
+      "title": "[HRL] Critical Evaluation of India's Monetary Policy Since COVID-2019",
       "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
       "marks": 14,
-      "lecture": "Lecture 6: Post-Pandemic Monetary Management",
+      "lecture": "Faculty HRL: Lecture 6: Post-Pandemic Monetary Management",
       "summary": "Comprehensive three-phase evaluation of RBI's monetary trajectory from emergency COVID accommodation (2020-2021) to aggressive rate normalization (2022-2023) and current stance.",
       "tags": [
+        "HRL",
         "Monetary Policy",
         "COVID-19 Response",
         "Repo Rate",
@@ -1868,12 +1876,13 @@ export const businessEnvironmentCourse: Course = {
       "id": "601-topic-21",
       "slug": "significance-pestle-analysis-mnc-examples",
       "number": 21,
-      "title": "Significance of PESTLE Analysis in Strategic Business Decisions: Multi-MNC Case Studies",
+      "title": "[HRL] Significance of PESTLE Analysis in Strategic Business Decisions: Multi-MNC Case Studies",
       "unit": "Globalisation, Indian Enterprises & Environmental Scanning (PESTLE)",
       "marks": 14,
-      "lecture": "Lecture 4: Strategic Environmental Scanning & MNC Strategy",
+      "lecture": "Faculty HRL: Lecture 4: Strategic Environmental Scanning & MNC Strategy",
       "summary": "Analyzing the strategic importance of PESTLE analysis for international business decisions, illustrated through detailed case studies of Apple, Tesla, Unilever, and McDonald's.",
       "tags": [
+        "HRL",
         "PESTLE Analysis",
         "MNC Strategy",
         "Apple",
@@ -1947,12 +1956,13 @@ export const businessEnvironmentCourse: Course = {
       "id": "601-topic-22",
       "slug": "comparative-pestle-analysis-india-china-us-japan",
       "number": 22,
-      "title": "Comparative PESTLE Analysis of Major Global Economies: India, China, US, and Japan",
+      "title": "[HRL] Comparative PESTLE Analysis of Major Global Economies: India, China, US, and Japan",
       "unit": "Macro Interconnectedness, Governance & Comparative Country PESTLE",
       "marks": 14,
-      "lecture": "Lecture 8: Comparative International Business Environments",
+      "lecture": "Faculty HRL: Lecture 8: Comparative International Business Environments",
       "summary": "Comprehensive comparative PESTLE matrix analyzing the macro-environmental operating conditions, institutional drivers, and strategic challenges across India, China, the US, and Japan.",
       "tags": [
+        "HRL",
         "Comparative PESTLE",
         "India",
         "China",
@@ -2033,12 +2043,13 @@ export const businessEnvironmentCourse: Course = {
       "id": "601-topic-23",
       "slug": "union-budget-macroeconomic-transmission-mechanism",
       "number": 23,
-      "title": "Macroeconomic Transmission Mechanism of the Union Budget on India's Economy",
+      "title": "[HRL] Macroeconomic Transmission Mechanism of the Union Budget on India's Economy",
       "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
       "marks": 14,
-      "lecture": "Lecture 6: Union Budget Architecture & Market Dynamics",
+      "lecture": "Faculty HRL: Lecture 6: Union Budget Architecture & Market Dynamics",
       "summary": "Analyzing the direct and indirect transmission channels through which the Union Budget influences GDP growth, fiscal deficit, FDI, FII capital flows, stock markets, and commodity prices.",
       "tags": [
+        "HRL",
         "Union Budget",
         "Macroeconomic Transmission",
         "GDP Impact",
@@ -3239,12 +3250,12 @@ export const businessEnvironmentCourse: Course = {
     {
       "id": "601-eq-13",
       "number": 13,
-      "title": "Strategies and Policy Objectives to Control Price Rise (Inflation) in India",
+      "title": "[HRL] Strategies and Policy Objectives to Control Price Rise (Inflation) in India",
       "marks": 14,
       "relatedSlugs": [
         "strategies-to-control-price-rise-india"
       ],
-      "question": "What are the different strategies or objectives the Government of India can take to control price rise in the country?",
+      "question": "[HRL] What are the different strategies or objectives the Government of India can take to control price rise in the country?",
       "blocks": [
         {
           "type": "h3",
@@ -3310,12 +3321,12 @@ export const businessEnvironmentCourse: Course = {
     {
       "id": "601-eq-14",
       "number": 14,
-      "title": "Monetary Policy Reforms and Architecture to Ensure Continuous Economic Growth",
+      "title": "[HRL] Monetary Policy Reforms and Architecture to Ensure Continuous Economic Growth",
       "marks": 14,
       "relatedSlugs": [
         "monetary-policy-reforms-continuous-growth"
       ],
-      "question": "What changes would you suggest in the monetary policy to ensure continuous growth of the economy?",
+      "question": "[HRL] What changes would you suggest in the monetary policy to ensure continuous growth of the economy?",
       "blocks": [
         {
           "type": "h3",
@@ -3377,12 +3388,12 @@ export const businessEnvironmentCourse: Course = {
     {
       "id": "601-eq-15",
       "number": 15,
-      "title": "Fiscal Policy: Mechanisms of Economic Promotion vs. Growth Hindrance",
+      "title": "[HRL] Fiscal Policy: Mechanisms of Economic Promotion vs. Growth Hindrance",
       "marks": 14,
       "relatedSlugs": [
         "fiscal-policy-promoter-hindrance-economic-development"
       ],
-      "question": "How can fiscal policy promote or become a hindrance for economic development in the country?",
+      "question": "[HRL] How can fiscal policy promote or become a hindrance for economic development in the country?",
       "blocks": [
         {
           "type": "h3",
@@ -3444,12 +3455,12 @@ export const businessEnvironmentCourse: Course = {
     {
       "id": "601-eq-16",
       "number": 16,
-      "title": "Strategies to Control Corruption and Promote Ease of Doing Business in India",
+      "title": "[HRL] Strategies to Control Corruption and Promote Ease of Doing Business in India",
       "marks": 14,
       "relatedSlugs": [
         "controlling-corruption-ease-of-doing-business"
       ],
-      "question": "What steps would you take to control corruption and promote the ease of doing business in the economy?",
+      "question": "[HRL] What steps would you take to control corruption and promote the ease of doing business in the economy?",
       "blocks": [
         {
           "type": "h3",
@@ -3519,12 +3530,12 @@ export const businessEnvironmentCourse: Course = {
     {
       "id": "601-eq-17",
       "number": 17,
-      "title": "Strategic Measures and Policy Reforms to Attract Foreign Direct Investment (FDI) into India",
+      "title": "[HRL] Strategic Measures and Policy Reforms to Attract Foreign Direct Investment (FDI) into India",
       "marks": 14,
       "relatedSlugs": [
         "strategic-measures-attract-fdi-india"
       ],
-      "question": "What steps should the Government of India take to attract Foreign Direct Investment (FDI) into India?",
+      "question": "[HRL] What steps should the Government of India take to attract Foreign Direct Investment (FDI) into India?",
       "blocks": [
         {
           "type": "h3",
@@ -3594,12 +3605,12 @@ export const businessEnvironmentCourse: Course = {
     {
       "id": "601-eq-18",
       "number": 18,
-      "title": "The Macroeconomic Interconnectedness Matrix: Oil, Gold, Markets, Forex, and Policy Web",
+      "title": "[HRL] The Macroeconomic Interconnectedness Matrix: Oil, Gold, Markets, Forex, and Policy Web",
       "marks": 14,
       "relatedSlugs": [
         "macroeconomic-interconnectedness-matrix-india"
       ],
-      "question": "How are crude oil prices, gold prices, stock markets, FII, DII, FDI, exchange rates, monetary policy, fiscal policy, and forex reserves interconnected in the Indian economy?",
+      "question": "[HRL] How are crude oil prices, gold prices, stock markets, FII, DII, FDI, exchange rates, monetary policy, fiscal policy, and forex reserves interconnected in the Indian economy?",
       "blocks": [
         {
           "type": "h3",
@@ -3676,12 +3687,12 @@ export const businessEnvironmentCourse: Course = {
     {
       "id": "601-eq-19",
       "number": 19,
-      "title": "Strategic Action Plans to Improve Key Global Governance and Development Indices",
+      "title": "[HRL] Strategic Action Plans to Improve Key Global Governance and Development Indices",
       "marks": 14,
       "relatedSlugs": [
         "action-plans-improve-global-governance-indices"
       ],
-      "question": "How can India improve its performance across the Human Development Index (HDI), Political Stability Index, Transparency/Corruption Index, and Ease of Doing Business Index?",
+      "question": "[HRL] How can India improve its performance across the Human Development Index (HDI), Political Stability Index, Transparency/Corruption Index, and Ease of Doing Business Index?",
       "blocks": [
         {
           "type": "h3",
@@ -3741,12 +3752,12 @@ export const businessEnvironmentCourse: Course = {
     {
       "id": "601-eq-20",
       "number": 20,
-      "title": "Critical Evaluation of India's Monetary Policy Since COVID-2019",
+      "title": "[HRL] Critical Evaluation of India's Monetary Policy Since COVID-2019",
       "marks": 14,
       "relatedSlugs": [
         "critical-evaluation-india-monetary-policy-post-covid"
       ],
-      "question": "Make a critical evaluation of India's monetary policy trajectory, instruments, and outcomes since COVID-2019.",
+      "question": "[HRL] Make a critical evaluation of India's monetary policy trajectory, instruments, and outcomes since COVID-2019.",
       "blocks": [
         {
           "type": "h3",
@@ -3805,12 +3816,12 @@ export const businessEnvironmentCourse: Course = {
     {
       "id": "601-eq-21",
       "number": 21,
-      "title": "Significance of PESTLE Analysis in Strategic Business Decisions: Multi-MNC Case Studies",
+      "title": "[HRL] Significance of PESTLE Analysis in Strategic Business Decisions: Multi-MNC Case Studies",
       "marks": 14,
       "relatedSlugs": [
         "significance-pestle-analysis-mnc-examples"
       ],
-      "question": "Explain the significance of PEST/PESTLE analysis for strategic business decisions, and illustrate its application using concrete examples from global Multinational Corporations (MNCs).",
+      "question": "[HRL] Explain the significance of PEST/PESTLE analysis for strategic business decisions, and illustrate its application using concrete examples from global Multinational Corporations (MNCs).",
       "blocks": [
         {
           "type": "h3",
@@ -3875,12 +3886,12 @@ export const businessEnvironmentCourse: Course = {
     {
       "id": "601-eq-22",
       "number": 22,
-      "title": "Comparative PESTLE Analysis of Major Global Economies: India, China, US, and Japan",
+      "title": "[HRL] Comparative PESTLE Analysis of Major Global Economies: India, China, US, and Japan",
       "marks": 14,
       "relatedSlugs": [
         "comparative-pestle-analysis-india-china-us-japan"
       ],
-      "question": "Perform a comprehensive comparative PESTLE analysis across four major global economies: India, China, the United States, and Japan.",
+      "question": "[HRL] Perform a comprehensive comparative PESTLE analysis across four major global economies: India, China, the United States, and Japan.",
       "blocks": [
         {
           "type": "h3",
@@ -3953,12 +3964,12 @@ export const businessEnvironmentCourse: Course = {
     {
       "id": "601-eq-23",
       "number": 23,
-      "title": "Macroeconomic Transmission Mechanism of the Union Budget on India's Economy",
+      "title": "[HRL] Macroeconomic Transmission Mechanism of the Union Budget on India's Economy",
       "marks": 14,
       "relatedSlugs": [
         "union-budget-macroeconomic-transmission-mechanism"
       ],
-      "question": "How does the Union Budget affect India's GDP, FDI, FII, stock markets, crude oil prices, gold prices, and overall macroeconomic indicators?",
+      "question": "[HRL] How does the Union Budget affect India's GDP, FDI, FII, stock markets, crude oil prices, gold prices, and overall macroeconomic indicators?",
       "blocks": [
         {
           "type": "h3",
