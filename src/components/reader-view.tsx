@@ -106,10 +106,6 @@ export function ReaderView({
             color: currentColor,
             blockIndex,
           });
-          toast.success("Highlighted text", {
-            description: `Auto-saved to local notebook. Press Shift+H to toggle.`,
-            duration: 1800,
-          });
           selection.removeAllRanges();
           setSelectedText("");
           setSelectedBlockIndex(undefined);
@@ -139,7 +135,6 @@ export function ReaderView({
       color: color || currentColor,
       blockIndex: selectedBlockIndex,
     });
-    toast.success("Highlighted text", { duration: 1500 });
     window.getSelection()?.removeAllRanges();
     setSelectedText("");
     setSelectedBlockIndex(undefined);
