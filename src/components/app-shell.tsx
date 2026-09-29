@@ -355,6 +355,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const currentUser = useAccessControl((s) => s.currentUser);
   const isAdmin = useAccessControl((s) => s.isAdmin(s.currentUser?.email));
   const signOut = useAccessControl((s) => s.signOut);
+  const setUserEmail = useHighlights((s) => s.setUserEmail);
+
+  useEffect(() => {
+    setUserEmail(currentUser?.email);
+  }, [currentUser?.email, setUserEmail]);
+
   const studied = useProgress((s) => s.studied);
   const highlights = useHighlights((s) => s.highlights);
   const autoHighlight = useHighlights((s) => s.autoHighlight);

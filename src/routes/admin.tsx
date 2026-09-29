@@ -6,8 +6,8 @@ import {
   CheckCircle2,
   Clock,
   Copy,
+  Database,
   Globe,
-  KeyRound,
   Lock,
   Mail,
   Plus,
@@ -26,8 +26,8 @@ import {
   XCircle,
 } from "lucide-react";
 import { useAccessControl, DEFAULT_PASSCODES } from "@/lib/auth/access-control";
+import { isSupabaseReady, getSupabaseConfig } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -54,7 +54,7 @@ function AdminDashboard() {
   const [passwordInput, setPasswordInput] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [newEmailInput, setNewEmailInput] = useState("");
-  const [activeTab, setActiveTab] = useState<"pending" | "approved" | "whitelist" | "passcodes">("pending");
+  const [activeTab, setActiveTab] = useState<"pending" | "approved" | "whitelist" | "database">("pending");
   const [isSyncing, setIsSyncing] = useState(false);
 
   // Real-time server sync every 3 seconds
@@ -354,6 +354,21 @@ function AdminDashboard() {
             <UserPlus className="size-3.5" />
             <span>Pre-Approved Whitelist ({whitelistedEmails.length})</span>
           </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("database")}
+            className={cn(
+              "flex items-center gap-1.5 rounded-full px-4 py-2 font-sans font-bold transition-all",
+              activeTab === "database"
+                ? "bg-white text-black shadow-xs"
+                : "bg-[#141414] text-[#999999] border border-[#262626] hover:text-white",
+            )}
+          >
+            <Database className="size-3.5 text-[#0099ff]" />
+            <span>Supabase Database</span>
+            <span className={cn("size-2 rounded-full", isSupabaseReady() ? "bg-[#22c55e]" : "bg-amber-400")} />
+          </button>
+
         </div>
 
         {/* Tab 1: Pending Requests Queue */}
@@ -600,6 +615,116 @@ function AdminDashboard() {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+          </div>
+        )}
+        {/* Tab 4: Supabase PostgreSQL Database Status & Schema */}
+        {activeTab === "database" && (
+          <div className="space-y-6">
+            <div className="rounded-[20px] border border-[#262626] bg-[#141414] p-5 shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#262626] pb-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex size-10 items-center justify-center rounded-full bg-[#1c1c1c] border border-[#262626]">
+                    <Database className="size-5 text-[#0099ff]" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-base font-bold text-white">
+                      Supabase PostgreSQL User Highlights Sync
+                    </h3>
+                    <p className="font-sans text-xs text-[#999999]">
+                      User-isolated highlight and annotation persistence linked to Google email IDs.
+                    </p>
+                  </div>
+                </div>
+                <span
+                  className={cn(
+                    "rounded-full px-3 py-1 font-mono text-xs font-bold border",
+                    isSupabaseReady()
+                      ? "bg-[#22c55e]/15 border-[#22c55e]/30 text-[#22c55e]"
+                      : "bg-amber-500/15 border-amber-500/30 text-amber-400",
+                  )}
+                >
+                  {isSupabaseReady() ? "Connected to Supabase" : "Local Partition Mode (Active)"}
+                </span>
+              </div>
+
+              <div className="space-y-2 text-xs font-sans text-[#cccccc] leading-relaxed">
+                <p>
+                  Each authenticated user's highlights are strictly isolated to their Google email profile (<code>user_email</code>). User A cannot see or modify User B's annotations.
+                </p>
+                <div className="rounded-xl bg-[#090909] p-3 border border-[#262626] font-mono text-[11px] text-[#999999] space-y-1">
+                  <div><strong>Supabase Project URL:</strong> {getSupabaseConfig().url}</div>
+                  <div><strong>Status:</strong> {isSupabaseReady() ? "Active PostgreSQL Realtime Sync" : "Waiting for VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in Vercel environment"}</div>
+                </div>
+              </div>
+
+              <div className="space-y-2 pt-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs font-bold text-white">
+                    PostgreSQL Table Schema (supabase/schema.sql):
+                  </span>
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={() => {
+                      const sql = `-- Create user_highlights table in Supabase
+create table if not exists public.user_highlights (
+  id text primary key,
+  user_email text not null,
+  doc_id text not null,
+  doc_title text,
+  block_index integer,
+  block_id text,
+  text text not null,
+  color text not null default 'yellow',
+  note text,
+  tags text[] default '{}',
+  created_at bigint not null,
+  updated_at bigint not null
+);
+
+create index if not exists idx_user_highlights_email on public.user_highlights(user_email);
+create index if not exists idx_user_highlights_email_doc on public.user_highlights(user_email, doc_id);
+
+alter table public.user_highlights enable row level security;
+
+create policy "Allow access to user highlights by email"
+  on public.user_highlights
+  for all
+  using (true)
+  with check (true);`;
+                      navigator.clipboard.writeText(sql);
+                      toast.success("SQL Schema copied to clipboard", {
+                        description: "Paste and run in Supabase SQL Editor.",
+                      });
+                    }}
+                    className="bg-white text-black hover:bg-white/90 text-xs rounded-full font-bold h-8 gap-1.5"
+                  >
+                    <Copy className="size-3.5" />
+                    Copy SQL Script
+                  </Button>
+                </div>
+
+                <pre className="rounded-[16px] border border-[#262626] bg-[#090909] p-4 font-mono text-[11px] leading-relaxed text-[#999999] overflow-x-auto">
+{`create table if not exists public.user_highlights (
+  id text primary key,
+  user_email text not null,
+  doc_id text not null,
+  doc_title text,
+  block_index integer,
+  block_id text,
+  text text not null,
+  color text not null default 'yellow',
+  note text,
+  tags text[] default '{}',
+  created_at bigint not null,
+  updated_at bigint not null
+);
+
+create index if not exists idx_user_highlights_email on public.user_highlights(user_email);
+create index if not exists idx_user_highlights_email_doc on public.user_highlights(user_email, doc_id);`}
+                </pre>
               </div>
             </div>
           </div>
