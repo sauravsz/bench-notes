@@ -6,7 +6,7 @@ export const businessEnvironmentCourse: Course = {
   "code": "601",
   "title": "Analysis of Business Environment",
   "category": "Core",
-  "description": "Comprehensive analysis of macro-environmental forces, global growth scenarios (2025-2030), global enterprise models, GATS trade architecture, PESTLE analysis of Indian conglomerates, and TAM/SAM/SOM market sizing.",
+  "description": "Comprehensive analysis of macro-environmental forces, global growth scenarios (2025-2030), global enterprise models, GATS trade architecture, PESTLE analysis of Indian conglomerates, monetary and fiscal policies, inflation management, macroeconomic interconnectedness, and TAM/SAM/SOM market sizing.",
   "instructor": "Executive Faculty",
   "accentColor": "#4F46E5",
   "units": [
@@ -14,7 +14,9 @@ export const businessEnvironmentCourse: Course = {
     "Global Enterprise Models, Strategy & Human Development",
     "Global Trade Architecture & Modes of Services",
     "Globalisation, Indian Enterprises & Environmental Scanning (PESTLE)",
-    "Market Sizing Methodology, Data Sources & Entry Analysis"
+    "Market Sizing Methodology, Data Sources & Entry Analysis",
+    "Macroeconomic Policy, Monetary & Fiscal Strategy",
+    "Macro Interconnectedness, Governance & Comparative Country PESTLE"
   ],
   "topics": [
     {
@@ -1231,6 +1233,881 @@ export const businessEnvironmentCourse: Course = {
           ]
         }
       ]
+    },
+    {
+      "id": "601-topic-13",
+      "slug": "strategies-to-control-price-rise-india",
+      "number": 13,
+      "title": "Strategies and Policy Objectives to Control Price Rise (Inflation) in India",
+      "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
+      "marks": 14,
+      "lecture": "Lecture 6: Price Stability & Inflation Management",
+      "summary": "Analyzing monetary, fiscal, supply-side, and administrative strategies deployed by the Government of India and the Reserve Bank of India to contain headline and core inflation.",
+      "tags": [
+        "Price Rise",
+        "Inflation Control",
+        "Monetary Tightening",
+        "Supply-Side Management",
+        "Buffer Stocks"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "Nature and Drivers of Price Rise in the Indian Economy"
+        },
+        {
+          "type": "p",
+          "text": "Inflation in India is a multi-dimensional phenomenon driven by both demand-pull pressures (excess aggregate demand, liquidity expansion) and cost-push supply shocks (monsoon volatility affecting food prices, global crude oil spikes, and supply chain disruptions). Controlling sustained price rise requires an integrated tripartite policy response combining monetary tightening, fiscal interventions, and administrative supply-side management."
+        },
+        {
+          "type": "h3",
+          "text": "Core Strategic Interventions to Control Inflation"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Policy Dimension",
+            "Strategic Objective",
+            "Specific Operational Mechanism Deployed"
+          ],
+          "rows": [
+            [
+              "1. Monetary Policy Measures (RBI)",
+              "Contract aggregate demand and absorb surplus market liquidity.",
+              "Hike the Policy Repo Rate under the Liquidity Adjustment Facility (LAF); raise the Cash Reserve Ratio (CRR); absorb excess liquidity via Standing Deposit Facility (SDF) and Open Market Operations (OMO sales)."
+            ],
+            [
+              "2. Fiscal & Duty Interventions",
+              "Directly compress landed import costs of essential inputs.",
+              "Reduce central excise duties on petrol and diesel; eliminate or lower customs import tariffs on crude palm oil, soybean oil, and pulses; rationalize GST slabs on essential consumer goods."
+            ],
+            [
+              "3. Supply-Side Buffer Management",
+              "Stabilize domestic food supplies and curb speculative price spikes.",
+              "Release wheat and rice into open wholesale markets via the Food Corporation of India's Open Market Sale Scheme (OMSS); deploy the Price Stabilization Fund (PSF) for market intervention in onions and pulses."
+            ],
+            [
+              "4. Trade & Export Restrictions",
+              "Prioritize domestic availability over export revenues during shortages.",
+              "Impose minimum export prices (MEP), export duties, or temporary export bans on non-basmati white rice, wheat, and onions; allow duty-free imports of critical food commodities."
+            ],
+            [
+              "5. Administrative & Anti-Hoarding Laws",
+              "Eliminate black-market hoarding and supply bottlenecks.",
+              "Strictly enforce stock-holding limits on traders under the Essential Commodities Act (ECA); mandate weekly reporting of pulses and wheat inventory to prevent artificial scarcity."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Long-Term Structural Inflation Management"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Agricultural Logistics Modernization: Developing cold chain infrastructure and modern warehouses under the Agriculture Infrastructure Fund (AIF) to reduce post-harvest losses.",
+            "PM GatiShakti National Master Plan: Streamlining multi-modal logistics networks to compress inter-state freight transit times and eliminate distribution cost friction.",
+            "Energy Diversification: Scaling domestic solar PV, ethanol blending (target 20%), and green hydrogen to decouple the domestic economy from imported fossil fuel price shocks."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-topic-14",
+      "slug": "monetary-policy-reforms-continuous-growth",
+      "number": 14,
+      "title": "Monetary Policy Reforms and Architecture to Ensure Continuous Economic Growth",
+      "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
+      "marks": 14,
+      "lecture": "Lecture 6: Monetary Architecture & Growth Dynamics",
+      "summary": "Suggested policy shifts in RBI's monetary framework: agile rate calibration, targeted credit deployment, external benchmarking, and liquidity management to sustain long-term growth.",
+      "tags": [
+        "Monetary Policy",
+        "RBI Reforms",
+        "Economic Growth",
+        "Repo Rate",
+        "TLTRO",
+        "Credit Transmission"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "The Dual Mandate: Balancing Price Stability with Sustainable Growth"
+        },
+        {
+          "type": "p",
+          "text": "Under the Flexible Inflation Targeting (FIT) framework established in 2016, the Reserve Bank of India (RBI) operates with a primary mandate to maintain price stability (4% CPI inflation target within a +/- 2% tolerance band) while keeping in mind the objective of growth. To ensure continuous, non-inflationary economic growth in an era of global volatility, several structural and operational adjustments in monetary policy are necessary:"
+        },
+        {
+          "type": "h3",
+          "text": "Key Recommended Monetary Policy Reforms"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Policy Reform Area",
+            "Current Operational Constraint",
+            "Recommended Strategic Modification"
+          ],
+          "rows": [
+            [
+              "1. Interest Rate Calibration & Agility",
+              "Prolonged high policy repo rates (6.50%) compress private corporate capital expenditure (CapEx) and retail consumer credit demand.",
+              "Adopt a forward-looking, data-dependent countercyclical stance; calibrate rate cuts proactively as headline inflation approaches the 4% target to lower the real cost of capital."
+            ],
+            [
+              "2. Targeted Credit Deployment (Sectoral Focus)",
+              "Broad-brush interest rate hikes disproportionately penalize credit-starved productive sectors like MSMEs and green tech.",
+              "Revive and institutionalize Targeted Long-Term Repo Operations (TLTRO) with lower capital costs linked directly to green energy, semiconductor manufacturing, and export infrastructure."
+            ],
+            [
+              "3. Enhancing Monetary Transmission",
+              "Asymmetry in lending rate transmission; banks rapidly hike floating loan rates but delay deposit rate hikes, creating liquidity friction.",
+              "Extend the mandatory External Benchmark Lending Rate (EBLR) framework to NBFC lending and align deposit pricing with market benchmarks to ensure uniform transmission."
+            ],
+            [
+              "4. Refining the Liquidity Framework",
+              "Friction between overnight call money rates and the policy repo rate during liquidity deficit cycles.",
+              "Deploy dynamic fine-tuning operations through Variable Rate Repo (VRR) and Variable Rate Reverse Repo (VRRR) auctions to maintain liquidity balance without stoking asset bubbles."
+            ],
+            [
+              "5. Priority Sector Lending (PSL) Modernization",
+              "Traditional PSL categories do not fully incentivize modern high-productivity sectors.",
+              "Restructure PSL weightages to assign higher multipliers for tech-enabled supply chain infrastructure, digital manufacturing, and climate-resilient farming."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Harnessing Central Bank Digital Currency (CBDC / e-Rupee)"
+        },
+        {
+          "type": "p",
+          "text": "Accelerate the institutional rollout of wholesale and retail CBDC (e-Rupee) for domestic cross-bank settlement and bilateral cross-border trade settlements. This reduces banking intermediary friction, lowers settlement costs, and enhances the real-time velocity of money."
+        }
+      ]
+    },
+    {
+      "id": "601-topic-15",
+      "slug": "fiscal-policy-promoter-hindrance-economic-development",
+      "number": 15,
+      "title": "Fiscal Policy: Mechanisms of Economic Promotion vs. Growth Hindrance",
+      "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
+      "marks": 14,
+      "lecture": "Lecture 6: Fiscal Strategy & Public Finance",
+      "summary": "Analyzing how government taxation, public expenditure, and debt management promote economic development, contrasted with the hindrances of crowding out, deficits, and debt traps.",
+      "tags": [
+        "Fiscal Policy",
+        "Public Expenditure",
+        "CapEx Multiplier",
+        "Crowding Out",
+        "Fiscal Deficit",
+        "FRBM"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "Nature and Scope of Fiscal Policy"
+        },
+        {
+          "type": "p",
+          "text": "Fiscal policy encompasses the government's strategic decisions regarding public expenditure, taxation, borrowing, and fiscal deficit management to influence macroeconomic activity. In a developing economy like India, fiscal policy plays a dual role: it can serve as a primary catalyst for long-term growth or, if mismanaged, become a severe structural constraint."
+        },
+        {
+          "type": "h3",
+          "text": "How Fiscal Policy Promotes Economic Development"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "High Capital Expenditure (CapEx) Multiplier: Productive public capital investment in physical infrastructure (roads, railways, ports, power grids) yields an economic multiplier of 2.45x (compared to only 0.92x for revenue expenditure), crowding in private capital investment and generating industrial jobs.",
+            "Targeted Industrial Tax Incentives: Pro-growth taxation reforms\u2014such as the corporate tax cut (Section 115BAB offering a 15% rate for new manufacturing setups) and Production Linked Incentive (PLI) budget allocations\u2014stimulate manufacturing investment.",
+            "Equitable Wealth Redistribution: Progressive direct taxation combined with targeted social safety nets (Direct Benefit Transfer via PM-KISAN, Ayushman Bharat, rural housing) expands grassroots consumer purchasing power.",
+            "Countercyclical Stabilization: During economic downturns, expansionary fiscal spending compensates for depressed private demand, preventing deep recessions."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "How Fiscal Policy Can Become a Hindrance to Development"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Hindrance Mechanism",
+            "Operational Cause & Dynamic",
+            "Adverse Macroeconomic Consequence"
+          ],
+          "rows": [
+            [
+              "1. Crowding-Out Effect",
+              "Excessive government market borrowing to fund non-productive fiscal deficits.",
+              "Absorbs available banking liquidity, pushing up sovereign bond yields and raising corporate borrowing costs for private industry."
+            ],
+            [
+              "2. Debt Sustainability Traps",
+              "High general government debt-to-GDP ratio (>80%) requiring heavy annual interest payments.",
+              "Interest servicing consumes over 25% of annual budget revenues, squeezing out essential capital outlays for health and education."
+            ],
+            [
+              "3. Unproductive Revenue Spending",
+              "Excessive growth in untargeted populist subsidies, administrative overheads, and non-asset-creating expenditure.",
+              "Fuels structural demand-pull inflation without adding productive economic capacity."
+            ],
+            [
+              "4. Sovereign Rating Downgrade Risks",
+              "Persistent breaches of the Fiscal Responsibility and Budget Management (FRBM) Act targets.",
+              "Triggers negative foreign credit rating revisions, elevating overseas borrowing costs and discouraging Foreign Direct Investment (FDI)."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-topic-16",
+      "slug": "controlling-corruption-ease-of-doing-business",
+      "number": 16,
+      "title": "Strategies to Control Corruption and Promote Ease of Doing Business in India",
+      "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
+      "marks": 14,
+      "lecture": "Lecture 7: Governance, Transparency & Business Regulations",
+      "summary": "Institutional, technological, and regulatory measures to eliminate bureaucratic corruption, streamline business compliance, and accelerate investment approvals.",
+      "tags": [
+        "Corruption Control",
+        "Ease of Doing Business",
+        "Single Window System",
+        "GeM Portal",
+        "Faceless Assessment",
+        "IBC"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "The Nexus Between Corruption and Business Friction"
+        },
+        {
+          "type": "p",
+          "text": "Corruption functions as an arbitrary, regressive tax on enterprise, elevating operational friction, creating entry barriers for innovative startups, and discouraging foreign institutional capital. Promoting the Ease of Doing Business requires replacing discretionary bureaucratic touchpoints with transparent digital governance, simplified legal codes, and automated compliance frameworks."
+        },
+        {
+          "type": "h3",
+          "text": "Key Strategic Pillars to Control Corruption and Enhance Ease of Business"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Strategic Reform Area",
+            "Specific Implementation Measure",
+            "Impact on Business Environment"
+          ],
+          "rows": [
+            [
+              "1. Digital Single-Window Clearance",
+              "National Single Window System (NSWS) integrating central ministry and state-level statutory clearances into a single digital portal.",
+              "Eliminates multiple departmental visits, sets time-bound deemed approvals, and removes physical rent-seeking checkpoints."
+            ],
+            [
+              "2. Transparent Public Procurement",
+              "Mandatory procurement for all government ministries, departments, and PSUs through the Government e-Marketplace (GeM) portal.",
+              "Eliminates opaque tendering and kickbacks; enables transparent digital bidding for MSMEs and national vendors."
+            ],
+            [
+              "3. Faceless Tax Administration",
+              "Faceless Assessment, Faceless Appeals, and automated document identification numbers (DIN) by CBDT and CBIC.",
+              "Eliminates direct physical interface between taxpayers and tax officers, ending discretionary tax harassment."
+            ],
+            [
+              "4. Decriminalization of Minor Defaults",
+              "Enactment of the Jan Vishwas Act and amendments to the Companies Act 2013 decriminalizing procedural and technical defaults.",
+              "Replaces criminal penalties with civil monetary fines, reducing corporate litigation and fear of administrative penalization."
+            ],
+            [
+              "5. Time-Bound Corporate Exit (IBC)",
+              "Robust implementation of the Insolvency and Bankruptcy Code (IBC 2016) and pre-packaged insolvency regimes for MSMEs.",
+              "Provides a transparent, time-bound legal framework (180-270 days) for corporate debt resolution and business restructuring."
+            ],
+            [
+              "6. Direct Benefit Transfer (DBT / JAM)",
+              "Direct transfer of government subsidies, grants, and incentives into verified bank accounts using the Jan Dhan-Aadhaar-Mobile trinity.",
+              "Eliminates intermediary corruption, leakage, and ghost beneficiaries across all government welfare schemes."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Strengthening Commercial Judicial Infrastructure"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Dedicated Commercial Courts: Expanding specialized commercial courts under the Commercial Courts Act with mandatory pre-institution mediation to resolve business contract disputes within 12 months.",
+            "Land Title Digitization: Comprehensive digital mapping and blockchain registration of industrial land records to eliminate title fraud and litigation delays."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-topic-17",
+      "slug": "strategic-measures-attract-fdi-india",
+      "number": 17,
+      "title": "Strategic Measures and Policy Reforms to Attract Foreign Direct Investment (FDI) into India",
+      "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
+      "marks": 14,
+      "lecture": "Lecture 7: Foreign Capital & Investment Policy",
+      "summary": "Analyzing sectoral liberalization, Production Linked Incentive (PLI) schemes, plug-and-play industrial infrastructure, and Bilateral Investment Treaties to attract global FDI.",
+      "tags": [
+        "FDI",
+        "Foreign Direct Investment",
+        "PLI Schemes",
+        "Automatic Route",
+        "Ease of Investment",
+        "Invest India"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "Strategic Imperative of Foreign Direct Investment (FDI)"
+        },
+        {
+          "type": "p",
+          "text": "Foreign Direct Investment (FDI) serves as non-debt-creating stable capital that brings advanced technological know-how, global management practices, employment generation, and integration into multinational supply chains. To compete effectively against regional peers (Vietnam, Indonesia, Mexico) for global supply chain relocation ('China Plus One'), India requires a comprehensive multi-pronged investment attraction strategy."
+        },
+        {
+          "type": "h3",
+          "text": "Key Strategic Measures to Accelerate FDI Inflows"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Strategic Policy Dimension",
+            "Specific Policy Reform",
+            "Expected Strategic Outcome"
+          ],
+          "rows": [
+            [
+              "1. Liberalization of Sectoral Caps",
+              "Expand the 100% Automatic Route across remaining restricted sectors (defense manufacturing, multi-brand retail, space technology, insurance).",
+              "Removes bureaucratic approval delays and signals long-term regulatory openness to global conglomerates."
+            ],
+            [
+              "2. Production Linked Incentives (PLI)",
+              "Scale financial incentives (4% to 6% incremental output subsidies) across 14 champion sectors: semiconductors, electronics, solar PV, EV batteries, advanced pharma.",
+              "Directly offsets the initial cost-of-manufacturing disability in India, attracting global anchor manufacturers (e.g., Apple supply chain, Micron)."
+            ],
+            [
+              "3. Plug-and-Play Industrial Corridors",
+              "Develop pre-cleared industrial zones, Mega Investment Textile Parks (MITRA), and National Industrial Corridor Development projects with pre-installed utilities.",
+              "Enables foreign investors to commence factory operations within 90 days without navigating tedious land acquisition or environmental approvals."
+            ],
+            [
+              "4. Policy & Tax Stability",
+              "Maintain an absolute commitment against retrospective taxation and provide predictable long-term corporate tax regimes (Section 115BAB 15% rate for new manufacturing).",
+              "Eliminates sovereign regulatory risk, which is the primary deterrent for institutional private equity and sovereign wealth funds."
+            ],
+            [
+              "5. Bilateral Investment Treaties (BITs)",
+              "Modernize and fast-track Bilateral Investment Treaties with major capital-exporting economies (USA, UK, EU, UAE) with balanced dispute settlement mechanisms.",
+              "Provides international legal protection for foreign investor assets, unlocking multi-billion dollar long-term capital commitments."
+            ],
+            [
+              "6. Dedicated Institutional Handholding",
+              "Strengthen Invest India with state-level single-window facilitation desks providing end-to-end support from site selection to post-launch dispute resolution.",
+              "Compresses project execution timelines and enhances investor satisfaction across the investment lifecycle."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Labor & Logistics Reform Integration"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Implementation of Four Labor Codes: Consolidating 29 legacy labor laws into 4 simplified codes (Wages, Industrial Relations, Social Security, Occupational Safety) to provide labor flexibility for large-scale factories.",
+            "National Logistics Policy (NLP): Lowering India's logistics cost from ~13% of GDP down toward global benchmarks (8%) to make Indian manufacturing export-competitive."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-topic-18",
+      "slug": "macroeconomic-interconnectedness-matrix-india",
+      "number": 18,
+      "title": "The Macroeconomic Interconnectedness Matrix: Oil, Gold, Markets, Forex, and Policy Web",
+      "unit": "Macro Interconnectedness, Governance & Comparative Country PESTLE",
+      "marks": 14,
+      "lecture": "Lecture 8: Macroeconomic System Dynamics",
+      "summary": "Analyzing the multi-dimensional interconnected web linking Crude Oil, Gold, Stock Markets, FII, DII, FDI, Exchange Rates, Monetary/Fiscal Policies, and Forex Reserves.",
+      "tags": [
+        "Macro Interconnectedness",
+        "Crude Oil",
+        "Gold",
+        "FII DII",
+        "Forex Reserves",
+        "Exchange Rate",
+        "Monetary Fiscal Nexus"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "The Systemic Macroeconomic Web of the Indian Economy"
+        },
+        {
+          "type": "p",
+          "text": "The macroeconomic environment operates as a dynamic, interconnected general equilibrium system. A disturbance in an external exogenous variable (such as global crude oil prices or US interest rates) triggers an automatic chain reaction across domestic currency values, capital flows, inflation, corporate earnings, and government policy responses."
+        },
+        {
+          "type": "h3",
+          "text": "The 8-Step Macroeconomic Transmission Web"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Transmission Node",
+            "Causal Economic Trigger",
+            "Systemic Impact Across Adjacent Macro Variables"
+          ],
+          "rows": [
+            [
+              "1. Global Crude Oil Spike",
+              "Geopolitical conflict pushes Brent crude oil above $95/barrel.",
+              "India imports >85% of crude oil -> Import bill surges -> Trade Deficit widens -> Current Account Deficit (CAD) expands significantly."
+            ],
+            [
+              "2. Exchange Rate Pressure",
+              "High demand for US Dollars to pay for expensive oil imports.",
+              "Indian Rupee (INR) experiences depreciation pressure against USD -> Imported inflation rises across chemicals, fertilizers, and logistics."
+            ],
+            [
+              "3. Monetary Policy Tightening",
+              "High fuel prices feed into headline CPI inflation breaching target bands.",
+              "RBI initiates Monetary Tightening: hikes policy repo rate -> absorbs excess liquidity -> domestic borrowing costs rise across housing and corporate loans."
+            ],
+            [
+              "4. FII Capital Outflows",
+              "Rising US Treasury bond yields + domestic interest rate hikes + currency depreciation risk.",
+              "Foreign Institutional Investors (FIIs) engage in risk-off selling -> liquidate Indian equities -> repatriate funds to USD assets."
+            ],
+            [
+              "5. Stock Market & DII Balancing",
+              "FII selling creates downward pressure on major stock market benchmark indices (Nifty/Sensex).",
+              "Domestic Institutional Investors (DIIs via monthly mutual fund SIP inflows of >\u20b920,000 Cr) purchase equities, acting as a structural shock absorber."
+            ],
+            [
+              "6. Gold Demand & Import Pressure",
+              "Geopolitical uncertainty + inflation hedging + domestic currency weakness.",
+              "Domestic gold prices surge -> Retail gold demand rises -> Gold imports increase -> Further widens the trade deficit and CAD."
+            ],
+            [
+              "7. Forex Reserve Defense",
+              "Severe volatility in the USD/INR exchange rate.",
+              "RBI intervenes in foreign exchange markets (sells USD from Forex Reserves to absorb excess INR), causing temporary drawdown in total Forex Reserves."
+            ],
+            [
+              "8. Fiscal Policy Response",
+              "Inflationary strain on household budgets and industrial input costs.",
+              "Government cuts fuel excise duties + expands fertilizer subsidies -> Tax revenue drops while subsidy bill rises -> Expands the Fiscal Deficit."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Role of Foreign Direct Investment (FDI) in the Matrix"
+        },
+        {
+          "type": "p",
+          "text": "Unlike volatile short-term FII portfolio capital ('hot money'), Foreign Direct Investment (FDI) represents long-term strategic equity commitments (e.g., greenfield factories, infrastructure). FDI inflows provide a durable non-debt financing cushion that offsets the Current Account Deficit (CAD) and permanently rebuilds national Forex Reserves."
+        }
+      ]
+    },
+    {
+      "id": "601-topic-19",
+      "slug": "action-plans-improve-global-governance-indices",
+      "number": 19,
+      "title": "Strategic Action Plans to Improve Key Global Governance and Development Indices",
+      "unit": "Macro Interconnectedness, Governance & Comparative Country PESTLE",
+      "marks": 14,
+      "lecture": "Lecture 8: Global Indices & National Competitiveness",
+      "summary": "Concrete policy roadmaps to improve India's ranking across the Human Development Index (HDI), Political Stability Index, Corruption Perceptions Index, and Ease of Doing Business.",
+      "tags": [
+        "Global Indices",
+        "HDI Improvement",
+        "Political Stability",
+        "Corruption Perceptions Index",
+        "Ease of Doing Business"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "National Competitiveness and Global Governance Indices"
+        },
+        {
+          "type": "p",
+          "text": "International institutional indices evaluate a country's socio-economic health, institutional integrity, and investment attractiveness. Improving these metrics requires targeted structural interventions across public healthcare, education, judicial transparency, anti-corruption enforcement, and regulatory simplification."
+        },
+        {
+          "type": "h3",
+          "text": "Actionable Improvement Blueprints Across the Four Key Indices"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Global Index",
+            "Current Institutional Bottleneck",
+            "Strategic Policy Action Plan to Improve Score"
+          ],
+          "rows": [
+            [
+              "1. Human Development Index (HDI)",
+              "Low public healthcare spending (~1.4% GDP), gaps in mean years of schooling (6.6 years), and maternal/child undernutrition.",
+              "Increase public healthcare outlay to 2.5% of GDP under Ayushman Bharat; fully implement National Education Policy (NEP 2020) to raise expected and mean years of schooling; expand GNI per capita through high-productivity manufacturing jobs."
+            ],
+            [
+              "2. Political Stability & Governance Index",
+              "Regional socio-economic disparities, policy unpredictability, and periodic inter-state friction.",
+              "Strengthen cooperative federalism through active Inter-State Council forums; ensure long-term policy predictability (avoiding abrupt tariff reversals); institutionalize inclusive welfare delivery to reduce social polarization."
+            ],
+            [
+              "3. Transparency & Corruption Perceptions Index (CPI)",
+              "Discretionary approvals in local municipal licensing, land registration bottlenecks, and non-transparent political financing.",
+              "Universalize mandatory digital public procurement via the GeM portal; digitize all municipal land records via blockchain; strengthen online Right to Information (RTI) portals; enforce strict whistleblower protection."
+            ],
+            [
+              "4. Ease of Doing Business Index",
+              "Delays in commercial dispute resolution, complicated cross-border trading procedures, and multiple municipal construction permits.",
+              "Fully operationalize the National Single Window System (NSWS); establish fast-track commercial courts with mandatory time-bound arbitration; automate customs risk management systems to achieve 24-hour port clearance."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Institutional Synergy and Economic Dividend"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Sovereign Credit Rating Upgrades: Improvements in transparency, political stability, and fiscal discipline encourage international rating agencies (Moody's, S&P, Fitch) to upgrade sovereign ratings.",
+            "Lower Cost of Capital: Higher index performance lowers the sovereign risk premium, reducing overseas commercial borrowing costs for Indian corporations."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-topic-20",
+      "slug": "critical-evaluation-india-monetary-policy-post-covid",
+      "number": 20,
+      "title": "Critical Evaluation of India's Monetary Policy Since COVID-2019",
+      "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
+      "marks": 14,
+      "lecture": "Lecture 6: Post-Pandemic Monetary Management",
+      "summary": "Comprehensive three-phase evaluation of RBI's monetary trajectory from emergency COVID accommodation (2020-2021) to aggressive rate normalization (2022-2023) and current stance.",
+      "tags": [
+        "Monetary Policy",
+        "COVID-19 Response",
+        "Repo Rate",
+        "SDF",
+        "G-SAP",
+        "Inflation Targeting",
+        "RBI Evaluation"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "Evolution of RBI's Monetary Policy Architecture Since 2020"
+        },
+        {
+          "type": "p",
+          "text": "Since the onset of the COVID-19 pandemic in early 2020, the Reserve Bank of India (RBI) has steered the monetary system through three distinct phases: emergency crisis mitigation, aggressive post-war inflation containment, and calibrated disinflationary management."
+        },
+        {
+          "type": "h3",
+          "text": "Three-Phase Monetary Policy Trajectory"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Phase & Timeline",
+            "Core Policy Stance & Strategy",
+            "Specific Monetary Instruments Deployed",
+            "Observed Macroeconomic Outcomes"
+          ],
+          "rows": [
+            [
+              "Phase 1 (2020\u20132021): Emergency Accommodation",
+              "Ultra-accommodative stance to prevent financial market freeze and support collapsed economic output.",
+              "Slashed Policy Repo Rate by 115 bps to historical low of 4.00%; cut Reverse Repo to 3.35%; injected >\u20b917 Lakh Crores liquidity via Targeted Long-Term Repo Operations (TLTRO), Cash Reserve Ratio (CRR) cut to 3%, and G-SAP (Government Securities Acquisition Programme); 6-month loan moratorium.",
+              "Prevented systemic corporate defaults; stabilized bond yields; supported GDP recovery from -5.8% contraction in FY21 to 9.1% growth in FY22."
+            ],
+            [
+              "Phase 2 (2022\u20132023): Inflation Surge & Rapid Normalization",
+              "Shift to 'withdrawal of accommodation' in response to Russia-Ukraine war commodity and crude price shocks pushing CPI to 7.8%.",
+              "Introduced the Standing Deposit Facility (SDF) at 3.75% as non-collateralized liquidity absorption floor; executed aggressive cumulative 250 bps repo rate hike (4.00% to 6.50%); raised CRR back to 4.50%.",
+              "Successfully anchored medium-term inflation expectations; prevented domestic second-round price spirals; protected foreign exchange stability against aggressive US Fed rate hikes."
+            ],
+            [
+              "Phase 3 (2023\u2013Present): Calibrated Disinflation & Balance",
+              "Maintaining withdrawal of accommodation; prioritizing durable alignment of CPI with the 4% target while supporting growth.",
+              "Held repo rate steady at 6.50%; active fine-tuning of system liquidity through Variable Rate Repo (VRR) and Variable Rate Reverse Repo (VRRR) auctions; enhanced macroprudential risk weights on unsecured retail loans.",
+              "Headline inflation moderated toward target band; GDP growth maintained world-leading pace (>7.5% in FY24); banking sector balance sheets achieved multi-decade high asset quality (GNPA < 2.8%)."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Critical Policy Evaluation: Successes vs. Ongoing Vulnerabilities"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Key Policy Successes: Demonstrated superior institutional agility compared to Western central banks by avoiding permanent quantitative easing traps; maintained financial stability and controlled currency depreciation without burning excessive reserves.",
+            "Structural Limitations: Food inflation remains persistently volatile due to recurring climate shocks (unseasonal rains, heatwaves) which monetary rate hikes cannot directly fix; high lending rates have moderately constrained small MSME capital investments."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-topic-21",
+      "slug": "significance-pestle-analysis-mnc-examples",
+      "number": 21,
+      "title": "Significance of PESTLE Analysis in Strategic Business Decisions: Multi-MNC Case Studies",
+      "unit": "Globalisation, Indian Enterprises & Environmental Scanning (PESTLE)",
+      "marks": 14,
+      "lecture": "Lecture 4: Strategic Environmental Scanning & MNC Strategy",
+      "summary": "Analyzing the strategic importance of PESTLE analysis for international business decisions, illustrated through detailed case studies of Apple, Tesla, Unilever, and McDonald's.",
+      "tags": [
+        "PESTLE Analysis",
+        "MNC Strategy",
+        "Apple",
+        "Tesla",
+        "Unilever",
+        "McDonalds",
+        "Environmental Scanning"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "Strategic Significance of PESTLE Environmental Scanning"
+        },
+        {
+          "type": "p",
+          "text": "The PESTLE framework (Political, Economic, Social, Technological, Legal, Environmental) is a fundamental macro-environmental scanning instrument. For Multinational Corporations (MNCs) operating across diverse international territories, PESTLE analysis serves critical strategic functions: it identifies external market opportunities and existential threats, prevents costly ethnocentric operational blunders, guides foreign market entry modes, and enables proactive strategic agility rather than reactive crisis management."
+        },
+        {
+          "type": "h3",
+          "text": "Application of PESTLE Analysis Across Global MNCs"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Multinational Corporation (MNC)",
+            "Primary PESTLE Dimensions Analyzed",
+            "Concrete Macro-Environmental Factors",
+            "Strategic Corporate Action & Outcome"
+          ],
+          "rows": [
+            [
+              "Apple Inc.",
+              "Political (P), Legal (L), Technological (T)",
+              "Rising US-China geopolitical tensions; EU Digital Markets Act mandating Type-C charging and alternative app stores; Indian Production Linked Incentive (PLI) subsidies.",
+              "Diversified manufacturing footprint by scaling iPhone assembly in India (via Foxconn, Pegatron, Tata Electronics) and Vietnam; redesigned global hardware to Type-C; local retail expansion in emerging markets."
+            ],
+            [
+              "Tesla Inc.",
+              "Political (P), Economic (E), Environmental (E)",
+              "US Inflation Reduction Act (IRA) offering $7,500 consumer EV tax credits; global lithium/battery raw material price volatility; accelerating national net-zero decarbonization mandates.",
+              "Constructed localized Gigafactories (Shanghai, Berlin, Texas) to circumvent import tariffs; vertically integrated battery cell manufacturing; monetized regulatory carbon credits (generating billions in pure gross margin)."
+            ],
+            [
+              "Unilever",
+              "Social (S), Economic (E), Environmental (E)",
+              "Evolving consumer health and wellness preferences; rural purchasing power constraints in developing economies; severe plastic packaging waste regulations.",
+              "Pioneered single-use affordable sachet distribution models in India (Hindustan Unilever); acquired premium organic and plant-based food brands; committed to 100% recyclable plastic packaging by 2025."
+            ],
+            [
+              "McDonald's",
+              "Social (S), Legal (L), Economic (E)",
+              "Deep cultural and religious dietary taboos in South Asia (rejection of beef and pork); strict domestic food safety standards (FSSAI); inflation in local agricultural produce.",
+              "Executed complete menu re-engineering in India (introducing McAloo Tikki, Maharaja Mac, and completely segregated vegetarian/non-vegetarian kitchens); established captive local cold-chain farm sourcing networks."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Key Strategic Takeaway for Global Managers"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Proactive Adaptation over Standardization: Global success requires adapting business models to host-country PESTLE realities rather than forcing standardized domestic models.",
+            "Dynamic Continuous Scanning: Macro-environmental variables are not static; continuous monitoring enables corporate leadership to pivot strategies before regulatory or economic shifts become existential crises."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-topic-22",
+      "slug": "comparative-pestle-analysis-india-china-us-japan",
+      "number": 22,
+      "title": "Comparative PESTLE Analysis of Major Global Economies: India, China, US, and Japan",
+      "unit": "Macro Interconnectedness, Governance & Comparative Country PESTLE",
+      "marks": 14,
+      "lecture": "Lecture 8: Comparative International Business Environments",
+      "summary": "Comprehensive comparative PESTLE matrix analyzing the macro-environmental operating conditions, institutional drivers, and strategic challenges across India, China, the US, and Japan.",
+      "tags": [
+        "Comparative PESTLE",
+        "India",
+        "China",
+        "United States",
+        "Japan",
+        "Country Analysis"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "The Comparative Macro-Environmental Landscape"
+        },
+        {
+          "type": "p",
+          "text": "International enterprises evaluating cross-border capital allocation must understand the divergent macro-environmental operating architectures across the world's leading economies. Below is the comparative PESTLE matrix across India, China, the United States, and Japan:"
+        },
+        {
+          "type": "h3",
+          "text": "Comparative PESTLE Matrix Across the Four Economies"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "PESTLE Dimension",
+            "India",
+            "China",
+            "United States",
+            "Japan"
+          ],
+          "rows": [
+            [
+              "Political (P)",
+              "Stable parliamentary democracy; strong policy continuity; cooperative federalism (GST Council); rising geopolitical alignment with Quad and Western trade partners.",
+              "Centralized single-party state capitalism; strong state intervention; geopolitical tensions with West; active industrial policy and state-owned enterprise dominance.",
+              "Democratic republic with deep two-party polarization; periodic executive policy shifts; aggressive trade sanctions and national security export controls.",
+              "Highly stable parliamentary democracy; broad political consensus; strong bureaucratic continuity; defense integration with Western allies."
+            ],
+            [
+              "Economic (E)",
+              "Fastest growing major economy (6.5%\u20137.0% GDP); massive demographic dividend; expanding middle-class consumption; moderate public debt (~82% GDP).",
+              "Growth decelerating (4.0%\u20134.5%); transitioning from real-estate/infrastructure debt model to high-tech manufacturing; local government debt challenges.",
+              "World's largest economy ($28T+); resilient consumer spending; US Dollar global reserve currency dominance; high public debt (>120% GDP).",
+              "Low growth (0.8%\u20131.2%); exit from negative interest rates; ultra-high sovereign debt (>260% GDP) mostly held domestically; high per capita wealth."
+            ],
+            [
+              "Social (S)",
+              "Young demographic (median age 28); rapid urbanization; rising digital literacy and consumer premiumisation.",
+              "Rapidly aging society; shrinking working-age labor force; declining birth rates; growing social safety net demands.",
+              "Diverse multicultural society; flexible labor market; significant income inequality; high consumerism.",
+              "Hyper-aged society (median age 49; >29% over 65 yrs); shrinking domestic consumer market; high social harmony and life expectancy."
+            ],
+            [
+              "Technological (T)",
+              "Global IT services and software powerhouse; world-leading Digital Public Infrastructure (UPI, Aadhaar, ONDC); emerging semiconductor and EV ecosystem.",
+              "Global leader in 5G, EV batteries, solar PV, high-speed rail, and AI manufacturing; facing Western semiconductor export restrictions.",
+              "World leader in foundational AI models, advanced semiconductor design, biotechnology, cloud computing, and private aerospace (Silicon Valley).",
+              "World leader in industrial robotics, precision machinery, automotive engineering, advanced materials, and hydrogen fuel research."
+            ],
+            [
+              "Legal (L)",
+              "Common law system; ongoing judicial reforms (Commercial Courts, IBC 2016, Jan Vishwas Act); complex but reforming labor/land laws.",
+              "Civil law system with state supremacy; stringent data localization laws (Personal Information Protection Law); regulatory scrutiny on private tech platforms.",
+              "Strict common law rule of law; strong intellectual property (IP) protection; active antitrust scrutiny (FTC/DOJ); sophisticated corporate legal infrastructure.",
+              "Civil law system; highly predictable regulatory environment; strong patent protection; low commercial litigation rate with focus on consensual arbitration."
+            ],
+            [
+              "Environmental (E)",
+              "Aggressive renewable energy targets (500 GW by 2030); expanding solar PV and green hydrogen; vulnerability to monsoon climate volatility.",
+              "World's largest clean energy investor and producer; also world's largest carbon emitter; dual carbon goals (peak emissions by 2030, neutrality by 2060).",
+              "Massive clean energy subsidies under the Inflation Reduction Act (IRA); major global exporter of liquefied natural gas (LNG) and shale oil.",
+              "High dependence on imported fossil fuels; restarting nuclear reactors; heavy investments in hydrogen economy and industrial circular recycling."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-topic-23",
+      "slug": "union-budget-macroeconomic-transmission-mechanism",
+      "number": 23,
+      "title": "Macroeconomic Transmission Mechanism of the Union Budget on India's Economy",
+      "unit": "Macroeconomic Policy, Monetary & Fiscal Strategy",
+      "marks": 14,
+      "lecture": "Lecture 6: Union Budget Architecture & Market Dynamics",
+      "summary": "Analyzing the direct and indirect transmission channels through which the Union Budget influences GDP growth, fiscal deficit, FDI, FII capital flows, stock markets, and commodity prices.",
+      "tags": [
+        "Union Budget",
+        "Macroeconomic Transmission",
+        "GDP Impact",
+        "FII Capital Flows",
+        "Stock Market",
+        "Gold and Crude"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "The Union Budget as the Primary Macroeconomic Policy Instrument"
+        },
+        {
+          "type": "p",
+          "text": "The Union Budget is the sovereign statement of estimated government revenues and expenditures for the upcoming fiscal year. Beyond accounting, it is the primary instrument of macroeconomic steering that directly shapes corporate profitability, aggregate demand, investor sentiment, and financial market pricing across the economy."
+        },
+        {
+          "type": "h3",
+          "text": "The 6 Core Transmission Channels of the Union Budget"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Macro Indicator",
+            "Specific Budget Policy Transmission Channel",
+            "Direction & Macroeconomic Impact"
+          ],
+          "rows": [
+            [
+              "1. GDP Growth & Output",
+              "Capital Expenditure (CapEx) allocations (e.g., \u20b911.11 Lakh Crores in physical infrastructure: railways, highways, ports, urban development).",
+              "CapEx delivers a high 2.45x multiplier, crowding in private industrial investment, creating core sector demand (steel, cement), and generating formal employment."
+            ],
+            [
+              "2. Fiscal Deficit & Sovereign Yields",
+              "Fiscal deficit target setting (e.g., glide path reducing deficit below 4.5% of GDP) and total market borrowing announcement.",
+              "Lower fiscal deficit reduces government market borrowing, lowering 10-year sovereign G-Sec bond yields, which reduces commercial lending rates for private enterprise."
+            ],
+            [
+              "3. Foreign Institutional Investors (FII)",
+              "Taxation policies on financial assets: Long-Term Capital Gains (LTCG), Short-Term Capital Gains (STCG), and Securities Transaction Tax (STT).",
+              "Fiscal discipline and stable capital gains tax regimes encourage FII equity inflows; unexpected tax hikes trigger temporary foreign capital outflows and stock market corrections."
+            ],
+            [
+              "4. Foreign Direct Investment (FDI)",
+              "Expansion of Production Linked Incentive (PLI) financial outlays, customs duty rationalization on intermediate components, and dedicated industrial corridor funding.",
+              "Lowers the cost of manufacturing in India, directly incentivizing long-term global MNCs to establish greenfield manufacturing plants."
+            ],
+            [
+              "5. Stock Market Sectors",
+              "Sectoral budget expenditure allocations and excise/customs tariff modifications.",
+              "Directly creates sectoral equity winners (defense, infrastructure, renewable energy, railways) and losers (sectors facing increased tax burdens or subsidy cuts)."
+            ],
+            [
+              "6. Gold & Crude Oil Pricing",
+              "Customs duty adjustments on gold imports (e.g., cutting gold duty from 15% to 6%) and central excise duty adjustments on petroleum fuels.",
+              "Lower gold import duties reduce domestic retail gold prices and curb illegal smuggling; fuel excise adjustments insulate domestic pump prices against global crude oil price shocks."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Overall Macroeconomic Equilibrium"
+        },
+        {
+          "type": "p",
+          "text": "A well-calibrated Union Budget balances capital-led growth with fiscal consolidation, anchoring inflation expectations, stabilizing the Indian Rupee against external headwinds, and maintaining India's position as the fastest-growing major economy globally."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -1242,7 +2119,7 @@ export const businessEnvironmentCourse: Course = {
       "relatedSlugs": [
         "global-economic-growth-scenarios-2025-2030"
       ],
-      "question": "Explain the global economic growth trajectory from 2025 to 2030, the major institutional projections, the Five Forces shaping the world economy, and the three possible economic scenarios.",
+      "question": "Global Economic Growth Scenario Analysis (2025\u20132030) and the Five Forces",
       "blocks": [
         {
           "type": "h3",
@@ -1342,7 +2219,7 @@ export const businessEnvironmentCourse: Course = {
       "relatedSlugs": [
         "emerging-global-economic-architecture-equation"
       ],
-      "question": "Discuss the structural shift in the emerging global economic architecture, the new competitive growth equation, the contextual vs. transactional environmental framework, and the G-GROWTH 2030 model.",
+      "question": "The Emerging Global Economic Architecture and New Competitive Equation",
       "blocks": [
         {
           "type": "h3",
@@ -1430,7 +2307,7 @@ export const businessEnvironmentCourse: Course = {
       "relatedSlugs": [
         "global-enterprise-models-eprg-bartlett-ghoshal"
       ],
-      "question": "Explain the concept of a Global Enterprise, Howard Perlmutter's EPRG framework, Bartlett and Ghoshal's Global Strategy Matrix, and Dunning's OLI Paradigm.",
+      "question": "Global Enterprise Analysis: Perlmutter's EPRG Framework and Global Strategy Models",
       "blocks": [
         {
           "type": "h3",
@@ -1540,7 +2417,7 @@ export const businessEnvironmentCourse: Course = {
       "relatedSlugs": [
         "human-development-index-hdi-business-strategy"
       ],
-      "question": "Explain the Human Development Index (HDI), its core dimensions and indicators, calculation methodology, development categories, and its strategic relevance for global business decisions.",
+      "question": "The Human Development Index (HDI): Dimensions, Calculation, and Strategic Business Relevance",
       "blocks": [
         {
           "type": "h3",
@@ -1639,7 +2516,7 @@ export const businessEnvironmentCourse: Course = {
       "relatedSlugs": [
         "global-trade-goods-services-gats-modes"
       ],
-      "question": "Differentiate between Global Trade in Goods (GTG) and Global Trade in Services (GTS), and explain the four modes of services trade under the General Agreement on Trade in Services (GATS).",
+      "question": "Global Trade in Goods and Services: Characteristics and GATS Modes of Supply",
       "blocks": [
         {
           "type": "h3",
@@ -1737,7 +2614,7 @@ export const businessEnvironmentCourse: Course = {
       "relatedSlugs": [
         "evolution-global-trade-architecture-wto-regionalization"
       ],
-      "question": "Trace the evolution of the global trade architecture from GATT and the WTO to modern regional trade agreements, friendshoring, and digital trade governance.",
+      "question": "Evolution of Global Trade Architecture: From GATT/WTO to Regional Blocs and Nearshoring",
       "blocks": [
         {
           "type": "h3",
@@ -1813,7 +2690,7 @@ export const businessEnvironmentCourse: Course = {
       "relatedSlugs": [
         "dimensions-drivers-critique-globalisation"
       ],
-      "question": "Define globalisation, analyze its core dimensions and strategic drivers, and critically examine the benefits, challenges, and the emerging paradigm of strategic globalisation.",
+      "question": "Globalisation: Conceptual Dimensions, Strategic Drivers, and Contemporary Critique",
       "blocks": [
         {
           "type": "h3",
@@ -1904,7 +2781,7 @@ export const businessEnvironmentCourse: Course = {
       "relatedSlugs": [
         "internationalization-indian-enterprises-case-studies"
       ],
-      "question": "Examine the internationalization strategies, cross-border acquisitions, and global growth trajectories of Tata Motors, Reliance Industries, Mahindra & Mahindra, Sun Pharma, and the Aditya Birla Group.",
+      "question": "Internationalization Journey of Indian Enterprises: Tata, Reliance, Mahindra, Sun Pharma, and Birla",
       "blocks": [
         {
           "type": "h3",
@@ -1981,7 +2858,7 @@ export const businessEnvironmentCourse: Course = {
       "relatedSlugs": [
         "pestle-environmental-analysis-tata-group"
       ],
-      "question": "Perform a comprehensive PEST/PESTLE macro-environmental analysis for the Tata Group, examining specific Political, Economic, Social, and Technological opportunities, threats, and strategic responses.",
+      "question": "Comprehensive PEST and PESTLE Environmental Analysis: The Case of Tata House",
       "blocks": [
         {
           "type": "h3",
@@ -2074,7 +2951,7 @@ export const businessEnvironmentCourse: Course = {
       "relatedSlugs": [
         "market-sizing-methodology-tam-sam-som"
       ],
-      "question": "Explain the structured market sizing methodology, the mathematical definitions of TAM, SAM, and SOM, and the differences between top-down and bottom-up estimation approaches.",
+      "question": "Market Sizing Methodology: The TAM, SAM, and SOM Hierarchy and Estimation Process",
       "blocks": [
         {
           "type": "h3",
@@ -2169,7 +3046,7 @@ export const businessEnvironmentCourse: Course = {
       "relatedSlugs": [
         "market-entry-case-people-insight-analytics"
       ],
-      "question": "Using the case of People Insight Analytics Pvt. Ltd., demonstrate the complete step-by-step mathematical estimation of TAM, SAM, and SOM for India, including top-down validation, competitor analysis, triangulation, and 5-year CAGR forecasting.",
+      "question": "Market Size Estimation & Market Entry Analysis: Case of People Insight Analytics Pvt. Ltd.",
       "blocks": [
         {
           "type": "h3",
@@ -2290,7 +3167,7 @@ export const businessEnvironmentCourse: Course = {
       "relatedSlugs": [
         "data-source-architecture-triangulation"
       ],
-      "question": "Explain the 5-level data source architecture used for international market sizing, data reliability assessment, and how data triangulation ensures credible market entry decisions.",
+      "question": "Data Source Architecture for Market Sizing and Triangulation Principles",
       "blocks": [
         {
           "type": "h3",
@@ -2356,6 +3233,792 @@ export const businessEnvironmentCourse: Course = {
             "Competitor-Based Grounding: Aggregating verified revenues of known competitors establishes a realistic floor for current market size, preventing over-optimistic entry assumptions.",
             "Transparent Assumption Auditing: If bottom-up SAM (\u20b91,680 Cr) aligns with top-down SAM (\u20b91,680 Cr) and competitor coverage estimates (\u20b91,571 Cr), management establishes high confidence in the baseline market entry business case."
           ]
+        }
+      ]
+    },
+    {
+      "id": "601-eq-13",
+      "number": 13,
+      "title": "Strategies and Policy Objectives to Control Price Rise (Inflation) in India",
+      "marks": 14,
+      "relatedSlugs": [
+        "strategies-to-control-price-rise-india"
+      ],
+      "question": "What are the different strategies or objectives the Government of India can take to control price rise in the country?",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "Nature and Drivers of Price Rise in the Indian Economy"
+        },
+        {
+          "type": "p",
+          "text": "Inflation in India is a multi-dimensional phenomenon driven by both demand-pull pressures (excess aggregate demand, liquidity expansion) and cost-push supply shocks (monsoon volatility affecting food prices, global crude oil spikes, and supply chain disruptions). Controlling sustained price rise requires an integrated tripartite policy response combining monetary tightening, fiscal interventions, and administrative supply-side management."
+        },
+        {
+          "type": "h3",
+          "text": "Core Strategic Interventions to Control Inflation"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Policy Dimension",
+            "Strategic Objective",
+            "Specific Operational Mechanism Deployed"
+          ],
+          "rows": [
+            [
+              "1. Monetary Policy Measures (RBI)",
+              "Contract aggregate demand and absorb surplus market liquidity.",
+              "Hike the Policy Repo Rate under the Liquidity Adjustment Facility (LAF); raise the Cash Reserve Ratio (CRR); absorb excess liquidity via Standing Deposit Facility (SDF) and Open Market Operations (OMO sales)."
+            ],
+            [
+              "2. Fiscal & Duty Interventions",
+              "Directly compress landed import costs of essential inputs.",
+              "Reduce central excise duties on petrol and diesel; eliminate or lower customs import tariffs on crude palm oil, soybean oil, and pulses; rationalize GST slabs on essential consumer goods."
+            ],
+            [
+              "3. Supply-Side Buffer Management",
+              "Stabilize domestic food supplies and curb speculative price spikes.",
+              "Release wheat and rice into open wholesale markets via the Food Corporation of India's Open Market Sale Scheme (OMSS); deploy the Price Stabilization Fund (PSF) for market intervention in onions and pulses."
+            ],
+            [
+              "4. Trade & Export Restrictions",
+              "Prioritize domestic availability over export revenues during shortages.",
+              "Impose minimum export prices (MEP), export duties, or temporary export bans on non-basmati white rice, wheat, and onions; allow duty-free imports of critical food commodities."
+            ],
+            [
+              "5. Administrative & Anti-Hoarding Laws",
+              "Eliminate black-market hoarding and supply bottlenecks.",
+              "Strictly enforce stock-holding limits on traders under the Essential Commodities Act (ECA); mandate weekly reporting of pulses and wheat inventory to prevent artificial scarcity."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Long-Term Structural Inflation Management"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Agricultural Logistics Modernization: Developing cold chain infrastructure and modern warehouses under the Agriculture Infrastructure Fund (AIF) to reduce post-harvest losses.",
+            "PM GatiShakti National Master Plan: Streamlining multi-modal logistics networks to compress inter-state freight transit times and eliminate distribution cost friction.",
+            "Energy Diversification: Scaling domestic solar PV, ethanol blending (target 20%), and green hydrogen to decouple the domestic economy from imported fossil fuel price shocks."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-eq-14",
+      "number": 14,
+      "title": "Monetary Policy Reforms and Architecture to Ensure Continuous Economic Growth",
+      "marks": 14,
+      "relatedSlugs": [
+        "monetary-policy-reforms-continuous-growth"
+      ],
+      "question": "What changes would you suggest in the monetary policy to ensure continuous growth of the economy?",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "The Dual Mandate: Balancing Price Stability with Sustainable Growth"
+        },
+        {
+          "type": "p",
+          "text": "Under the Flexible Inflation Targeting (FIT) framework established in 2016, the Reserve Bank of India (RBI) operates with a primary mandate to maintain price stability (4% CPI inflation target within a +/- 2% tolerance band) while keeping in mind the objective of growth. To ensure continuous, non-inflationary economic growth in an era of global volatility, several structural and operational adjustments in monetary policy are necessary:"
+        },
+        {
+          "type": "h3",
+          "text": "Key Recommended Monetary Policy Reforms"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Policy Reform Area",
+            "Current Operational Constraint",
+            "Recommended Strategic Modification"
+          ],
+          "rows": [
+            [
+              "1. Interest Rate Calibration & Agility",
+              "Prolonged high policy repo rates (6.50%) compress private corporate capital expenditure (CapEx) and retail consumer credit demand.",
+              "Adopt a forward-looking, data-dependent countercyclical stance; calibrate rate cuts proactively as headline inflation approaches the 4% target to lower the real cost of capital."
+            ],
+            [
+              "2. Targeted Credit Deployment (Sectoral Focus)",
+              "Broad-brush interest rate hikes disproportionately penalize credit-starved productive sectors like MSMEs and green tech.",
+              "Revive and institutionalize Targeted Long-Term Repo Operations (TLTRO) with lower capital costs linked directly to green energy, semiconductor manufacturing, and export infrastructure."
+            ],
+            [
+              "3. Enhancing Monetary Transmission",
+              "Asymmetry in lending rate transmission; banks rapidly hike floating loan rates but delay deposit rate hikes, creating liquidity friction.",
+              "Extend the mandatory External Benchmark Lending Rate (EBLR) framework to NBFC lending and align deposit pricing with market benchmarks to ensure uniform transmission."
+            ],
+            [
+              "4. Refining the Liquidity Framework",
+              "Friction between overnight call money rates and the policy repo rate during liquidity deficit cycles.",
+              "Deploy dynamic fine-tuning operations through Variable Rate Repo (VRR) and Variable Rate Reverse Repo (VRRR) auctions to maintain liquidity balance without stoking asset bubbles."
+            ],
+            [
+              "5. Priority Sector Lending (PSL) Modernization",
+              "Traditional PSL categories do not fully incentivize modern high-productivity sectors.",
+              "Restructure PSL weightages to assign higher multipliers for tech-enabled supply chain infrastructure, digital manufacturing, and climate-resilient farming."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Harnessing Central Bank Digital Currency (CBDC / e-Rupee)"
+        },
+        {
+          "type": "p",
+          "text": "Accelerate the institutional rollout of wholesale and retail CBDC (e-Rupee) for domestic cross-bank settlement and bilateral cross-border trade settlements. This reduces banking intermediary friction, lowers settlement costs, and enhances the real-time velocity of money."
+        }
+      ]
+    },
+    {
+      "id": "601-eq-15",
+      "number": 15,
+      "title": "Fiscal Policy: Mechanisms of Economic Promotion vs. Growth Hindrance",
+      "marks": 14,
+      "relatedSlugs": [
+        "fiscal-policy-promoter-hindrance-economic-development"
+      ],
+      "question": "How can fiscal policy promote or become a hindrance for economic development in the country?",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "Nature and Scope of Fiscal Policy"
+        },
+        {
+          "type": "p",
+          "text": "Fiscal policy encompasses the government's strategic decisions regarding public expenditure, taxation, borrowing, and fiscal deficit management to influence macroeconomic activity. In a developing economy like India, fiscal policy plays a dual role: it can serve as a primary catalyst for long-term growth or, if mismanaged, become a severe structural constraint."
+        },
+        {
+          "type": "h3",
+          "text": "How Fiscal Policy Promotes Economic Development"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "High Capital Expenditure (CapEx) Multiplier: Productive public capital investment in physical infrastructure (roads, railways, ports, power grids) yields an economic multiplier of 2.45x (compared to only 0.92x for revenue expenditure), crowding in private capital investment and generating industrial jobs.",
+            "Targeted Industrial Tax Incentives: Pro-growth taxation reforms\u2014such as the corporate tax cut (Section 115BAB offering a 15% rate for new manufacturing setups) and Production Linked Incentive (PLI) budget allocations\u2014stimulate manufacturing investment.",
+            "Equitable Wealth Redistribution: Progressive direct taxation combined with targeted social safety nets (Direct Benefit Transfer via PM-KISAN, Ayushman Bharat, rural housing) expands grassroots consumer purchasing power.",
+            "Countercyclical Stabilization: During economic downturns, expansionary fiscal spending compensates for depressed private demand, preventing deep recessions."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "How Fiscal Policy Can Become a Hindrance to Development"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Hindrance Mechanism",
+            "Operational Cause & Dynamic",
+            "Adverse Macroeconomic Consequence"
+          ],
+          "rows": [
+            [
+              "1. Crowding-Out Effect",
+              "Excessive government market borrowing to fund non-productive fiscal deficits.",
+              "Absorbs available banking liquidity, pushing up sovereign bond yields and raising corporate borrowing costs for private industry."
+            ],
+            [
+              "2. Debt Sustainability Traps",
+              "High general government debt-to-GDP ratio (>80%) requiring heavy annual interest payments.",
+              "Interest servicing consumes over 25% of annual budget revenues, squeezing out essential capital outlays for health and education."
+            ],
+            [
+              "3. Unproductive Revenue Spending",
+              "Excessive growth in untargeted populist subsidies, administrative overheads, and non-asset-creating expenditure.",
+              "Fuels structural demand-pull inflation without adding productive economic capacity."
+            ],
+            [
+              "4. Sovereign Rating Downgrade Risks",
+              "Persistent breaches of the Fiscal Responsibility and Budget Management (FRBM) Act targets.",
+              "Triggers negative foreign credit rating revisions, elevating overseas borrowing costs and discouraging Foreign Direct Investment (FDI)."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-eq-16",
+      "number": 16,
+      "title": "Strategies to Control Corruption and Promote Ease of Doing Business in India",
+      "marks": 14,
+      "relatedSlugs": [
+        "controlling-corruption-ease-of-doing-business"
+      ],
+      "question": "What steps would you take to control corruption and promote the ease of doing business in the economy?",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "The Nexus Between Corruption and Business Friction"
+        },
+        {
+          "type": "p",
+          "text": "Corruption functions as an arbitrary, regressive tax on enterprise, elevating operational friction, creating entry barriers for innovative startups, and discouraging foreign institutional capital. Promoting the Ease of Doing Business requires replacing discretionary bureaucratic touchpoints with transparent digital governance, simplified legal codes, and automated compliance frameworks."
+        },
+        {
+          "type": "h3",
+          "text": "Key Strategic Pillars to Control Corruption and Enhance Ease of Business"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Strategic Reform Area",
+            "Specific Implementation Measure",
+            "Impact on Business Environment"
+          ],
+          "rows": [
+            [
+              "1. Digital Single-Window Clearance",
+              "National Single Window System (NSWS) integrating central ministry and state-level statutory clearances into a single digital portal.",
+              "Eliminates multiple departmental visits, sets time-bound deemed approvals, and removes physical rent-seeking checkpoints."
+            ],
+            [
+              "2. Transparent Public Procurement",
+              "Mandatory procurement for all government ministries, departments, and PSUs through the Government e-Marketplace (GeM) portal.",
+              "Eliminates opaque tendering and kickbacks; enables transparent digital bidding for MSMEs and national vendors."
+            ],
+            [
+              "3. Faceless Tax Administration",
+              "Faceless Assessment, Faceless Appeals, and automated document identification numbers (DIN) by CBDT and CBIC.",
+              "Eliminates direct physical interface between taxpayers and tax officers, ending discretionary tax harassment."
+            ],
+            [
+              "4. Decriminalization of Minor Defaults",
+              "Enactment of the Jan Vishwas Act and amendments to the Companies Act 2013 decriminalizing procedural and technical defaults.",
+              "Replaces criminal penalties with civil monetary fines, reducing corporate litigation and fear of administrative penalization."
+            ],
+            [
+              "5. Time-Bound Corporate Exit (IBC)",
+              "Robust implementation of the Insolvency and Bankruptcy Code (IBC 2016) and pre-packaged insolvency regimes for MSMEs.",
+              "Provides a transparent, time-bound legal framework (180-270 days) for corporate debt resolution and business restructuring."
+            ],
+            [
+              "6. Direct Benefit Transfer (DBT / JAM)",
+              "Direct transfer of government subsidies, grants, and incentives into verified bank accounts using the Jan Dhan-Aadhaar-Mobile trinity.",
+              "Eliminates intermediary corruption, leakage, and ghost beneficiaries across all government welfare schemes."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Strengthening Commercial Judicial Infrastructure"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Dedicated Commercial Courts: Expanding specialized commercial courts under the Commercial Courts Act with mandatory pre-institution mediation to resolve business contract disputes within 12 months.",
+            "Land Title Digitization: Comprehensive digital mapping and blockchain registration of industrial land records to eliminate title fraud and litigation delays."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-eq-17",
+      "number": 17,
+      "title": "Strategic Measures and Policy Reforms to Attract Foreign Direct Investment (FDI) into India",
+      "marks": 14,
+      "relatedSlugs": [
+        "strategic-measures-attract-fdi-india"
+      ],
+      "question": "What steps should the Government of India take to attract Foreign Direct Investment (FDI) into India?",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "Strategic Imperative of Foreign Direct Investment (FDI)"
+        },
+        {
+          "type": "p",
+          "text": "Foreign Direct Investment (FDI) serves as non-debt-creating stable capital that brings advanced technological know-how, global management practices, employment generation, and integration into multinational supply chains. To compete effectively against regional peers (Vietnam, Indonesia, Mexico) for global supply chain relocation ('China Plus One'), India requires a comprehensive multi-pronged investment attraction strategy."
+        },
+        {
+          "type": "h3",
+          "text": "Key Strategic Measures to Accelerate FDI Inflows"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Strategic Policy Dimension",
+            "Specific Policy Reform",
+            "Expected Strategic Outcome"
+          ],
+          "rows": [
+            [
+              "1. Liberalization of Sectoral Caps",
+              "Expand the 100% Automatic Route across remaining restricted sectors (defense manufacturing, multi-brand retail, space technology, insurance).",
+              "Removes bureaucratic approval delays and signals long-term regulatory openness to global conglomerates."
+            ],
+            [
+              "2. Production Linked Incentives (PLI)",
+              "Scale financial incentives (4% to 6% incremental output subsidies) across 14 champion sectors: semiconductors, electronics, solar PV, EV batteries, advanced pharma.",
+              "Directly offsets the initial cost-of-manufacturing disability in India, attracting global anchor manufacturers (e.g., Apple supply chain, Micron)."
+            ],
+            [
+              "3. Plug-and-Play Industrial Corridors",
+              "Develop pre-cleared industrial zones, Mega Investment Textile Parks (MITRA), and National Industrial Corridor Development projects with pre-installed utilities.",
+              "Enables foreign investors to commence factory operations within 90 days without navigating tedious land acquisition or environmental approvals."
+            ],
+            [
+              "4. Policy & Tax Stability",
+              "Maintain an absolute commitment against retrospective taxation and provide predictable long-term corporate tax regimes (Section 115BAB 15% rate for new manufacturing).",
+              "Eliminates sovereign regulatory risk, which is the primary deterrent for institutional private equity and sovereign wealth funds."
+            ],
+            [
+              "5. Bilateral Investment Treaties (BITs)",
+              "Modernize and fast-track Bilateral Investment Treaties with major capital-exporting economies (USA, UK, EU, UAE) with balanced dispute settlement mechanisms.",
+              "Provides international legal protection for foreign investor assets, unlocking multi-billion dollar long-term capital commitments."
+            ],
+            [
+              "6. Dedicated Institutional Handholding",
+              "Strengthen Invest India with state-level single-window facilitation desks providing end-to-end support from site selection to post-launch dispute resolution.",
+              "Compresses project execution timelines and enhances investor satisfaction across the investment lifecycle."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Labor & Logistics Reform Integration"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Implementation of Four Labor Codes: Consolidating 29 legacy labor laws into 4 simplified codes (Wages, Industrial Relations, Social Security, Occupational Safety) to provide labor flexibility for large-scale factories.",
+            "National Logistics Policy (NLP): Lowering India's logistics cost from ~13% of GDP down toward global benchmarks (8%) to make Indian manufacturing export-competitive."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-eq-18",
+      "number": 18,
+      "title": "The Macroeconomic Interconnectedness Matrix: Oil, Gold, Markets, Forex, and Policy Web",
+      "marks": 14,
+      "relatedSlugs": [
+        "macroeconomic-interconnectedness-matrix-india"
+      ],
+      "question": "How are crude oil prices, gold prices, stock markets, FII, DII, FDI, exchange rates, monetary policy, fiscal policy, and forex reserves interconnected in the Indian economy?",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "The Systemic Macroeconomic Web of the Indian Economy"
+        },
+        {
+          "type": "p",
+          "text": "The macroeconomic environment operates as a dynamic, interconnected general equilibrium system. A disturbance in an external exogenous variable (such as global crude oil prices or US interest rates) triggers an automatic chain reaction across domestic currency values, capital flows, inflation, corporate earnings, and government policy responses."
+        },
+        {
+          "type": "h3",
+          "text": "The 8-Step Macroeconomic Transmission Web"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Transmission Node",
+            "Causal Economic Trigger",
+            "Systemic Impact Across Adjacent Macro Variables"
+          ],
+          "rows": [
+            [
+              "1. Global Crude Oil Spike",
+              "Geopolitical conflict pushes Brent crude oil above $95/barrel.",
+              "India imports >85% of crude oil -> Import bill surges -> Trade Deficit widens -> Current Account Deficit (CAD) expands significantly."
+            ],
+            [
+              "2. Exchange Rate Pressure",
+              "High demand for US Dollars to pay for expensive oil imports.",
+              "Indian Rupee (INR) experiences depreciation pressure against USD -> Imported inflation rises across chemicals, fertilizers, and logistics."
+            ],
+            [
+              "3. Monetary Policy Tightening",
+              "High fuel prices feed into headline CPI inflation breaching target bands.",
+              "RBI initiates Monetary Tightening: hikes policy repo rate -> absorbs excess liquidity -> domestic borrowing costs rise across housing and corporate loans."
+            ],
+            [
+              "4. FII Capital Outflows",
+              "Rising US Treasury bond yields + domestic interest rate hikes + currency depreciation risk.",
+              "Foreign Institutional Investors (FIIs) engage in risk-off selling -> liquidate Indian equities -> repatriate funds to USD assets."
+            ],
+            [
+              "5. Stock Market & DII Balancing",
+              "FII selling creates downward pressure on major stock market benchmark indices (Nifty/Sensex).",
+              "Domestic Institutional Investors (DIIs via monthly mutual fund SIP inflows of >\u20b920,000 Cr) purchase equities, acting as a structural shock absorber."
+            ],
+            [
+              "6. Gold Demand & Import Pressure",
+              "Geopolitical uncertainty + inflation hedging + domestic currency weakness.",
+              "Domestic gold prices surge -> Retail gold demand rises -> Gold imports increase -> Further widens the trade deficit and CAD."
+            ],
+            [
+              "7. Forex Reserve Defense",
+              "Severe volatility in the USD/INR exchange rate.",
+              "RBI intervenes in foreign exchange markets (sells USD from Forex Reserves to absorb excess INR), causing temporary drawdown in total Forex Reserves."
+            ],
+            [
+              "8. Fiscal Policy Response",
+              "Inflationary strain on household budgets and industrial input costs.",
+              "Government cuts fuel excise duties + expands fertilizer subsidies -> Tax revenue drops while subsidy bill rises -> Expands the Fiscal Deficit."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Role of Foreign Direct Investment (FDI) in the Matrix"
+        },
+        {
+          "type": "p",
+          "text": "Unlike volatile short-term FII portfolio capital ('hot money'), Foreign Direct Investment (FDI) represents long-term strategic equity commitments (e.g., greenfield factories, infrastructure). FDI inflows provide a durable non-debt financing cushion that offsets the Current Account Deficit (CAD) and permanently rebuilds national Forex Reserves."
+        }
+      ]
+    },
+    {
+      "id": "601-eq-19",
+      "number": 19,
+      "title": "Strategic Action Plans to Improve Key Global Governance and Development Indices",
+      "marks": 14,
+      "relatedSlugs": [
+        "action-plans-improve-global-governance-indices"
+      ],
+      "question": "How can India improve its performance across the Human Development Index (HDI), Political Stability Index, Transparency/Corruption Index, and Ease of Doing Business Index?",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "National Competitiveness and Global Governance Indices"
+        },
+        {
+          "type": "p",
+          "text": "International institutional indices evaluate a country's socio-economic health, institutional integrity, and investment attractiveness. Improving these metrics requires targeted structural interventions across public healthcare, education, judicial transparency, anti-corruption enforcement, and regulatory simplification."
+        },
+        {
+          "type": "h3",
+          "text": "Actionable Improvement Blueprints Across the Four Key Indices"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Global Index",
+            "Current Institutional Bottleneck",
+            "Strategic Policy Action Plan to Improve Score"
+          ],
+          "rows": [
+            [
+              "1. Human Development Index (HDI)",
+              "Low public healthcare spending (~1.4% GDP), gaps in mean years of schooling (6.6 years), and maternal/child undernutrition.",
+              "Increase public healthcare outlay to 2.5% of GDP under Ayushman Bharat; fully implement National Education Policy (NEP 2020) to raise expected and mean years of schooling; expand GNI per capita through high-productivity manufacturing jobs."
+            ],
+            [
+              "2. Political Stability & Governance Index",
+              "Regional socio-economic disparities, policy unpredictability, and periodic inter-state friction.",
+              "Strengthen cooperative federalism through active Inter-State Council forums; ensure long-term policy predictability (avoiding abrupt tariff reversals); institutionalize inclusive welfare delivery to reduce social polarization."
+            ],
+            [
+              "3. Transparency & Corruption Perceptions Index (CPI)",
+              "Discretionary approvals in local municipal licensing, land registration bottlenecks, and non-transparent political financing.",
+              "Universalize mandatory digital public procurement via the GeM portal; digitize all municipal land records via blockchain; strengthen online Right to Information (RTI) portals; enforce strict whistleblower protection."
+            ],
+            [
+              "4. Ease of Doing Business Index",
+              "Delays in commercial dispute resolution, complicated cross-border trading procedures, and multiple municipal construction permits.",
+              "Fully operationalize the National Single Window System (NSWS); establish fast-track commercial courts with mandatory time-bound arbitration; automate customs risk management systems to achieve 24-hour port clearance."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Institutional Synergy and Economic Dividend"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Sovereign Credit Rating Upgrades: Improvements in transparency, political stability, and fiscal discipline encourage international rating agencies (Moody's, S&P, Fitch) to upgrade sovereign ratings.",
+            "Lower Cost of Capital: Higher index performance lowers the sovereign risk premium, reducing overseas commercial borrowing costs for Indian corporations."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-eq-20",
+      "number": 20,
+      "title": "Critical Evaluation of India's Monetary Policy Since COVID-2019",
+      "marks": 14,
+      "relatedSlugs": [
+        "critical-evaluation-india-monetary-policy-post-covid"
+      ],
+      "question": "Make a critical evaluation of India's monetary policy trajectory, instruments, and outcomes since COVID-2019.",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "Evolution of RBI's Monetary Policy Architecture Since 2020"
+        },
+        {
+          "type": "p",
+          "text": "Since the onset of the COVID-19 pandemic in early 2020, the Reserve Bank of India (RBI) has steered the monetary system through three distinct phases: emergency crisis mitigation, aggressive post-war inflation containment, and calibrated disinflationary management."
+        },
+        {
+          "type": "h3",
+          "text": "Three-Phase Monetary Policy Trajectory"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Phase & Timeline",
+            "Core Policy Stance & Strategy",
+            "Specific Monetary Instruments Deployed",
+            "Observed Macroeconomic Outcomes"
+          ],
+          "rows": [
+            [
+              "Phase 1 (2020\u20132021): Emergency Accommodation",
+              "Ultra-accommodative stance to prevent financial market freeze and support collapsed economic output.",
+              "Slashed Policy Repo Rate by 115 bps to historical low of 4.00%; cut Reverse Repo to 3.35%; injected >\u20b917 Lakh Crores liquidity via Targeted Long-Term Repo Operations (TLTRO), Cash Reserve Ratio (CRR) cut to 3%, and G-SAP (Government Securities Acquisition Programme); 6-month loan moratorium.",
+              "Prevented systemic corporate defaults; stabilized bond yields; supported GDP recovery from -5.8% contraction in FY21 to 9.1% growth in FY22."
+            ],
+            [
+              "Phase 2 (2022\u20132023): Inflation Surge & Rapid Normalization",
+              "Shift to 'withdrawal of accommodation' in response to Russia-Ukraine war commodity and crude price shocks pushing CPI to 7.8%.",
+              "Introduced the Standing Deposit Facility (SDF) at 3.75% as non-collateralized liquidity absorption floor; executed aggressive cumulative 250 bps repo rate hike (4.00% to 6.50%); raised CRR back to 4.50%.",
+              "Successfully anchored medium-term inflation expectations; prevented domestic second-round price spirals; protected foreign exchange stability against aggressive US Fed rate hikes."
+            ],
+            [
+              "Phase 3 (2023\u2013Present): Calibrated Disinflation & Balance",
+              "Maintaining withdrawal of accommodation; prioritizing durable alignment of CPI with the 4% target while supporting growth.",
+              "Held repo rate steady at 6.50%; active fine-tuning of system liquidity through Variable Rate Repo (VRR) and Variable Rate Reverse Repo (VRRR) auctions; enhanced macroprudential risk weights on unsecured retail loans.",
+              "Headline inflation moderated toward target band; GDP growth maintained world-leading pace (>7.5% in FY24); banking sector balance sheets achieved multi-decade high asset quality (GNPA < 2.8%)."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Critical Policy Evaluation: Successes vs. Ongoing Vulnerabilities"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Key Policy Successes: Demonstrated superior institutional agility compared to Western central banks by avoiding permanent quantitative easing traps; maintained financial stability and controlled currency depreciation without burning excessive reserves.",
+            "Structural Limitations: Food inflation remains persistently volatile due to recurring climate shocks (unseasonal rains, heatwaves) which monetary rate hikes cannot directly fix; high lending rates have moderately constrained small MSME capital investments."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-eq-21",
+      "number": 21,
+      "title": "Significance of PESTLE Analysis in Strategic Business Decisions: Multi-MNC Case Studies",
+      "marks": 14,
+      "relatedSlugs": [
+        "significance-pestle-analysis-mnc-examples"
+      ],
+      "question": "Explain the significance of PEST/PESTLE analysis for strategic business decisions, and illustrate its application using concrete examples from global Multinational Corporations (MNCs).",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "Strategic Significance of PESTLE Environmental Scanning"
+        },
+        {
+          "type": "p",
+          "text": "The PESTLE framework (Political, Economic, Social, Technological, Legal, Environmental) is a fundamental macro-environmental scanning instrument. For Multinational Corporations (MNCs) operating across diverse international territories, PESTLE analysis serves critical strategic functions: it identifies external market opportunities and existential threats, prevents costly ethnocentric operational blunders, guides foreign market entry modes, and enables proactive strategic agility rather than reactive crisis management."
+        },
+        {
+          "type": "h3",
+          "text": "Application of PESTLE Analysis Across Global MNCs"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Multinational Corporation (MNC)",
+            "Primary PESTLE Dimensions Analyzed",
+            "Concrete Macro-Environmental Factors",
+            "Strategic Corporate Action & Outcome"
+          ],
+          "rows": [
+            [
+              "Apple Inc.",
+              "Political (P), Legal (L), Technological (T)",
+              "Rising US-China geopolitical tensions; EU Digital Markets Act mandating Type-C charging and alternative app stores; Indian Production Linked Incentive (PLI) subsidies.",
+              "Diversified manufacturing footprint by scaling iPhone assembly in India (via Foxconn, Pegatron, Tata Electronics) and Vietnam; redesigned global hardware to Type-C; local retail expansion in emerging markets."
+            ],
+            [
+              "Tesla Inc.",
+              "Political (P), Economic (E), Environmental (E)",
+              "US Inflation Reduction Act (IRA) offering $7,500 consumer EV tax credits; global lithium/battery raw material price volatility; accelerating national net-zero decarbonization mandates.",
+              "Constructed localized Gigafactories (Shanghai, Berlin, Texas) to circumvent import tariffs; vertically integrated battery cell manufacturing; monetized regulatory carbon credits (generating billions in pure gross margin)."
+            ],
+            [
+              "Unilever",
+              "Social (S), Economic (E), Environmental (E)",
+              "Evolving consumer health and wellness preferences; rural purchasing power constraints in developing economies; severe plastic packaging waste regulations.",
+              "Pioneered single-use affordable sachet distribution models in India (Hindustan Unilever); acquired premium organic and plant-based food brands; committed to 100% recyclable plastic packaging by 2025."
+            ],
+            [
+              "McDonald's",
+              "Social (S), Legal (L), Economic (E)",
+              "Deep cultural and religious dietary taboos in South Asia (rejection of beef and pork); strict domestic food safety standards (FSSAI); inflation in local agricultural produce.",
+              "Executed complete menu re-engineering in India (introducing McAloo Tikki, Maharaja Mac, and completely segregated vegetarian/non-vegetarian kitchens); established captive local cold-chain farm sourcing networks."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Key Strategic Takeaway for Global Managers"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Proactive Adaptation over Standardization: Global success requires adapting business models to host-country PESTLE realities rather than forcing standardized domestic models.",
+            "Dynamic Continuous Scanning: Macro-environmental variables are not static; continuous monitoring enables corporate leadership to pivot strategies before regulatory or economic shifts become existential crises."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-eq-22",
+      "number": 22,
+      "title": "Comparative PESTLE Analysis of Major Global Economies: India, China, US, and Japan",
+      "marks": 14,
+      "relatedSlugs": [
+        "comparative-pestle-analysis-india-china-us-japan"
+      ],
+      "question": "Perform a comprehensive comparative PESTLE analysis across four major global economies: India, China, the United States, and Japan.",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "The Comparative Macro-Environmental Landscape"
+        },
+        {
+          "type": "p",
+          "text": "International enterprises evaluating cross-border capital allocation must understand the divergent macro-environmental operating architectures across the world's leading economies. Below is the comparative PESTLE matrix across India, China, the United States, and Japan:"
+        },
+        {
+          "type": "h3",
+          "text": "Comparative PESTLE Matrix Across the Four Economies"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "PESTLE Dimension",
+            "India",
+            "China",
+            "United States",
+            "Japan"
+          ],
+          "rows": [
+            [
+              "Political (P)",
+              "Stable parliamentary democracy; strong policy continuity; cooperative federalism (GST Council); rising geopolitical alignment with Quad and Western trade partners.",
+              "Centralized single-party state capitalism; strong state intervention; geopolitical tensions with West; active industrial policy and state-owned enterprise dominance.",
+              "Democratic republic with deep two-party polarization; periodic executive policy shifts; aggressive trade sanctions and national security export controls.",
+              "Highly stable parliamentary democracy; broad political consensus; strong bureaucratic continuity; defense integration with Western allies."
+            ],
+            [
+              "Economic (E)",
+              "Fastest growing major economy (6.5%\u20137.0% GDP); massive demographic dividend; expanding middle-class consumption; moderate public debt (~82% GDP).",
+              "Growth decelerating (4.0%\u20134.5%); transitioning from real-estate/infrastructure debt model to high-tech manufacturing; local government debt challenges.",
+              "World's largest economy ($28T+); resilient consumer spending; US Dollar global reserve currency dominance; high public debt (>120% GDP).",
+              "Low growth (0.8%\u20131.2%); exit from negative interest rates; ultra-high sovereign debt (>260% GDP) mostly held domestically; high per capita wealth."
+            ],
+            [
+              "Social (S)",
+              "Young demographic (median age 28); rapid urbanization; rising digital literacy and consumer premiumisation.",
+              "Rapidly aging society; shrinking working-age labor force; declining birth rates; growing social safety net demands.",
+              "Diverse multicultural society; flexible labor market; significant income inequality; high consumerism.",
+              "Hyper-aged society (median age 49; >29% over 65 yrs); shrinking domestic consumer market; high social harmony and life expectancy."
+            ],
+            [
+              "Technological (T)",
+              "Global IT services and software powerhouse; world-leading Digital Public Infrastructure (UPI, Aadhaar, ONDC); emerging semiconductor and EV ecosystem.",
+              "Global leader in 5G, EV batteries, solar PV, high-speed rail, and AI manufacturing; facing Western semiconductor export restrictions.",
+              "World leader in foundational AI models, advanced semiconductor design, biotechnology, cloud computing, and private aerospace (Silicon Valley).",
+              "World leader in industrial robotics, precision machinery, automotive engineering, advanced materials, and hydrogen fuel research."
+            ],
+            [
+              "Legal (L)",
+              "Common law system; ongoing judicial reforms (Commercial Courts, IBC 2016, Jan Vishwas Act); complex but reforming labor/land laws.",
+              "Civil law system with state supremacy; stringent data localization laws (Personal Information Protection Law); regulatory scrutiny on private tech platforms.",
+              "Strict common law rule of law; strong intellectual property (IP) protection; active antitrust scrutiny (FTC/DOJ); sophisticated corporate legal infrastructure.",
+              "Civil law system; highly predictable regulatory environment; strong patent protection; low commercial litigation rate with focus on consensual arbitration."
+            ],
+            [
+              "Environmental (E)",
+              "Aggressive renewable energy targets (500 GW by 2030); expanding solar PV and green hydrogen; vulnerability to monsoon climate volatility.",
+              "World's largest clean energy investor and producer; also world's largest carbon emitter; dual carbon goals (peak emissions by 2030, neutrality by 2060).",
+              "Massive clean energy subsidies under the Inflation Reduction Act (IRA); major global exporter of liquefied natural gas (LNG) and shale oil.",
+              "High dependence on imported fossil fuels; restarting nuclear reactors; heavy investments in hydrogen economy and industrial circular recycling."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-eq-23",
+      "number": 23,
+      "title": "Macroeconomic Transmission Mechanism of the Union Budget on India's Economy",
+      "marks": 14,
+      "relatedSlugs": [
+        "union-budget-macroeconomic-transmission-mechanism"
+      ],
+      "question": "How does the Union Budget affect India's GDP, FDI, FII, stock markets, crude oil prices, gold prices, and overall macroeconomic indicators?",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "The Union Budget as the Primary Macroeconomic Policy Instrument"
+        },
+        {
+          "type": "p",
+          "text": "The Union Budget is the sovereign statement of estimated government revenues and expenditures for the upcoming fiscal year. Beyond accounting, it is the primary instrument of macroeconomic steering that directly shapes corporate profitability, aggregate demand, investor sentiment, and financial market pricing across the economy."
+        },
+        {
+          "type": "h3",
+          "text": "The 6 Core Transmission Channels of the Union Budget"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Macro Indicator",
+            "Specific Budget Policy Transmission Channel",
+            "Direction & Macroeconomic Impact"
+          ],
+          "rows": [
+            [
+              "1. GDP Growth & Output",
+              "Capital Expenditure (CapEx) allocations (e.g., \u20b911.11 Lakh Crores in physical infrastructure: railways, highways, ports, urban development).",
+              "CapEx delivers a high 2.45x multiplier, crowding in private industrial investment, creating core sector demand (steel, cement), and generating formal employment."
+            ],
+            [
+              "2. Fiscal Deficit & Sovereign Yields",
+              "Fiscal deficit target setting (e.g., glide path reducing deficit below 4.5% of GDP) and total market borrowing announcement.",
+              "Lower fiscal deficit reduces government market borrowing, lowering 10-year sovereign G-Sec bond yields, which reduces commercial lending rates for private enterprise."
+            ],
+            [
+              "3. Foreign Institutional Investors (FII)",
+              "Taxation policies on financial assets: Long-Term Capital Gains (LTCG), Short-Term Capital Gains (STCG), and Securities Transaction Tax (STT).",
+              "Fiscal discipline and stable capital gains tax regimes encourage FII equity inflows; unexpected tax hikes trigger temporary foreign capital outflows and stock market corrections."
+            ],
+            [
+              "4. Foreign Direct Investment (FDI)",
+              "Expansion of Production Linked Incentive (PLI) financial outlays, customs duty rationalization on intermediate components, and dedicated industrial corridor funding.",
+              "Lowers the cost of manufacturing in India, directly incentivizing long-term global MNCs to establish greenfield manufacturing plants."
+            ],
+            [
+              "5. Stock Market Sectors",
+              "Sectoral budget expenditure allocations and excise/customs tariff modifications.",
+              "Directly creates sectoral equity winners (defense, infrastructure, renewable energy, railways) and losers (sectors facing increased tax burdens or subsidy cuts)."
+            ],
+            [
+              "6. Gold & Crude Oil Pricing",
+              "Customs duty adjustments on gold imports (e.g., cutting gold duty from 15% to 6%) and central excise duty adjustments on petroleum fuels.",
+              "Lower gold import duties reduce domestic retail gold prices and curb illegal smuggling; fuel excise adjustments insulate domestic pump prices against global crude oil price shocks."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "Overall Macroeconomic Equilibrium"
+        },
+        {
+          "type": "p",
+          "text": "A well-calibrated Union Budget balances capital-led growth with fiscal consolidation, anchoring inflation expectations, stabilizing the Indian Rupee against external headwinds, and maintaining India's position as the fastest-growing major economy globally."
         }
       ]
     }
