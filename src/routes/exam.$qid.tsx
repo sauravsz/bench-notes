@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, ArrowUp, Download, Printer, Scale } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUp, Scale } from "lucide-react";
 import { adjacentExams, getExam, getTopic } from "@/data";
 import { getExamById } from "@/data/courses";
 import { useCurrentCourse } from "@/lib/current-course";
 import { useAppearance, TEXT_WIDTH_CLASSES } from "@/lib/appearance";
 import { ReaderView } from "@/components/reader-view";
+import { RightRailToc } from "@/components/right-rail-toc";
 import { cn } from "@/lib/utils";
+
 export const Route = createFileRoute("/exam/$qid")({
   component: ExamAnswer,
 });
@@ -15,6 +17,10 @@ function ExamAnswer() {
   const { qid } = Route.useParams();
   const exam = getExam(qid);
   if (!exam) throw notFound();
+
+  const examMatch = getExamById(qid);
+  const course = examMatch?.course;
+
   const { prev, next } = adjacentExams(qid);
   const [progress, setProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -36,12 +42,11 @@ function ExamAnswer() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    const hit = getExamById(qid);
-    if (hit) {
-      setActiveCourseSlug(hit.course.slug);
+    if (course) {
+      setActiveCourseSlug(course.slug);
     }
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [qid, setActiveCourseSlug]);
+  }, [qid, course, setActiveCourseSlug]);
 
   const related = exam.relatedSlugs
     .map((slug) => getTopic(slug))
@@ -64,45 +69,49 @@ function ExamAnswer() {
         />
       </div>
 
-      <article className="px-4 py-8 sm:px-10 sm:py-12 ios-fade-up bg-[#090909]">
-        <div className={cn("mx-auto transition-all duration-200", TEXT_WIDTH_CLASSES[textWidth])}>
-          {/* Header Metadata */}
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#0099ff]">
-                Question {exam.number} · Model Answer
+      <div className="mx-auto flex max-w-[1440px] justify-center gap-8 px-4 py-8 sm:px-8 sm:py-12 bg-[#090909]">
+        {/* Main Article Canvas */}
+        <article className={cn("min-w-0 flex-1 transition-all duration-200 ios-fade-up", TEXT_WIDTH_CLASSES[textWidth])}>
+          {/* Breadcrumb Trail */}
+          <nav className="mb-6 flex flex-wrap items-center gap-1.5 font-mono text-xs text-[#666666]">
+            <Link to="/" className="hover:text-white transition-colors">
+              MBA Papers
+            </Link>
+            <span>/</span>
+            <Link
+              to="/"
+              onClick={() => course && setActiveCourseSlug(course.slug)}
+              className="hover:text-white transition-colors"
+            >
+              {course?.code || "Paper"} {course?.title}
+            </Link>
+            <span>/</span>
+            <Link to="/exam" className="hover:text-white transition-colors">
+              Model Answers
+            </Link>
+            <span>/</span>
+            <span className="text-[#0099ff]">Question {exam.number}</span>
+          </nav>
+
+          {/* Header Metadata Ribbon */}
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#262626] pb-4">
+            <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#0099ff]">
+              Question {exam.number} · Model Answer
+            </span>
+            {exam.marks && (
+              <span className="rounded-full bg-[#1c1c1c] border border-[#262626] text-[#999999] px-3 py-0.5 font-mono text-xs font-bold">
+                {exam.marks} Marks Scale
               </span>
-              {(exam.title.startsWith("[HRL]") || exam.question.startsWith("[HRL]")) && (
-                <span className="rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 px-2.5 py-0.5 font-mono text-[11px] font-bold flex items-center gap-1">
-                  <span>★</span> Faculty HRL
-                </span>
-              )}
-            </div>
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => window.print()}
-                className="no-print inline-flex items-center gap-1.5 rounded-full border border-[#262626] bg-[#141414] hover:bg-[#1c1c1c] text-[#cccccc] hover:text-white px-3 py-1 text-xs font-mono transition-colors cursor-pointer"
-                title="Print or Save this model answer as PDF"
-              >
-                <Printer className="size-3 text-amber-400" />
-                <span>PDF</span>
-              </button>
-              {exam.marks && (
-                <span className="rounded-full bg-[#1c1c1c] border border-[#262626] text-[#999999] px-3 py-0.5 font-mono text-xs font-bold">
-                  {exam.marks} Marks Scale
-                </span>
-              )}
-            </div>
+            )}
           </div>
 
           {/* Title and Question Card */}
-          <div className="mt-4 space-y-4">
-            <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-white leading-tight">
+          <div className="mt-6 space-y-4">
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.03em] text-white leading-tight">
               {exam.title}
             </h1>
-            <div className="rounded-[20px] border border-[#262626] bg-[#141414] p-5 shadow-xs">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#666666] block mb-1">
+            <div className="rounded-[20px] border border-[#262626] bg-[#141414] p-5 sm:p-6 shadow-xs">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#666666] block mb-2">
                 Examination Question Prompt
               </span>
               <p className="font-sans text-sm sm:text-base leading-relaxed text-[#cccccc]">
@@ -181,8 +190,14 @@ function ExamAnswer() {
               </Link>
             ) : null}
           </nav>
-        </div>
-      </article>
+        </article>
+
+        {/* Desktop Sticky Right-Rail Outline */}
+        <RightRailToc
+          blocks={exam.blocks}
+          progress={progress}
+        />
+      </div>
 
       {/* Floating Back to Top Button */}
       {showBackToTop ? (

@@ -83,6 +83,65 @@ function Dashboard() {
             </p>
           </div>
 
+          {/* ⭐ Dual Atmosphere Gradient Spotlight Cards */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {/* Card 1: Paper 602 Spotlight */}
+            <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#0099ff]/90 via-[#007acc] to-[#6a4cf5] p-6 sm:p-7 text-white shadow-xl transition-all duration-300">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-md px-2.5 py-0.5 font-mono text-[11px] font-bold text-white border border-white/20">
+                    Paper 602 · Master Notes
+                  </span>
+                </div>
+                <h3 className="font-display text-xl sm:text-2xl font-bold tracking-[-0.03em] text-white leading-snug">
+                  19 High-Yield 14-Mark Master Modules Ready.
+                </h3>
+                <p className="font-sans text-xs text-white/85 leading-relaxed">
+                  Complete analytical examination answers for Business Communications covering Hook-Line-Sinker, Minto Pyramid, SCQA, and RVU models.
+                </p>
+                <div className="pt-1">
+                  <Link
+                    to="/topic/$slug"
+                    params={{ slug: "nature-scope-business-communication" }}
+                    onClick={() => setActiveCourseSlug("business-communications")}
+                    className="inline-flex items-center gap-2 rounded-full bg-white text-black hover:bg-white/90 px-4 py-2 text-xs font-bold shadow-md transition-all ios-press"
+                  >
+                    <span>Explore 602 Notes</span>
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Paper 603 Mid-Sem Spotlight */}
+            <div className="relative overflow-hidden rounded-[24px] spotlight-violet p-6 sm:p-7 text-white shadow-xl transition-all duration-300">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-md px-2.5 py-0.5 font-mono text-[11px] font-bold text-white border border-white/20">
+                    Paper 603 · Mid Sem Focus
+                  </span>
+                </div>
+                <h3 className="font-display text-xl sm:text-2xl font-bold tracking-[-0.03em] text-white leading-snug">
+                  9 Master Examination Modules Ready.
+                </h3>
+                <p className="font-sans text-xs text-white/85 leading-relaxed">
+                  Core examination notes covering 6 foundational Latin maxims, Companies Act 2013 revamp analysis, and Indian Contract Act breach remedies.
+                </p>
+                <div className="pt-1">
+                  <Link
+                    to="/topic/$slug"
+                    params={{ slug: "midsem-foundational-legal-maxims" }}
+                    onClick={() => setActiveCourseSlug("business-laws")}
+                    className="inline-flex items-center gap-2 rounded-full bg-white text-black hover:bg-white/90 px-4 py-2 text-xs font-bold shadow-md transition-all ios-press"
+                  >
+                    <span>Study 603 Mid-Sem</span>
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Tip 3: Streamlined Minimal Course Header Track */}
           <div className="rounded-2xl border border-[#262626] bg-[#121212]/80 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="space-y-1">

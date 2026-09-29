@@ -32,6 +32,7 @@ import { HighlightsDrawer } from "./highlights-drawer";
 import { AppearancePopover } from "./appearance-popover";
 import { CourseSwitcher } from "./course-switcher";
 import { Switch } from "./ui/switch";
+import { CommandPalette } from "./command-palette";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
@@ -343,6 +344,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   const [open, setOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+
+  useEffect(() => {
+    const handleCustomOpen = () => setCommandPaletteOpen(true);
+    window.addEventListener("open-command-palette", handleCustomOpen);
+    return () => window.removeEventListener("open-command-palette", handleCustomOpen);
+  }, []);
   const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
   const currentUser = useAccessControl((s) => s.currentUser);
   const isAdmin = useAccessControl((s) => s.isAdmin(s.currentUser?.email));
@@ -445,6 +453,30 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               )}
               <span className="hidden md:inline">Auto-Highlight</span>
               <span className="font-semibold">{autoHighlight ? "ON" : "OFF"}</span>
+            </button>
+
+            {/* Omnisearch Trigger (Cmd+K) */}
+            <button
+              type="button"
+              onClick={() => setCommandPaletteOpen(true)}
+              className="hidden sm:inline-flex items-center gap-2 rounded-full border border-[#262626] bg-[#141414] px-3.5 py-1.5 text-xs text-[#999999] hover:text-white hover:bg-[#1c1c1c] transition-all ios-press"
+              title="Global Omnisearch (Cmd+K)"
+            >
+              <Search className="size-3.5 text-[#0099ff]" />
+              <span className="hidden md:inline">Quick Jump...</span>
+              <kbd className="rounded bg-[#090909] border border-[#262626] px-1.5 py-0.2 font-mono text-[10px] text-[#666666]">
+                ⌘K
+              </kbd>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setCommandPaletteOpen(true)}
+              className="sm:hidden inline-flex size-9 items-center justify-center rounded-full border border-[#262626] bg-[#141414] text-[#999999] hover:text-white hover:bg-[#1c1c1c] transition-all ios-press"
+              aria-label="Search notes"
+              title="Search notes (Cmd+K)"
+            >
+              <Search className="size-4" strokeWidth={1.75} />
             </button>
 
             {/* Quick Export PDF Link */}
@@ -606,6 +638,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         isOpen={loginModalOpen}
         onClose={() => setLoginModalOpen(false)}
       />
+      {/* Global Command Palette (Cmd+K) */}
+      <CommandPalette
+        isOpen={commandPaletteOpen}
+        onClose={() => setCommandPaletteOpen(false)}
+      />
+
     </div>
   );
 }

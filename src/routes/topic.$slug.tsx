@@ -1,12 +1,21 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowUp, Clock, Download, Printer, Sparkles } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  Clock,
+  Download,
+  Printer,
+  Sparkles,
+} from "lucide-react";
 import { adjacentTopics, getTopic } from "@/data";
 import { getTopicBySlug } from "@/data/courses";
 import { useProgress } from "@/lib/progress";
 import { useCurrentCourse } from "@/lib/current-course";
 import { useAppearance, TEXT_WIDTH_CLASSES } from "@/lib/appearance";
 import { ReaderView } from "@/components/reader-view";
+import { RightRailToc } from "@/components/right-rail-toc";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/topic/$slug")({
@@ -17,6 +26,9 @@ function TopicPage() {
   const { slug } = Route.useParams();
   const topic = getTopic(slug);
   if (!topic) throw notFound();
+
+  const courseMatch = getTopicBySlug(slug);
+  const course = courseMatch?.course;
 
   const { prev, next } = adjacentTopics(slug);
   const studied = useProgress((s) => s.studied[slug]);
@@ -49,16 +61,16 @@ function TopicPage() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    setLastSlug(slug);
-    const hit = getTopicBySlug(slug);
-    if (hit) {
-      setActiveCourseSlug(hit.course.slug);
-    }
-  }, [slug, setLastSlug, setActiveCourseSlug]);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [slug]);
 
   useEffect(() => {
     setLastSlug(slug);
-  }, [slug, setLastSlug]);
+    if (course) {
+      setActiveCourseSlug(course.slug);
+    }
+  }, [slug, course, setLastSlug, setActiveCourseSlug]);
 
   const isMidSemTopic = topic.unit === "Mid Sem Important" || slug.startsWith("midsem-");
 
@@ -79,11 +91,31 @@ function TopicPage() {
         />
       </div>
 
-      <article className="px-4 py-8 sm:px-10 sm:py-12 ios-fade-up bg-[#090909]">
-        <div className={cn("mx-auto transition-all duration-200", TEXT_WIDTH_CLASSES[textWidth])}>
+      <div className="mx-auto flex max-w-[1440px] justify-center gap-8 px-4 py-8 sm:px-8 sm:py-12 bg-[#090909]">
+        {/* Main Article Canvas */}
+        <article className={cn("min-w-0 flex-1 transition-all duration-200 ios-fade-up", TEXT_WIDTH_CLASSES[textWidth])}>
+          {/* Breadcrumb Navigation Trail */}
+          <nav className="mb-6 flex flex-wrap items-center gap-1.5 font-mono text-xs text-[#666666]">
+            <Link to="/" className="hover:text-white transition-colors">
+              MBA Papers
+            </Link>
+            <span>/</span>
+            <Link
+              to="/"
+              onClick={() => course && setActiveCourseSlug(course.slug)}
+              className="hover:text-white transition-colors"
+            >
+              {course?.code || "Paper"} {course?.title}
+            </Link>
+            <span>/</span>
+            <span className={cn(isMidSemTopic ? "text-amber-400 font-bold" : "text-[#999999]")}>
+              {topic.unit}
+            </span>
+          </nav>
+
           {/* Header Metadata Ribbon */}
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#262626] pb-4">
+            <div className="flex items-center gap-2">
               <span
                 className={cn(
                   "font-mono text-xs font-semibold uppercase tracking-[0.14em]",
@@ -93,28 +125,14 @@ function TopicPage() {
                 {isMidSemTopic && <Sparkles className="size-3.5" />}
                 {topic.unit}
               </span>
-              {topic.tags.includes("HRL") && (
-                <span className="rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 px-2.5 py-0.5 font-mono text-[11px] font-bold flex items-center gap-1">
-                  <span>★</span> Faculty HRL
-                </span>
-              )}
               {topic.marks && (
-                <span className="rounded-full bg-[#1c1c1c] border border-[#262626] text-[#999999] px-2 py-0.2 font-mono text-[10px] font-bold">
-                  {topic.marks} Marks Scope
+                <span className="rounded-full bg-[#1c1c1c] border border-[#262626] text-[#999999] px-2.5 py-0.5 font-mono text-[10px] font-bold">
+                  {topic.marks} Marks Scale
                 </span>
               )}
             </div>
 
             <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => window.print()}
-                className="no-print inline-flex items-center gap-1.5 rounded-full border border-[#262626] bg-[#141414] hover:bg-[#1c1c1c] text-[#cccccc] hover:text-white px-3 py-1 text-xs font-mono transition-colors cursor-pointer"
-                title="Print or Save this module as PDF"
-              >
-                <Printer className="size-3 text-[#0099ff]" />
-                <span>PDF</span>
-              </button>
               <span className="inline-flex items-center gap-2 text-xs text-[#999999] font-mono bg-[#141414] px-3 py-1 rounded-full border border-[#262626]">
                 <Clock className="size-3 text-[#0099ff]" />
                 <span>~{readTimeMin} min read</span>
@@ -124,8 +142,8 @@ function TopicPage() {
             </div>
           </div>
 
-          {/* Title and Summary */}
-          <div className="mt-4 space-y-3">
+          {/* Title and Summary Header */}
+          <div className="mt-6 space-y-3">
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.03em] text-white leading-tight">
               {topic.title}
             </h1>
@@ -194,8 +212,16 @@ function TopicPage() {
               </Link>
             ) : null}
           </nav>
-        </div>
-      </article>
+        </article>
+
+        {/* Desktop Sticky Right-Rail Outline */}
+        <RightRailToc
+          blocks={topic.blocks}
+          progress={progress}
+          studied={studied}
+          onToggleStudied={() => toggleStudied(slug)}
+        />
+      </div>
 
       {/* Floating Back to Top Button */}
       {showBackToTop ? (
