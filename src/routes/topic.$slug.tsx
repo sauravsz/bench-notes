@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowUp, Clock, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUp, Clock, Download, Printer, Sparkles } from "lucide-react";
 import { adjacentTopics, getTopic } from "@/data";
 import { getTopicBySlug } from "@/data/courses";
 import { useProgress } from "@/lib/progress";
@@ -105,12 +105,23 @@ function TopicPage() {
               )}
             </div>
 
-            <span className="inline-flex items-center gap-2 text-xs text-[#999999] font-mono bg-[#141414] px-3 py-1 rounded-full border border-[#262626]">
-              <Clock className="size-3 text-[#0099ff]" />
-              <span>~{readTimeMin} min read</span>
-              <span>•</span>
-              <span>{totalWords.toLocaleString()} words</span>
-            </span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="no-print inline-flex items-center gap-1.5 rounded-full border border-[#262626] bg-[#141414] hover:bg-[#1c1c1c] text-[#cccccc] hover:text-white px-3 py-1 text-xs font-mono transition-colors cursor-pointer"
+                title="Print or Save this module as PDF"
+              >
+                <Printer className="size-3 text-[#0099ff]" />
+                <span>PDF</span>
+              </button>
+              <span className="inline-flex items-center gap-2 text-xs text-[#999999] font-mono bg-[#141414] px-3 py-1 rounded-full border border-[#262626]">
+                <Clock className="size-3 text-[#0099ff]" />
+                <span>~{readTimeMin} min read</span>
+                <span>•</span>
+                <span>{totalWords.toLocaleString()} words</span>
+              </span>
+            </div>
           </div>
 
           {/* Title and Summary */}

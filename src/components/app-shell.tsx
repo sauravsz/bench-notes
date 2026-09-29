@@ -3,12 +3,14 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import {
   BookOpen,
   ChevronDown,
+  Download,
   Gavel,
   Highlighter,
   Languages,
   Menu,
   PanelLeft,
   PanelLeftClose,
+  Printer,
   Scale,
   Search,
   ShieldCheck,
@@ -208,6 +210,24 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           <span>Search</span>
         </Link>
 
+        <Link
+          to="/export"
+          onClick={onNavigate}
+          className={cn(
+            "flex min-h-10 items-center justify-between rounded-full px-3.5 text-sm font-medium transition-all duration-200 ios-press-subtle",
+            pathname.startsWith("/export")
+              ? "bg-[#1c1c1c] font-semibold text-white border border-[#262626]"
+              : "text-[#999999] hover:bg-[#141414] hover:text-white",
+          )}
+        >
+          <span className="flex items-center gap-2.5">
+            <Download className="size-4 shrink-0 text-[#0099ff]" strokeWidth={1.75} />
+            <span>Export Notes</span>
+          </span>
+          <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-1.5 py-0.5 font-mono text-[10px] font-bold text-[#0099ff]">
+            PDF
+          </span>
+        </Link>
         {isAdmin && (
           <Link
             to="/admin"
@@ -427,7 +447,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <span className="font-semibold">{autoHighlight ? "ON" : "OFF"}</span>
             </button>
 
-            {/* Readwise Appearance Typography (Aa) Button */}
+            {/* Quick Export PDF Link */}
+            <Link
+              to="/export/$courseSlug"
+              params={{ courseSlug: activeCourse.slug }}
+              className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-[#262626] bg-[#141414] px-3 py-1.5 font-sans text-xs font-medium text-[#cccccc] hover:bg-[#1c1c1c] hover:text-white transition-all ios-press"
+              title="Export Full Course Notes as PDF"
+            >
+              <Download className="size-3 text-[#0099ff]" />
+              <span>Export PDF</span>
+            </Link>
             <button
               type="button"
               data-appearance-trigger

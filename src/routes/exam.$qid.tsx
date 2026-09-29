@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, ArrowUp, Scale } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUp, Download, Printer, Scale } from "lucide-react";
 import { adjacentExams, getExam, getTopic } from "@/data";
 import { getExamById } from "@/data/courses";
 import { useCurrentCourse } from "@/lib/current-course";
@@ -78,11 +78,22 @@ function ExamAnswer() {
                 </span>
               )}
             </div>
-            {exam.marks && (
-              <span className="rounded-full bg-[#1c1c1c] border border-[#262626] text-[#999999] px-3 py-0.5 font-mono text-xs font-bold">
-                {exam.marks} Marks Scale
-              </span>
-            )}
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="no-print inline-flex items-center gap-1.5 rounded-full border border-[#262626] bg-[#141414] hover:bg-[#1c1c1c] text-[#cccccc] hover:text-white px-3 py-1 text-xs font-mono transition-colors cursor-pointer"
+                title="Print or Save this model answer as PDF"
+              >
+                <Printer className="size-3 text-amber-400" />
+                <span>PDF</span>
+              </button>
+              {exam.marks && (
+                <span className="rounded-full bg-[#1c1c1c] border border-[#262626] text-[#999999] px-3 py-0.5 font-mono text-xs font-bold">
+                  {exam.marks} Marks Scale
+                </span>
+              )}
+            </div>
           </div>
 
           {/* Title and Question Card */}

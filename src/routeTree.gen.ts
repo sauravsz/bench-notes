@@ -16,6 +16,8 @@ import { Route as MaximsRouteImport } from './routes/maxims'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ExamIndexRouteImport } from './routes/exam.index'
 import { Route as ExamQidRouteImport } from './routes/exam.$qid'
+import { Route as ExportIndexRouteImport } from './routes/export.index'
+import { Route as ExportCourseSlugRouteImport } from './routes/export.$courseSlug'
 import { Route as TopicSlugRouteImport } from './routes/topic.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -53,6 +55,16 @@ const ExamQidRoute = ExamQidRouteImport.update({
   path: '/exam/$qid',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExportIndexRoute = ExportIndexRouteImport.update({
+  id: '/export/',
+  path: '/export/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExportCourseSlugRoute = ExportCourseSlugRouteImport.update({
+  id: '/export/$courseSlug',
+  path: '/export/$courseSlug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TopicSlugRoute = TopicSlugRouteImport.update({
   id: '/topic/$slug',
   path: '/topic/$slug',
@@ -66,8 +78,10 @@ export interface FileRoutesByFullPath {
   '/maxims': typeof MaximsRoute
   '/search': typeof SearchRoute
   '/exam/$qid': typeof ExamQidRoute
+  '/export/$courseSlug': typeof ExportCourseSlugRoute
   '/topic/$slug': typeof TopicSlugRoute
   '/exam/': typeof ExamIndexRoute
+  '/export/': typeof ExportIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -76,8 +90,10 @@ export interface FileRoutesByTo {
   '/maxims': typeof MaximsRoute
   '/search': typeof SearchRoute
   '/exam/$qid': typeof ExamQidRoute
+  '/export/$courseSlug': typeof ExportCourseSlugRoute
   '/topic/$slug': typeof TopicSlugRoute
   '/exam': typeof ExamIndexRoute
+  '/export': typeof ExportIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -87,8 +103,10 @@ export interface FileRoutesById {
   '/maxims': typeof MaximsRoute
   '/search': typeof SearchRoute
   '/exam/$qid': typeof ExamQidRoute
+  '/export/$courseSlug': typeof ExportCourseSlugRoute
   '/topic/$slug': typeof TopicSlugRoute
   '/exam/': typeof ExamIndexRoute
+  '/export/': typeof ExportIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -99,8 +117,10 @@ export interface FileRouteTypes {
     | '/maxims'
     | '/search'
     | '/exam/$qid'
+    | '/export/$courseSlug'
     | '/topic/$slug'
     | '/exam/'
+    | '/export/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -109,8 +129,10 @@ export interface FileRouteTypes {
     | '/maxims'
     | '/search'
     | '/exam/$qid'
+    | '/export/$courseSlug'
     | '/topic/$slug'
     | '/exam'
+    | '/export'
   id:
     | '__root__'
     | '/'
@@ -119,8 +141,10 @@ export interface FileRouteTypes {
     | '/maxims'
     | '/search'
     | '/exam/$qid'
+    | '/export/$courseSlug'
     | '/topic/$slug'
     | '/exam/'
+    | '/export/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -130,8 +154,10 @@ export interface RootRouteChildren {
   MaximsRoute: typeof MaximsRoute
   SearchRoute: typeof SearchRoute
   ExamQidRoute: typeof ExamQidRoute
+  ExportCourseSlugRoute: typeof ExportCourseSlugRoute
   TopicSlugRoute: typeof TopicSlugRoute
   ExamIndexRoute: typeof ExamIndexRoute
+  ExportIndexRoute: typeof ExportIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -185,6 +211,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExamQidRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/export/': {
+      id: '/export/'
+      path: '/export'
+      fullPath: '/export/'
+      preLoaderRoute: typeof ExportIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/export/$courseSlug': {
+      id: '/export/$courseSlug'
+      path: '/export/$courseSlug'
+      fullPath: '/export/$courseSlug'
+      preLoaderRoute: typeof ExportCourseSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/topic/$slug': {
       id: '/topic/$slug'
       path: '/topic/$slug'
@@ -202,8 +242,10 @@ const rootRouteChildren: RootRouteChildren = {
   MaximsRoute: MaximsRoute,
   SearchRoute: SearchRoute,
   ExamQidRoute: ExamQidRoute,
+  ExportCourseSlugRoute: ExportCourseSlugRoute,
   TopicSlugRoute: TopicSlugRoute,
   ExamIndexRoute: ExamIndexRoute,
+  ExportIndexRoute: ExportIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
