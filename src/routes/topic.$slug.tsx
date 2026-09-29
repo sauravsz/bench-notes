@@ -83,7 +83,7 @@ function TopicPage() {
         <div className={cn("mx-auto transition-all duration-200", TEXT_WIDTH_CLASSES[textWidth])}>
           {/* Header Metadata Ribbon */}
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span
                 className={cn(
                   "font-mono text-xs font-semibold uppercase tracking-[0.14em]",
@@ -93,6 +93,11 @@ function TopicPage() {
                 {isMidSemTopic && <Sparkles className="size-3.5" />}
                 {topic.unit}
               </span>
+              {topic.tags.includes("HRL") && (
+                <span className="rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 px-2.5 py-0.5 font-mono text-[11px] font-bold flex items-center gap-1">
+                  <span>★</span> Faculty HRL
+                </span>
+              )}
               {topic.marks && (
                 <span className="rounded-full bg-[#1c1c1c] border border-[#262626] text-[#999999] px-2 py-0.2 font-mono text-[10px] font-bold">
                   {topic.marks} Marks Scope
