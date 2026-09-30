@@ -42,10 +42,12 @@ export function ReaderControls({
   onToggleToc?: () => void;
   onCopyMarkdown?: () => void;
 }) {
+  const highlights = useHighlights((s) => s.highlights);
   const autoHighlight = useHighlights((s) => s.autoHighlight);
   const toggleAutoHighlight = useHighlights((s) => s.toggleAutoHighlight);
-  const activeColor = useHighlights((s) => s.activeColor);
-  const setActiveColor = useHighlights((s) => s.setActiveColor);
+  const currentColor = useHighlights((s) => s.currentColor);
+  const setCurrentColor = useHighlights((s) => s.setCurrentColor);
+  const setNotebookOpen = useHighlights((s) => s.setNotebookOpen);
   const toggleAppearanceMenu = useAppearance((s) => s.toggleAppearanceMenu);
   const toggleStudiedStore = useProgress((s) => s.toggleStudied);
   const studiedStore = useProgress((s) => s.studied);
