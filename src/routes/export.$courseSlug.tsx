@@ -2,9 +2,9 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { allCourses } from "@/data/courses";
 import { NoteBody } from "@/components/note-body";
-import { ArrowLeft, BookOpen, CheckCircle2, Download, FileText, Printer, Sparkles } from "lucide-react";
+import { useAccessControl } from "@/lib/auth/access-control";
+import { ArrowLeft, BookOpen, CheckCircle2, Download, FileText, Lock, Printer, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
-
 type SearchParams = {
   mode?: "all" | "topics" | "exam";
 };
@@ -22,6 +22,35 @@ function CourseExportView() {
   const { courseSlug } = Route.useParams();
   const search = Route.useSearch();
   const [mode, setMode] = useState<"all" | "topics" | "exam">(search.mode || "all");
+  const currentUser = useAccessControl((s) => s.currentUser);
+  const isAdmin = useAccessControl((s) => s.isAdmin(s.currentUser?.email));
+
+  if (!isAdmin) {
+    return (
+      <main className="px-4 py-16 sm:px-10 bg-[#090909] text-center min-h-[70vh] flex items-center justify-center">
+        <div className="max-w-md mx-auto rounded-[24px] border border-[#262626] bg-[#141414] p-8 space-y-4">
+          <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-[#1c1c1c] border border-[#262626] text-amber-400">
+            <Lock className="size-6" />
+          </div>
+          <h2 className="font-display text-xl font-bold text-white">
+            Administrator Access Required
+          </h2>
+          <p className="font-sans text-xs text-[#999999] leading-relaxed">
+            Full course mass PDF compilation and export is restricted to verified administrators.
+          </p>
+          <div className="pt-2">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 rounded-full bg-white text-black px-4 py-2 text-xs font-bold hover:bg-white/90 transition-all"
+            >
+              Return to Study Dashboard
+            </Link>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
 
   const course = allCourses.find(
     (c) => c.slug === courseSlug || c.id === courseSlug || c.code.toLowerCase() === courseSlug.toLowerCase(),

@@ -112,7 +112,9 @@ export const businessCommunicationsCourse: Course = {
         },
         {
           "type": "diagram",
-          "diagramKind": "minto-pyramid"
+          "kind": "minto-pyramid",
+          "title": "Barbara Minto's Pyramid Principle",
+          "caption": "BLUF (Apex) -> MECE Supporting Pillars -> Empirical Proof Data"
         },
         {
           "type": "p",
@@ -120,7 +122,9 @@ export const businessCommunicationsCourse: Course = {
         },
         {
           "type": "diagram",
-          "diagramKind": "scqa-framework"
+          "kind": "scqa-framework",
+          "title": "The SCQA Narrative Engine",
+          "caption": "Situation -> Complication -> Question -> Answer"
         },
         {
           "type": "p",
@@ -2189,7 +2193,9 @@ export const businessCommunicationsCourse: Course = {
         },
         {
           "type": "diagram",
-          "diagramKind": "minto-pyramid"
+          "kind": "minto-pyramid",
+          "title": "Barbara Minto's Pyramid Principle",
+          "caption": "BLUF (Apex) -> MECE Supporting Pillars -> Empirical Proof Data"
         },
         {
           "type": "p",
@@ -2197,7 +2203,9 @@ export const businessCommunicationsCourse: Course = {
         },
         {
           "type": "diagram",
-          "diagramKind": "scqa-framework"
+          "kind": "scqa-framework",
+          "title": "The SCQA Narrative Engine",
+          "caption": "Situation -> Complication -> Question -> Answer"
         },
         {
           "type": "p",
