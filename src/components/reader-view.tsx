@@ -36,6 +36,7 @@ export function ReaderView({
   const fontSize = useAppearance((s) => s.fontSize);
   const lineSpacing = useAppearance((s) => s.lineSpacing);
   const fontFamily = useAppearance((s) => s.fontFamily);
+  const highlights = useHighlights((s) => s.highlights);
   // Manual selection toolbar state
   const [selectedText, setSelectedText] = useState("");
   const [selectedBlockIndex, setSelectedBlockIndex] = useState<number | undefined>(undefined);
@@ -171,9 +172,7 @@ export function ReaderView({
       else if (b.type === "p") md += `${b.text}\n\n`;
       else if (b.type === "ul") md += b.items.map((it) => `- ${it}`).join("\n") + "\n\n";
       else if (b.type === "ol") md += b.items.map((it, idx) => `${idx + 1}. ${it}`).join("\n") + "\n\n";
-      else if (b.type === "callout") md += `> **${b.title}**\n> ${b.body}\n\n`;
-      else if (b.type === "def") md += `> **Definition: ${b.term}**\n> ${b.body}\n\n`;
-      else if (b.type === "section") md += `## ${b.heading}\n\n`;
+      else if (b.type === "callout") md += `> **${b.label || b.title || "Note"}**\n> ${b.body || b.text || ""}\n\n`;
       else if (b.type === "table") {
         md += `| ${b.headers.join(" | ")} |\n| ${b.headers.map(() => "---").join(" | ")} |\n`;
         md += b.rows.map((row) => `| ${row.join(" | ")} |`).join("\n") + "\n\n";

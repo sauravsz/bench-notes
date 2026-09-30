@@ -8,6 +8,7 @@ import {
   Copy,
   Database,
   Globe,
+  KeyRound,
   Lock,
   Mail,
   Plus,
@@ -28,6 +29,7 @@ import {
 import { useAccessControl, DEFAULT_PASSCODES } from "@/lib/auth/access-control";
 import { isSupabaseReady, getSupabaseConfig } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -258,7 +260,7 @@ function AdminDashboard() {
                 </span>
                 <Switch
                   checked={authRequired}
-                  onCheckedChange={(checked) => {
+                  onCheckedChange={(checked: boolean) => {
                     setAuthRequired(checked);
                     if (checked) {
                       toast.success("Verification Gate enforced");

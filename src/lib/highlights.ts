@@ -288,26 +288,25 @@ export const useHighlights = create<HighlightsState>()((set, get) => ({
     set({ highlights: updated });
     saveLocalPartition(email, updated);
 
-    // Sync to Supabase in background
     if (isSupabaseReady() && supabase && email !== DEFAULT_GUEST_EMAIL) {
-      supabase
-        .from("user_highlights")
-        .upsert({
-          id: newItem.id,
-          user_email: email,
-          doc_id: newItem.docId,
-          doc_title: newItem.docTitle,
-          block_index: newItem.blockIndex ?? null,
-          block_id: newItem.blockId ?? null,
-          text: newItem.text,
-          color: newItem.color,
-          note: newItem.note ?? null,
-          tags: newItem.tags ?? [],
-          created_at: newItem.createdAt,
-          updated_at: newItem.updatedAt,
-        })
-        .then(() => {})
-        .catch(() => {});
+      void Promise.resolve(
+        supabase
+          .from("user_highlights")
+          .upsert({
+            id: newItem.id,
+            user_email: email,
+            doc_id: newItem.docId,
+            doc_title: newItem.docTitle,
+            block_index: newItem.blockIndex ?? null,
+            block_id: newItem.blockId ?? null,
+            text: newItem.text,
+            color: newItem.color,
+            note: newItem.note ?? null,
+            tags: newItem.tags ?? [],
+            created_at: newItem.createdAt,
+            updated_at: newItem.updatedAt,
+          })
+      ).catch(() => {});
     }
 
     return newItem;
@@ -334,18 +333,18 @@ export const useHighlights = create<HighlightsState>()((set, get) => ({
 
     // Sync to Supabase
     if (isSupabaseReady() && supabase && email !== DEFAULT_GUEST_EMAIL) {
-      supabase
-        .from("user_highlights")
-        .update({
-          color: updatedItem.color,
-          note: updatedItem.note ?? null,
-          tags: updatedItem.tags ?? [],
-          updated_at: updatedItem.updatedAt,
-        })
-        .eq("id", id)
-        .eq("user_email", email)
-        .then(() => {})
-        .catch(() => {});
+      void Promise.resolve(
+        supabase
+          .from("user_highlights")
+          .update({
+            color: updatedItem.color,
+            note: updatedItem.note ?? null,
+            tags: updatedItem.tags ?? [],
+            updated_at: updatedItem.updatedAt,
+          })
+          .eq("id", id)
+          .eq("user_email", email)
+      ).catch(() => {});
     }
   },
 
@@ -362,13 +361,13 @@ export const useHighlights = create<HighlightsState>()((set, get) => ({
 
     // Delete in Supabase
     if (isSupabaseReady() && supabase && email !== DEFAULT_GUEST_EMAIL) {
-      supabase
-        .from("user_highlights")
-        .delete()
-        .eq("id", id)
-        .eq("user_email", email)
-        .then(() => {})
-        .catch(() => {});
+      void Promise.resolve(
+        supabase
+          .from("user_highlights")
+          .delete()
+          .eq("id", id)
+          .eq("user_email", email)
+      ).catch(() => {});
     }
   },
 
@@ -384,13 +383,13 @@ export const useHighlights = create<HighlightsState>()((set, get) => ({
     saveLocalPartition(email, next);
 
     if (isSupabaseReady() && supabase && email !== DEFAULT_GUEST_EMAIL) {
-      supabase
-        .from("user_highlights")
-        .delete()
-        .eq("doc_id", docId)
-        .eq("user_email", email)
-        .then(() => {})
-        .catch(() => {});
+      void Promise.resolve(
+        supabase
+          .from("user_highlights")
+          .delete()
+          .eq("doc_id", docId)
+          .eq("user_email", email)
+      ).catch(() => {});
     }
   },
 
@@ -400,12 +399,12 @@ export const useHighlights = create<HighlightsState>()((set, get) => ({
     saveLocalPartition(email, {});
 
     if (isSupabaseReady() && supabase && email !== DEFAULT_GUEST_EMAIL) {
-      supabase
-        .from("user_highlights")
-        .delete()
-        .eq("user_email", email)
-        .then(() => {})
-        .catch(() => {});
+      void Promise.resolve(
+        supabase
+          .from("user_highlights")
+          .delete()
+          .eq("user_email", email)
+      ).catch(() => {});
     }
   },
 }));

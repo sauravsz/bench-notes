@@ -5,10 +5,12 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
 export function StudyTimer({
-  isOpen,
+  docTitle,
+  isOpen = true,
   onClose,
 }: {
-  isOpen: boolean;
+  docTitle?: string;
+  isOpen?: boolean;
   onClose: () => void;
 }) {
   const DEFAULT_MINUTES = 25;
@@ -27,7 +29,9 @@ export function StudyTimer({
         duration: 5000,
       });
     }
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer ?? undefined);
+    };
   }, [isRunning, secondsLeft]);
 
   if (!isOpen) return null;

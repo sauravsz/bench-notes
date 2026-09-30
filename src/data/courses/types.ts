@@ -34,7 +34,14 @@ export type NoteBlock =
   | { type: "quote"; text: string; cite?: string }
   | { type: "def"; term: string; section?: string; body: string }
   | { type: "maxim"; latin: string; meaning: string }
-  | { type: "callout"; label: string; body: string }
+  | {
+      type: "callout";
+      label?: string;
+      body?: string;
+      title?: string;
+      text?: string;
+      kind?: "insight" | "warning" | "tip" | "info";
+    }
   | { type: "tree"; title?: string; lines: string[] }
   | { type: "diagram"; kind: DiagramKind; title?: string; caption?: string };
 

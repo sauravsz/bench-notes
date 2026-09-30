@@ -255,15 +255,18 @@ function Block({
           <p className="mb-0 text-xs sm:text-sm text-[#999999] leading-relaxed">{render(block.meaning)}</p>
         </article>
       );
-    case "callout":
+    case "callout": {
+      const label = block.label || block.title || "Note";
+      const body = block.body || block.text || "";
       return (
         <aside className="mb-5 rounded-[18px] border border-[#262626] bg-[#181818] p-5">
           <p className="mb-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#0099ff]">
-            {render(block.label)}
+            {render(label)}
           </p>
-          <p className="mb-0 text-xs sm:text-sm leading-relaxed text-[#d1d1d1]">{render(block.body)}</p>
+          <p className="mb-0 text-xs sm:text-sm leading-relaxed text-[#d1d1d1]">{render(body)}</p>
         </aside>
       );
+    }
     case "diagram":
       return (
         <DiagramRenderer

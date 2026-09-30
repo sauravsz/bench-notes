@@ -67,7 +67,7 @@ export function ReaderControls({
       toggleStudiedStore(fallbackSlug);
     }
   };
-
+  const [timerOpen, setTimerOpen] = useState(false);
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const docHighlightsCount = Object.values(highlights).filter(
     (h) => h.docId === docId,
@@ -266,7 +266,7 @@ export function ReaderControls({
 
       {/* Shortcuts Guide Dialog */}
       {shortcutsOpen ? (
-        <ShortcutsDialog onClose={() => setShortcutsOpen(false)} />
+        <ShortcutsDialog isOpen={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
       ) : null}
     </div>
   );
