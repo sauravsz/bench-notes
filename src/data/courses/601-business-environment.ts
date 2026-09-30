@@ -2119,6 +2119,175 @@ export const businessEnvironmentCourse: Course = {
           "text": "A well-calibrated Union Budget balances capital-led growth with fiscal consolidation, anchoring inflation expectations, stabilizing the Indian Rupee against external headwinds, and maintaining India's position as the fastest-growing major economy globally."
         }
       ]
+    },
+    {
+      "id": "601-topic-24",
+      "slug": "apple-pestle-analysis-opportunities-threats-2026",
+      "number": 24,
+      "title": "Apple PESTLE Analysis (2026): Strategic Opportunities & Macroeconomic Threats",
+      "unit": "Globalisation, Indian Enterprises & Environmental Scanning (PESTLE)",
+      "marks": 14,
+      "lecture": "Lecture 24: Real-World Corporate PESTLE Case Analysis",
+      "summary": "A comprehensive PESTLE analysis of Apple Inc. (2026) evaluating the six external macro-environmental forces shaping the company's operating environment, revenue engine ($416.2B), and strategic trade-offs.",
+      "tags": [
+        "Apple PESTLE",
+        "PESTLE Analysis",
+        "Macro Environment",
+        "US Tariffs",
+        "EU DMA",
+        "Apple Intelligence",
+        "Carbon Neutral 2030"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "1. Conceptual Foundation: The PESTLE Framework"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Definition: Strategic framework examining six external macro-environmental forces (Political, Economic, Social, Technological, Legal, Environmental) outside a company's direct control.",
+            "Strategic Purpose: Isolates critical macro factors to identify opportunities and threats that inward-looking tools like SWOT miss.",
+            "Application to Apple: Essential for global exposure with manufacturing concentrated in Asia and revenue across 100+ markets."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "2. Apple PESTLE Analysis Matrix at a Glance (2026)"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "PESTLE Dimension",
+            "Key Macro Factor",
+            "Strategic Impact",
+            "Empirical Metrics & Operational Context"
+          ],
+          "rows": [
+            [
+              "Political (P)",
+              "US Tariffs on Electronics",
+              "Threat",
+              "Threat of 25% tariff on non-US iPhones (US-made iPhone estimated at ~$3,500 by Wedbush); China tariffs up to 55%."
+            ],
+            [
+              "Political (P)",
+              "India Supply-Chain Pivot",
+              "Opportunity / Risk",
+              "55M iPhones assembled in India in 2025 (~25% of total; up 50%+ YoY); Foxconn exported $4.4B (Jan-May 2025); August 2025 tariff hike raised India import levy to 50%."
+            ],
+            [
+              "Economic (E)",
+              "Services Revenue Engine",
+              "Opportunity",
+              "Record $109.2B services revenue in FY2025 (up from $96.2B), delivering high-margin recurring income alongside $416.2B total revenue (~47% gross margin)."
+            ],
+            [
+              "Economic (E)",
+              "Premium Pricing & Rates",
+              "Threat",
+              "$1,000+ device pricing faces high financing costs and record US household debt; strong USD creates foreign exchange drag."
+            ],
+            [
+              "Social (S)",
+              "Gen Z Loyalty & Lock-in",
+              "Opportunity",
+              "High US Gen Z iPhone adoption; iMessage blue-bubble ecosystem lock-in and Apple Watch health tracking (fall/heart detection)."
+            ],
+            [
+              "Social (S)",
+              "Anti-Apple Sentiment",
+              "Threat",
+              "Public backlash regarding third-party repair restrictions, right-to-repair campaigns, and supply chain labor conditions."
+            ],
+            [
+              "Technological (T)",
+              "On-Device Apple Intelligence",
+              "Opportunity",
+              "Privacy-preserving on-device AI integrated across iOS ecosystem driving hardware upgrades."
+            ],
+            [
+              "Technological (T)",
+              "AI Execution Gap & R&D",
+              "Threat / Opportunity",
+              "Siri upgrades delayed and AI chief departure; R&D budget increased to $34.6B in FY2025 to close gap with Google, Microsoft, and OpenAI."
+            ],
+            [
+              "Legal (L)",
+              "EU Digital Markets Act (DMA)",
+              "Threat",
+              "€500M ($590M) fine in April 2025 for steering restrictions; mandated third-party app stores/payments; €1.8B 2024 antitrust fine."
+            ],
+            [
+              "Legal (L)",
+              "Privacy Alignment",
+              "Opportunity",
+              "Proactive marketing of user privacy aligns with global data protection mandates."
+            ],
+            [
+              "Environmental (E)",
+              "Apple 2030 Climate Plan",
+              "Opportunity",
+              "Targeting 75% emissions cut from 2015 baseline with >60% already achieved; 300+ suppliers on clean energy."
+            ],
+            [
+              "Environmental (E)",
+              "AI Compute Energy Demand",
+              "Threat",
+              "15.3M metric tons CO2 generated in 2024; heavy AI data center compute loads threaten 2030 carbon neutrality trajectory."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "3. Critical Examination of External Dimensions"
+        },
+        {
+          "type": "h4",
+          "text": "Political & Legal Vulnerabilities"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Tariff Pressures: Shifting assembly to India mitigates China trade tensions but creates exposure to new levies and geopolitical warnings.",
+            "Antitrust Enforcement: The EU DMA structurally attacks the high-margin closed App Store model by mandating alternative marketplaces and payments."
+          ]
+        },
+        {
+          "type": "h4",
+          "text": "Economic & Social Foundations"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Services Transition: $109.2B services segment smooths lumpy hardware upgrade cycles into predictable cash flow.",
+            "Cultural Lock-in: Gen Z social graph retention through iMessage and FaceTime prevents platform switching."
+          ]
+        },
+        {
+          "type": "h4",
+          "text": "Technological & Environmental Paradoxes"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "AI Lag vs. R&D Spend: $34.6B R&D fuels the catch-up in generative AI while facing rapid competitor compounding.",
+            "Compute vs. Climate Goals: Expanding AI feature compute energy conflicts directly with the 2030 carbon-neutral commitment."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "4. Strategic Summary (14-Mark Takeaways)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Primary Risks: Political tariffs and legal DMA regulations pose greater structural threats to margins than direct product competition.",
+            "Core Moat: Social ecosystem lock-in and high-margin services ($109.2B) absorb external macro shocks.",
+            "Strategic Wildcard: AI functions simultaneously as a hardware driver, execution risk, and environmental strain."
+          ]
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -4030,6 +4199,129 @@ export const businessEnvironmentCourse: Course = {
         {
           "type": "p",
           "text": "A well-calibrated Union Budget balances capital-led growth with fiscal consolidation, anchoring inflation expectations, stabilizing the Indian Rupee against external headwinds, and maintaining India's position as the fastest-growing major economy globally."
+        }
+      ]
+    },
+    {
+      "id": "601-eq-24",
+      "number": 24,
+      "title": "Apple PESTLE Analysis (2026): Macro-Environmental Opportunities and Threats",
+      "marks": 14,
+      "relatedSlugs": [
+        "apple-pestle-analysis-opportunities-threats-2026"
+      ],
+      "question": "Conduct a comprehensive PESTLE analysis of Apple Inc. (2026). Evaluate the external political, economic, social, technological, legal, and environmental forces shaping the firm's strategic opportunities and threats.",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "1. Definition & Strategic Purpose of PESTLE Analysis"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Concept: A strategic framework examining the six external forces (Political, Economic, Social, Technological, Legal, Environmental) outside a firm's direct control.",
+            "Managerial Value: Identifies macro risks and opportunities that inward-focused tools (SWOT) overlook.",
+            "Firm Context: Vital for Apple given its $416.2B global revenue footprint and Asian supply-chain concentration."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "2. Comprehensive PESTLE Evaluation Matrix (2026)"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Dimension",
+            "Key Macro Factor",
+            "Impact",
+            "Strategic Data & Evidence"
+          ],
+          "rows": [
+            [
+              "Political (P)",
+              "US Tariffs on Electronics",
+              "Threat",
+              "Proposed 25% tariff on non-US phones (US-made iPhone estimated at ~$3,500 by Wedbush); China tariffs up to 55%."
+            ],
+            [
+              "Political (P)",
+              "India Manufacturing Shift",
+              "Opportunity / Risk",
+              "Assembled 55M iPhones in India in 2025 (~25% of total; up 50%+ YoY); $4.4B exported by Foxconn (Jan-May 2025); August 2025 tariff raised levy on Indian goods to 50%."
+            ],
+            [
+              "Economic (E)",
+              "Services Revenue Expansion",
+              "Opportunity",
+              "Record $109.2B in FY2025 (up from $96.2B), providing recurring high-margin income alongside $416.2B top-line revenue (~47% gross margin)."
+            ],
+            [
+              "Economic (E)",
+              "High Rates & Premium Pricing",
+              "Threat",
+              "$1,000+ device prices face elevated interest rates and high US household debt; strong USD creates foreign exchange drag."
+            ],
+            [
+              "Social (S)",
+              "Gen Z Loyalty & Lock-in",
+              "Opportunity",
+              "High US Gen Z iPhone ownership; iMessage blue-bubble network effects and Apple Watch health tracking lifestyle integration."
+            ],
+            [
+              "Social (S)",
+              "Anti-Apple Sentiment",
+              "Threat",
+              "Criticism over third-party repair restrictions, right-to-repair activism, and supply chain labor conditions."
+            ],
+            [
+              "Technological (T)",
+              "On-Device AI (Apple Intelligence)",
+              "Opportunity",
+              "Privacy-preserving on-device AI integrated into iOS driving hardware upgrade cycles."
+            ],
+            [
+              "Technological (T)",
+              "AI Execution Gap & R&D",
+              "Threat / Opportunity",
+              "Siri delays and AI leadership changes; FY2025 R&D spend increased to $34.6B (from $31.4B) to close gap with Google, Microsoft, and OpenAI."
+            ],
+            [
+              "Legal (L)",
+              "EU Digital Markets Act (DMA)",
+              "Threat",
+              "€500M ($590M) fine in April 2025 for anti-steering rules; mandated third-party app stores/payments; €1.8B 2024 antitrust fine."
+            ],
+            [
+              "Legal (L)",
+              "Privacy Regulatory Alignment",
+              "Opportunity",
+              "Proactive marketing of user privacy aligns with tightening global data protection laws."
+            ],
+            [
+              "Environmental (E)",
+              "Apple 2030 Carbon Neutrality",
+              "Opportunity",
+              "Targeting 75% emissions cut from 2015 baseline with >60% cut achieved by 2025; 300+ suppliers in clean energy."
+            ],
+            [
+              "Environmental (E)",
+              "AI Energy & Compute Demand",
+              "Threat",
+              "15.3M metric tons CO2 in 2024; compute power required for Apple Intelligence strains 2030 climate goals."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "3. Synthesis: Key Strategic Takeaways"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "External Dominance: Apple's primary risks in 2026 stem from political tariffs and legal DMA regulations rather than rival hardware products.",
+            "Ecosystem Engine: High-margin services ($109.2B) and social lock-in protect financial performance against macro volatility.",
+            "AI Trilemma: Artificial intelligence simultaneously drives hardware upgrades (technological), creates execution risks (technological), and threatens climate targets (environmental)."
+          ]
         }
       ]
     }
