@@ -11,6 +11,7 @@ import {
   Scale,
   Search,
   Sparkles,
+  TableProperties,
   Ticket,
 } from "lucide-react";
 import { allCourses, courseCategories, type Course } from "@/data/courses";
@@ -32,7 +33,7 @@ function Dashboard() {
 
   const [confirmReset, setConfirmReset] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-
+  const [dashboardSection, setDashboardSection] = useState<"syllabus" | "exams" | "matrices">("syllabus");
   const doneCount = activeCourse.topics.filter((t) => studied[t.slug]).length;
   const totalTopics = activeCourse.topics.length || 1;
   const masteryPercentage = Math.round((doneCount / totalTopics) * 100);
@@ -279,171 +280,227 @@ function Dashboard() {
           </div>
         </section>
 
-        {/* Active Subject Unit Syllabus Breakdown */}
+        {/* Active Paper Content Tabs & Section Switcher */}
         <section className="space-y-8">
-          <div className="border-b border-[#262626] pb-4">
-            <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-[-0.03em] text-white">
-              Paper {activeCourse.code} · {activeCourse.title} Syllabus
-            </h2>
-            <p className="mt-1 font-sans text-xs text-[#999999]">
-              Unit-wise lecture notes, structured answers, and core modules.
-            </p>
-          </div>
-
-          <div className="space-y-10">
-            {activeCourse.units.map((unit, idx) => {
-              const unitTopics = activeCourse.topics.filter((t) => t.unit === unit);
-              if (unitTopics.length === 0) return null;
-              const isMidSemUnit = unit === "Mid Sem Important";
-
-              return (
-                <div
-                  key={unit}
-                  className={cn(
-                    "space-y-4",
-                    isMidSemUnit && "rounded-[24px] border border-[#262626] bg-[#141414] p-6 shadow-sm",
-                  )}
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex items-center gap-2.5">
-                      <span
-                        className={cn(
-                          "flex size-6 items-center justify-center rounded-full font-mono text-xs font-bold",
-                          isMidSemUnit
-                            ? "bg-white text-black"
-                            : "bg-[#1c1c1c] text-[#999999] border border-[#262626]",
-                        )}
-                      >
-                        {isMidSemUnit ? "★" : idx + 1}
-                      </span>
-                      <h3 className="font-display text-xl font-bold text-white tracking-[-0.02em]">
-                        {unit}
-                      </h3>
-                    </div>
-                    {isMidSemUnit && (
-                      <span className="rounded-full bg-[#0099ff]/15 text-[#0099ff] border border-[#0099ff]/30 px-3 py-0.5 text-xs font-bold">
-                        9 Master Examination Modules
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Aesthetic 2-Column Module Card Grid */}
-                  <div className="grid gap-3.5 sm:grid-cols-2">
-                    {unitTopics.map((topic) => {
-                      const isStudied = studied[topic.slug];
-                      return (
-                        <Link
-                          key={topic.id}
-                          to="/topic/$slug"
-                          params={{ slug: topic.slug }}
-                          className="group flex flex-col justify-between rounded-[20px] border border-[#262626] bg-[#141414] p-5 transition-all duration-200 hover:border-[#383838] hover:bg-[#181818] hover:-translate-y-0.5 shadow-2xs"
-                        >
-                          <div className="space-y-2">
-                            <div className="flex items-center justify-between gap-2">
-                              <span className="flex size-7 items-center justify-center rounded-full bg-[#1c1c1c] border border-[#262626] font-mono text-xs font-bold text-[#999999] group-hover:text-white group-hover:border-[#0099ff]/50 transition-colors">
-                                {String(topic.number).padStart(2, "0")}
-                              </span>
-                              <div className="flex items-center gap-2">
-                                {topic.marks && (
-                                  <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#999999]">
-                                    {topic.marks} Marks
-                                  </span>
-                                )}
-                                {isStudied && (
-                                  <span className="inline-flex items-center gap-1 rounded-full bg-[#22c55e]/15 border border-[#22c55e]/30 px-2 py-0.5 font-sans text-[10px] font-bold text-[#22c55e]">
-                                    <CheckCircle2 className="size-3" /> Mastered
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-
-                            <h4 className="font-display text-base font-bold text-white group-hover:text-[#0099ff] transition-colors leading-snug">
-                              {topic.title}
-                            </h4>
-                            <p className="font-sans text-xs text-[#999999] line-clamp-2 leading-relaxed">
-                              {topic.summary}
-                            </p>
-                          </div>
-
-                          <div className="mt-4 pt-3 border-t border-[#1f1f1f] flex items-center justify-between text-xs">
-                            <span className="font-mono text-[11px] text-[#666666]">
-                              {topic.blocks.length} Sections
-                            </span>
-                            <span className="inline-flex items-center gap-1 font-sans font-bold text-[#0099ff] group-hover:translate-x-1 transition-transform">
-                              Read Note <ArrowRight className="size-3" />
-                            </span>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Model Exam Answers Section */}
-        <section className="space-y-6">
-          <div className="flex flex-col gap-1 border-b border-[#262626] pb-4 sm:flex-row sm:items-baseline sm:justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[#262626] pb-4">
             <div>
               <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-[-0.03em] text-white">
-                Paper {activeCourse.code} Model Exam Answers
+                Paper {activeCourse.code} · {activeCourse.title}
               </h2>
               <p className="mt-1 font-sans text-xs text-[#999999]">
-                {activeCourse.examQuestions.length} complete model university exam answers.
+                Structured syllabus modules, model exam answers, and comparative matrices.
               </p>
             </div>
-            <Link
-              to="/exam"
-              className="inline-flex items-center gap-1 text-xs font-bold text-[#0099ff] hover:underline"
-            >
-              <span>View Full Question Bank</span>
-              <ArrowRight className="size-3.5" />
-            </Link>
-          </div>
 
-          {/* Aesthetic 2-Column Model Exam Question Bento Cards */}
-          <div className="grid gap-4 sm:grid-cols-2">
-            {activeCourse.examQuestions.slice(0, 8).map((exam) => (
-              <Link
-                key={exam.id}
-                to="/exam/$qid"
-                params={{ qid: exam.id }}
-                className="group flex flex-col justify-between rounded-[22px] border border-[#262626] bg-[#141414] p-5 sm:p-6 transition-all duration-200 hover:border-[#383838] hover:bg-[#181818] hover:-translate-y-1 shadow-xs"
+            {/* Segmented Tab Controls */}
+            <div className="flex items-center gap-1.5 rounded-full bg-[#141414] p-1 border border-[#262626] text-xs">
+              <button
+                type="button"
+                onClick={() => setDashboardSection("syllabus")}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans font-bold transition-all",
+                  dashboardSection === "syllabus"
+                    ? "bg-white text-black shadow-xs"
+                    : "text-[#999999] hover:text-white",
+                )}
               >
-                <div className="space-y-2.5">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-3 py-0.5 font-mono text-xs font-bold text-[#0099ff]">
-                      Question {exam.number}
-                    </span>
-                    <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#999999]">
-                      {exam.marks ? `${exam.marks} Marks Answer` : "Model Solution"}
-                    </span>
-                  </div>
+                <BookOpen className="size-3.5" />
+                <span>Syllabus ({activeCourse.topics.length})</span>
+              </button>
 
-                  <h3 className="font-display text-base sm:text-lg font-bold text-white group-hover:text-[#0099ff] transition-colors leading-snug">
-                    {exam.title}
-                  </h3>
+              <button
+                type="button"
+                onClick={() => setDashboardSection("exams")}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans font-bold transition-all",
+                  dashboardSection === "exams"
+                    ? "bg-white text-black shadow-xs"
+                    : "text-[#999999] hover:text-white",
+                )}
+              >
+                <Scale className="size-3.5" />
+                <span>Model Answers ({activeCourse.examQuestions.length})</span>
+              </button>
 
-                  <div className="rounded-xl bg-[#090909]/60 p-3 border border-[#1f1f1f]">
-                    <p className="font-sans text-xs text-[#888888] leading-relaxed line-clamp-2">
-                      {exam.question}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-[#1f1f1f] flex items-center justify-between text-xs">
-                  <span className="font-mono text-[11px] text-[#666666]">
-                    {exam.blocks.length} Answer Sections
-                  </span>
-                  <span className="inline-flex items-center gap-1 font-sans font-bold text-[#0099ff] group-hover:translate-x-1 transition-transform">
-                    Study Solution <ArrowRight className="size-3" />
-                  </span>
-                </div>
-              </Link>
-            ))}
+              <button
+                type="button"
+                onClick={() => setDashboardSection("matrices")}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans font-bold transition-all",
+                  dashboardSection === "matrices"
+                    ? "bg-white text-black shadow-xs"
+                    : "text-[#999999] hover:text-white",
+                )}
+              >
+                <TableProperties className="size-3.5" />
+                <span className="hidden sm:inline">Comparison Matrices</span>
+                <span className="sm:hidden">Matrices</span>
+              </button>
+            </div>
           </div>
+
+          {/* 1. Syllabus View */}
+          {dashboardSection === "syllabus" && (
+            <div className="space-y-10">
+              {activeCourse.units.map((unit, idx) => {
+                const unitTopics = activeCourse.topics.filter((t) => t.unit === unit);
+                if (unitTopics.length === 0) return null;
+                const isMidSemUnit = unit === "Mid Sem Important";
+
+                return (
+                  <div
+                    key={unit}
+                    className={cn(
+                      "space-y-4",
+                      isMidSemUnit && "rounded-[24px] border border-[#262626] bg-[#141414] p-6 shadow-sm",
+                    )}
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div className="flex items-center gap-2.5">
+                        <span
+                          className={cn(
+                            "flex size-6 items-center justify-center rounded-full font-mono text-xs font-bold",
+                            isMidSemUnit
+                              ? "bg-white text-black"
+                              : "bg-[#1c1c1c] text-[#999999] border border-[#262626]",
+                          )}
+                        >
+                          {isMidSemUnit ? "★" : idx + 1}
+                        </span>
+                        <h3 className="font-display text-xl font-bold text-white tracking-[-0.02em]">
+                          {unit}
+                        </h3>
+                      </div>
+                      {isMidSemUnit && (
+                        <span className="rounded-full bg-[#0099ff]/15 text-[#0099ff] border border-[#0099ff]/30 px-3 py-0.5 text-xs font-bold">
+                          9 Master Examination Modules
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Aesthetic 2-Column Module Card Grid */}
+                    <div className="grid gap-3.5 sm:grid-cols-2">
+                      {unitTopics.map((topic) => {
+                        const isStudied = studied[topic.slug];
+                        return (
+                          <Link
+                            key={topic.id}
+                            to="/topic/$slug"
+                            params={{ slug: topic.slug }}
+                            className="group flex flex-col justify-between rounded-[20px] border border-[#262626] bg-[#141414] p-5 transition-all duration-200 hover:border-[#383838] hover:bg-[#181818] hover:-translate-y-0.5 shadow-2xs"
+                          >
+                            <div className="space-y-2">
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="flex size-7 items-center justify-center rounded-full bg-[#1c1c1c] border border-[#262626] font-mono text-xs font-bold text-[#999999] group-hover:text-white group-hover:border-[#0099ff]/50 transition-colors">
+                                  {String(topic.number).padStart(2, "0")}
+                                </span>
+                                <div className="flex items-center gap-2">
+                                  {topic.marks && (
+                                    <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#999999]">
+                                      {topic.marks} Marks
+                                    </span>
+                                  )}
+                                  {isStudied && (
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-[#22c55e]/15 border border-[#22c55e]/30 px-2 py-0.5 font-sans text-[10px] font-bold text-[#22c55e]">
+                                      <CheckCircle2 className="size-3" /> Mastered
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+
+                              <h4 className="font-display text-base font-bold text-white group-hover:text-[#0099ff] transition-colors leading-snug">
+                                {topic.title}
+                              </h4>
+                              <p className="font-sans text-xs text-[#999999] line-clamp-2 leading-relaxed">
+                                {topic.summary}
+                              </p>
+                            </div>
+
+                            <div className="mt-4 pt-3 border-t border-[#1f1f1f] flex items-center justify-between text-xs">
+                              <span className="font-mono text-[11px] text-[#666666]">
+                                {topic.blocks.length} Sections
+                              </span>
+                              <span className="inline-flex items-center gap-1 font-sans font-bold text-[#0099ff] group-hover:translate-x-1 transition-transform">
+                                Read Note <ArrowRight className="size-3" />
+                              </span>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* 2. Model Exam Answers View */}
+          {dashboardSection === "exams" && (
+            <div className="space-y-6">
+              <div className="grid gap-4 sm:grid-cols-2">
+                {activeCourse.examQuestions.map((exam) => (
+                  <Link
+                    key={exam.id}
+                    to="/exam/$qid"
+                    params={{ qid: exam.id }}
+                    className="group flex flex-col justify-between rounded-[22px] border border-[#262626] bg-[#141414] p-5 sm:p-6 transition-all duration-200 hover:border-[#383838] hover:bg-[#181818] hover:-translate-y-1 shadow-xs"
+                  >
+                    <div className="space-y-2.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-3 py-0.5 font-mono text-xs font-bold text-[#0099ff]">
+                          Question {exam.number}
+                        </span>
+                        <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#999999]">
+                          {exam.marks ? `${exam.marks} Marks Answer` : "Model Solution"}
+                        </span>
+                      </div>
+
+                      <h3 className="font-display text-base sm:text-lg font-bold text-white group-hover:text-[#0099ff] transition-colors leading-snug">
+                        {exam.title}
+                      </h3>
+
+                      <div className="rounded-xl bg-[#090909]/60 p-3 border border-[#1f1f1f]">
+                        <p className="font-sans text-xs text-[#888888] leading-relaxed line-clamp-2">
+                          {exam.question}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-[#1f1f1f] flex items-center justify-between text-xs">
+                      <span className="font-mono text-[11px] text-[#666666]">
+                        {exam.blocks.length} Answer Sections
+                      </span>
+                      <span className="inline-flex items-center gap-1 font-sans font-bold text-[#0099ff] group-hover:translate-x-1 transition-transform">
+                        Study Solution <ArrowRight className="size-3" />
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* 3. Comparison Matrices View */}
+          {dashboardSection === "matrices" && (
+            <div className="rounded-[24px] border border-[#262626] bg-[#141414] p-8 text-center space-y-4">
+              <TableProperties className="mx-auto size-10 text-[#0099ff]" />
+              <h3 className="font-display text-2xl font-bold text-white">
+                Paper {activeCourse.code} Comparison Matrices
+              </h3>
+              <p className="font-sans text-xs text-[#999999] max-w-md mx-auto leading-relaxed">
+                Explore side-by-side differentiation frameworks, statutory contrasts, and comparison matrices for {activeCourse.title}.
+              </p>
+              <div className="pt-2">
+                <Link
+                  to="/comparisons"
+                  className="inline-flex items-center gap-2 rounded-full bg-white text-black px-6 py-2.5 font-sans text-xs font-bold hover:bg-white/90 transition-all ios-press"
+                >
+                  <span>Open Comparison Matrix Studio</span>
+                  <ArrowRight className="size-3.5" />
+                </Link>
+              </div>
+            </div>
+          )}
         </section>
       </div>
     </main>

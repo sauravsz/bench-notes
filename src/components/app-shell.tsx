@@ -421,50 +421,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="ml-auto flex items-center gap-2 sm:gap-3">
-            {/* Quick Auto-Highlight Header Toggle Switch */}
-            <button
-              type="button"
-              onClick={handleHeaderToggleAuto}
-              className={cn(
-                "hidden sm:flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-all duration-200 ios-press",
-                autoHighlight
-                  ? "bg-[#0099ff]/15 text-[#0099ff] border border-[#0099ff]/40"
-                  : "bg-[#141414] text-[#999999] hover:text-white border border-[#262626]",
-              )}
-            >
-              {autoHighlight ? (
-                <Zap className="size-3 fill-[#0099ff] text-[#0099ff]" />
-              ) : (
-                <ZapOff className="size-3 text-[#999999]" />
-              )}
-              <span className="hidden md:inline">Auto-Highlight</span>
-              <span className="font-semibold">{autoHighlight ? "ON" : "OFF"}</span>
-            </button>
-
             {/* Omnisearch Trigger (Cmd+K) */}
             <button
               type="button"
               onClick={() => setCommandPaletteOpen(true)}
-              className="hidden sm:inline-flex items-center gap-2 rounded-full border border-[#262626] bg-[#141414] px-3.5 py-1.5 text-xs text-[#999999] hover:text-white hover:bg-[#1c1c1c] transition-all ios-press"
+              className="flex items-center gap-2 rounded-full border border-[#262626] bg-[#141414] px-3.5 py-1.5 text-xs text-[#999999] hover:text-white hover:bg-[#1c1c1c] transition-all ios-press"
               title="Global Omnisearch (Cmd+K)"
             >
               <Search className="size-3.5 text-[#0099ff]" />
-              <span className="hidden md:inline">Quick Jump...</span>
-              <kbd className="rounded bg-[#090909] border border-[#262626] px-1.5 py-0.2 font-mono text-[10px] text-[#666666]">
+              <span className="hidden sm:inline">Quick Jump...</span>
+              <kbd className="hidden sm:inline rounded bg-[#090909] border border-[#262626] px-1.5 py-0.2 font-mono text-[10px] text-[#666666]">
                 ⌘K
               </kbd>
             </button>
-
-            <button
-              type="button"
-              onClick={() => setCommandPaletteOpen(true)}
-              className="sm:hidden inline-flex size-9 items-center justify-center rounded-full border border-[#262626] bg-[#141414] text-[#999999] hover:text-white hover:bg-[#1c1c1c] transition-all ios-press"
-              aria-label="Search notes"
-              title="Search notes (Cmd+K)"
-            >
-              <Search className="size-4" strokeWidth={1.75} />
-            </button>
-
             {/* Quick Export PDF Link (Icon-only, Admin only) */}
             {isAdmin && (
               <Link
@@ -525,16 +494,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <span className="absolute right-1.5 top-1.5 size-2 rounded-full bg-[#0099ff] ring-2 ring-[#090909]" />
               )}
             </button>
-
-            {/* Search Link */}
-            <Link
-              to="/search"
-              className="inline-flex size-9 sm:size-10 items-center justify-center rounded-full border border-[#262626] bg-[#141414] text-[#999999] hover:text-white hover:bg-[#1c1c1c] transition-all ios-press"
-              aria-label="Search notes"
-              title="Search notes"
-            >
-              <Search className="size-4" strokeWidth={1.75} />
-            </Link>
 
             {/* User Profile / Admin Link / Sign In Button */}
             {currentUser ? (

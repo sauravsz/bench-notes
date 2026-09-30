@@ -175,29 +175,6 @@ export function ReaderControls({
 
       {/* Right Group: Reader Tool Buttons */}
       <div className="flex items-center gap-1.5">
-        {/* Table of Contents Button */}
-        {onToggleToc ? (
-          <button
-            type="button"
-            onClick={onToggleToc}
-            className="inline-flex size-8 items-center justify-center rounded-full border border-[#262626] bg-[#1c1c1c] text-[#999999] hover:bg-[#262626] hover:text-white transition-all ios-press"
-            title="Table of contents (T)"
-          >
-            <ListOrdered className="size-3.5" />
-          </button>
-        ) : null}
-
-        {/* Appearance Popover Trigger (Aa) */}
-        <button
-          type="button"
-          data-appearance-trigger
-          onClick={toggleAppearanceMenu}
-          className="inline-flex size-8 items-center justify-center rounded-full border border-[#262626] bg-[#1c1c1c] text-[#999999] hover:bg-[#262626] hover:text-white transition-all ios-press"
-          title="Reading appearance & width (Aa)"
-        >
-          <SlidersHorizontal className="size-3.5" />
-        </button>
-
         {/* Focus Timer / Stopwatch */}
         <button
           type="button"
@@ -208,21 +185,17 @@ export function ReaderControls({
           <Clock className="size-3.5" />
         </button>
 
-        {/* Notebook Highlights Button */}
-        <button
-          type="button"
-          onClick={() => setNotebookOpen(true)}
-          className="relative inline-flex size-8 items-center justify-center rounded-full border border-[#262626] bg-[#1c1c1c] text-[#999999] hover:bg-[#262626] hover:text-white transition-all ios-press"
-          title="Open highlights notebook (H)"
-        >
-          <Highlighter className="size-3.5" />
-          {docHighlightsCount > 0 && (
-            <span className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full bg-[#0099ff] text-[9px] font-bold text-white">
-              {docHighlightsCount}
-            </span>
-          )}
-        </button>
-
+        {/* Table of Contents Button on mobile */}
+        {onToggleToc ? (
+          <button
+            type="button"
+            onClick={onToggleToc}
+            className="xl:hidden inline-flex size-8 items-center justify-center rounded-full border border-[#262626] bg-[#1c1c1c] text-[#999999] hover:bg-[#262626] hover:text-white transition-all ios-press"
+            title="Table of contents (T)"
+          >
+            <ListOrdered className="size-3.5" />
+          </button>
+        ) : null}
         {/* Copy Clean Markdown */}
         {onCopyMarkdown ? (
           <button
