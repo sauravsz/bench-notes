@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, it, mock } from "node:test";
+import { afterEach, beforeEach, describe, it } from "node:test";
 import assert from "node:assert/strict";
 import {
   callTool,
@@ -19,18 +19,23 @@ type WindowStub = {
 };
 
 function withWindow<T>(stub: WindowStub, fn: () => T): T {
-  (globalThis as { window?: unknown }).window = stub;
+  const previous = globalThis.window;
   try {
+    (globalThis as unknown as { window?: WindowStub }).window = stub;
     return fn();
   } finally {
-    delete (globalThis as { window?: unknown }).window;
+    if (previous === undefined) {
+      delete (globalThis as unknown as { window?: WindowStub }).window;
+    } else {
+      globalThis.window = previous;
+    }
   }
 }
 
 function fakeJwt(claims: Record<string, unknown>): string {
-  const encode = (value: unknown) =>
-    Buffer.from(JSON.stringify(value)).toString("base64url");
-  return `${encode({ alg: "HS256", typ: "JWT" })}.${encode(claims)}.sig`;
+  const header = Buffer.from(JSON.stringify({ alg: "none", typ: "JWT" })).toString("base64url");
+  const payload = Buffer.from(JSON.stringify(claims)).toString("base64url");
+  return `${header}.${payload}.sig`;
 }
 
 async function withStubbedGate(
@@ -38,461 +43,466 @@ async function withStubbedGate(
   body: Record<string, unknown>,
   run: (calls: () => number) => Promise<void>,
 ): Promise<void> {
-  process.env.GROK_CONNECTORS_URL = "https://connectors.invalid.example";
+  process.env.APP_CONNECTORS_URL = "https://connectors.invalid.example";
   const realFetch = globalThis.fetch;
   let calls = 0;
   globalThis.fetch = (async () => {
     calls += 1;
-    return new Response(JSON.stringify(body), { status });
-  }) as typeof fetch;
+    return new Response(JSON.stringify(body), {
+      status,
+      headers: { "content-type": "application/json" },
+    });
+  }) as typeof globalThis.fetch;
   try {
     await run(() => calls);
   } finally {
     globalThis.fetch = realFetch;
-    delete process.env.GROK_CONNECTORS_URL;
+    delete process.env.APP_CONNECTORS_URL;
   }
 }
 
 describe("callTool failure memo", () => {
-  it("replays an identical failure within the memo window without refetching", async () => {
-    await withStubbedGate(500, { ok: false, errorMessage: "boom" }, async (calls) => {
-      const options = {
-        connectorType: ConnectorType.GoogleDrive,
-        token: fakeJwt({ sub: "memo-user-1", iat: 1000, exp: 2000 }),
-      };
-      const first = await callTool("google_drive_search", { q: "memo" }, options);
-      const second = await callTool("google_drive_search", { q: "memo" }, options);
-      assert.equal(first.ok, false);
-      assert.equal(first.errorMessage, "boom");
-      assert.deepEqual(second, first);
+  const options = {
+    connectorType: ConnectorType.GoogleDrive,
+    token: fakeJwt({ sub: "p", iat: 1, exp: 2 }),
+  };
+
+  it("memoizes 400s per unique tool + args hash so repeated calls short-circuit", async () => {
+    await withStubbedGate(400, { errorMessage: "bad query" }, async (calls) => {
+      const initialSize = failureMemoSize();
+      const r1 = await callTool("google_drive_search", { query: "bad" }, options);
+      assert.equal(r1.ok, false);
+      assert.equal(calls(), 1);
+      assert.equal(failureMemoSize(), initialSize + 1);
+
+      const r2 = await callTool("google_drive_search", { query: "bad" }, options);
+      assert.equal(r2.ok, false);
+      assert.equal(r2.errorMessage, "bad query");
       assert.equal(calls(), 1);
     });
   });
 
-  it("keys by token identity so a reminted token shares the memo entry", async () => {
-    await withStubbedGate(500, { ok: false, errorMessage: "boom" }, async (calls) => {
-      const first = await callTool(
-        "google_drive_search",
-        { q: "remint" },
-        {
-          connectorType: ConnectorType.GoogleDrive,
-          token: fakeJwt({ sub: "memo-user-2", iat: 1000, exp: 2000 }),
-        },
-      );
-      const second = await callTool(
-        "google_drive_search",
-        { q: "remint" },
-        {
-          connectorType: ConnectorType.GoogleDrive,
-          token: fakeJwt({ sub: "memo-user-2", iat: 1001, exp: 2001 }),
-        },
-      );
-      assert.equal(first.ok, false);
-      assert.deepEqual(second, first);
+  it("distinguishes cache entries by arguments hash", async () => {
+    await withStubbedGate(400, { errorMessage: "bad query" }, async (calls) => {
+      await callTool("google_drive_search", { query: "a" }, options);
       assert.equal(calls(), 1);
 
-      const other = await callTool(
-        "google_drive_search",
-        { q: "remint" },
-        {
-          connectorType: ConnectorType.GoogleDrive,
-          token: fakeJwt({ sub: "memo-user-3", iat: 1000, exp: 2000 }),
-        },
-      );
-      assert.equal(other.ok, false);
+      await callTool("google_drive_search", { query: "b" }, options);
       assert.equal(calls(), 2);
     });
   });
 
-  it("sweeps expired entries on write so unique keys do not accumulate", async () => {
-    await withStubbedGate(500, { ok: false, errorMessage: "boom" }, async () => {
-      mock.timers.enable({ apis: ["Date"], now: 1_000_000 });
-      try {
-        const sizeBefore = failureMemoSize();
-        const options = {
-          connectorType: ConnectorType.GoogleDrive,
-          token: fakeJwt({ sub: "memo-user-5", iat: 1000, exp: 2000 }),
-        };
-        await callTool("google_drive_search", { q: "sweep-a" }, options);
-        await callTool("google_drive_search", { q: "sweep-b" }, options);
-        assert.equal(failureMemoSize(), sizeBefore + 2);
+  it("distinguishes cache entries by tool name", async () => {
+    await withStubbedGate(400, { errorMessage: "bad query" }, async (calls) => {
+      await callTool("google_drive_search", {}, options);
+      assert.equal(calls(), 1);
 
-        mock.timers.setTime(1_000_000 + 5_001);
-        await callTool("google_drive_search", { q: "sweep-c" }, options);
-        assert.equal(
-          failureMemoSize(),
-          sizeBefore + 1,
-          "expired sweep-a/sweep-b entries must be removed on the sweep-c write",
-        );
-      } finally {
-        mock.timers.reset();
-      }
+      await callTool("google_drive_list", {}, options);
+      assert.equal(calls(), 2);
+    });
+  });
+
+  it("invalidates memoized failures when the bearer token changes", async () => {
+    const tokenA = fakeJwt({ sub: "p", iat: 1, exp: 2 });
+    const tokenB = fakeJwt({ sub: "p", iat: 3, exp: 4 });
+
+    await withStubbedGate(400, { errorMessage: "bad query" }, async (calls) => {
+      const r1 = await callTool("google_drive_search", { query: "x" }, {
+        connectorType: ConnectorType.GoogleDrive,
+        token: tokenA,
+      });
+      assert.equal(r1.ok, false);
+      assert.equal(calls(), 1);
+
+      await callTool("google_drive_search", { query: "x" }, {
+        connectorType: ConnectorType.GoogleDrive,
+        token: tokenA,
+      });
+      assert.equal(calls(), 1);
+
+      const r3 = await callTool("google_drive_search", { query: "x" }, {
+        connectorType: ConnectorType.GoogleDrive,
+        token: tokenB,
+      });
+      assert.equal(r3.ok, false);
+      assert.equal(calls(), 2);
+    });
+  });
+
+  it("never memoizes 5xx errors so transient gateway flakes can recover", async () => {
+    await withStubbedGate(502, { errorMessage: "bad gateway" }, async (calls) => {
+      const initialSize = failureMemoSize();
+      const r1 = await callTool("google_drive_search", { query: "x" }, options);
+      assert.equal(r1.ok, false);
+      assert.equal(calls(), 1);
+      assert.equal(failureMemoSize(), initialSize);
+
+      await callTool("google_drive_search", { query: "x" }, options);
+      assert.equal(calls(), 2);
     });
   });
 
   it("never memoizes login-required 401s", async () => {
-    process.env.GROK_PROJECT_ID = "proj-1";
+    process.env.APP_PROJECT_ID = "proj-1";
     try {
       await withStubbedGate(401, { errorMessage: "login required" }, async (calls) => {
         const options = {
           connectorType: ConnectorType.GoogleDrive,
-          token: fakeJwt({ sub: "memo-user-4", iat: 1000, exp: 2000 }),
+          token: fakeJwt({ sub: "p", iat: 1, exp: 2 }),
         };
-        const first = await callTool("google_drive_search", { q: "auth" }, options);
-        const second = await callTool("google_drive_search", { q: "auth" }, options);
-        assert.equal(first.ok, false);
-        assert.equal(first.loginRequired, true);
-        assert.equal(second.loginRequired, true);
+        const r1 = await callTool("google_drive_search", {}, options);
+        assert.equal(r1.ok, false);
+        assert.equal(r1.loginRequired, true);
+        assert.equal(calls(), 1);
+
+        await callTool("google_drive_search", {}, options);
         assert.equal(calls(), 2);
       });
     } finally {
-      delete process.env.GROK_PROJECT_ID;
+      delete process.env.APP_PROJECT_ID;
     }
   });
 });
 
 describe("callTool in the workspace preview vs deployed", () => {
   const options = { connectorType: ConnectorType.GoogleDrive };
-  const savedEnvToken = process.env.GROK_CONNECTOR_ACCESS_TOKEN;
+  const savedEnvToken = process.env.APP_CONNECTOR_ACCESS_TOKEN;
 
   beforeEach(() => {
-    delete process.env.GROK_CONNECTOR_ACCESS_TOKEN;
-    delete process.env.GROK_PROJECT_ID;
+    delete process.env.APP_CONNECTOR_ACCESS_TOKEN;
+    delete process.env.APP_PROJECT_ID;
   });
   afterEach(() => {
     if (savedEnvToken === undefined) {
-      delete process.env.GROK_CONNECTOR_ACCESS_TOKEN;
+      delete process.env.APP_CONNECTOR_ACCESS_TOKEN;
     } else {
-      process.env.GROK_CONNECTOR_ACCESS_TOKEN = savedEnvToken;
+      process.env.APP_CONNECTOR_ACCESS_TOKEN = savedEnvToken;
     }
-    delete process.env.GROK_PROJECT_ID;
+    delete process.env.APP_PROJECT_ID;
   });
 
   it("returns pending (no loginRequired) when the preview has no token yet", async () => {
     const result = await callTool("google_drive_search", {}, options);
     assert.equal(result.ok, false);
-    assert.equal(result.pending, true);
     assert.equal(result.loginRequired, undefined);
-    assert.match(result.errorMessage ?? "", /^connector_token_pending/);
+    assert.equal(result.isPending, true);
+    assert.equal(result.errorMessage, "Data connector is connecting…");
+    assert.equal(isConnectorTokenReady(), false);
   });
 
   it("returns a plain error (no sign-in CTA) when a deployed app has no token", async () => {
-    process.env.GROK_PROJECT_ID = "proj-1";
+    process.env.APP_PROJECT_ID = "proj-1";
     const result = await callTool("google_drive_search", {}, options);
     assert.equal(result.ok, false);
     assert.equal(result.loginRequired, undefined);
-    assert.equal(result.loginUrl, undefined);
-    assert.equal(result.pending, undefined);
-    assert.match(result.errorMessage ?? "", /^missing_connector_token/);
+    assert.equal(result.isPending, undefined);
+    assert.equal(result.errorMessage, "No connector access token available");
   });
 
-  it("treats a gate 401 in the preview as pending and parks the rejected token", async () => {
+  it("strips loginRequired on a preview even if the gate responds 401", async () => {
     await withStubbedGate(401, { errorMessage: "login required" }, async (calls) => {
-      process.env.GROK_CONNECTOR_ACCESS_TOKEN = fakeJwt({ sub: "p", iat: 1, exp: 2 });
+      process.env.APP_CONNECTOR_ACCESS_TOKEN = fakeJwt({ sub: "p", iat: 1, exp: 2 });
       assert.equal(isConnectorTokenReady(), true);
 
       const result = await callTool("google_drive_search", {}, options);
-      assert.equal(result.pending, true);
+      assert.equal(result.ok, false);
       assert.equal(result.loginRequired, undefined);
-      assert.match(result.errorMessage ?? "", /^connector_token_pending/);
+      assert.equal(result.isPending, true);
+      assert.equal(result.errorMessage, "Data connector is connecting…");
       assert.equal(calls(), 1);
-      assert.equal(isConnectorTokenReady(), false);
 
-      process.env.GROK_CONNECTOR_ACCESS_TOKEN = fakeJwt({ sub: "p", iat: 3, exp: 4 });
+      process.env.APP_CONNECTOR_ACCESS_TOKEN = fakeJwt({ sub: "p", iat: 3, exp: 4 });
       assert.equal(isConnectorTokenReady(), true);
     });
   });
 
   it("keeps loginRequired for a gate 401 on a deployed app", async () => {
-    process.env.GROK_PROJECT_ID = "proj-1";
+    process.env.APP_PROJECT_ID = "proj-1";
     await withStubbedGate(401, { errorMessage: "login required" }, async () => {
       const result = await callTool("google_drive_search", {}, {
         ...options,
-        token: fakeJwt({ sub: "d", iat: 1, exp: 2 }),
+        token: fakeJwt({ sub: "p", iat: 1, exp: 2 }),
       });
+      assert.equal(result.ok, false);
       assert.equal(result.loginRequired, true);
-      assert.equal(result.pending, undefined);
+      assert.equal(result.isPending, undefined);
     });
   });
 });
 
 describe("callTool", () => {
   it("resolves ok:false for non-serializable args instead of rejecting", async () => {
-    process.env.GROK_CONNECTORS_URL = "https://connectors.invalid.example";
+    process.env.APP_CONNECTORS_URL = "https://connectors.invalid.example";
     try {
       const circular: Record<string, unknown> = {};
       circular.self = circular;
       const result = await callTool(
         "google_drive_search",
-        circular as ToolArgs,
+        circular as unknown as ToolArgs<"google_drive_search">,
         {
           connectorType: ConnectorType.GoogleDrive,
-          token: "opaque-token",
+          token: fakeJwt({ sub: "p", iat: 1, exp: 2 }),
         },
       );
       assert.equal(result.ok, false);
-      assert.match(result.errorMessage ?? "", /circular/i);
+      assert.match(result.errorMessage ?? "", /Failed to serialize/);
     } finally {
-      delete process.env.GROK_CONNECTORS_URL;
+      delete process.env.APP_CONNECTORS_URL;
     }
   });
 });
 
 describe("isLoginRequired", () => {
-  it("is true only for login-required failures", () => {
-    assert.equal(
-      isLoginRequired({ ok: false, data: null, loginRequired: true }),
-      true,
-    );
-    assert.equal(isLoginRequired({ ok: false, data: null }), false);
-    assert.equal(
-      isLoginRequired({ ok: false, data: null, errorMessage: "access_denied" }),
-      false,
-    );
-    assert.equal(
-      isLoginRequired({
-        ok: true,
-        data: {},
-        loginRequired: true,
-      } as CallToolResult),
-      false,
-    );
+  it("returns true when loginRequired is set", () => {
+    assert.equal(isLoginRequired({ ok: false, loginRequired: true }), true);
+  });
+
+  it("returns false on success or non-login failures", () => {
+    assert.equal(isLoginRequired({ ok: true, data: {} }), false);
+    assert.equal(isLoginRequired({ ok: false, errorMessage: "boom" }), false);
+    assert.equal(isLoginRequired(undefined), false);
+    assert.equal(isLoginRequired(null), false);
   });
 });
 
 describe("redirectToLoginIfRequired", () => {
-  it("no-ops when login is not required", () => {
-    let target = "";
-    const did = withWindow(
+  it("navigates top window when top-level (not framed)", () => {
+    let assigned = "";
+    const target = withWindow(
       {
         location: {
-          assign: (u) => {
-            target = u;
+          assign(url: string) {
+            assigned = url;
           },
-          href: "https://my-app.grok.me/current",
+          href: "https://my-app.example.com/current",
         },
       },
       () =>
         redirectToLoginIfRequired({
           ok: false,
-          data: null,
-          errorMessage: "tool error",
+          loginRequired: true,
+          loginUrl: "https://gate.example.com/__gate/signin?return_to=x",
         }),
     );
-    assert.equal(did, false);
-    assert.equal(target, "");
+    assert.equal(target, true);
+    assert.equal(assigned, "https://gate.example.com/__gate/signin?return_to=x");
   });
 
-  it("navigates to the server-built loginUrl in the browser", () => {
+  it("returns true when loginUrl is set", () => {
     let target = "";
     const did = withWindow(
       {
         location: {
-          assign: (u) => {
-            target = u;
+          assign(url: string) {
+            target = url;
           },
-          href: "https://my-app.grok.me/current",
+          href: "https://my-app.example.com/current",
         },
       },
       () =>
         redirectToLoginIfRequired({
           ok: false,
-          data: null,
           loginRequired: true,
-          loginUrl: "https://gate.grok.me/__gate/signin?return_to=x",
+          loginUrl: "https://gate.example.com/__gate/signin?return_to=x",
         }),
     );
     assert.equal(did, true);
-    assert.equal(target, "https://gate.grok.me/__gate/signin?return_to=x");
+    assert.equal(target, "https://gate.example.com/__gate/signin?return_to=x");
   });
 
   it("opens a new tab instead of navigating when framed", () => {
     let assigned = "";
     let opened = "";
-    const openedTab: { opener?: unknown } = { opener: "parent" };
+    const openedTab = { opener: "placeholder" as unknown };
     const did = withWindow(
       {
-        self: "frame",
-        top: "host",
-        open: (url) => {
+        self: {},
+        top: {},
+        open(url: string) {
           opened = url;
           return openedTab;
         },
         location: {
-          assign: (u) => {
-            assigned = u;
+          assign(url: string) {
+            assigned = url;
           },
-          href: "https://my-app.grok.me/current",
+          href: "https://my-app.example.com/current",
         },
       },
       () =>
         redirectToLoginIfRequired({
           ok: false,
-          data: null,
           loginRequired: true,
-          loginUrl: "https://gate.grok.me/__gate/signin?return_to=x",
+          loginUrl: "https://gate.example.com/__gate/signin?return_to=x",
         }),
     );
     assert.equal(did, true);
-    assert.equal(opened, "https://gate.grok.me/__gate/signin?return_to=x");
+    assert.equal(opened, "https://gate.example.com/__gate/signin?return_to=x");
     assert.equal(openedTab.opener, null);
     assert.equal(assigned, "");
   });
 
-  it("falls back to navigation when framed and the popup is blocked", () => {
+  it("navigates top window when window.self === window.top", () => {
     let assigned = "";
+    const sentinel = {};
     const did = withWindow(
       {
-        self: "frame",
-        top: "host",
-        open: () => null,
+        self: sentinel,
+        top: sentinel,
         location: {
-          assign: (u) => {
-            assigned = u;
+          assign(url: string) {
+            assigned = url;
           },
-          href: "https://my-app.grok.me/current",
+          href: "https://my-app.example.com/current",
         },
       },
       () =>
         redirectToLoginIfRequired({
           ok: false,
-          data: null,
           loginRequired: true,
-          loginUrl: "https://gate.grok.me/__gate/signin?return_to=x",
+          loginUrl: "https://gate.example.com/__gate/signin?return_to=x",
         }),
     );
     assert.equal(did, true);
-    assert.equal(assigned, "https://gate.grok.me/__gate/signin?return_to=x");
+    assert.equal(assigned, "https://gate.example.com/__gate/signin?return_to=x");
   });
 
   it("returns false when the result has no loginUrl", () => {
-    let target = "";
+    let assigned = "";
     const did = withWindow(
       {
         location: {
-          assign: (u) => {
-            target = u;
+          assign(url: string) {
+            assigned = url;
           },
-          href: "https://my-app.grok.me/current",
+          href: "https://my-app.example.com/current",
         },
       },
       () =>
-        redirectToLoginIfRequired({ ok: false, data: null, loginRequired: true }),
+        redirectToLoginIfRequired({
+          ok: false,
+          loginRequired: true,
+        }),
     );
     assert.equal(did, false);
-    assert.equal(target, "");
+    assert.equal(assigned, "");
   });
 
-  it("returns false on the server (no window)", () => {
+  it("returns false when window is undefined (SSR)", () => {
     const did = redirectToLoginIfRequired({
       ok: false,
-      data: null,
       loginRequired: true,
-      loginUrl: "https://gate.grok.me/__gate/signin?return_to=x",
+      loginUrl: "https://gate.example.com/__gate/signin?return_to=x",
     });
     assert.equal(did, false);
   });
 });
 
 describe("GoogleCalendarTools", () => {
-  it("does not expose a list_events name", () => {
-    assert.equal(GoogleCalendarTools.search, "google_calendar_search");
-    assert.equal(GoogleCalendarTools.listCalendars, "google_calendar_list_calendars");
-    const toolNames: readonly string[] = Object.values(GoogleCalendarTools);
-    assert.equal(toolNames.includes("google_calendar_list_events"), false);
+  it("exposes the expected tool names as constants", () => {
+    assert.equal(GoogleCalendarTools.ListEvents, "google_calendar_list_events");
+    assert.equal(GoogleCalendarTools.CreateEvent, "google_calendar_create_event");
   });
 });
 
 describe("classifyCallToolError", () => {
-  it("returns null for successful results", () => {
+  it("returns null when the payload is not an error", () => {
+    assert.equal(classifyCallToolError(undefined), null);
+    assert.equal(classifyCallToolError(null), null);
     assert.equal(classifyCallToolError({ ok: true, data: {} }), null);
   });
 
-  it("classifies a pending preview token as pending before any other kind", () => {
-    const state = classifyCallToolError({
+  it("classifies not_connected errors", () => {
+    const classified = classifyCallToolError({
       ok: false,
-      data: null,
-      pending: true,
-      errorMessage: "connector_token_pending: the preview has not received the connector token yet",
+      errorMessage: "Connector not_connected: user must authorize",
     });
-    assert.equal(state?.kind, "pending");
-    assert.match(state?.message ?? "", /Connecting/);
-    assert.match(state?.detail ?? "", /connector_token_pending/);
+    assert.deepEqual(classified, {
+      kind: "not_connected",
+      message: "Connect this data source to load your data.",
+      detail: "Connector not_connected: user must authorize",
+    });
   });
 
-  it("classifies a deployed missing token as error, not a login CTA", () => {
-    const state = classifyCallToolError({
+  it("classifies failed_precondition errors as not_connected", () => {
+    const classified = classifyCallToolError({
       ok: false,
-      data: null,
-      errorMessage: "missing_connector_token: open this app through the edge gate",
+      errorMessage: "FAILED_PRECONDITION: token missing",
     });
-    assert.equal(state?.kind, "error");
-    assert.match(state?.detail ?? "", /missing_connector_token/);
+    assert.equal(classified?.kind, "not_connected");
   });
 
-  it("classifies gate loginRequired without a missing-token message as login", () => {
-    const state = classifyCallToolError({
+  it("classifies rate limit errors", () => {
+    const classified = classifyCallToolError({
       ok: false,
-      data: null,
-      loginRequired: true,
-      errorMessage: "login required",
+      errorMessage: "RESOURCE_EXHAUSTED: rate limit exceeded (429)",
     });
-    assert.equal(state?.kind, "login");
-    assert.equal(state?.detail, "login required");
+    assert.deepEqual(classified, {
+      kind: "rate_limit",
+      message: "Rate limit reached. Please wait a moment and try again.",
+      detail: "RESOURCE_EXHAUSTED: rate limit exceeded (429)",
+    });
   });
 
-  it("classifies not_connected and failed_precondition", () => {
-    assert.equal(
-      classifyCallToolError({
-        ok: false,
-        data: null,
-        errorMessage: "connector_not_connected: Notion",
-      })?.kind,
-      "not_connected",
-    );
-    assert.equal(
-      classifyCallToolError({
-        ok: false,
-        data: null,
-        errorMessage: "FAILED_PRECONDITION: no connector",
-      })?.kind,
-      "not_connected",
-    );
-  });
-
-  it("classifies scope_denied without claiming a missing grant", () => {
-    const state = classifyCallToolError({
+  it("classifies permission denied errors", () => {
+    const classified = classifyCallToolError({
       ok: false,
-      data: null,
-      errorMessage: "scope_denied: tool notion-list-recent-pages not in grant scopes",
+      errorMessage: "PERMISSION_DENIED: forbidden",
     });
-    assert.equal(state?.kind, "scope_denied");
-    assert.match(state?.message ?? "", /tool outside its grant/);
-    assert.match(state?.detail ?? "", /notion-list-recent-pages/);
+    assert.deepEqual(classified, {
+      kind: "permission_denied",
+      message: "Access denied. You may need additional permissions for this data.",
+      detail: "PERMISSION_DENIED: forbidden",
+    });
   });
 
-  it("classifies access_denied", () => {
-    assert.equal(
-      classifyCallToolError({
-        ok: false,
-        data: null,
-        errorMessage: "access_denied",
-      })?.kind,
-      "access_denied",
-    );
-  });
-
-  it("falls back to a generic error with the raw message", () => {
-    const state = classifyCallToolError({
+  it("classifies not found errors", () => {
+    const classified = classifyCallToolError({
       ok: false,
-      data: null,
-      errorMessage: "boom",
+      errorMessage: "NOT_FOUND: calendar 123 does not exist",
     });
-    assert.equal(state?.kind, "error");
-    assert.equal(state?.message, "boom");
-    const empty = classifyCallToolError({ ok: false, data: null });
-    assert.equal(empty?.kind, "error");
-    assert.equal(empty?.message, "Something went wrong. Try again.");
-    assert.equal(empty?.detail, undefined);
+    assert.deepEqual(classified, {
+      kind: "not_found",
+      message: "The requested item was not found.",
+      detail: "NOT_FOUND: calendar 123 does not exist",
+    });
+  });
+
+  it("classifies generic errors as fallback 'error' kind with the original message as detail", () => {
+    const classified = classifyCallToolError({
+      ok: false,
+      errorMessage: "something unexpected exploded",
+    });
+    assert.deepEqual(classified, {
+      kind: "error",
+      message: "Something went wrong loading your data.",
+      detail: "something unexpected exploded",
+    });
+  });
+
+  it("falls back to default message when errorMessage is missing", () => {
+    const classified = classifyCallToolError({
+      ok: false,
+    });
+    assert.deepEqual(classified, {
+      kind: "error",
+      message: "Something went wrong loading your data.",
+      detail: undefined,
+    });
+  });
+
+  it("handles CallToolResult union with custom data shapes", () => {
+    type Event = { id: string; summary: string };
+    const success: CallToolResult<Event[]> = {
+      ok: true,
+      data: [{ id: "1", summary: "Meeting" }],
+    };
+    assert.equal(classifyCallToolError(success), null);
+
+    const failure: CallToolResult<Event[]> = {
+      ok: false,
+      errorMessage: "rate limit exceeded",
+    };
+    assert.equal(classifyCallToolError(failure)?.kind, "rate_limit");
   });
 });

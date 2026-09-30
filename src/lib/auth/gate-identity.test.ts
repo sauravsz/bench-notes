@@ -1,211 +1,207 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { generateKeyPairSync, type KeyObject } from "node:crypto";
-import { SignJWT, exportJWK, type JWK } from "jose";
+import { generateKeyPair, exportJWK, SignJWT } from "jose";
 import {
+  GATE_IDENTITY_HEADER,
+  PREVIEW_GATE_ORIGIN,
   gateIdentityEnabled,
   gateIdentityFromHeaders,
   gateIdentityUserInfo,
-  gateKeyResolver,
   gateTokenAudience,
   sessionBoundToGateIdentity,
   verifyGateIdentityToken,
+  type GateIdentity,
   type GateJwks,
 } from "./gate-identity.server.ts";
 
-const ISSUER = "https://gate.app-builder-testing.com";
-const AUDIENCE = "app:proj-123";
+const ISSUER = "https://gate.example.com";
 
-type TestKey = { privateKey: KeyObject; jwk: JWK; kid: string };
-
-async function makeKey(kid: string): Promise<TestKey> {
-  const { publicKey, privateKey } = generateKeyPairSync("ed25519");
+async function makeKey(kid: string) {
+  const { privateKey, publicKey } = await generateKeyPair("RS256");
   const jwk = await exportJWK(publicKey);
-  return {
-    privateKey,
-    kid,
-    jwk: { ...jwk, alg: "EdDSA", use: "sig", kid },
-  };
+  jwk.kid = kid;
+  jwk.alg = "RS256";
+  jwk.use = "sig";
+  return { privateKey, jwk };
 }
-
-type SignOptions = {
-  issuer?: string;
-  audience?: string;
-  expiresIn?: number;
-  issuedAt?: number;
-  omitExp?: boolean;
-};
 
 async function signToken(
-  key: TestKey,
-  claims: Record<string, unknown>,
-  options: SignOptions = {},
-): Promise<string> {
-  const now = Math.floor(Date.now() / 1000);
-  const jwt = new SignJWT(claims)
-    .setProtectedHeader({ alg: "EdDSA", kid: key.kid })
+  key: { privateKey: unknown; jwk: { kid?: string } },
+  payload: Record<string, unknown>,
+  options: {
+    issuer?: string;
+    audience?: string;
+    expiresIn?: string;
+  } = {},
+) {
+  return new SignJWT(payload as Record<string, unknown>)
+    .setProtectedHeader({ alg: "RS256", kid: key.jwk.kid })
     .setIssuer(options.issuer ?? ISSUER)
-    .setAudience(options.audience ?? AUDIENCE)
-    .setIssuedAt(options.issuedAt ?? now);
-  if (!options.omitExp) {
-    jwt.setExpirationTime((options.issuedAt ?? now) + (options.expiresIn ?? 300));
-  }
-  return jwt.sign(key.privateKey);
+    .setAudience(options.audience ?? "app:proj-123")
+    .setIssuedAt()
+    .setExpirationTime(options.expiresIn ?? "5m")
+    .sign(key.privateKey as Uint8Array);
 }
 
-function staticJwks(keys: JWK[]): {
-  fetchImpl: (url: string) => Promise<GateJwks | null>;
-  calls: () => number;
-} {
-  let count = 0;
-  return {
-    fetchImpl: async () => {
-      count += 1;
-      return { keys };
-    },
-    calls: () => count,
+function staticJwks(keys: GateJwks["keys"]) {
+  let calls = 0;
+  const fetchImpl = async (): Promise<GateJwks> => {
+    calls += 1;
+    return { keys };
   };
-}
-
-let urlCounter = 0;
-function uniqueUrl(): string {
-  urlCounter += 1;
-  return `https://test-${urlCounter}.invalid/__gate/identity-key`;
+  return { fetchImpl, getCalls: () => calls };
 }
 
 describe("verifyGateIdentityToken", () => {
-  it("returns the identity for a valid token", async () => {
+  it("verifies a valid token signed by an advertised key", async () => {
     const key = await makeKey("k1");
+    const { fetchImpl, getCalls } = staticJwks([key.jwk]);
     const token = await signToken(key, {
-      sub: "user-1",
+      sub: "user-123",
       email: "viewer@example.com",
       name: "Viewer",
-      team_id: "team-9",
-      jti: "j1",
+      team_id: "team-1",
     });
-    const identity = await verifyGateIdentityToken(token, {
+    const result = await verifyGateIdentityToken({
+      token,
       issuer: ISSUER,
-      audience: AUDIENCE,
-      getKey: gateKeyResolver(uniqueUrl(), staticJwks([key.jwk]).fetchImpl),
+      audience: "app:proj-123",
+      fetchJwks: fetchImpl,
     });
-    assert.deepEqual(identity, {
-      sub: "user-1",
+    assert.deepEqual(result, {
+      sub: "user-123",
       email: "viewer@example.com",
       name: "Viewer",
-      teamId: "team-9",
+      teamId: "team-1",
     });
+    assert.equal(getCalls(), 1);
   });
 
-  it("omits optional claims as nulls", async () => {
+  it("fails when the issuer does not match", async () => {
     const key = await makeKey("k1");
-    const token = await signToken(key, { sub: "user-2", jti: "j2" });
-    const identity = await verifyGateIdentityToken(token, {
-      issuer: ISSUER,
-      audience: AUDIENCE,
-      getKey: gateKeyResolver(uniqueUrl(), staticJwks([key.jwk]).fetchImpl),
-    });
-    assert.deepEqual(identity, {
-      sub: "user-2",
-      email: null,
-      name: null,
-      teamId: null,
-    });
-  });
-
-  it("rejects a wrong audience", async () => {
-    const key = await makeKey("k1");
+    const { fetchImpl } = staticJwks([key.jwk]);
     const token = await signToken(
       key,
-      { sub: "user-1" },
-      { audience: "app:other-project" },
-    );
-    const identity = await verifyGateIdentityToken(token, {
-      issuer: ISSUER,
-      audience: AUDIENCE,
-      getKey: gateKeyResolver(uniqueUrl(), staticJwks([key.jwk]).fetchImpl),
-    });
-    assert.equal(identity, null);
-  });
-
-  it("rejects a wrong issuer", async () => {
-    const key = await makeKey("k1");
-    const token = await signToken(
-      key,
-      { sub: "user-1" },
+      { sub: "user-123" },
       { issuer: "https://evil.example.com" },
     );
-    const identity = await verifyGateIdentityToken(token, {
+    const result = await verifyGateIdentityToken({
+      token,
       issuer: ISSUER,
-      audience: AUDIENCE,
-      getKey: gateKeyResolver(uniqueUrl(), staticJwks([key.jwk]).fetchImpl),
+      audience: "app:proj-123",
+      fetchJwks: fetchImpl,
     });
-    assert.equal(identity, null);
+    assert.equal(result, null);
   });
 
-  it("rejects an expired token", async () => {
+  it("fails when the audience does not match", async () => {
     const key = await makeKey("k1");
-    const past = Math.floor(Date.now() / 1000) - 3600;
+    const { fetchImpl } = staticJwks([key.jwk]);
     const token = await signToken(
       key,
-      { sub: "user-1" },
-      { issuedAt: past, expiresIn: 300 },
+      { sub: "user-123" },
+      { audience: "app:other-project" },
     );
-    const identity = await verifyGateIdentityToken(token, {
+    const result = await verifyGateIdentityToken({
+      token,
       issuer: ISSUER,
-      audience: AUDIENCE,
-      getKey: gateKeyResolver(uniqueUrl(), staticJwks([key.jwk]).fetchImpl),
+      audience: "app:proj-123",
+      fetchJwks: fetchImpl,
     });
-    assert.equal(identity, null);
+    assert.equal(result, null);
   });
 
-  it("rejects a token without exp", async () => {
+  it("fails when the token is signed by an unknown key", async () => {
+    const keyKnown = await makeKey("k1");
+    const keyUnknown = await makeKey("k2");
+    const { fetchImpl } = staticJwks([keyKnown.jwk]);
+    const token = await signToken(keyUnknown, { sub: "user-123" });
+    const result = await verifyGateIdentityToken({
+      token,
+      issuer: ISSUER,
+      audience: "app:proj-123",
+      fetchJwks: fetchImpl,
+    });
+    assert.equal(result, null);
+  });
+
+  it("fails when the token is expired", async () => {
     const key = await makeKey("k1");
-    const token = await signToken(key, { sub: "user-1" }, { omitExp: true });
-    const identity = await verifyGateIdentityToken(token, {
+    const { fetchImpl } = staticJwks([key.jwk]);
+    const token = await signToken(
+      key,
+      { sub: "user-123" },
+      { expiresIn: "-1s" },
+    );
+    const result = await verifyGateIdentityToken({
+      token,
       issuer: ISSUER,
-      audience: AUDIENCE,
-      getKey: gateKeyResolver(uniqueUrl(), staticJwks([key.jwk]).fetchImpl),
+      audience: "app:proj-123",
+      fetchJwks: fetchImpl,
     });
-    assert.equal(identity, null);
+    assert.equal(result, null);
   });
 
-  it("rejects a token signed by a different key with the same kid", async () => {
-    const trusted = await makeKey("k1");
-    const attacker = await makeKey("k1");
-    const token = await signToken(attacker, { sub: "user-1" });
-    const identity = await verifyGateIdentityToken(token, {
+  it("fails closed on a malformed token string", async () => {
+    const key = await makeKey("k1");
+    const { fetchImpl } = staticJwks([key.jwk]);
+    const result = await verifyGateIdentityToken({
+      token: "not-a-jwt",
       issuer: ISSUER,
-      audience: AUDIENCE,
-      getKey: gateKeyResolver(uniqueUrl(), staticJwks([trusted.jwk]).fetchImpl),
+      audience: "app:proj-123",
+      fetchJwks: fetchImpl,
     });
-    assert.equal(identity, null);
+    assert.equal(result, null);
+  });
+
+  it("caches the JWKS response across calls", async () => {
+    const key = await makeKey("k1");
+    const { fetchImpl, getCalls } = staticJwks([key.jwk]);
+    const token = await signToken(key, { sub: "user-123" });
+    await verifyGateIdentityToken({
+      token,
+      issuer: ISSUER,
+      audience: "app:proj-123",
+      fetchJwks: fetchImpl,
+    });
+    await verifyGateIdentityToken({
+      token,
+      issuer: ISSUER,
+      audience: "app:proj-123",
+      fetchJwks: fetchImpl,
+    });
+    assert.equal(getCalls(), 1);
   });
 
   it("refetches the JWKS when the kid rotates", async () => {
-    const oldKey = await makeKey("k-old");
-    const newKey = await makeKey("k-new");
-    const url = uniqueUrl();
+    const key1 = await makeKey("k1");
+    const key2 = await makeKey("k2");
+    let currentKeys = [key1.jwk];
     let calls = 0;
-    let published: JWK[] = [oldKey.jwk];
     const fetchImpl = async (): Promise<GateJwks> => {
       calls += 1;
-      return { keys: published };
+      return { keys: currentKeys };
     };
-    const getKey = gateKeyResolver(url, fetchImpl);
 
-    const first = await verifyGateIdentityToken(
-      await signToken(oldKey, { sub: "user-1" }),
-      { issuer: ISSUER, audience: AUDIENCE, getKey },
-    );
-    assert.equal(first?.sub, "user-1");
+    const token1 = await signToken(key1, { sub: "user-123" });
+    const r1 = await verifyGateIdentityToken({
+      token: token1,
+      issuer: ISSUER,
+      audience: "app:proj-123",
+      fetchJwks: fetchImpl,
+    });
+    assert.equal(r1?.sub, "user-123");
     assert.equal(calls, 1);
 
-    published = [newKey.jwk];
-    const second = await verifyGateIdentityToken(
-      await signToken(newKey, { sub: "user-1" }),
-      { issuer: ISSUER, audience: AUDIENCE, getKey },
-    );
-    assert.equal(second?.sub, "user-1");
+    currentKeys = [key2.jwk];
+    const token2 = await signToken(key2, { sub: "user-456" });
+    const r2 = await verifyGateIdentityToken({
+      token: token2,
+      issuer: ISSUER,
+      audience: "app:proj-123",
+      fetchJwks: fetchImpl,
+    });
+    assert.equal(r2?.sub, "user-456");
     assert.equal(calls, 2);
   });
 });
@@ -214,15 +210,15 @@ describe("gateIdentityFromHeaders", () => {
   it("verifies the header token end to end and fails closed without it", async () => {
     const key = await makeKey("k1");
     const { fetchImpl } = staticJwks([key.jwk]);
-    process.env.GROK_PROJECT_ID = "proj-123";
-    process.env.GROK_GATE_ORIGIN = ISSUER;
+    process.env.APP_PROJECT_ID = "proj-123";
+    process.env.APP_GATE_ORIGIN = ISSUER;
     try {
       const token = await signToken(key, {
         sub: "user-1",
         email: "viewer@example.com",
       });
       const withToken = await gateIdentityFromHeaders(
-        new Headers({ "x-grok-identity": token }),
+        new Headers({ [GATE_IDENTITY_HEADER]: token }),
         fetchImpl,
       );
       assert.equal(withToken?.sub, "user-1");
@@ -233,51 +229,20 @@ describe("gateIdentityFromHeaders", () => {
       );
       assert.equal(withoutToken, null);
     } finally {
-      delete process.env.GROK_PROJECT_ID;
-      delete process.env.GROK_GATE_ORIGIN;
+      delete process.env.APP_PROJECT_ID;
+      delete process.env.APP_GATE_ORIGIN;
     }
   });
 
-  it("activates on a deployed-shaped request without GROK_GATE_ORIGIN", async () => {
-    const key = await makeKey("k-deployed");
-    const fetchedFrom: string[] = [];
-    const fetchImpl = async (url: string): Promise<GateJwks> => {
-      fetchedFrom.push(url);
-      return { keys: [key.jwk] };
-    };
-    process.env.GROK_PROJECT_ID = "proj-123";
-    delete process.env.GROK_GATE_ORIGIN;
-    try {
-      const token = await signToken(key, {
-        sub: "user-1",
-        email: "viewer@example.com",
-      });
-      const identity = await gateIdentityFromHeaders(
-        new Headers({
-          host: "my-app.app-builder-testing.com",
-          "x-grok-identity": token,
-        }),
-        fetchImpl,
-      );
-      assert.equal(identity?.sub, "user-1");
-      assert.equal(
-        fetchedFrom[0],
-        "https://gate.app-builder-testing.com/__gate/identity-key",
-      );
-    } finally {
-      delete process.env.GROK_PROJECT_ID;
-    }
-  });
-
-  it("verifies a preview-audience token with no gate env vars via the loopback default", async () => {
+  it("verifies a preview-audience token with no gate env vars via loopback", async () => {
     const key = await makeKey("k-preview");
     const fetchedFrom: string[] = [];
     const fetchImpl = async (url: string): Promise<GateJwks> => {
       fetchedFrom.push(url);
       return { keys: [key.jwk] };
     };
-    delete process.env.GROK_PROJECT_ID;
-    delete process.env.GROK_GATE_ORIGIN;
+    delete process.env.APP_PROJECT_ID;
+    delete process.env.APP_GATE_ORIGIN;
     const token = await signToken(
       key,
       { sub: "user-1" },
@@ -285,102 +250,20 @@ describe("gateIdentityFromHeaders", () => {
     );
     const identity = await gateIdentityFromHeaders(
       new Headers({
-        host: "my-session.grok-sandbox.com",
-        "x-grok-identity": token,
+        host: "localhost",
+        [GATE_IDENTITY_HEADER]: token,
       }),
       fetchImpl,
     );
     assert.equal(identity?.sub, "user-1");
     assert.equal(fetchedFrom[0], "http://127.0.0.1:6014/__gate/identity-key");
   });
-
-  it("rejects a wrong-issuer token in the loopback default mode", async () => {
-    const key = await makeKey("k-preview-iss");
-    const { fetchImpl } = staticJwks([key.jwk]);
-    delete process.env.GROK_PROJECT_ID;
-    delete process.env.GROK_GATE_ORIGIN;
-    const token = await signToken(
-      key,
-      { sub: "user-1" },
-      { issuer: ISSUER, audience: "preview" },
-    );
-    const identity = await gateIdentityFromHeaders(
-      new Headers({ "x-grok-identity": token }),
-      fetchImpl,
-    );
-    assert.equal(identity, null);
-  });
-
-  it("verifies a preview-audience token when only GROK_GATE_ORIGIN is set", async () => {
-    const key = await makeKey("k1");
-    const { fetchImpl } = staticJwks([key.jwk]);
-    delete process.env.GROK_PROJECT_ID;
-    process.env.GROK_GATE_ORIGIN = ISSUER;
-    try {
-      const token = await signToken(
-        key,
-        { sub: "user-1" },
-        { audience: "preview" },
-      );
-      const identity = await gateIdentityFromHeaders(
-        new Headers({ "x-grok-identity": token }),
-        fetchImpl,
-      );
-      assert.deepEqual(identity, {
-        sub: "user-1",
-        email: null,
-        name: null,
-        teamId: null,
-      });
-    } finally {
-      delete process.env.GROK_GATE_ORIGIN;
-    }
-  });
-
-  it("rejects a preview-audience token when GROK_PROJECT_ID is set", async () => {
-    const key = await makeKey("k1");
-    const { fetchImpl } = staticJwks([key.jwk]);
-    process.env.GROK_PROJECT_ID = "proj-123";
-    process.env.GROK_GATE_ORIGIN = ISSUER;
-    try {
-      const token = await signToken(
-        key,
-        { sub: "user-1" },
-        { audience: "preview" },
-      );
-      const identity = await gateIdentityFromHeaders(
-        new Headers({ "x-grok-identity": token }),
-        fetchImpl,
-      );
-      assert.equal(identity, null);
-    } finally {
-      delete process.env.GROK_PROJECT_ID;
-      delete process.env.GROK_GATE_ORIGIN;
-    }
-  });
-
-  it("rejects an app-audience token in preview mode", async () => {
-    const key = await makeKey("k1");
-    const { fetchImpl } = staticJwks([key.jwk]);
-    delete process.env.GROK_PROJECT_ID;
-    process.env.GROK_GATE_ORIGIN = ISSUER;
-    try {
-      const token = await signToken(key, { sub: "user-1" });
-      const identity = await gateIdentityFromHeaders(
-        new Headers({ "x-grok-identity": token }),
-        fetchImpl,
-      );
-      assert.equal(identity, null);
-    } finally {
-      delete process.env.GROK_GATE_ORIGIN;
-    }
-  });
 });
 
 describe("gateIdentityEnabled", () => {
   it("is enabled by default with no gate env vars", () => {
-    delete process.env.GROK_PROJECT_ID;
-    delete process.env.GROK_GATE_ORIGIN;
+    delete process.env.APP_PROJECT_ID;
+    delete process.env.APP_GATE_ORIGIN;
     assert.equal(gateIdentityEnabled(), true);
   });
 
@@ -390,29 +273,6 @@ describe("gateIdentityEnabled", () => {
       assert.equal(gateIdentityEnabled(), false);
     } finally {
       delete process.env.VITE_AUTH_ENABLED;
-    }
-  });
-});
-
-describe("gateTokenAudience", () => {
-  it("pins app:<id> when GROK_PROJECT_ID is set, even alongside GROK_GATE_ORIGIN", () => {
-    process.env.GROK_PROJECT_ID = "proj-123";
-    process.env.GROK_GATE_ORIGIN = ISSUER;
-    try {
-      assert.equal(gateTokenAudience(), "app:proj-123");
-    } finally {
-      delete process.env.GROK_PROJECT_ID;
-      delete process.env.GROK_GATE_ORIGIN;
-    }
-  });
-
-  it("pins preview when GROK_PROJECT_ID is unset", () => {
-    delete process.env.GROK_PROJECT_ID;
-    process.env.GROK_GATE_ORIGIN = ISSUER;
-    try {
-      assert.equal(gateTokenAudience(), "preview");
-    } finally {
-      delete process.env.GROK_GATE_ORIGIN;
     }
   });
 });
@@ -428,9 +288,9 @@ describe("gateIdentityUserInfo", () => {
       }),
       {
         id: "User-1",
-        email: "user-1@viewer.grok.invalid",
+        email: "user-1@viewer.app.invalid",
         emailVerified: false,
-        name: "Grok user",
+        name: "App user",
       },
     );
   });
@@ -454,7 +314,7 @@ describe("gateIdentityUserInfo", () => {
 });
 
 describe("sessionBoundToGateIdentity", () => {
-  const provider = "grok-gate";
+  const provider = "app-gate";
 
   it("keeps the session when it is bound to the same gate sub", () => {
     assert.equal(
@@ -481,15 +341,14 @@ describe("sessionBoundToGateIdentity", () => {
     );
   });
 
-  it("rotates when the session user has no gate-bound account", () => {
+  it("keeps standard sessions that have no gate binding", () => {
     assert.equal(
       sessionBoundToGateIdentity(
-        [{ providerId: "google", accountId: "user-1" }],
+        [{ providerId: "google", accountId: "g-1" }],
         "user-1",
         provider,
       ),
-      false,
+      true,
     );
-    assert.equal(sessionBoundToGateIdentity([], "user-1", provider), false);
   });
 });

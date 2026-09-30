@@ -7,13 +7,13 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#090909" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="{{APP_NAME}}" />
     <title>Add {{APP_NAME}} to your Home Screen</title>
-    <link rel="manifest" href="/__grok/manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="/__grok/icon-180.png" />
-    <link rel="stylesheet" href="/__grok/install/styles.css" />
+    <link rel="manifest" href="/app-pwa/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/app-pwa/icon-180.png" />
+    <link rel="stylesheet" href="/app-pwa/install/styles.css" />
     <script>
       (function () {
         var ua = navigator.userAgent || "";
@@ -59,58 +59,61 @@
   </head>
   <body>
     <div class="page">
-      <header class="powered" aria-label="Powered by Grok">
-        <span class="powered-by">Powered by</span>
-        <span class="powered-brand">
-          <img
-            class="grok-logo"
-            src="/__grok/install/assets/homescreen/logo-grok.svg"
-            width="14"
-            height="14"
-            alt=""
-          />
-          <span class="powered-grok">Grok</span>
-        </span>
+      <header class="topbar">
+        <a class="cancel" href="{{APP_URL}}">Done</a>
       </header>
 
-      <main class="content">
-        <div class="ob" aria-hidden="true">
-          <img
-            class="ob-img ob-phone"
-            src="/__grok/install/assets/homescreen/ob-phone.png"
-            width="338"
-            height="294"
-            alt=""
-          />
-          <img
-            class="ob-img ob-ipad"
-            src="/__grok/install/assets/homescreen/ob-ipad.png"
-            width="634"
-            height="294"
-            alt=""
-          />
+      <div class="device-art" aria-hidden="true">
+        <div class="device-sheet">
+          <div class="ob-stage">
+            <img
+              class="ob-screen ob-screen-phone"
+              src="/app-pwa/install/assets/homescreen/ob-phone.png"
+              width="402"
+              height="874"
+              alt=""
+            />
+            <img
+              class="ob-screen ob-screen-ipad"
+              src="/app-pwa/install/assets/homescreen/ob-ipad.png"
+              width="820"
+              height="1180"
+              alt=""
+            />
+          </div>
         </div>
+      </div>
 
+      <main class="content">
         <section class="copy">
-          <h1>Add {{APP_NAME}} to your&nbsp;Home&nbsp;Screen</h1>
+          <div class="icon-wrap">
+            <img
+              class="app-icon"
+              src="/app-pwa/icon-180.png"
+              width="60"
+              height="60"
+              alt=""
+            />
+          </div>
+          <h1>Add {{APP_NAME}} to your Home&nbsp;Screen</h1>
+          <p class="subtitle">
+            Install this app on your device for fast, full-screen offline access.
+          </p>
 
           <div class="steps">
-            <p class="step step-tap step-ios27">
+            <p class="step step-tap step-ios-27">
               <span class="muted">Tap</span>
               <span class="glass glass--icon" aria-hidden="true">
-                <img src="/__grok/install/assets/homescreen/glass-puzzle.svg" width="24" height="24" alt="" />
+                <img src="/app-pwa/install/assets/homescreen/glass-share.svg" width="24" height="24" alt="" />
               </span>
-              <span class="muted loc loc-phone">in the bottom bar, then</span>
-              <span class="muted loc loc-ipad">in the tool bar, then</span>
-              <span class="glass glass--icon" aria-hidden="true">
-                <img src="/__grok/install/assets/homescreen/glass-share.svg" width="24" height="24" alt="" />
-              </span>
+              <span class="muted loc loc-phone">in the menu bar</span>
+              <span class="muted loc loc-ipad">in the tool bar</span>
             </p>
 
             <p class="step step-tap step-ios-legacy">
               <span class="muted">Tap</span>
               <span class="glass glass--icon" aria-hidden="true">
-                <img src="/__grok/install/assets/homescreen/glass-share.svg" width="24" height="24" alt="" />
+                <img src="/app-pwa/install/assets/homescreen/glass-share.svg" width="24" height="24" alt="" />
               </span>
               <span class="muted loc loc-phone">in the bottom bar</span>
               <span class="muted loc loc-ipad">in the tool bar</span>
@@ -121,7 +124,7 @@
               <span class="add-label">
                 <img
                   class="plus-icon"
-                  src="/__grok/install/assets/homescreen/plus.svg"
+                  src="/app-pwa/install/assets/homescreen/plus.svg"
                   width="16"
                   height="16"
                   alt=""
