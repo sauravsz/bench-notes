@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ComparisonsRouteImport } from './routes/comparisons'
 import { Route as GlossaryRouteImport } from './routes/glossary'
 import { Route as MaximsRouteImport } from './routes/maxims'
 import { Route as SearchRouteImport } from './routes/search'
@@ -28,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComparisonsRoute = ComparisonsRouteImport.update({
+  id: '/comparisons',
+  path: '/comparisons',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GlossaryRoute = GlossaryRouteImport.update({
@@ -74,6 +80,7 @@ const TopicSlugRoute = TopicSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/comparisons': typeof ComparisonsRoute
   '/glossary': typeof GlossaryRoute
   '/maxims': typeof MaximsRoute
   '/search': typeof SearchRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/comparisons': typeof ComparisonsRoute
   '/glossary': typeof GlossaryRoute
   '/maxims': typeof MaximsRoute
   '/search': typeof SearchRoute
@@ -99,6 +107,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/comparisons': typeof ComparisonsRoute
   '/glossary': typeof GlossaryRoute
   '/maxims': typeof MaximsRoute
   '/search': typeof SearchRoute
@@ -113,6 +122,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/comparisons'
     | '/glossary'
     | '/maxims'
     | '/search'
@@ -125,6 +135,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/admin'
+    | '/comparisons'
     | '/glossary'
     | '/maxims'
     | '/search'
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/comparisons'
     | '/glossary'
     | '/maxims'
     | '/search'
@@ -150,6 +162,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
+  ComparisonsRoute: typeof ComparisonsRoute
   GlossaryRoute: typeof GlossaryRoute
   MaximsRoute: typeof MaximsRoute
   SearchRoute: typeof SearchRoute
@@ -174,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comparisons': {
+      id: '/comparisons'
+      path: '/comparisons'
+      fullPath: '/comparisons'
+      preLoaderRoute: typeof ComparisonsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/glossary': {
@@ -238,6 +258,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
+  ComparisonsRoute: ComparisonsRoute,
   GlossaryRoute: GlossaryRoute,
   MaximsRoute: MaximsRoute,
   SearchRoute: SearchRoute,

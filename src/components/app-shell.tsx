@@ -18,15 +18,17 @@ import {
   Menu,
   PanelLeft,
   PanelLeftClose,
-  PanelRight,
-  PanelRightClose,
-  Plus,
+  Printer,
   Scale,
   Search,
   Share2,
   ShieldCheck,
   SlidersHorizontal,
   Sparkles,
+  TableProperties,
+  PanelRight,
+  PanelRightClose,
+  Plus,
   Trash2,
   Unlock,
   User,
@@ -167,6 +169,25 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
             {activeCourse.examQuestions.length} Qs
           </span>
         </Link>
+        <Link
+          to="/comparisons"
+          onClick={onNavigate}
+          className={cn(
+            "flex min-h-10 items-center justify-between rounded-full px-3.5 text-sm font-medium transition-all duration-200 ios-press-subtle",
+            pathname === "/comparisons"
+              ? "bg-[#1c1c1c] font-semibold text-white border border-[#262626]"
+              : "text-[#999999] hover:bg-[#141414] hover:text-white",
+          )}
+        >
+          <span className="flex items-center gap-2.5">
+            <TableProperties className="size-4 shrink-0 text-[#0099ff]" strokeWidth={1.75} />
+            <span>Comparison Studio</span>
+          </span>
+          <span className="rounded-full bg-[#1c1c1c] border border-[#262626] px-2 py-0.5 font-sans text-[10px] font-bold text-[#0099ff]">
+            Matrix
+          </span>
+        </Link>
+
 
         {activeCourse.glossary && activeCourse.glossary.length > 0 ? (
           <Link

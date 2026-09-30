@@ -221,5 +221,53 @@ function extractBlockText(block: NoteBlock): string {
       return "";
   }
 }
+export type ComparisonTableItem = {
+  id: string;
+  courseCode: string;
+  courseTitle: string;
+  courseSlug: string;
+  topicTitle: string;
+  topicSlug: string;
+  unit: string;
+  caption: string;
+  headers: string[];
+  rows: string[][];
+};
+
+export function getAllComparisonTables(courseSlugFilter?: string): ComparisonTableItem[] {
+  const targetCourses = courseSlugFilter && courseSlugFilter !== "all"
+    ? allCourses.filter((c) => c.slug === courseSlugFilter)
+    : allCourses;
+
+  const results: ComparisonTableItem[] = [];
+
+  for (const course of targetCourses) {
+    for (const topic of course.topics) {
+      topic.blocks.forEach((block, idx) => {
+        if (block.type === "table" && block.headers && block.rows) {
+          const caption =
+            block.caption ||
+            block.headers.join(" vs ") ||
+            `${topic.title} Matrix`;
+
+          results.push({
+            id: `tbl_${course.slug}_${topic.slug}_${idx}`,
+            courseCode: course.code,
+            courseTitle: course.title,
+            courseSlug: course.slug,
+            topicTitle: topic.title,
+            topicSlug: topic.slug,
+            unit: topic.unit,
+            caption,
+            headers: block.headers,
+            rows: block.rows,
+          });
+        }
+      });
+    }
+  }
+
+  return results;
+}
 
 export * from "./types";

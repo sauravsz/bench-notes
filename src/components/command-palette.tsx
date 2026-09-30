@@ -15,6 +15,7 @@ import {
   Scale,
   Search,
   Sparkles,
+  TableProperties,
   X,
   Zap,
 } from "lucide-react";
@@ -126,6 +127,14 @@ export function CommandPalette({
         subtitle: "Jurisprudential maxims, meanings, and leading case laws",
         icon: Languages,
         action: () => router.navigate({ to: "/maxims" }),
+      },
+      {
+        id: "nav-comparisons",
+        category: "Navigation",
+        title: "Comparison Matrix Studio",
+        subtitle: "Side-by-side comparative matrices and distinction frameworks across all 8 papers",
+        icon: TableProperties,
+        action: () => router.navigate({ to: "/comparisons" }),
       },
       {
         id: "action-notebook",
