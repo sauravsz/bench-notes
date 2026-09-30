@@ -3,8 +3,8 @@ import { Check, Clock, ListOrdered, PanelRight, PanelRightClose, Sparkles } from
 import type { NoteBlock } from "@/data/types";
 import { extractHeadings, type HeadingItem } from "./table-of-contents";
 import { useAppearance } from "@/lib/appearance";
+import { useProgress } from "@/lib/progress";
 import { cn } from "@/lib/utils";
-
 export function RightRailToc({
   blocks,
   progress,
@@ -22,6 +22,33 @@ export function RightRailToc({
   const headings = extractHeadings(blocks);
   const rightSidebarCollapsed = useAppearance((s) => s.rightSidebarCollapsed);
   const toggleRightSidebar = useAppearance((s) => s.toggleRightSidebar);
+  const toggleStudiedStore = useProgress((s) => s.toggleStudied);
+  const studiedStore = useProgress((s) => s.studied);
+
+  let routeSlug = "";
+  if (typeof window !== "undefined") {
+    const p = window.location.pathname;
+    if (p.includes("/topic/")) {
+      routeSlug = p.split("/topic/")[1]?.split("?")[0]?.split("#")[0] || "";
+    } else if (p.includes("/exam/")) {
+      routeSlug = p.split("/exam/")[1]?.split("?")[0]?.split("#")[0] || "";
+    }
+  }
+
+  const isStudiedEffective =
+    studied !== undefined
+      ? studied
+      : routeSlug
+        ? !!studiedStore[routeSlug]
+        : false;
+
+  const handleToggleStudied = () => {
+    if (onToggleStudied) {
+      onToggleStudied();
+    } else if (routeSlug) {
+      toggleStudiedStore(routeSlug);
+    }
+  };
   useEffect(() => {
     if (headings.length === 0) return;
 
@@ -105,21 +132,21 @@ export function RightRailToc({
             />
           </div>
 
-          {onToggleStudied && (
-            <button
-              type="button"
-              onClick={onToggleStudied}
-              className={cn(
-                "w-full flex items-center justify-center gap-1.5 rounded-full py-1.5 font-sans text-xs font-bold transition-all ios-press mt-2",
-                studied
-                  ? "bg-[#22c55e]/20 text-[#22c55e] border border-[#22c55e]/40"
-                  : "bg-[#1c1c1c] text-white hover:bg-[#262626] border border-[#262626]",
-              )}
-            >
-              <Check className="size-3.5" />
-              <span>{studied ? "Studied ✓" : "Mark as Studied (M)"}</span>
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={handleToggleStudied}
+            className={cn(
+              "w-full flex items-center justify-center gap-1.5 rounded-full py-1.5 font-sans text-xs font-bold transition-all ios-press mt-2",
+              isStudiedEffective
+                ? "bg-[#22c55e]/20 text-[#22c55e] border border-[#22c55e]/40 hover:bg-[#22c55e]/30"
+                : "bg-[#1c1c1c] text-white hover:bg-[#262626] border border-[#262626]",
+            )}
+            title="Mark as Studied (M)"
+            aria-label="Toggle Studied Status"
+          >
+            <Check className="size-3.5" />
+            <span>{isStudiedEffective ? "Studied ✓" : "Mark as Studied (M)"}</span>
+          </button>
         </div>
 
         {/* Outline List */}

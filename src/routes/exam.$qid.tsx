@@ -5,6 +5,7 @@ import { adjacentExams, getExam, getTopic } from "@/data";
 import { getExamById } from "@/data/courses";
 import { useCurrentCourse } from "@/lib/current-course";
 import { useAppearance, TEXT_WIDTH_CLASSES } from "@/lib/appearance";
+import { useProgress } from "@/lib/progress";
 import { ReaderView } from "@/components/reader-view";
 import { RightRailToc } from "@/components/right-rail-toc";
 import { cn } from "@/lib/utils";
@@ -26,7 +27,9 @@ function ExamAnswer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const textWidth = useAppearance((s) => s.textWidth);
   const setActiveCourseSlug = useCurrentCourse((s) => s.setActiveCourseSlug);
-
+  const studied = useProgress((s) => s.studied[qid]);
+  const toggleStudied = useProgress((s) => s.toggleStudied);
+  const setLastSlug = useProgress((s) => s.setLastSlug);
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -45,8 +48,9 @@ function ExamAnswer() {
     if (course) {
       setActiveCourseSlug(course.slug);
     }
+    setLastSlug(qid);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [qid, course, setActiveCourseSlug]);
+  }, [qid, course, setActiveCourseSlug, setLastSlug]);
 
   const related = exam.relatedSlugs
     .map((slug) => getTopic(slug))
@@ -143,6 +147,8 @@ function ExamAnswer() {
               docId={`exam:${exam.id}`}
               docTitle={exam.title}
               blocks={exam.blocks}
+              studied={studied}
+              onToggleStudied={() => toggleStudied(qid)}
             />
           </div>
 
@@ -196,6 +202,8 @@ function ExamAnswer() {
         <RightRailToc
           blocks={exam.blocks}
           progress={progress}
+          studied={studied}
+          onToggleStudied={() => toggleStudied(qid)}
         />
       </div>
 

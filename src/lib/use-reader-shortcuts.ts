@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useAppearance } from "./appearance";
 import { useHighlights } from "./highlights";
+import { useProgress } from "./progress";
 import { toast } from "sonner";
-
 export function useReaderShortcuts() {
   const toggleSidebar = useAppearance((s) => s.toggleSidebar);
   const toggleRightSidebar = useAppearance((s) => s.toggleRightSidebar);
@@ -12,6 +12,7 @@ export function useReaderShortcuts() {
   const decreaseFontSize = useAppearance((s) => s.decreaseFontSize);
   const cycleLineSpacing = useAppearance((s) => s.cycleLineSpacing);
   const toggleAutoHighlight = useHighlights((s) => s.toggleAutoHighlight);
+  const toggleStudied = useProgress((s) => s.toggleStudied);
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       // Ignore if user is currently typing in an input, textarea, or contentEditable
@@ -54,6 +55,39 @@ export function useReaderShortcuts() {
           toast.info("Right sidebar expanded", { duration: 1000 });
         }
         return;
+      }
+
+      // 4. M -> Toggle Mark as Studied
+      if (
+        (e.key.toLowerCase() === "m" || e.code === "KeyM") &&
+        !e.metaKey &&
+        !e.ctrlKey &&
+        !e.altKey &&
+        !e.shiftKey
+      ) {
+        let slug = "";
+        if (typeof window !== "undefined") {
+          const pathname = window.location.pathname;
+          if (pathname.includes("/topic/")) {
+            slug = pathname.split("/topic/")[1]?.split("?")[0]?.split("#")[0] || "";
+          } else if (pathname.includes("/exam/")) {
+            slug = pathname.split("/exam/")[1]?.split("?")[0]?.split("#")[0] || "";
+          } else {
+            slug = useProgress.getState().lastSlug || "";
+          }
+        }
+
+        if (slug) {
+          e.preventDefault();
+          const isCurrentlyStudied = !!useProgress.getState().studied[slug];
+          toggleStudied(slug);
+          if (!isCurrentlyStudied) {
+            toast.success("Marked as Studied ✓", { duration: 1500 });
+          } else {
+            toast.info("Unmarked from Studied", { duration: 1500 });
+          }
+          return;
+        }
       }
 
       // 3. Shift + H -> Toggle Auto-Highlighting
@@ -117,8 +151,6 @@ export function useReaderShortcuts() {
       }
     }
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [
     toggleSidebar,
     toggleRightSidebar,
@@ -128,5 +160,6 @@ export function useReaderShortcuts() {
     decreaseFontSize,
     cycleLineSpacing,
     toggleAutoHighlight,
+    toggleStudied,
   ]);
 }

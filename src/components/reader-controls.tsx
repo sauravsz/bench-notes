@@ -19,6 +19,7 @@ import {
   type HighlightColor,
 } from "@/lib/highlights";
 import { useAppearance } from "@/lib/appearance";
+import { useProgress } from "@/lib/progress";
 import { Switch } from "./ui/switch";
 import { Button } from "./ui/button";
 import { StudyTimer } from "./study-timer";
@@ -41,15 +42,31 @@ export function ReaderControls({
   onToggleToc?: () => void;
   onCopyMarkdown?: () => void;
 }) {
-  const [timerOpen, setTimerOpen] = useState(false);
-  const [shortcutsOpen, setShortcutsOpen] = useState(false);
-  const highlights = useHighlights((s) => s.highlights);
   const autoHighlight = useHighlights((s) => s.autoHighlight);
   const toggleAutoHighlight = useHighlights((s) => s.toggleAutoHighlight);
-  const currentColor = useHighlights((s) => s.currentColor);
-  const setCurrentColor = useHighlights((s) => s.setCurrentColor);
-  const setNotebookOpen = useHighlights((s) => s.setNotebookOpen);
+  const activeColor = useHighlights((s) => s.activeColor);
+  const setActiveColor = useHighlights((s) => s.setActiveColor);
   const toggleAppearanceMenu = useAppearance((s) => s.toggleAppearanceMenu);
+  const toggleStudiedStore = useProgress((s) => s.toggleStudied);
+  const studiedStore = useProgress((s) => s.studied);
+
+  const fallbackSlug = docId.startsWith("exam:") ? docId.replace("exam:", "") : docId;
+  const isStudiedEffective =
+    studied !== undefined
+      ? studied
+      : fallbackSlug
+        ? !!studiedStore[fallbackSlug]
+        : false;
+
+  const handleToggle = () => {
+    if (onToggleStudied) {
+      onToggleStudied();
+    } else if (fallbackSlug) {
+      toggleStudiedStore(fallbackSlug);
+    }
+  };
+
+  const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const docHighlightsCount = Object.values(highlights).filter(
     (h) => h.docId === docId,
   ).length;
@@ -96,22 +113,20 @@ export function ReaderControls({
     <div className="no-print my-4 flex flex-wrap items-center justify-between gap-3 rounded-[20px] border border-[#262626] bg-[#141414] p-3 shadow-xs">
       {/* Left Group: Studied Check & Auto-Highlight Toggle */}
       <div className="flex flex-wrap items-center gap-2">
-        {onToggleStudied ? (
-          <button
-            type="button"
-            onClick={onToggleStudied}
-            className={cn(
-              "inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-xs font-bold transition-all duration-200 ios-press",
-              studied
-                ? "bg-[#22c55e]/20 text-[#22c55e] border border-[#22c55e]/40 shadow-xs"
-                : "bg-[#1c1c1c] text-[#999999] hover:text-white border border-[#262626]",
-            )}
-            title="Mark note as studied / unstudied (M)"
-          >
-            <Check className={cn("size-3.5", studied ? "stroke-[2.5]" : "")} />
-            <span>{studied ? "Studied ✓" : "Mark Studied"}</span>
-          </button>
-        ) : null}
+        <button
+          type="button"
+          onClick={handleToggle}
+          className={cn(
+            "inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-xs font-bold transition-all duration-200 ios-press",
+            isStudiedEffective
+              ? "bg-[#22c55e]/20 text-[#22c55e] border border-[#22c55e]/40 shadow-xs"
+              : "bg-[#1c1c1c] text-[#999999] hover:text-white border border-[#262626]",
+          )}
+          title="Mark note as studied / unstudied (M)"
+        >
+          <Check className={cn("size-3.5", isStudiedEffective ? "stroke-[2.5]" : "")} />
+          <span>{isStudiedEffective ? "Studied ✓" : "Mark as Studied (M)"}</span>
+        </button>
 
         {/* Auto-Highlight Switch Pill */}
         <div className="flex items-center gap-2 rounded-full border border-[#262626] bg-[#1c1c1c] px-3 py-1 text-xs">
