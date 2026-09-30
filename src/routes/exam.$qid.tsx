@@ -51,6 +51,24 @@ function ExamAnswer() {
     setLastSlug(qid);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [qid, course, setActiveCourseSlug, setLastSlug]);
+  useEffect(() => {
+    const savedY = sessionStorage.getItem(`scroll_pos_exam_${qid}`);
+    if (savedY) {
+      const y = parseInt(savedY, 10);
+      if (!isNaN(y) && y > 0) {
+        setTimeout(() => window.scrollTo({ top: y, behavior: "instant" }), 60);
+      }
+    }
+
+    const handleSaveScroll = () => {
+      if (window.scrollY > 100) {
+        sessionStorage.setItem(`scroll_pos_exam_${qid}`, String(window.scrollY));
+      }
+    };
+    window.addEventListener("scroll", handleSaveScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleSaveScroll);
+  }, [qid]);
+
 
   const related = exam.relatedSlugs
     .map((slug) => getTopic(slug))

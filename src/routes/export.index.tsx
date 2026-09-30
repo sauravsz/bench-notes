@@ -9,8 +9,10 @@ export const Route = createFileRoute("/export/")({
 function ExportIndex() {
   const currentUser = useAccessControl((s) => s.currentUser);
   const isAdmin = useAccessControl((s) => s.isAdmin(s.currentUser?.email));
+  const isApproved = useAccessControl((s) => s.isApproved(s.currentUser?.email));
+  const isAuthorized = isAdmin || isApproved;
 
-  if (!isAdmin) {
+  if (!currentUser || !isAuthorized) {
     return (
       <main className="px-4 py-16 sm:px-10 bg-[#090909] text-center min-h-[70vh] flex items-center justify-center">
         <div className="max-w-md mx-auto rounded-[24px] border border-[#262626] bg-[#141414] p-8 space-y-4">

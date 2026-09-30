@@ -64,6 +64,24 @@ function TopicPage() {
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [slug]);
+  useEffect(() => {
+    const savedY = sessionStorage.getItem(`scroll_pos_${slug}`);
+    if (savedY) {
+      const y = parseInt(savedY, 10);
+      if (!isNaN(y) && y > 0) {
+        setTimeout(() => window.scrollTo({ top: y, behavior: "instant" }), 60);
+      }
+    }
+
+    const handleSaveScroll = () => {
+      if (window.scrollY > 100) {
+        sessionStorage.setItem(`scroll_pos_${slug}`, String(window.scrollY));
+      }
+    };
+    window.addEventListener("scroll", handleSaveScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleSaveScroll);
+  }, [slug]);
+
 
   useEffect(() => {
     setLastSlug(slug);

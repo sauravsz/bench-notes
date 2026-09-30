@@ -211,15 +211,9 @@ export const useHighlights = create<HighlightsState>()((set, get) => ({
           };
         }
 
-        // Merge remote with local partition
-        const currentLocal = get().highlights;
-        const merged: Record<string, HighlightItem> = {
-          ...currentLocal,
-          ...remoteMap,
-        };
-
-        set({ highlights: merged, isSyncing: false });
-        saveLocalPartition(targetEmail, merged);
+        // Canonical cloud synchronization: replace stale local partition with remote map
+        set({ highlights: remoteMap, isSyncing: false });
+        saveLocalPartition(targetEmail, remoteMap);
         return true;
       }
     } catch {

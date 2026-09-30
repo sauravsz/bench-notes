@@ -41,9 +41,17 @@ export function CommandPalette({
   const toggleAppearanceMenu = useAppearance((s) => s.toggleAppearanceMenu);
 
   const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(query);
+    }, 40);
+    return () => clearTimeout(handler);
+  }, [query]);
 
   // Global Cmd+K / Ctrl+K listener
   useEffect(() => {
@@ -77,9 +85,9 @@ export function CommandPalette({
 
   // Filter items
   const searchResults = useMemo(() => {
-    if (!query.trim()) return [];
-    return searchGlobalNotes(query);
-  }, [query]);
+    if (!debouncedQuery.trim()) return [];
+    return searchGlobalNotes(debouncedQuery);
+  }, [debouncedQuery]);
 
   // Default quick actions when query is empty
   const defaultActions = useMemo(() => {
