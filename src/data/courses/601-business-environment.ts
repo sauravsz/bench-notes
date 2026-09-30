@@ -2312,6 +2312,179 @@ export const businessEnvironmentCourse: Course = {
           ]
         }
       ]
+    },
+    {
+      "id": "601-topic-25",
+      "slug": "hofstede-six-cultural-dimensions-business-environment",
+      "number": 25,
+      "title": "Hofstede's Six Cultural Dimensions in International Business Environment",
+      "unit": "Global Enterprise Models, Strategy & Human Development",
+      "marks": 14,
+      "lecture": "Lecture 25: Cross-Cultural Dimensions & Global Environmental Scanning",
+      "summary": "Comprehensive analysis of Geert Hofstede's 6 dimensions of national culture (PDI, IDV, MAS, UAI, LTO, IND) and their strategic impacts on cross-border management, negotiations, and international business environments.",
+      "tags": [
+        "Hofstede",
+        "6 Cultural Dimensions",
+        "Power Distance",
+        "Individualism",
+        "Masculinity",
+        "Uncertainty Avoidance",
+        "Long Term Orientation",
+        "Indulgence"
+      ],
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "1. Theoretical Framework: Culture in the Global Business Environment"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Definition: Geert Hofstede defines culture as the 'collective programming of the mind that distinguishes the members of one human group from another.'",
+            "Strategic Relevance: National culture determines institutional structures, managerial authority, negotiation protocols, consumer behavior, and cross-border M&A post-merger integration success.",
+            "Evolution: Expanded from the original 4-dimension model (1980) to 6 dimensions with the addition of Long-Term Orientation (Bond, 1987) and Indulgence vs. Restraint (Minkov, 2010)."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "2. Detailed Analysis of Hofstede's Six Cultural Dimensions"
+        },
+        {
+          "type": "h4",
+          "text": "Dimension 1: Power Distance Index (PDI)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Core Concept: The degree to which less powerful members of organizations expect and accept that power is distributed unequally.",
+            "High PDI (Hierarchy Accepted): Centralized decision-making, strict status deference, formal honorifics, tall management hierarchies (e.g., India, China, Arab States, Malaysia).",
+            "Low PDI (Egalitarian Consultative): Flat structures, decentralized authority, open subordinate debate, peer parity (e.g., Denmark, Sweden, USA, Israel)."
+          ]
+        },
+        {
+          "type": "h4",
+          "text": "Dimension 2: Individualism vs. Collectivism (IDV)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Core Concept: The fundamental degree of societal interdependence ('I' vs. 'We' consciousness).",
+            "Individualism (High IDV): Focus on individual autonomy, personal career achievement, contractual work relationships, merit-based performance bonuses (e.g., USA, UK, Australia).",
+            "Collectivism (Low IDV): Focus on in-group loyalty, collective harmony, relationship-first business (Guanxi), consensus-driven decision-making (e.g., China, Japan, Guatemala, Indonesia)."
+          ]
+        },
+        {
+          "type": "h4",
+          "text": "Dimension 3: Masculinity vs. Femininity (MAS)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Core Concept: The underlying societal value driver: competition/achievement (Masculine) vs. quality of life/nurturing (Feminine).",
+            "Masculine (High MAS - Achievement Driven): Focus on ambition, performance metrics, material rewards, assertiveness, and winning (e.g., Japan, USA, Germany, Hungary).",
+            "Feminine (Low MAS - Quality of Life): Focus on consensus, work-life balance, employee welfare, environmental sustainability, equality (e.g., Sweden, Norway, Netherlands, Denmark)."
+          ]
+        },
+        {
+          "type": "h4",
+          "text": "Dimension 4: Uncertainty Avoidance Index (UAI)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Core Concept: The extent to which a society feels threatened by ambiguous, uncertain, or unstructured situations.",
+            "High UAI (Risk Averse / Rigid Rules): Strict formal protocols, comprehensive contracts, reliance on technical expertise, resistance to radical disruption (e.g., Greece, Portugal, Japan, France).",
+            "Low UAI (Risk Tolerant / Flexible): Pragmatic comfort with ambiguity, high entrepreneurial risk appetite, informal operating procedures, agile pivots (e.g., Singapore, USA, UK, Denmark)."
+          ]
+        },
+        {
+          "type": "h4",
+          "text": "Dimension 5: Long-Term vs. Short-Term Normative Orientation (LTO)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Core Concept: How a society prioritizes future pragmatic preparation vs. honoring past traditions and short-term obligations.",
+            "Long-Term Orientation (High LTO / Pragmatic): High savings rate, sustained capital investment, multi-decade strategic planning horizons, persistence (e.g., China, Japan, South Korea, Germany).",
+            "Short-Term Orientation (Low LTO / Normative): Focus on immediate quarterly earnings, short-term shareholder returns, tradition preservation, immediate gratification (e.g., USA, UK, Nigeria)."
+          ]
+        },
+        {
+          "type": "h4",
+          "text": "Dimension 6: Indulgence vs. Restraint (IND)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Core Concept: The degree to which societal members freely satisfy basic human desires to enjoy life and have fun.",
+            "Indulgence (High IND): Free gratification of leisure and pleasure desires, optimistic outlook, higher consumer discretionary spending (e.g., Mexico, Brazil, USA, UK).",
+            "Restraint (Low IND): Suppression of gratification regulated by strict social norms and duty, pessimistic outlook, lower leisure spending (e.g., Russia, Egypt, China, Eastern Europe)."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "3. Comparative Matrix: Hofstede's 6 Cultural Dimensions"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Dimension",
+            "High-Score Strategic Profile",
+            "Low-Score Strategic Profile",
+            "International Management & Strategy Impact"
+          ],
+          "rows": [
+            [
+              "Power Distance (PDI)",
+              "Centralized hierarchy, status titles, top-down directives (India, China).",
+              "Flat hierarchy, consultative decisions, informal debate (Denmark, USA).",
+              "Determines leadership delegation, delegation span, and protocol in executive negotiations."
+            ],
+            [
+              "Individualism (IDV)",
+              "Individual accountability, merit bonuses, task primacy (USA, Australia).",
+              "In-group loyalty, consensus sign-off, relational trust (Japan, China).",
+              "Shapes HR compensation design, sales incentive structures, and partnership formation."
+            ],
+            [
+              "Masculinity (MAS)",
+              "High competitiveness, decisive assertiveness, material success (Japan, USA).",
+              "Consensus building, employee welfare, work-life balance (Sweden, Norway).",
+              "Governs workplace motivation, corporate performance culture, and dispute resolution."
+            ],
+            [
+              "Uncertainty Avoidance (UAI)",
+              "Formal SOPs, detailed contracts, risk minimization (Greece, Japan).",
+              "Pragmatic agility, comfort with ambiguity, venture risk (Singapore, UK).",
+              "Dictates corporate governance rigidity, contract length, and innovation speed."
+            ],
+            [
+              "Long-Term Orientation (LTO)",
+              "Strategic patience, high reinvestment, multi-year milestones (China, S. Korea).",
+              "Quarterly ROI pressure, rapid shareholder payback (USA, UK).",
+              "Affects CapEx payback horizons, R&D patience, and joint-venture commitment duration."
+            ],
+            [
+              "Indulgence (IND)",
+              "High leisure spend, experience economy, optimistic branding (Mexico, USA).",
+              "Frugal spending, utilitarian product positioning, formal norms (Russia, China).",
+              "Influences consumer marketing messaging, luxury goods demand, and employee engagement."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "4. Strategic Examination Takeaways (14 Marks)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Mitigating Ethnocentrism: Hofstede's 6-dimension framework prevents MNCs from imposing home-country operational models onto incongruent host cultures.",
+            "Multi-Dimensional Synergy: Effective cross-border strategy requires evaluating interactions across all 6 dimensions rather than isolated single factors.",
+            "Market Entry Calibration: Cultural distance directly influences the choice between direct acquisition, joint venture, or wholly owned subsidiary."
+          ]
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -4406,6 +4579,169 @@ export const businessEnvironmentCourse: Course = {
               "Threat",
               "15.3M metric tons CO2 in 2024; AI compute load strains 2030 carbon neutrality roadmap."
             ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "601-eq-25",
+      "number": 25,
+      "title": "Hofstede's Six Cultural Dimensions in International Business Environment",
+      "marks": 14,
+      "relatedSlugs": [
+        "hofstede-six-cultural-dimensions-business-environment"
+      ],
+      "question": "Critically analyze Geert Hofstede's Six Dimensions of National Culture. Explain how each dimension influences cross-border management, organizational behavior, business negotiations, and strategy in the international business environment.",
+      "blocks": [
+        {
+          "type": "h3",
+          "text": "1. Theoretical Framework: Culture in the Global Business Environment"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Definition: Geert Hofstede defines culture as the 'collective programming of the mind that distinguishes the members of one human group from another.'",
+            "Strategic Relevance: National culture determines institutional structures, managerial authority, negotiation protocols, consumer behavior, and cross-border M&A post-merger integration success.",
+            "Evolution: Expanded from the original 4-dimension model (1980) to 6 dimensions with the addition of Long-Term Orientation (Bond, 1987) and Indulgence vs. Restraint (Minkov, 2010)."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "2. Detailed Analysis of Hofstede's Six Cultural Dimensions"
+        },
+        {
+          "type": "h4",
+          "text": "Dimension 1: Power Distance Index (PDI)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Core Concept: The degree to which less powerful members of organizations expect and accept that power is distributed unequally.",
+            "High PDI (Hierarchy Accepted): Centralized decision-making, strict status deference, formal honorifics, tall management hierarchies (e.g., India, China, Arab States, Malaysia).",
+            "Low PDI (Egalitarian Consultative): Flat structures, decentralized authority, open subordinate debate, peer parity (e.g., Denmark, Sweden, USA, Israel)."
+          ]
+        },
+        {
+          "type": "h4",
+          "text": "Dimension 2: Individualism vs. Collectivism (IDV)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Core Concept: The fundamental degree of societal interdependence ('I' vs. 'We' consciousness).",
+            "Individualism (High IDV): Focus on individual autonomy, personal career achievement, contractual work relationships, merit-based performance bonuses (e.g., USA, UK, Australia).",
+            "Collectivism (Low IDV): Focus on in-group loyalty, collective harmony, relationship-first business (Guanxi), consensus-driven decision-making (e.g., China, Japan, Guatemala, Indonesia)."
+          ]
+        },
+        {
+          "type": "h4",
+          "text": "Dimension 3: Masculinity vs. Femininity (MAS)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Core Concept: The underlying societal value driver: competition/achievement (Masculine) vs. quality of life/nurturing (Feminine).",
+            "Masculine (High MAS - Achievement Driven): Focus on ambition, performance metrics, material rewards, assertiveness, and winning (e.g., Japan, USA, Germany, Hungary).",
+            "Feminine (Low MAS - Quality of Life): Focus on consensus, work-life balance, employee welfare, environmental sustainability, equality (e.g., Sweden, Norway, Netherlands, Denmark)."
+          ]
+        },
+        {
+          "type": "h4",
+          "text": "Dimension 4: Uncertainty Avoidance Index (UAI)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Core Concept: The extent to which a society feels threatened by ambiguous, uncertain, or unstructured situations.",
+            "High UAI (Risk Averse / Rigid Rules): Strict formal protocols, comprehensive contracts, reliance on technical expertise, resistance to radical disruption (e.g., Greece, Portugal, Japan, France).",
+            "Low UAI (Risk Tolerant / Flexible): Pragmatic comfort with ambiguity, high entrepreneurial risk appetite, informal operating procedures, agile pivots (e.g., Singapore, USA, UK, Denmark)."
+          ]
+        },
+        {
+          "type": "h4",
+          "text": "Dimension 5: Long-Term vs. Short-Term Normative Orientation (LTO)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Core Concept: How a society prioritizes future pragmatic preparation vs. honoring past traditions and short-term obligations.",
+            "Long-Term Orientation (High LTO / Pragmatic): High savings rate, sustained capital investment, multi-decade strategic planning horizons, persistence (e.g., China, Japan, South Korea, Germany).",
+            "Short-Term Orientation (Low LTO / Normative): Focus on immediate quarterly earnings, short-term shareholder returns, tradition preservation, immediate gratification (e.g., USA, UK, Nigeria)."
+          ]
+        },
+        {
+          "type": "h4",
+          "text": "Dimension 6: Indulgence vs. Restraint (IND)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Core Concept: The degree to which societal members freely satisfy basic human desires to enjoy life and have fun.",
+            "Indulgence (High IND): Free gratification of leisure and pleasure desires, optimistic outlook, higher consumer discretionary spending (e.g., Mexico, Brazil, USA, UK).",
+            "Restraint (Low IND): Suppression of gratification regulated by strict social norms and duty, pessimistic outlook, lower leisure spending (e.g., Russia, Egypt, China, Eastern Europe)."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "3. Comparative Matrix: Hofstede's 6 Cultural Dimensions"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Dimension",
+            "High-Score Strategic Profile",
+            "Low-Score Strategic Profile",
+            "International Management & Strategy Impact"
+          ],
+          "rows": [
+            [
+              "Power Distance (PDI)",
+              "Centralized hierarchy, status titles, top-down directives (India, China).",
+              "Flat hierarchy, consultative decisions, informal debate (Denmark, USA).",
+              "Determines leadership delegation, delegation span, and protocol in executive negotiations."
+            ],
+            [
+              "Individualism (IDV)",
+              "Individual accountability, merit bonuses, task primacy (USA, Australia).",
+              "In-group loyalty, consensus sign-off, relational trust (Japan, China).",
+              "Shapes HR compensation design, sales incentive structures, and partnership formation."
+            ],
+            [
+              "Masculinity (MAS)",
+              "High competitiveness, decisive assertiveness, material success (Japan, USA).",
+              "Consensus building, employee welfare, work-life balance (Sweden, Norway).",
+              "Governs workplace motivation, corporate performance culture, and dispute resolution."
+            ],
+            [
+              "Uncertainty Avoidance (UAI)",
+              "Formal SOPs, detailed contracts, risk minimization (Greece, Japan).",
+              "Pragmatic agility, comfort with ambiguity, venture risk (Singapore, UK).",
+              "Dictates corporate governance rigidity, contract length, and innovation speed."
+            ],
+            [
+              "Long-Term Orientation (LTO)",
+              "Strategic patience, high reinvestment, multi-year milestones (China, S. Korea).",
+              "Quarterly ROI pressure, rapid shareholder payback (USA, UK).",
+              "Affects CapEx payback horizons, R&D patience, and joint-venture commitment duration."
+            ],
+            [
+              "Indulgence (IND)",
+              "High leisure spend, experience economy, optimistic branding (Mexico, USA).",
+              "Frugal spending, utilitarian product positioning, formal norms (Russia, China).",
+              "Influences consumer marketing messaging, luxury goods demand, and employee engagement."
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "4. Strategic Examination Takeaways (14 Marks)"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Mitigating Ethnocentrism: Hofstede's 6-dimension framework prevents MNCs from imposing home-country operational models onto incongruent host cultures.",
+            "Multi-Dimensional Synergy: Effective cross-border strategy requires evaluating interactions across all 6 dimensions rather than isolated single factors.",
+            "Market Entry Calibration: Cultural distance directly influences the choice between direct acquisition, joint venture, or wholly owned subsidiary."
           ]
         }
       ]
