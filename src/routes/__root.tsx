@@ -20,6 +20,9 @@ export const Route = createRootRoute({
         content:
           "MBA Business Law (Paper 603) and core curriculum interactive examination and lecture revision suite.",
       },
+      { httpEquiv: "Cache-Control", content: "no-cache, no-store, must-revalidate" },
+      { httpEquiv: "Pragma", content: "no-cache" },
+      { httpEquiv: "Expires", content: "0" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
@@ -48,6 +51,11 @@ export const Route = createRootRoute({
           <Toaster position="bottom-right" theme="dark" richColors />
         </AuthProvider>
         <Scripts />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(r){for(var reg of r){reg.unregister();}});}`,
+          }}
+        />
       </body>
     </html>
   ),
