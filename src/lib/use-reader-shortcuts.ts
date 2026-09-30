@@ -3,6 +3,7 @@ import { useAppearance } from "./appearance";
 import { useHighlights } from "./highlights";
 import { useProgress } from "./progress";
 import { toast } from "sonner";
+
 export function useReaderShortcuts() {
   const toggleSidebar = useAppearance((s) => s.toggleSidebar);
   const toggleRightSidebar = useAppearance((s) => s.toggleRightSidebar);
@@ -13,6 +14,7 @@ export function useReaderShortcuts() {
   const cycleLineSpacing = useAppearance((s) => s.cycleLineSpacing);
   const toggleAutoHighlight = useHighlights((s) => s.toggleAutoHighlight);
   const toggleStudied = useProgress((s) => s.toggleStudied);
+
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       // Ignore if user is currently typing in an input, textarea, or contentEditable
@@ -20,26 +22,39 @@ export function useReaderShortcuts() {
       if (
         target instanceof HTMLInputElement ||
         target instanceof HTMLTextAreaElement ||
-        target?.isContentEditable
+        target?.isContentEditable ||
+        target?.closest("input") ||
+        target?.closest("textarea")
       ) {
         return;
       }
 
-      // 1. Cmd + B / Ctrl + B -> Toggle Sidebar
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "b") {
+      // 1. Cmd + B / Ctrl + B -> Toggle Left Sidebar
+      if ((e.metaKey || e.ctrlKey) && (e.key.toLowerCase() === "b" || e.code === "KeyB")) {
         e.preventDefault();
-        toggleSidebar();
+        e.stopPropagation();
+        const next = toggleSidebar();
+        if (next) {
+          toast.info("Left sidebar collapsed (⌘B)", { duration: 1200 });
+        } else {
+          toast.info("Left sidebar expanded (⌘B)", { duration: 1200 });
+        }
         return;
       }
 
-      // 2. Bracket shortcuts [ or ] -> Toggle Sidebar
+      // 2. Bracket shortcuts [ or ] -> Toggle Left Sidebar
       if ((e.key === "[" || e.key === "]") && !e.metaKey && !e.ctrlKey) {
         e.preventDefault();
-        toggleSidebar();
+        const next = toggleSidebar();
+        if (next) {
+          toast.info("Left sidebar collapsed", { duration: 1200 });
+        } else {
+          toast.info("Left sidebar expanded", { duration: 1200 });
+        }
         return;
       }
 
-      // 3. T -> Toggle Right Sidebar (Outline / Progress)
+      // 3. T -> Toggle Right Sidebar (Outline / Table of Contents)
       if (
         (e.key.toLowerCase() === "t" || e.code === "KeyT") &&
         !e.metaKey &&
@@ -50,9 +65,9 @@ export function useReaderShortcuts() {
         e.preventDefault();
         const next = toggleRightSidebar();
         if (next) {
-          toast.info("Right sidebar collapsed", { duration: 1000 });
+          toast.info("Outline collapsed (T)", { duration: 1200 });
         } else {
-          toast.info("Right sidebar expanded", { duration: 1000 });
+          toast.info("Outline expanded (T)", { duration: 1200 });
         }
         return;
       }
@@ -82,59 +97,59 @@ export function useReaderShortcuts() {
           const isCurrentlyStudied = !!useProgress.getState().studied[slug];
           toggleStudied(slug);
           if (!isCurrentlyStudied) {
-            toast.success("Marked as Studied ✓", { duration: 1500 });
+            toast.success("Marked as Studied ✓ (M)", { duration: 1500 });
           } else {
-            toast.info("Unmarked from Studied", { duration: 1500 });
+            toast.info("Unmarked from Studied (M)", { duration: 1500 });
           }
           return;
         }
       }
 
-      // 3. Shift + H -> Toggle Auto-Highlighting
+      // 5. Shift + H -> Toggle Auto-Highlighting
       if (e.shiftKey && (e.key.toLowerCase() === "h" || e.code === "KeyH") && !e.metaKey && !e.ctrlKey) {
         e.preventDefault();
         const next = toggleAutoHighlight();
         if (next) {
-          toast.success("Auto-highlighting enabled", { duration: 1500 });
+          toast.success("Auto-highlighting enabled (⇧H)", { duration: 1500 });
         } else {
-          toast.info("Auto-highlighting disabled", { duration: 1500 });
+          toast.info("Auto-highlighting disabled (⇧H)", { duration: 1500 });
         }
         return;
       }
 
-      // 4. Shift + , (<) -> Decrease width
+      // 6. Shift + , (<) -> Decrease width
       if (e.shiftKey && (e.key === "<" || e.key === ",")) {
         e.preventDefault();
         decreaseWidth();
-        toast.info("Line width decreased", { duration: 1000 });
+        toast.info("Line width decreased (⇧<)", { duration: 1000 });
         return;
       }
 
-      // 5. Shift + . (>) -> Increase width
+      // 7. Shift + . (>) -> Increase width
       if (e.shiftKey && (e.key === ">" || e.key === ".")) {
         e.preventDefault();
         increaseWidth();
-        toast.info("Line width increased", { duration: 1000 });
+        toast.info("Line width increased (⇧>)", { duration: 1000 });
         return;
       }
 
-      // 6. Shift + - (_) -> Decrease font size
+      // 8. Shift + - (_) -> Decrease font size
       if (e.shiftKey && (e.key === "_" || e.key === "-")) {
         e.preventDefault();
         decreaseFontSize();
-        toast.info("Font size decreased", { duration: 1000 });
+        toast.info("Font size decreased (⇧-)", { duration: 1000 });
         return;
       }
 
-      // 7. Shift + = (+) -> Increase font size
+      // 9. Shift + = (+) -> Increase font size
       if (e.shiftKey && (e.key === "+" || e.key === "=")) {
         e.preventDefault();
         increaseFontSize();
-        toast.info("Font size increased", { duration: 1000 });
+        toast.info("Font size increased (⇧+)", { duration: 1000 });
         return;
       }
 
-      // 8. Shift + : or Shift + ; -> Decrease line spacing
+      // 10. Shift + : or Shift + ; -> Decrease line spacing
       if (e.shiftKey && (e.key === ":" || e.key === ";")) {
         e.preventDefault();
         cycleLineSpacing("down");
@@ -142,7 +157,7 @@ export function useReaderShortcuts() {
         return;
       }
 
-      // 9. Shift + " or Shift + ' -> Increase line spacing
+      // 11. Shift + " or Shift + ' -> Increase line spacing
       if (e.shiftKey && (e.key === '"' || e.key === "'")) {
         e.preventDefault();
         cycleLineSpacing("up");
@@ -151,6 +166,8 @@ export function useReaderShortcuts() {
       }
     }
 
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [
     toggleSidebar,
     toggleRightSidebar,
