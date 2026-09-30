@@ -91,66 +91,6 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           <BookOpen className="size-4 shrink-0 text-[#0099ff]" strokeWidth={1.75} />
           <span>Syllabus Overview</span>
         </Link>
-
-        {/* Adaptive Course Master Module Spotlight Link */}
-        {activeCourse.slug === "business-communications" ? (
-          <Link
-            to="/topic/$slug"
-            params={{ slug: "corporate-clarity-ocean-of-data" }}
-            onClick={onNavigate}
-            className={cn(
-              "flex min-h-10 items-center justify-between rounded-full px-3.5 text-sm font-semibold transition-all duration-200 ios-press-subtle my-1.5",
-              pathname.startsWith("/topic/corporate-clarity") || pathname.startsWith("/topic/602-")
-                ? "bg-white text-[#0369A1] shadow-sm"
-                : "bg-[#141414] text-white hover:bg-[#1c1c1c] border border-sky-500/30",
-            )}
-          >
-            <span className="flex items-center gap-2">
-              <Sparkles className="size-3.5 shrink-0 text-sky-400" />
-              <span>19 Master Modules</span>
-            </span>
-            <span
-              className={cn(
-                "rounded-full px-2 py-0.5 text-[10px] font-bold",
-                pathname.startsWith("/topic/corporate-clarity")
-                  ? "bg-[#0369A1] text-white"
-                  : "bg-sky-500/20 text-sky-300 border border-sky-500/40",
-              )}
-            >
-              19 Notes
-            </span>
-          </Link>
-        ) : (
-          <Link
-            to="/topic/$slug"
-            params={{ slug: "midsem-foundational-legal-maxims" }}
-            onClick={() => {
-              setActiveCourseSlug("business-laws");
-              onNavigate?.();
-            }}
-            className={cn(
-              "flex min-h-10 items-center justify-between rounded-full px-3.5 text-sm font-semibold transition-all duration-200 ios-press-subtle my-1.5",
-              pathname.startsWith("/topic/midsem-")
-                ? "bg-white text-black shadow-sm"
-                : "bg-[#141414] text-white hover:bg-[#1c1c1c] border border-[#262626]",
-            )}
-          >
-            <span className="flex items-center gap-2">
-              <Sparkles className={cn("size-3.5 shrink-0", pathname.startsWith("/topic/midsem-") ? "text-amber-500" : "text-[#0099ff]")} />
-              <span>Mid Sem Important</span>
-            </span>
-            <span
-              className={cn(
-                "rounded-full px-2 py-0.5 text-[10px] font-bold",
-                pathname.startsWith("/topic/midsem-")
-                  ? "bg-black text-white"
-                  : "bg-[#1c1c1c] text-[#999999] border border-[#262626]",
-              )}
-            >
-              9 Notes
-            </span>
-          </Link>
-        )}
         <Link
           to="/exam"
           onClick={onNavigate}
@@ -231,19 +171,22 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           </Link>
         ) : null}
 
-        <Link
-          to="/search"
-          onClick={onNavigate}
-          className={cn(
-            "flex min-h-10 items-center gap-2.5 rounded-full px-3.5 text-sm font-medium transition-all duration-200 ios-press-subtle",
-            pathname === "/search"
-              ? "bg-[#1c1c1c] font-semibold text-white border border-[#262626]"
-              : "text-[#999999] hover:bg-[#141414] hover:text-white",
-          )}
+        <button
+          type="button"
+          onClick={() => {
+            onNavigate?.();
+            window.dispatchEvent(new CustomEvent("open-command-palette"));
+          }}
+          className="flex w-full min-h-10 items-center justify-between rounded-full px-3.5 text-sm font-medium text-[#999999] hover:bg-[#141414] hover:text-white transition-all duration-200 ios-press-subtle text-left"
         >
-          <Search className="size-4 shrink-0 text-[#999999]" strokeWidth={1.75} />
-          <span>Search</span>
-        </Link>
+          <span className="flex items-center gap-2.5">
+            <Search className="size-4 shrink-0 text-[#999999]" strokeWidth={1.75} />
+            <span>Search Notes</span>
+          </span>
+          <kbd className="rounded bg-[#090909] border border-[#262626] px-1.5 py-0.2 font-mono text-[10px] text-[#666666]">
+            ⌘K
+          </kbd>
+        </button>
 
         {isAdmin && (
           <Link

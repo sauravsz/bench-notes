@@ -165,17 +165,17 @@ function Block({
   switch (block.type) {
     case "h3": {
       const headingId = `section-${blockIndex}-${block.text.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
-      return <h3 id={headingId} className="scroll-mt-24 font-display text-xl sm:text-2xl font-bold tracking-[-0.03em] text-white mt-8 mb-3">{render(block.text)}</h3>;
+      return <h3 id={headingId} className="scroll-mt-24 font-display font-bold tracking-[-0.03em] text-white mt-8 mb-3">{render(block.text)}</h3>;
     }
     case "h4": {
       const headingId = `concept-${blockIndex}-${block.text.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
-      return <h4 id={headingId} className="scroll-mt-24 font-display text-base sm:text-lg font-bold text-[#e6e6e6] mt-6 mb-2">{render(block.text)}</h4>;
+      return <h4 id={headingId} className="scroll-mt-24 font-display font-bold text-[#e6e6e6] mt-6 mb-2">{render(block.text)}</h4>;
     }
     case "p":
-      return <p className="font-sans text-sm sm:text-base leading-relaxed text-[#d1d1d1] mb-4">{render(block.text)}</p>;
+      return <p className="font-sans leading-relaxed text-[#d1d1d1] mb-4">{render(block.text)}</p>;
     case "ul":
       return (
-        <ul className="space-y-2 mb-5 pl-5 list-disc text-sm sm:text-base text-[#d1d1d1] leading-relaxed">
+        <ul className="space-y-2 mb-5 pl-5 list-disc text-[#d1d1d1] leading-relaxed">
           {block.items.map((item, i) => (
             <li key={i}>{render(item)}</li>
           ))}
@@ -183,7 +183,7 @@ function Block({
       );
     case "ol":
       return (
-        <ol className="space-y-2 mb-5 pl-5 list-decimal text-sm sm:text-base text-[#d1d1d1] leading-relaxed">
+        <ol className="space-y-2 mb-5 pl-5 list-decimal text-[#d1d1d1] leading-relaxed">
           {block.items.map((item, i) => (
             <li key={i}>{render(item)}</li>
           ))}
@@ -197,7 +197,7 @@ function Block({
               {render(block.caption)}
             </p>
           ) : null}
-          <table className="w-full text-left text-xs sm:text-sm">
+          <table className="w-full text-left">
             <thead>
               <tr className="border-b border-[#262626] bg-[#1c1c1c]">
                 {block.headers.map((h) => (
@@ -220,7 +220,7 @@ function Block({
     case "quote":
       return (
         <blockquote className="my-5 rounded-r-[18px] border-l-2 border-[#0099ff] bg-[#141414] px-5 py-4">
-          <p className="mb-1 text-sm sm:text-base font-medium text-white italic leading-relaxed">
+          <p className="mb-1 font-medium text-white italic leading-relaxed">
             {render(block.text)}
           </p>
           {block.cite ? (
@@ -234,7 +234,7 @@ function Block({
       return (
         <article className="mb-4 rounded-[18px] border border-[#262626] bg-[#141414] p-5">
           <header className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
-            <h4 className="m-0 font-display text-sm sm:text-base font-bold text-white">
+            <h4 className="m-0 font-display font-bold text-white">
               {render(block.term)}
             </h4>
             {block.section ? (
@@ -243,7 +243,7 @@ function Block({
               </span>
             ) : null}
           </header>
-          <p className="mb-0 text-xs sm:text-sm leading-relaxed text-[#cccccc]">{render(block.body)}</p>
+          <p className="mb-0 leading-relaxed text-[#cccccc]">{render(block.body)}</p>
         </article>
       );
     case "maxim":
@@ -252,7 +252,7 @@ function Block({
           <p className="mb-1 font-display text-base font-bold text-white tracking-[-0.01em]">
             {render(block.latin)}
           </p>
-          <p className="mb-0 text-xs sm:text-sm text-[#999999] leading-relaxed">{render(block.meaning)}</p>
+          <p className="mb-0 text-[#999999] leading-relaxed">{render(block.meaning)}</p>
         </article>
       );
     case "callout": {
@@ -263,7 +263,7 @@ function Block({
           <p className="mb-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#0099ff]">
             {render(label)}
           </p>
-          <p className="mb-0 text-xs sm:text-sm leading-relaxed text-[#d1d1d1]">{render(body)}</p>
+          <p className="mb-0 leading-relaxed text-[#d1d1d1]">{render(body)}</p>
         </aside>
       );
     }
