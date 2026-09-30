@@ -1,27 +1,37 @@
 import { useState, useEffect } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
+  AlertTriangle,
+  ArrowLeft,
+  ArrowRight,
   BookOpen,
+  Check,
   ChevronDown,
+  ChevronRight,
+  Command,
   Download,
-  Gavel,
+  FileText,
   Highlighter,
-  Languages,
+  Lock,
+  LogOut,
   Menu,
   PanelLeft,
   PanelLeftClose,
-  Printer,
-  Scale,
+  PanelRight,
+  PanelRightClose,
+  Plus,
   Search,
+  Share2,
   ShieldCheck,
+  SlidersHorizontal,
   Sparkles,
-  Type,
+  Trash2,
+  Unlock,
   User,
   X,
   Zap,
   ZapOff,
 } from "lucide-react";
-import { useProgress } from "@/lib/progress";
 import { useHighlights } from "@/lib/highlights";
 import { useAppearance } from "@/lib/appearance";
 import { useCurrentCourse } from "@/lib/current-course";
@@ -372,9 +382,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   const sidebarCollapsed = useAppearance((s) => s.sidebarCollapsed);
   const toggleSidebar = useAppearance((s) => s.toggleSidebar);
+  const rightSidebarCollapsed = useAppearance((s) => s.rightSidebarCollapsed);
+  const toggleRightSidebar = useAppearance((s) => s.toggleRightSidebar);
   const appearanceMenuOpen = useAppearance((s) => s.appearanceMenuOpen);
   const setAppearanceMenuOpen = useAppearance((s) => s.setAppearanceMenuOpen);
-
   const handleHeaderToggleAuto = () => {
     const next = toggleAutoHighlight();
     if (next) {
@@ -504,6 +515,26 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               title="Reading Appearance & Width (Aa)"
             >
               <span className="font-sans text-xs font-bold">Aa</span>
+            </button>
+
+            {/* Right Sidebar (Outline & Progress) Toggle */}
+            <button
+              type="button"
+              onClick={() => toggleRightSidebar()}
+              className={cn(
+                "hidden xl:inline-flex size-9 sm:size-10 items-center justify-center rounded-full border border-[#262626] bg-[#141414] transition-all ios-press",
+                !rightSidebarCollapsed
+                  ? "text-[#0099ff] hover:bg-[#1c1c1c] hover:text-white"
+                  : "text-[#999999] hover:bg-[#1c1c1c] hover:text-white"
+              )}
+              title={rightSidebarCollapsed ? "Show Table of Contents & Progress (T)" : "Hide Table of Contents & Progress (T)"}
+              aria-label="Toggle Table of Contents"
+            >
+              {rightSidebarCollapsed ? (
+                <PanelRight className="size-4" strokeWidth={1.75} />
+              ) : (
+                <PanelRightClose className="size-4 text-[#0099ff]" strokeWidth={1.75} />
+              )}
             </button>
 
             <p className="hidden font-sans text-xs tabular-nums text-[#999999] lg:block">

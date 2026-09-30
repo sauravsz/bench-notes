@@ -5,13 +5,13 @@ import { toast } from "sonner";
 
 export function useReaderShortcuts() {
   const toggleSidebar = useAppearance((s) => s.toggleSidebar);
+  const toggleRightSidebar = useAppearance((s) => s.toggleRightSidebar);
   const increaseWidth = useAppearance((s) => s.increaseWidth);
   const decreaseWidth = useAppearance((s) => s.decreaseWidth);
   const increaseFontSize = useAppearance((s) => s.increaseFontSize);
   const decreaseFontSize = useAppearance((s) => s.decreaseFontSize);
   const cycleLineSpacing = useAppearance((s) => s.cycleLineSpacing);
   const toggleAutoHighlight = useHighlights((s) => s.toggleAutoHighlight);
-
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       // Ignore if user is currently typing in an input, textarea, or contentEditable
@@ -35,6 +35,24 @@ export function useReaderShortcuts() {
       if ((e.key === "[" || e.key === "]") && !e.metaKey && !e.ctrlKey) {
         e.preventDefault();
         toggleSidebar();
+        return;
+      }
+
+      // 3. T -> Toggle Right Sidebar (Outline / Progress)
+      if (
+        (e.key.toLowerCase() === "t" || e.code === "KeyT") &&
+        !e.metaKey &&
+        !e.ctrlKey &&
+        !e.altKey &&
+        !e.shiftKey
+      ) {
+        e.preventDefault();
+        const next = toggleRightSidebar();
+        if (next) {
+          toast.info("Right sidebar collapsed", { duration: 1000 });
+        } else {
+          toast.info("Right sidebar expanded", { duration: 1000 });
+        }
         return;
       }
 
@@ -103,6 +121,7 @@ export function useReaderShortcuts() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [
     toggleSidebar,
+    toggleRightSidebar,
     increaseWidth,
     decreaseWidth,
     increaseFontSize,

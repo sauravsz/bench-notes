@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Check, Clock, ListOrdered, Sparkles } from "lucide-react";
+import { Check, Clock, ListOrdered, PanelRight, PanelRightClose, Sparkles } from "lucide-react";
 import type { NoteBlock } from "@/data/types";
 import { extractHeadings, type HeadingItem } from "./table-of-contents";
+import { useAppearance } from "@/lib/appearance";
 import { cn } from "@/lib/utils";
 
 export function RightRailToc({
@@ -19,7 +20,8 @@ export function RightRailToc({
 }) {
   const [activeId, setActiveId] = useState<string>("");
   const headings = extractHeadings(blocks);
-
+  const rightSidebarCollapsed = useAppearance((s) => s.rightSidebarCollapsed);
+  const toggleRightSidebar = useAppearance((s) => s.toggleRightSidebar);
   useEffect(() => {
     if (headings.length === 0) return;
 
@@ -45,6 +47,20 @@ export function RightRailToc({
 
   if (headings.length === 0) return null;
 
+  if (rightSidebarCollapsed) {
+    return (
+      <button
+        type="button"
+        onClick={() => toggleRightSidebar()}
+        className="no-print fixed top-20 right-6 z-40 hidden xl:flex size-9 items-center justify-center rounded-full border border-[#262626] bg-[#141414]/90 text-[#999999] shadow-lg backdrop-blur-md hover:bg-[#1c1c1c] hover:text-white transition-all duration-200 group ios-press"
+        title="Show Table of Contents & Progress (T)"
+        aria-label="Show Table of Contents"
+      >
+        <PanelRight className="size-4 text-[#0099ff] group-hover:scale-110 transition-transform" strokeWidth={1.75} />
+      </button>
+    );
+  }
+
   const scrollToHeading = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -67,9 +83,20 @@ export function RightRailToc({
             <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#999999]">
               Reading Progress
             </span>
-            <span className="font-mono text-xs font-bold text-[#0099ff]">
-              {Math.round(progress)}%
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-xs font-bold text-[#0099ff]">
+                {Math.round(progress)}%
+              </span>
+              <button
+                type="button"
+                onClick={() => toggleRightSidebar()}
+                className="flex size-6 items-center justify-center rounded-md border border-transparent hover:border-[#262626] hover:bg-[#1c1c1c] text-[#888888] hover:text-white transition-colors ios-press"
+                title="Hide Right Sidebar (T)"
+                aria-label="Hide Right Sidebar"
+              >
+                <PanelRightClose className="size-3.5" strokeWidth={1.75} />
+              </button>
+            </div>
           </div>
           <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#1c1c1c]">
             <div
@@ -134,7 +161,7 @@ export function RightRailToc({
             <kbd className="rounded bg-[#1c1c1c] px-1 py-0.2 border border-[#262626] text-white">M</kbd>
           </div>
           <div className="flex items-center justify-between">
-            <span>Table of Contents</span>
+            <span>Toggle Sidebar</span>
             <kbd className="rounded bg-[#1c1c1c] px-1 py-0.2 border border-[#262626] text-white">T</kbd>
           </div>
           <div className="flex items-center justify-between">

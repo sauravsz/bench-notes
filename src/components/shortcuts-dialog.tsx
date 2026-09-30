@@ -24,7 +24,9 @@ export function ShortcutsDialog({
   if (!isOpen) return null;
 
   const SHORTCUTS = [
-    { key: "⌘B / [ / ]", desc: "Toggle Sidebar (Distraction-Free Mode)", category: "Navigation" },
+    { key: "⌘B / [ / ]", desc: "Toggle Left Navigation Sidebar", category: "Navigation" },
+    { key: "T", desc: "Toggle Right Sidebar (Outline & Progress)", category: "Navigation" },
+    { key: "M", desc: "Toggle Mark Topic as Studied", category: "Reading & Highlighting" },
     { key: "⇧H", desc: "Toggle Instant Auto-Highlighting", category: "Reading & Highlighting" },
     { key: "H", desc: "Highlight Selected Text (Manual Mode)", category: "Reading & Highlighting" },
     { key: "N", desc: "Add Note / Annotation to Selection", category: "Reading & Highlighting" },
@@ -34,6 +36,7 @@ export function ShortcutsDialog({
     { key: "⇧=", desc: "Increase Font Size (+)", category: "Appearance" },
     { key: "⇧:", desc: "Decrease Line Height Spacing (:)", category: "Appearance" },
     { key: "⇧\"", desc: "Increase Line Height Spacing (\")", category: "Appearance" },
+    { key: "⌘K", desc: "Open Search & Command Bar", category: "General" },
     { key: "?", desc: "Open Keyboard Shortcuts Help", category: "General" },
   ];
 

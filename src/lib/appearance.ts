@@ -56,6 +56,7 @@ export const THEME_TONE_STYLES: Record<ThemeTone, { bg: string; surface: string;
 
 type AppearanceState = {
   sidebarCollapsed: boolean;
+  rightSidebarCollapsed: boolean;
   textWidth: TextWidth;
   fontSize: number; // 14 to 28 px
   lineSpacing: LineSpacing;
@@ -66,6 +67,8 @@ type AppearanceState = {
   // Actions
   toggleSidebar: () => boolean;
   setSidebarCollapsed: (collapsed: boolean) => void;
+  toggleRightSidebar: () => boolean;
+  setRightSidebarCollapsed: (collapsed: boolean) => void;
   setTextWidth: (width: TextWidth) => void;
   increaseWidth: () => void;
   decreaseWidth: () => void;
@@ -88,6 +91,7 @@ export const useAppearance = create<AppearanceState>()(
   persist(
     (set, get) => ({
       sidebarCollapsed: false,
+      rightSidebarCollapsed: false,
       textWidth: "wide",
       fontSize: 17,
       lineSpacing: "normal",
@@ -103,6 +107,13 @@ export const useAppearance = create<AppearanceState>()(
 
       setSidebarCollapsed: (collapsed) => set({ sidebarCollapsed: collapsed }),
 
+      toggleRightSidebar: () => {
+        const next = !get().rightSidebarCollapsed;
+        set({ rightSidebarCollapsed: next });
+        return next;
+      },
+
+      setRightSidebarCollapsed: (collapsed) => set({ rightSidebarCollapsed: collapsed }),
       setTextWidth: (textWidth) => set({ textWidth }),
 
       increaseWidth: () => {
@@ -147,6 +158,7 @@ export const useAppearance = create<AppearanceState>()(
       resetAppearance: () =>
         set({
           sidebarCollapsed: false,
+          rightSidebarCollapsed: false,
           textWidth: "wide",
           fontSize: 17,
           lineSpacing: "normal",
@@ -158,6 +170,7 @@ export const useAppearance = create<AppearanceState>()(
       name: "bench-notes-appearance-v1",
       partialize: (state) => ({
         sidebarCollapsed: state.sidebarCollapsed,
+        rightSidebarCollapsed: state.rightSidebarCollapsed,
         textWidth: state.textWidth,
         fontSize: state.fontSize,
         lineSpacing: state.lineSpacing,
