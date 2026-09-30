@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { supabase, isSupabaseReady } from "@/lib/supabase/client";
 
 export type AccessStatus = "approved" | "pending" | "rejected";
 
@@ -26,6 +27,10 @@ export const MASTER_ADMIN_HASH =
   "a1565ed260e2ffc7bc621b55588ea8c0b8077496ea0c6d9a84b385071d40d14c";
 export const ADMIN_PLAIN_HASH =
   "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
+
+export const PREAPPROVED_STUDENT_EMAILS = [
+  "sumitaditya588@gmail.com",
+];
 
 export const DEFAULT_PASSCODES = ["BENCH2026", "BENCH-1872", "MBA2026"];
 
@@ -110,8 +115,25 @@ export const useAccessControl = create<AccessControlState>()(
   persist(
     (set, get) => ({
       adminEmails: [MASTER_ADMIN_EMAIL],
-      whitelistedEmails: [MASTER_ADMIN_EMAIL],
-      accessRequests: {},
+      whitelistedEmails: [MASTER_ADMIN_EMAIL, ...PREAPPROVED_STUDENT_EMAILS],
+      accessRequests: {
+        [MASTER_ADMIN_EMAIL]: {
+          id: "req_admin_master",
+          email: MASTER_ADMIN_EMAIL,
+          name: "Administrator",
+          requestedAt: 1790608179763,
+          status: "approved",
+          note: "Master Administrator",
+        },
+        "sumitaditya588@gmail.com": {
+          id: "req_sumitaditya588",
+          email: "sumitaditya588@gmail.com",
+          name: "Sumit Aditya",
+          requestedAt: 1790776000000,
+          status: "approved",
+          note: "Pre-Approved Student",
+        },
+      },
       currentUser: null,
       adminToken: null,
       authRequired: true,
@@ -121,39 +143,76 @@ export const useAccessControl = create<AccessControlState>()(
       syncWithServer: async () => {
         try {
           const res = await fetch("/api/access/list");
-          if (!res.ok) return false;
-          const data = await res.json();
-          if (data.ok && Array.isArray(data.records)) {
-            const recordsMap: Record<string, AccessRequest> = {};
-            for (const r of data.records) {
-              recordsMap[r.email.toLowerCase()] = r;
-            }
-            const updatedWhitelist = Array.from(
-              new Set([...get().whitelistedEmails, ...(data.whitelist || [])]),
-            );
+          if (res.ok) {
+            const data = await res.json();
+            if (data.ok && Array.isArray(data.records)) {
+              const recordsMap: Record<string, AccessRequest> = {};
+              for (const r of data.records) {
+                recordsMap[r.email.toLowerCase()] = r;
+              }
+              const updatedWhitelist = Array.from(
+                new Set([
+                  ...get().whitelistedEmails,
+                  ...(data.whitelist || []),
+                  ...PREAPPROVED_STUDENT_EMAILS,
+                ]),
+              );
 
-            set((state) => ({
-              accessRequests: {
-                ...state.accessRequests,
-                ...recordsMap,
-              },
-              whitelistedEmails: updatedWhitelist,
-            }));
+              set((state) => ({
+                accessRequests: {
+                  ...state.accessRequests,
+                  ...recordsMap,
+                },
+                whitelistedEmails: updatedWhitelist,
+              }));
 
-            // Check if current user got approved
-            const current = get().currentUser;
-            if (current) {
-              const clean = current.email.toLowerCase();
-              const req = recordsMap[clean];
-              if (req?.status === "approved" || get().isApproved(clean)) {
-                return true;
+              // Check if current user got approved
+              const current = get().currentUser;
+              if (current) {
+                const clean = current.email.toLowerCase();
+                const req = recordsMap[clean];
+                if (req?.status === "approved" || get().isApproved(clean)) {
+                  return true;
+                }
               }
             }
           }
-          return false;
         } catch {
-          return false;
+          // fallback
         }
+
+        // Direct Supabase access requests sync if configured
+        if (isSupabaseReady() && supabase) {
+          try {
+            const { data: sbData } = await supabase.from("access_requests").select("*");
+            if (Array.isArray(sbData)) {
+              const sbRecords: Record<string, AccessRequest> = {};
+              for (const r of sbData) {
+                sbRecords[r.email.toLowerCase()] = {
+                  id: r.id,
+                  email: r.email.toLowerCase(),
+                  name: r.name,
+                  avatar: r.avatar || undefined,
+                  status: r.status,
+                  requestedAt: Number(r.requested_at) || Date.now(),
+                  note: r.note || undefined,
+                };
+              }
+              set((state) => ({
+                accessRequests: { ...state.accessRequests, ...sbRecords },
+                whitelistedEmails: Array.from(new Set([
+                  ...state.whitelistedEmails,
+                  ...Object.keys(sbRecords).filter((k) => sbRecords[k].status === "approved"),
+                  ...PREAPPROVED_STUDENT_EMAILS,
+                ])),
+              }));
+            }
+          } catch {
+            // fallback
+          }
+        }
+
+        return false;
       },
 
       signInWithGoogle: async ({ email, name, avatar, accessCode }) => {
@@ -175,6 +234,7 @@ export const useAccessControl = create<AccessControlState>()(
         const isWhitelisted =
           isAdmin ||
           isCodeValid ||
+          PREAPPROVED_STUDENT_EMAILS.includes(cleanEmail) ||
           whitelist.some(
             (w) =>
               w === cleanEmail ||
@@ -208,11 +268,13 @@ export const useAccessControl = create<AccessControlState>()(
             ? "System Administrator"
             : isCodeValid
             ? "Verified via Passcode"
+            : PREAPPROVED_STUDENT_EMAILS.includes(cleanEmail)
+            ? "Pre-Approved Student"
             : existing?.note,
         };
 
         const newWhitelist =
-          isCodeValid || isAdmin
+          isCodeValid || isAdmin || PREAPPROVED_STUDENT_EMAILS.includes(cleanEmail)
             ? Array.from(new Set([...get().whitelistedEmails, cleanEmail]))
             : get().whitelistedEmails;
 
@@ -225,7 +287,7 @@ export const useAccessControl = create<AccessControlState>()(
           },
         }));
 
-        // Transmit to server to sync across all devices
+        // Transmit to server API
         try {
           const res = await fetch("/api/access/request", {
             method: "POST",
@@ -252,7 +314,22 @@ export const useAccessControl = create<AccessControlState>()(
             }
           }
         } catch {
-          // ignore network failure, optimistic local state retained
+          // ignore network failure
+        }
+
+        // Direct Supabase upsert if configured
+        if (isSupabaseReady() && supabase) {
+          void Promise.resolve(
+            supabase.from("access_requests").upsert({
+              id: newRequest.id,
+              email: cleanEmail,
+              name: user.name,
+              avatar: user.avatar,
+              status: newRequest.status,
+              requested_at: newRequest.requestedAt,
+              note: newRequest.note || null,
+            })
+          ).catch(() => {});
         }
 
         return {
@@ -375,7 +452,7 @@ export const useAccessControl = create<AccessControlState>()(
           set((state) => ({
             currentUser: adminUser,
             adminToken: trimmed,
-            whitelistedEmails: Array.from(new Set([...state.whitelistedEmails, MASTER_ADMIN_EMAIL])),
+            whitelistedEmails: Array.from(new Set([...state.whitelistedEmails, MASTER_ADMIN_EMAIL, ...PREAPPROVED_STUDENT_EMAILS])),
             accessRequests: {
               ...state.accessRequests,
               [MASTER_ADMIN_EMAIL]: {
@@ -548,6 +625,10 @@ export const useAccessControl = create<AccessControlState>()(
           return true;
         }
 
+        if (PREAPPROVED_STUDENT_EMAILS.includes(target)) {
+          return true;
+        }
+
         const whitelist = get().whitelistedEmails.map((e) => e.toLowerCase());
         if (
           whitelist.some(
@@ -572,7 +653,7 @@ export const useAccessControl = create<AccessControlState>()(
       },
     }),
     {
-      name: "bench-notes-access-v2",
+      name: "bench-notes-access-v3",
       partialize: (state) => ({
         adminEmails: state.adminEmails,
         whitelistedEmails: state.whitelistedEmails,

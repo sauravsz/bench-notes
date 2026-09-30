@@ -20,6 +20,10 @@ export interface AccessStoreData {
 
 export const MASTER_ADMIN_EMAIL = "varmint-aqua-early@duck.com";
 
+export const INITIAL_PREAPPROVED_EMAILS = [
+  "sumitaditya588@gmail.com",
+];
+
 export const VALID_ADMIN_HASHES = new Set<string>([
   "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", // sha256 of "admin"
   "a1565ed260e2ffc7bc621b55588ea8c0b8077496ea0c6d9a84b385071d40d14c", // legacy hash
@@ -53,7 +57,7 @@ export async function validateAdminAuth(passwordOrToken?: string): Promise<boole
 
 const TMP_STORE_PATH = path.join(
   process.env.TMPDIR || process.env.TEMP || "/tmp",
-  "bench_notes_access_v2.json"
+  "bench_notes_access_v3.json"
 );
 
 function loadFromLocalDisk(): AccessStoreData | null {
@@ -79,20 +83,31 @@ function saveToLocalDisk(data: AccessStoreData): void {
   }
 }
 
-// Remote KV integration if environment variables are provided
-async function saveToRemoteKv(data: AccessStoreData): Promise<void> {
-  const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-  const kvToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!kvUrl || !kvToken) return;
+// Remote Supabase REST sync
+async function saveToSupabaseRecord(record: AccessRecord): Promise<void> {
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
+  const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseKey) return;
 
   try {
-    await fetch(`${kvUrl}/set/benchnotes:store`, {
+    await fetch(`${supabaseUrl}/rest/v1/access_requests`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${kvToken}`,
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
         "Content-Type": "application/json",
+        Prefer: "resolution=merge-duplicates",
       },
-      body: JSON.stringify(JSON.stringify(data)),
+      body: JSON.stringify({
+        id: record.id,
+        email: record.email.toLowerCase().trim(),
+        name: record.name,
+        avatar: record.avatar,
+        status: record.status,
+        requested_at: record.requestedAt,
+        approved_at: record.approvedAt || null,
+        note: record.note || null,
+      }),
     });
   } catch {
     // non-fatal
@@ -113,7 +128,7 @@ class AccessStore {
       this.records = diskData.records || {};
       this.whitelist = diskData.whitelist || [];
     } else {
-      this.whitelist = [MASTER_ADMIN_EMAIL];
+      this.whitelist = [MASTER_ADMIN_EMAIL, ...INITIAL_PREAPPROVED_EMAILS];
       this.records[MASTER_ADMIN_EMAIL] = {
         id: "req_admin_master",
         email: MASTER_ADMIN_EMAIL,
@@ -123,7 +138,8 @@ class AccessStore {
         note: "System Administrator",
       };
     }
-    // Always ensure master admin is present and approved
+
+    // Always ensure master admin and preapproved students are present and approved
     if (!this.whitelist.includes(MASTER_ADMIN_EMAIL)) {
       this.whitelist.push(MASTER_ADMIN_EMAIL);
     }
@@ -137,6 +153,24 @@ class AccessStore {
         note: "System Administrator",
       };
     }
+
+    for (const email of INITIAL_PREAPPROVED_EMAILS) {
+      const clean = email.toLowerCase().trim();
+      if (!this.whitelist.includes(clean)) {
+        this.whitelist.push(clean);
+      }
+      if (!this.records[clean]) {
+        this.records[clean] = {
+          id: `req_${clean.replace(/[^a-z0-9]/g, "_")}`,
+          email: clean,
+          name: clean.split("@")[0],
+          requestedAt: Date.now(),
+          status: "approved",
+          approvedAt: Date.now(),
+          note: "Pre-Approved Student",
+        };
+      }
+    }
   }
 
   private persist() {
@@ -145,7 +179,6 @@ class AccessStore {
       whitelist: this.whitelist,
     };
     saveToLocalDisk(data);
-    saveToRemoteKv(data).catch(() => {});
   }
 
   public isApproved(email: string): boolean {
@@ -203,6 +236,7 @@ class AccessStore {
 
     this.records[clean] = record;
     this.persist();
+    saveToSupabaseRecord(record).catch(() => {});
     return record;
   }
 
@@ -239,7 +273,7 @@ class AccessStore {
       requestedAt: existing?.requestedAt || Date.now(),
       status: "approved",
       approvedAt: Date.now(),
-      note: note || existing?.note,
+      note: note || existing?.note || "Approved by Administrator",
     };
 
     this.records[clean] = record;
@@ -247,6 +281,7 @@ class AccessStore {
       this.whitelist.push(clean);
     }
     this.persist();
+    saveToSupabaseRecord(record).catch(() => {});
     return record;
   }
 
@@ -266,6 +301,7 @@ class AccessStore {
     this.records[clean] = record;
     this.whitelist = this.whitelist.filter((e) => e !== clean);
     this.persist();
+    saveToSupabaseRecord(record).catch(() => {});
     return record;
   }
 
@@ -278,6 +314,7 @@ class AccessStore {
     if (!clean.startsWith("@") && this.records[clean]) {
       this.records[clean].status = "approved";
       this.records[clean].approvedAt = Date.now();
+      saveToSupabaseRecord(this.records[clean]).catch(() => {});
     }
     this.persist();
   }
@@ -289,6 +326,7 @@ class AccessStore {
     if (!clean.startsWith("@") && this.records[clean]) {
       this.records[clean].status = "rejected";
       this.records[clean].rejectedAt = Date.now();
+      saveToSupabaseRecord(this.records[clean]).catch(() => {});
     }
     this.persist();
   }
