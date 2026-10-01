@@ -30,6 +30,7 @@ export const ADMIN_PLAIN_HASH =
 
 export const PREAPPROVED_STUDENT_EMAILS = [
   "sumitaditya588@gmail.com",
+  "mehbubalambarbhuiya1234@gmail.com",
 ];
 
 export const DEFAULT_PASSCODES = ["BENCH2026", "BENCH-1872", "MBA2026"];
@@ -129,6 +130,14 @@ export const useAccessControl = create<AccessControlState>()(
           id: "req_sumitaditya588",
           email: "sumitaditya588@gmail.com",
           name: "Sumit Aditya",
+          requestedAt: 1790776000000,
+          status: "approved",
+          note: "Pre-Approved Student",
+        },
+        "mehbubalambarbhuiya1234@gmail.com": {
+          id: "req_mehbubalambarbhuiya",
+          email: "mehbubalambarbhuiya1234@gmail.com",
+          name: "Mehbub Alam Barbhuiya",
           requestedAt: 1790776000000,
           status: "approved",
           note: "Pre-Approved Student",

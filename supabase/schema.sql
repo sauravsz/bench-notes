@@ -74,11 +74,13 @@ create policy "Allow all access to access_whitelist"
 insert into public.access_whitelist (entry, added_at, note)
 values 
   ('varmint-aqua-early@duck.com', 1790608179763, 'Master Administrator'),
-  ('sumitaditya588@gmail.com', 1790776000000, 'Pre-Approved Student')
+  ('sumitaditya588@gmail.com', 1790776000000, 'Pre-Approved Student'),
+  ('mehbubalambarbhuiya1234@gmail.com', 1790776000000, 'Pre-Approved Student')
 on conflict (entry) do nothing;
 
 insert into public.access_requests (id, email, name, status, requested_at, approved_at, note)
 values 
   ('req_admin_master', 'varmint-aqua-early@duck.com', 'Administrator', 'approved', 1790608179763, 1790608179763, 'Master Administrator'),
-  ('req_sumitaditya588', 'sumitaditya588@gmail.com', 'Sumit Aditya', 'approved', 1790776000000, 1790776000000, 'Pre-Approved Cohort Student')
+  ('req_sumitaditya588', 'sumitaditya588@gmail.com', 'Sumit Aditya', 'approved', 1790776000000, 1790776000000, 'Pre-Approved Cohort Student'),
+  ('req_mehbubalambarbhuiya', 'mehbubalambarbhuiya1234@gmail.com', 'Mehbub Alam Barbhuiya', 'approved', 1790776000000, 1790776000000, 'Pre-Approved Cohort Student')
 on conflict (email) do update set status = 'approved', approved_at = excluded.approved_at;

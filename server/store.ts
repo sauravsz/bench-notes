@@ -22,6 +22,7 @@ export const MASTER_ADMIN_EMAIL = "varmint-aqua-early@duck.com";
 
 export const INITIAL_PREAPPROVED_EMAILS = [
   "sumitaditya588@gmail.com",
+  "mehbubalambarbhuiya1234@gmail.com",
 ];
 
 export const VALID_ADMIN_HASHES = new Set<string>([
