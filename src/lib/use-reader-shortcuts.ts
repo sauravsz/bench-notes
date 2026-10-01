@@ -39,24 +39,14 @@ export function useReaderShortcuts() {
       if ((e.metaKey || e.ctrlKey) && (e.key.toLowerCase() === "b" || e.code === "KeyB")) {
         e.preventDefault();
         e.stopPropagation();
-        const next = toggleSidebar();
-        if (next) {
-          toast.info("Left sidebar collapsed (⌘B)", { duration: 1200 });
-        } else {
-          toast.info("Left sidebar expanded (⌘B)", { duration: 1200 });
-        }
+        toggleSidebar();
         return;
       }
 
       // 2. Bracket shortcuts [ or ] -> Toggle Left Sidebar
       if ((e.key === "[" || e.key === "]") && !e.metaKey && !e.ctrlKey) {
         e.preventDefault();
-        const next = toggleSidebar();
-        if (next) {
-          toast.info("Left sidebar collapsed", { duration: 1200 });
-        } else {
-          toast.info("Left sidebar expanded", { duration: 1200 });
-        }
+        toggleSidebar();
         return;
       }
 
@@ -69,12 +59,7 @@ export function useReaderShortcuts() {
         !e.shiftKey
       ) {
         e.preventDefault();
-        const next = toggleRightSidebar();
-        if (next) {
-          toast.info("Outline collapsed (T)", { duration: 1200 });
-        } else {
-          toast.info("Outline expanded (T)", { duration: 1200 });
-        }
+        toggleRightSidebar();
         return;
       }
 
