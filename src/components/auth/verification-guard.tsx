@@ -36,6 +36,10 @@ export function VerificationGuard({ children }: { children: ReactNode }) {
   const [passcodeInput, setPasscodeInput] = useState("");
   const [showPasscodeField, setShowPasscodeField] = useState(false);
 
+  const isUserApproved = currentUser ? isApproved(currentUser.email) : false;
+  const isUserAdmin = currentUser ? isAdmin(currentUser.email) : false;
+  const isPending = Boolean(currentUser && !isUserApproved && !isUserAdmin);
+
   // Check URL query parameters for instant invite code (e.g. ?code=BENCH2026 or ?access_token=...)
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -52,15 +56,17 @@ export function VerificationGuard({ children }: { children: ReactNode }) {
     }
   }, [verifyWithPasscode]);
 
-  // Periodic sync with server so approvals reflect in real-time
+  // Periodic sync with server only when user is awaiting verification approval
   useEffect(() => {
+    if (!isPending) return;
     syncWithServer();
     const interval = setInterval(() => {
-      syncWithServer();
-    }, 3000);
+      if (typeof document !== "undefined" && document.visibilityState === "visible") {
+        syncWithServer();
+      }
+    }, 4000);
     return () => clearInterval(interval);
-  }, [syncWithServer]);
-
+  }, [isPending, syncWithServer]);
   // If auth is not required, pass through
   if (!authRequired) {
     return <>{children}</>;

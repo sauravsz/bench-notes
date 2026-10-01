@@ -42,9 +42,9 @@ function MaximsPage() {
       <div className="mx-auto max-w-3xl space-y-8">
         <header className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1c1c1c] border border-[#262626] px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#0099ff]">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0099ff]/15 border border-[#0099ff]/30 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#0099ff]">
               <Languages className="size-3.5" />
-              Jurisprudence & Legal Maxims
+              Paper 603 · Business Laws Jurisprudence
             </span>
             <span className="font-mono text-xs text-[#666666]">
               {maxims.length} Maxims

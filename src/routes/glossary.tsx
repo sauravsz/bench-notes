@@ -7,9 +7,30 @@ export const Route = createFileRoute("/glossary")({ component: GlossaryPage });
 
 function GlossaryPage() {
   const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
-  const glossary = activeCourse.glossary || [];
   const [search, setSearch] = useState("");
   const [selectedLetter, setSelectedLetter] = useState<string>("All");
+
+  const glossary = useMemo(() => {
+    if (activeCourse.glossary && activeCourse.glossary.length > 0) {
+      return activeCourse.glossary;
+    }
+    const harvested: Array<{ id: string; term: string; body: string; section?: string; topicSlug: string }> = [];
+    for (const topic of activeCourse.topics) {
+      for (let i = 0; i < topic.blocks.length; i++) {
+        const b = topic.blocks[i];
+        if (b.type === "def") {
+          harvested.push({
+            id: `def-${topic.slug}-${i}`,
+            term: b.term,
+            body: b.body,
+            section: b.section,
+            topicSlug: topic.slug,
+          });
+        }
+      }
+    }
+    return harvested;
+  }, [activeCourse]);
 
   const letters = useMemo(() => {
     const set = new Set<string>();

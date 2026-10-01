@@ -22,8 +22,7 @@ export function CourseSwitcher({
   const menuRef = useRef<HTMLDivElement>(null);
 
   const activeCourse =
-    allCourses.find((c) => c.slug === activeCourseSlug) || allCourses[2];
-
+    allCourses.find((c) => c.slug === activeCourseSlug) || allCourses[0];
   // Click outside listener
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {

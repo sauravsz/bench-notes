@@ -4,7 +4,6 @@ import { persist } from "zustand/middleware";
 export type TextWidth = "narrow" | "medium" | "wide" | "full";
 export type LineSpacing = "compact" | "normal" | "relaxed" | "loose";
 export type FontFamily = "serif" | "sans" | "mono" | "accessible";
-export type ThemeTone = "warm" | "light" | "sepia" | "dark";
 
 export const TEXT_WIDTH_CLASSES: Record<TextWidth, string> = {
   narrow: "max-w-xl",      // ~576px
@@ -27,33 +26,6 @@ export const FONT_FAMILY_CLASSES: Record<FontFamily, string> = {
   accessible: "font-sans tracking-wide",
 };
 
-export const THEME_TONE_STYLES: Record<ThemeTone, { bg: string; surface: string; text: string; line: string }> = {
-  warm: {
-    bg: "#FAF8F5",
-    surface: "#FFFFFF",
-    text: "#0F172A",
-    line: "#CBD5E1",
-  },
-  light: {
-    bg: "#FFFFFF",
-    surface: "#F8FAFC",
-    text: "#0F172A",
-    line: "#E2E8F0",
-  },
-  sepia: {
-    bg: "#F4ECD8",
-    surface: "#FCF8ED",
-    text: "#2E2012",
-    line: "#D8C7A8",
-  },
-  dark: {
-    bg: "#0B0F17",
-    surface: "#111827",
-    text: "#F1F5F9",
-    line: "#1F2937",
-  },
-};
-
 type AppearanceState = {
   sidebarCollapsed: boolean;
   rightSidebarCollapsed: boolean;
@@ -61,7 +33,6 @@ type AppearanceState = {
   fontSize: number; // 14 to 28 px
   lineSpacing: LineSpacing;
   fontFamily: FontFamily;
-  themeTone: ThemeTone;
   appearanceMenuOpen: boolean;
 
   // Actions
@@ -78,7 +49,6 @@ type AppearanceState = {
   setLineSpacing: (spacing: LineSpacing) => void;
   cycleLineSpacing: (direction: "up" | "down") => void;
   setFontFamily: (family: FontFamily) => void;
-  setThemeTone: (tone: ThemeTone) => void;
   setAppearanceMenuOpen: (open: boolean) => void;
   toggleAppearanceMenu: () => void;
   resetAppearance: () => void;
@@ -96,7 +66,6 @@ export const useAppearance = create<AppearanceState>()(
       fontSize: 17,
       lineSpacing: "normal",
       fontFamily: "serif",
-      themeTone: "warm",
       appearanceMenuOpen: false,
 
       toggleSidebar: () => {
@@ -149,8 +118,6 @@ export const useAppearance = create<AppearanceState>()(
 
       setFontFamily: (fontFamily) => set({ fontFamily }),
 
-      setThemeTone: (themeTone) => set({ themeTone }),
-
       setAppearanceMenuOpen: (open) => set({ appearanceMenuOpen: open }),
 
       toggleAppearanceMenu: () => set((s) => ({ appearanceMenuOpen: !s.appearanceMenuOpen })),
@@ -163,7 +130,6 @@ export const useAppearance = create<AppearanceState>()(
           fontSize: 17,
           lineSpacing: "normal",
           fontFamily: "serif",
-          themeTone: "warm",
         }),
     }),
     {
@@ -175,7 +141,6 @@ export const useAppearance = create<AppearanceState>()(
         fontSize: state.fontSize,
         lineSpacing: state.lineSpacing,
         fontFamily: state.fontFamily,
-        themeTone: state.themeTone,
       }),
     },
   ),

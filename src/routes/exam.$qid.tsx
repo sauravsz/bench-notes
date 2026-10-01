@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, ArrowUp, Scale } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
 import { adjacentExams, getExam, getTopic } from "@/data";
 import { getExamById } from "@/data/courses";
 import { useCurrentCourse } from "@/lib/current-course";
@@ -31,27 +31,6 @@ function ExamAnswer() {
   const toggleStudied = useProgress((s) => s.toggleStudied);
   const setLastSlug = useProgress((s) => s.setLastSlug);
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const totalHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        setProgress(Math.min(100, Math.max(0, (scrollY / totalHeight) * 100)));
-      } else {
-        setProgress(0);
-      }
-      setShowBackToTop(scrollY > 300);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    if (course) {
-      setActiveCourseSlug(course.slug);
-    }
-    setLastSlug(qid);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [qid, course, setActiveCourseSlug, setLastSlug]);
-  useEffect(() => {
     const savedY = sessionStorage.getItem(`scroll_pos_exam_${qid}`);
     if (savedY) {
       const y = parseInt(savedY, 10);
@@ -60,14 +39,46 @@ function ExamAnswer() {
       }
     }
 
-    const handleSaveScroll = () => {
-      if (window.scrollY > 100) {
-        sessionStorage.setItem(`scroll_pos_exam_${qid}`, String(window.scrollY));
+    let saveTimer: ReturnType<typeof setTimeout> | null = null;
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+          if (totalHeight > 0) {
+            setProgress(Math.min(100, Math.max(0, (scrollY / totalHeight) * 100)));
+          } else {
+            setProgress(0);
+          }
+          setShowBackToTop(scrollY > 300);
+          ticking = false;
+        });
+        ticking = true;
       }
+
+      if (saveTimer) clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        if (window.scrollY > 100) {
+          sessionStorage.setItem(`scroll_pos_exam_${qid}`, String(window.scrollY));
+        }
+      }, 400);
     };
-    window.addEventListener("scroll", handleSaveScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleSaveScroll);
-  }, [qid]);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    if (course) {
+      setActiveCourseSlug(course.slug);
+    }
+    setLastSlug(qid);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (saveTimer) clearTimeout(saveTimer);
+    };
+  }, [qid, course, setActiveCourseSlug, setLastSlug]);
 
 
   const related = exam.relatedSlugs

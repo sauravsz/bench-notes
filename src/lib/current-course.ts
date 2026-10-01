@@ -22,7 +22,7 @@ export const useCurrentCourse = create<CurrentCourseState>()(
 
       getActiveCourse: () => {
         const slug = get().activeCourseSlug;
-        return getCourse(slug) || allCourses.find((c) => c.slug === "business-laws") || allCourses[2];
+        return getCourse(slug) || allCourses[0];
       },
     }),
     {

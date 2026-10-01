@@ -18,21 +18,23 @@ export function StudyTimer({
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout | number | null = null;
-    if (isRunning && secondsLeft > 0) {
-      timer = setInterval(() => {
-        setSecondsLeft((prev) => prev - 1);
-      }, 1000);
-    } else if (secondsLeft === 0 && isRunning) {
-      setIsRunning(false);
-      toast.success("Study sprint completed! Take a 5-minute break.", {
-        duration: 5000,
+    if (!isRunning) return;
+
+    const interval = setInterval(() => {
+      setSecondsLeft((prev) => {
+        if (prev <= 1) {
+          setIsRunning(false);
+          toast.success("Study sprint completed! Take a 5-minute break.", {
+            duration: 5000,
+          });
+          return 0;
+        }
+        return prev - 1;
       });
-    }
-    return () => {
-      clearInterval(timer ?? undefined);
-    };
-  }, [isRunning, secondsLeft]);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isRunning]);
 
   if (!isOpen) return null;
 

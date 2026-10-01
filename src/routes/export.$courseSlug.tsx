@@ -3,7 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { allCourses } from "@/data/courses";
 import { NoteBody } from "@/components/note-body";
 import { useAccessControl } from "@/lib/auth/access-control";
-import { ArrowLeft, BookOpen, CheckCircle2, Download, FileText, Lock, Printer, Sparkles } from "lucide-react";
+import { ArrowLeft, BookOpen, Lock, Printer } from "lucide-react";
 import { cn } from "@/lib/utils";
 type SearchParams = {
   mode?: "all" | "topics" | "exam";

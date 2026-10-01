@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { allCourses } from "@/data/courses";
 import { useAccessControl } from "@/lib/auth/access-control";
-import { ArrowRight, BookOpen, Download, FileText, Lock, Printer, Sparkles } from "lucide-react";
+import { BookOpen, Download, FileText, Lock, Printer, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/export/")({
   component: ExportIndex,

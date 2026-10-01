@@ -5,8 +5,6 @@ import {
   ArrowRight,
   ArrowUp,
   Clock,
-  Download,
-  Printer,
   Sparkles,
 } from "lucide-react";
 import { adjacentTopics, getTopic } from "@/data";
@@ -48,23 +46,6 @@ function TopicPage() {
   const readTimeMin = Math.max(1, Math.round(totalWords / 200));
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const totalHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        setProgress(Math.min(100, Math.max(0, (scrollY / totalHeight) * 100)));
-      } else {
-        setProgress(0);
-      }
-      setShowBackToTop(scrollY > 300);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [slug]);
-  useEffect(() => {
     const savedY = sessionStorage.getItem(`scroll_pos_${slug}`);
     if (savedY) {
       const y = parseInt(savedY, 10);
@@ -73,15 +54,41 @@ function TopicPage() {
       }
     }
 
-    const handleSaveScroll = () => {
-      if (window.scrollY > 100) {
-        sessionStorage.setItem(`scroll_pos_${slug}`, String(window.scrollY));
-      }
-    };
-    window.addEventListener("scroll", handleSaveScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleSaveScroll);
-  }, [slug]);
+    let saveTimer: ReturnType<typeof setTimeout> | null = null;
+    let ticking = false;
 
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+          if (totalHeight > 0) {
+            setProgress(Math.min(100, Math.max(0, (scrollY / totalHeight) * 100)));
+          } else {
+            setProgress(0);
+          }
+          setShowBackToTop(scrollY > 300);
+          ticking = false;
+        });
+        ticking = true;
+      }
+
+      if (saveTimer) clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        if (window.scrollY > 100) {
+          sessionStorage.setItem(`scroll_pos_${slug}`, String(window.scrollY));
+        }
+      }, 400);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (saveTimer) clearTimeout(saveTimer);
+    };
+  }, [slug]);
 
   useEffect(() => {
     setLastSlug(slug);

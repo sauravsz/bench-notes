@@ -14,7 +14,7 @@ import {
   TableProperties,
   Ticket,
 } from "lucide-react";
-import { allCourses, courseCategories, type Course } from "@/data/courses";
+import { allCourses, courseCategories, getCourse, type Course } from "@/data/courses";
 import { useCurrentCourse } from "@/lib/current-course";
 import { useProgress } from "@/lib/progress";
 import { cn } from "@/lib/utils";
@@ -46,11 +46,13 @@ function Dashboard() {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
     const courseParam = params.get("course");
-    if (courseParam === "603" || courseParam === "business-laws") {
-      setActiveCourseSlug("business-laws");
+    if (courseParam) {
+      const matched = getCourse(courseParam);
+      if (matched) {
+        setActiveCourseSlug(matched.slug);
+      }
     }
   }, [setActiveCourseSlug]);
-
   const handleReset = () => {
     resetProgress();
     setConfirmReset(false);

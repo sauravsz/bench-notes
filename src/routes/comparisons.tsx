@@ -38,7 +38,13 @@ function ComparisonStudioPage() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const allTables = useMemo(() => getAllComparisonTables(), []);
-
+  const courseCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const t of allTables) {
+      counts[t.courseSlug] = (counts[t.courseSlug] || 0) + 1;
+    }
+    return counts;
+  }, [allTables]);
   const filteredTables = useMemo(() => {
     let list = allTables;
 
@@ -118,7 +124,7 @@ function ComparisonStudioPage() {
               All Papers ({allTables.length})
             </button>
             {allCourses.map((c) => {
-              const count = allTables.filter((t) => t.courseSlug === c.slug).length;
+              const count = courseCounts[c.slug] || 0;
               if (count === 0) return null;
               const isSelected = selectedCourseSlug === c.slug;
 
