@@ -356,11 +356,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-dvh bg-[#090909] text-white">
       {/* Floating Restore Button when Topbar & Sidebar are collapsed */}
       {sidebarCollapsed ? (
-        <div className="no-print fixed left-4 top-4 z-40 flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="no-print fixed left-4 top-4 z-40 flex items-center gap-2 apple-restore-pill">
           <button
             type="button"
             onClick={toggleSidebar}
-            className="flex size-9 items-center justify-center rounded-full border border-[#262626] bg-[#141414]/90 backdrop-blur-md text-white shadow-lg hover:bg-[#1c1c1c] transition-all"
+            className="flex size-9 items-center justify-center rounded-full border border-[#262626] bg-[#141414]/90 backdrop-blur-md text-white shadow-xl hover:bg-[#1c1c1c] transition-all apple-press"
             title="Restore Navigation Bar & Sidebar (Cmd+B)"
             aria-label="Restore Top Bar & Sidebar"
           >
@@ -392,7 +392,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <button
             type="button"
             onClick={toggleSidebar}
-            className="hidden lg:inline-flex size-9 items-center justify-center rounded-full border border-[#262626] bg-[#141414] text-[#999999] hover:text-white hover:bg-[#1c1c1c] transition-colors"
+            className="hidden lg:inline-flex size-9 items-center justify-center rounded-full border border-[#262626] bg-[#141414] text-[#999999] hover:text-white hover:bg-[#1c1c1c] transition-colors apple-press"
             title={sidebarCollapsed ? "Expand Sidebar (Cmd+B)" : "Collapse Sidebar (Cmd+B)"}
             aria-label="Toggle Sidebar"
           >
@@ -494,34 +494,45 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      {/* Mobile Sidebar Overlay */}
-      {open ? (
-        <div className="no-print fixed inset-0 z-40 lg:hidden">
-          <button
-            type="button"
-            className="absolute inset-0 bg-black/80 backdrop-blur-md transition-opacity duration-300"
-            aria-label="Close syllabus"
-            onClick={() => setOpen(false)}
-          />
-          <nav className="drawer-surface absolute inset-y-0 left-0 w-[min(20rem,88vw)] overflow-y-auto border-r border-[#262626] bg-[#090909] px-4 pt-16 shadow-2xl animate-in slide-in-from-left duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
-            <NavList onNavigate={() => setOpen(false)} />
-          </nav>
-        </div>
-      ) : null}
+      {/* Mobile Sidebar Overlay with Apple Sheet Physics */}
+      <div
+        className={cn(
+          "no-print fixed inset-0 z-40 lg:hidden pointer-events-none transition-all duration-300",
+          open && "pointer-events-auto",
+        )}
+      >
+        <button
+          type="button"
+          className={cn(
+            "absolute inset-0 bg-black/80 backdrop-blur-xl apple-sheet-backdrop",
+            open && "apple-sheet-backdrop-open",
+          )}
+          aria-label="Close syllabus"
+          onClick={() => setOpen(false)}
+        />
+        <nav
+          className={cn(
+            "apple-sheet-panel absolute inset-y-0 left-0 w-[min(20rem,88vw)] overflow-y-auto border-r border-[#262626] bg-[#090909] px-4 pt-16 shadow-2xl",
+            open && "apple-sheet-panel-open",
+          )}
+        >
+          <NavList onNavigate={() => setOpen(false)} />
+        </nav>
+      </div>
 
-      {/* Main Content Layout */}
+      {/* Main Content Layout with Apple Spring Split-View Physics */}
       <div className={cn("mx-auto flex max-w-[1500px]", sidebarCollapsed ? "pt-12 sm:pt-14" : "")}>
         <aside
           className={cn(
-            "no-print sticky top-16 h-[calc(100dvh-4rem)] w-[280px] shrink-0 overflow-y-auto border-r border-[#262626] px-3 pt-6 transition-all duration-200",
-            sidebarCollapsed ? "hidden" : "hidden lg:block",
+            "no-print sticky top-16 h-[calc(100dvh-4rem)] shrink-0 overflow-y-auto border-r border-[#262626] px-3 pt-6 hidden lg:block apple-sidebar-desktop",
+            sidebarCollapsed && "apple-sidebar-desktop-collapsed",
           )}
         >
           <NavList />
         </aside>
 
         {/* Content Area */}
-        <div className="min-w-0 flex-1 transition-all duration-200">{children}</div>
+        <div className="min-w-0 flex-1 transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]">{children}</div>
       </div>
 
       {/* Highlights Slide-over Drawer */}
