@@ -14,8 +14,6 @@ import {
   Menu,
   PanelLeft,
   PanelLeftClose,
-  PanelRight,
-  PanelRightClose,
   Scale,
   Search,
   ShieldCheck,
@@ -424,18 +422,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 ⌘K
               </kbd>
             </button>
-            {/* Quick Export PDF Link (Icon-only, Admin only) */}
-            {isAdmin && (
-              <Link
-                to="/export/$courseSlug"
-                params={{ courseSlug: activeCourse.slug }}
-                className="relative inline-flex size-9 sm:size-10 items-center justify-center rounded-full border border-[#262626] bg-[#141414] text-[#999999] hover:text-white hover:bg-[#1c1c1c] transition-all ios-press"
-                title="Export Full Course Notes as PDF"
-                aria-label="Export Full Course Notes as PDF"
-              >
-                <Download className="size-4 text-[#0099ff]" strokeWidth={1.75} />
-              </Link>
-            )}
             <button
               type="button"
               data-appearance-trigger
@@ -447,25 +433,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <span className="font-sans text-xs font-bold">Aa</span>
             </button>
 
-            {/* Right Sidebar (Outline & Progress) Toggle */}
-            <button
-              type="button"
-              onClick={() => toggleRightSidebar()}
-              className={cn(
-                "hidden xl:inline-flex size-9 sm:size-10 items-center justify-center rounded-full border border-[#262626] bg-[#141414] transition-all ios-press",
-                !rightSidebarCollapsed
-                  ? "text-[#0099ff] hover:bg-[#1c1c1c] hover:text-white"
-                  : "text-[#999999] hover:bg-[#1c1c1c] hover:text-white"
-              )}
-              title={rightSidebarCollapsed ? "Show Table of Contents & Progress (T)" : "Hide Table of Contents & Progress (T)"}
-              aria-label="Toggle Table of Contents"
-            >
-              {rightSidebarCollapsed ? (
-                <PanelRight className="size-4" strokeWidth={1.75} />
-              ) : (
-                <PanelRightClose className="size-4 text-[#0099ff]" strokeWidth={1.75} />
-              )}
-            </button>
 
             <p className="hidden font-sans text-xs tabular-nums text-[#999999] lg:block">
               {done}/{activeCourse.topics.length} studied
@@ -488,16 +455,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             {/* User Profile / Admin Link / Sign In Button */}
             {currentUser ? (
               <div className="flex items-center gap-2">
-                {isAdmin && (
-                  <Link
-                    to="/admin"
-                    className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-white text-black px-3 py-1 font-sans text-xs font-bold hover:bg-white/90 transition-all ios-press"
-                    title="Open Administrator Verification Panel"
-                  >
-                    <ShieldCheck className="size-3.5" />
-                    <span>Admin</span>
-                  </Link>
-                )}
                 <button
                   type="button"
                   onClick={() => {
