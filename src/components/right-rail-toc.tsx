@@ -74,20 +74,6 @@ export function RightRailToc({
 
   if (headings.length === 0) return null;
 
-  if (rightSidebarCollapsed) {
-    return (
-      <button
-        type="button"
-        onClick={() => toggleRightSidebar()}
-        className="no-print fixed top-20 right-6 z-40 hidden xl:flex size-9 items-center justify-center rounded-full border border-[#262626] bg-[#141414]/90 text-[#999999] shadow-lg backdrop-blur-md hover:bg-[#1c1c1c] hover:text-white transition-all duration-200 group ios-press"
-        title="Show Table of Contents & Progress (T)"
-        aria-label="Show Table of Contents"
-      >
-        <PanelRight className="size-4 text-[#0099ff] group-hover:scale-110 transition-transform" strokeWidth={1.75} />
-      </button>
-    );
-  }
-
   const scrollToHeading = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -97,12 +83,28 @@ export function RightRailToc({
   };
 
   return (
-    <aside
-      className={cn(
-        "no-print sticky top-20 z-10 hidden h-[calc(100dvh-6rem)] w-64 shrink-0 overflow-y-auto pl-6 pr-2 xl:block",
-        className,
-      )}
-    >
+    <>
+      {rightSidebarCollapsed ? (
+        <div className="no-print fixed top-20 right-6 z-40 hidden xl:flex apple-restore-pill">
+          <button
+            type="button"
+            onClick={() => toggleRightSidebar()}
+            className="flex size-9 items-center justify-center rounded-full border border-[#262626] bg-[#141414]/90 text-white shadow-xl backdrop-blur-md hover:bg-[#1c1c1c] transition-all duration-200 apple-press"
+            title="Show Table of Contents & Progress (T)"
+            aria-label="Show Table of Contents"
+          >
+            <PanelRight className="size-4 text-[#0099ff]" strokeWidth={1.75} />
+          </button>
+        </div>
+      ) : null}
+
+      <aside
+        className={cn(
+          "no-print sticky top-20 z-10 hidden h-[calc(100dvh-6rem)] shrink-0 overflow-y-auto pl-6 pr-2 xl:block apple-sidebar-right",
+          rightSidebarCollapsed && "apple-sidebar-right-collapsed",
+          className,
+        )}
+      >
       <div className="space-y-6">
         {/* Reading Progress Metric Card */}
         <div className="rounded-[18px] border border-[#262626] bg-[#141414] p-4 space-y-2.5">
@@ -201,6 +203,7 @@ export function RightRailToc({
           </div>
         </div>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 }

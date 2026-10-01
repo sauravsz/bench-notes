@@ -184,8 +184,60 @@
   pointer-events: none !important;
   overflow: hidden !important;
 }
+/* Right Split Sidebar Animation (Table of Contents & Progress) */
+.apple-sidebar-right {
+  width: 16rem;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: width 0.36s var(--apple-ease-spring),
+              transform 0.36s var(--apple-ease-spring),
+              opacity 0.28s ease,
+              padding 0.36s var(--apple-ease-spring);
+  will-change: width, transform, opacity;
+}
 
-/* Apple Mobile Slide Sheet Animation */
+.apple-sidebar-right-collapsed {
+  width: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  opacity: 0 !important;
+  transform: translate3d(20px, 0, 0) scale(0.98) !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+/* Apple Smooth Spring Accordions (Fluid CSS Grid expansion) */
+.apple-accordion-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.34s var(--apple-ease-spring), opacity 0.25s ease;
+  opacity: 0;
+  will-change: grid-template-rows, opacity;
+}
+
+.apple-accordion-wrapper-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.apple-accordion-inner {
+  overflow: hidden;
+}
+
+/* Apple Sidebar Interactive Item Morphing */
+.apple-nav-item {
+  position: relative;
+  transition: background-color 0.18s var(--apple-ease-snappy),
+              color 0.15s ease,
+              transform 0.12s var(--apple-ease-snappy),
+              border-color 0.18s ease;
+  will-change: transform;
+}
+
+.apple-nav-item:active {
+  transform: scale(0.975);
+}
+
 .apple-sheet-backdrop {
   opacity: 0;
   transition: opacity 0.32s var(--apple-ease-spring), backdrop-filter 0.32s ease;

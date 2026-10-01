@@ -70,9 +70,9 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           to="/"
           onClick={onNavigate}
           className={cn(
-            "flex min-h-10 items-center gap-2.5 rounded-full px-3.5 text-sm font-medium transition-all duration-200 ios-press-subtle",
+            "apple-nav-item apple-press-subtle flex min-h-10 items-center gap-2.5 rounded-full px-3.5 text-sm font-medium",
             pathname === "/"
-              ? "bg-[#1c1c1c] font-semibold text-white border border-[#262626]"
+              ? "apple-nav-item-active"
               : "text-[#999999] hover:bg-[#141414] hover:text-white",
           )}
         >
@@ -83,9 +83,9 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           to="/exam"
           onClick={onNavigate}
           className={cn(
-            "flex min-h-10 items-center justify-between rounded-full px-3.5 text-sm font-medium transition-all duration-200 ios-press-subtle",
+            "apple-nav-item apple-press-subtle flex min-h-10 items-center justify-between rounded-full px-3.5 text-sm font-medium",
             pathname.startsWith("/exam")
-              ? "bg-[#1c1c1c] font-semibold text-white border border-[#262626]"
+              ? "apple-nav-item-active"
               : "text-[#999999] hover:bg-[#141414] hover:text-white",
           )}
         >
@@ -101,9 +101,9 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           to="/comparisons"
           onClick={onNavigate}
           className={cn(
-            "flex min-h-10 items-center justify-between rounded-full px-3.5 text-sm font-medium transition-all duration-200 ios-press-subtle",
+            "apple-nav-item apple-press-subtle flex min-h-10 items-center justify-between rounded-full px-3.5 text-sm font-medium",
             pathname === "/comparisons"
-              ? "bg-[#1c1c1c] font-semibold text-white border border-[#262626]"
+              ? "apple-nav-item-active"
               : "text-[#999999] hover:bg-[#141414] hover:text-white",
           )}
         >
@@ -267,38 +267,44 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
                 />
               </div>
             </button>
-
-            {!isCollapsed && (
-              <ul className="flex flex-col space-y-0.5 pl-1 transition-all">
-                {list.map((topic) => {
-                  const href = `/topic/${topic.slug}`;
-                  const active = pathname === href;
-                  return (
-                    <li key={topic.id}>
-                      <Link
-                        to="/topic/$slug"
-                        params={{ slug: topic.slug }}
-                        onClick={onNavigate}
-                        className={cn(
-                          "flex min-h-8 items-center gap-2 rounded-lg px-2.5 py-1 text-xs leading-snug transition-all duration-150",
-                          active
-                            ? "bg-[#1c1c1c] font-semibold text-white border border-[#262626]"
-                            : "text-[#a0a0a0] hover:bg-[#141414] hover:text-white",
-                        )}
-                      >
-                        <span className="w-4 shrink-0 font-mono text-[10px] text-[#666666]">
-                          {String(topic.number).padStart(2, "0")}
-                        </span>
-                        <span className="flex-1 truncate">{topic.title}</span>
-                        {studied[topic.slug] ? (
-                          <span className="size-1.5 shrink-0 rounded-full bg-[#22c55e]" />
-                        ) : null}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
+            <div
+              className={cn(
+                "apple-accordion-wrapper",
+                !isCollapsed && "apple-accordion-wrapper-open",
+              )}
+            >
+              <div className="apple-accordion-inner">
+                <ul className="flex flex-col space-y-0.5 pl-1 pt-0.5">
+                  {list.map((topic) => {
+                    const href = `/topic/${topic.slug}`;
+                    const active = pathname === href;
+                    return (
+                      <li key={topic.id}>
+                        <Link
+                          to="/topic/$slug"
+                          params={{ slug: topic.slug }}
+                          onClick={onNavigate}
+                          className={cn(
+                            "apple-nav-item apple-press-subtle flex min-h-8 items-center gap-2 rounded-lg px-2.5 py-1 text-xs leading-snug",
+                            active
+                              ? "bg-[#1c1c1c] font-semibold text-white border border-[#262626]"
+                              : "text-[#a0a0a0] hover:bg-[#141414] hover:text-white",
+                          )}
+                        >
+                          <span className="w-4 shrink-0 font-mono text-[10px] text-[#666666]">
+                            {String(topic.number).padStart(2, "0")}
+                          </span>
+                          <span className="flex-1 truncate">{topic.title}</span>
+                          {studied[topic.slug] ? (
+                            <span className="size-1.5 shrink-0 rounded-full bg-[#22c55e]" />
+                          ) : null}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
           </div>
         );
       })}
