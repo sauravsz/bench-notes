@@ -113,7 +113,7 @@ function TopicPage() {
         {/* Main Article Canvas */}
         <article className={cn("min-w-0 flex-1 transition-all duration-200 ios-fade-up", TEXT_WIDTH_CLASSES[textWidth])}>
           {/* Breadcrumb Navigation Trail */}
-          <nav className="mb-6 flex flex-wrap items-center gap-1.5 font-mono text-xs text-[#666666]">
+          <nav className="print-breadcrumbs mb-6 flex flex-wrap items-center gap-1.5 font-mono text-xs text-[#666666]">
             <Link to="/" className="hover:text-white transition-colors">
               MBA Papers
             </Link>

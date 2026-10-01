@@ -22,6 +22,9 @@ function CourseExportView() {
   const { courseSlug } = Route.useParams();
   const search = Route.useSearch();
   const [mode, setMode] = useState<"all" | "topics" | "exam">(search.mode || "all");
+  const [paperTheme, setPaperTheme] = useState<"dark" | "light">("dark");
+  const [fontSizeScale, setFontSizeScale] = useState<"compact" | "normal" | "large">("normal");
+
   const currentUser = useAccessControl((s) => s.currentUser);
   const isAdmin = useAccessControl((s) => s.isAdmin(s.currentUser?.email));
   const isApproved = useAccessControl((s) => s.isApproved(s.currentUser?.email));
@@ -53,7 +56,6 @@ function CourseExportView() {
     );
   }
 
-
   const course = allCourses.find(
     (c) => c.slug === courseSlug || c.id === courseSlug || c.code.toLowerCase() === courseSlug.toLowerCase(),
   );
@@ -82,8 +84,20 @@ function CourseExportView() {
   const showTopics = mode === "all" || mode === "topics";
   const showExam = mode === "all" || mode === "exam";
 
+  const fontSizeClass =
+    fontSizeScale === "compact"
+      ? "text-xs leading-normal"
+      : fontSizeScale === "large"
+        ? "text-base leading-loose"
+        : "text-sm leading-relaxed";
+
   return (
-    <div className="min-h-screen bg-[#090909] text-white">
+    <div
+      className={cn(
+        "min-h-screen transition-colors duration-200",
+        paperTheme === "light" ? "bg-[#f8fafc] text-[#0f172a]" : "bg-[#090909] text-white",
+      )}
+    >
       {/* Sticky Action Toolbar (Hidden on Print) */}
       <div className="no-print sticky top-0 z-40 border-b border-[#262626] bg-[#090909]/95 backdrop-blur-md px-4 py-3 sm:px-8">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3">
@@ -102,38 +116,65 @@ function CourseExportView() {
             </div>
           </div>
 
-          {/* Scope Toggles & Primary Print CTA */}
-          <div className="flex items-center gap-2">
+          {/* Scope Toggles, Scale & Primary Print CTA */}
+          <div className="flex flex-wrap items-center gap-2">
+            {/* Mode Scope Selection */}
             <div className="hidden md:flex items-center gap-1 rounded-full border border-[#262626] bg-[#141414] p-1 text-xs">
               <button
                 type="button"
                 onClick={() => setMode("all")}
                 className={cn(
-                  "rounded-full px-3 py-1 font-medium transition-colors",
+                  "rounded-full px-3 py-1 font-medium transition-colors cursor-pointer",
                   mode === "all" ? "bg-white text-black font-bold" : "text-[#999999] hover:text-white",
                 )}
               >
-                All Content ({course.topics.length + course.examQuestions.length})
+                All ({course.topics.length + course.examQuestions.length})
               </button>
               <button
                 type="button"
                 onClick={() => setMode("topics")}
                 className={cn(
-                  "rounded-full px-3 py-1 font-medium transition-colors",
+                  "rounded-full px-3 py-1 font-medium transition-colors cursor-pointer",
                   mode === "topics" ? "bg-white text-black font-bold" : "text-[#999999] hover:text-white",
                 )}
               >
-                Topics Only ({course.topics.length})
+                Topics ({course.topics.length})
               </button>
               <button
                 type="button"
                 onClick={() => setMode("exam")}
                 className={cn(
-                  "rounded-full px-3 py-1 font-medium transition-colors",
+                  "rounded-full px-3 py-1 font-medium transition-colors cursor-pointer",
                   mode === "exam" ? "bg-white text-black font-bold" : "text-[#999999] hover:text-white",
                 )}
               >
                 Exam Qs ({course.examQuestions.length})
+              </button>
+            </div>
+
+            {/* Screen Preview Theme Toggle */}
+            <div className="hidden lg:flex items-center gap-1 rounded-full border border-[#262626] bg-[#141414] p-1 text-xs">
+              <button
+                type="button"
+                onClick={() => setPaperTheme("dark")}
+                className={cn(
+                  "rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors cursor-pointer",
+                  paperTheme === "dark" ? "bg-[#262626] text-white font-bold" : "text-[#888888] hover:text-white",
+                )}
+                title="Dark Screen Preview"
+              >
+                Dark
+              </button>
+              <button
+                type="button"
+                onClick={() => setPaperTheme("light")}
+                className={cn(
+                  "rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors cursor-pointer",
+                  paperTheme === "light" ? "bg-white text-black font-bold" : "text-[#888888] hover:text-white",
+                )}
+                title="Light Paper Preview"
+              >
+                Paper
               </button>
             </div>
 
@@ -150,53 +191,98 @@ function CourseExportView() {
       </div>
 
       {/* Main Printable Document Canvas */}
-      <main className="mx-auto max-w-4xl px-4 py-8 sm:px-10 sm:py-12">
+      <main className="mx-auto max-w-4xl px-4 py-8 sm:px-10 sm:py-12 print-canvas">
         {/* Cover / Header Section */}
-        <section className="border-b-2 border-white/20 pb-8 space-y-4">
+        <section
+          className={cn(
+            "pb-12 space-y-6 avoid-break",
+            paperTheme === "light" ? "border-b border-[#cbd5e1]" : "border-b-2 border-white/20",
+          )}
+        >
           <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[#888888]">
             <span>MBA ACADEMIC CURRICULUM · MASTER REVISION PORTFOLIO</span>
             <span>{new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
           </div>
 
-          <div className="space-y-2 pt-2">
-            <span className="inline-block rounded bg-[#0099ff]/20 text-[#0099ff] px-2.5 py-0.5 font-mono text-xs font-bold border border-[#0099ff]/40">
+          <div className="space-y-3 pt-2">
+            <span className="inline-block rounded bg-[#0099ff]/15 text-[#0099ff] px-3 py-1 font-mono text-xs font-bold border border-[#0099ff]/40">
               PAPER {course.code} · {course.category.toUpperCase()}
             </span>
-            <h1 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-white">
+            <h1
+              className={cn(
+                "font-display text-3xl sm:text-5xl font-bold tracking-tight",
+                paperTheme === "light" ? "text-[#0f172a]" : "text-white",
+              )}
+            >
               {course.title}
             </h1>
-            <p className="font-sans text-sm sm:text-base text-[#aaaaaa] leading-relaxed max-w-3xl">
+            <p
+              className={cn(
+                "font-sans text-sm sm:text-base leading-relaxed max-w-3xl",
+                paperTheme === "light" ? "text-[#475569]" : "text-[#aaaaaa]",
+              )}
+            >
               {course.description}
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 pt-4 sm:grid-cols-4 text-xs font-mono">
-            <div className="rounded-xl border border-[#262626] bg-[#141414] p-3">
+          <div className="grid grid-cols-2 gap-3 pt-2 sm:grid-cols-4 text-xs font-mono">
+            <div
+              className={cn(
+                "rounded-xl border p-3.5",
+                paperTheme === "light" ? "border-[#cbd5e1] bg-white text-[#0f172a]" : "border-[#262626] bg-[#141414]",
+              )}
+            >
               <span className="text-[#666666] block">Curriculum Units</span>
-              <span className="font-bold text-white text-base">{course.units.length} Units</span>
+              <span className="font-bold text-base">{course.units.length} Units</span>
             </div>
-            <div className="rounded-xl border border-[#262626] bg-[#141414] p-3">
+            <div
+              className={cn(
+                "rounded-xl border p-3.5",
+                paperTheme === "light" ? "border-[#cbd5e1] bg-white text-[#0f172a]" : "border-[#262626] bg-[#141414]",
+              )}
+            >
               <span className="text-[#666666] block">Syllabus Modules</span>
-              <span className="font-bold text-white text-base">{course.topics.length} Notes</span>
+              <span className="font-bold text-base">{course.topics.length} Notes</span>
             </div>
-            <div className="rounded-xl border border-[#262626] bg-[#141414] p-3">
+            <div
+              className={cn(
+                "rounded-xl border p-3.5",
+                paperTheme === "light" ? "border-[#cbd5e1] bg-white text-[#0f172a]" : "border-[#262626] bg-[#141414]",
+              )}
+            >
               <span className="text-[#666666] block">Model Exam Bank</span>
-              <span className="font-bold text-white text-base">{course.examQuestions.length} Qs</span>
+              <span className="font-bold text-base">{course.examQuestions.length} Qs</span>
             </div>
-            <div className="rounded-xl border border-[#262626] bg-[#141414] p-3">
+            <div
+              className={cn(
+                "rounded-xl border p-3.5",
+                paperTheme === "light" ? "border-[#cbd5e1] bg-white text-[#0f172a]" : "border-[#262626] bg-[#141414]",
+              )}
+            >
               <span className="text-[#666666] block">Document Scope</span>
               <span className="font-bold text-[#0099ff] text-base capitalize">{mode} Mode</span>
             </div>
           </div>
         </section>
 
-        {/* Table of Contents */}
-        <section className="my-10 border-b border-[#262626] pb-8 avoid-break">
-          <h2 className="font-display text-xl font-bold text-white mb-4 flex items-center gap-2">
+        {/* Table of Contents Section */}
+        <section
+          className={cn(
+            "my-10 pb-8 avoid-break page-break-after",
+            paperTheme === "light" ? "border-b border-[#cbd5e1]" : "border-b border-[#262626]",
+          )}
+        >
+          <h2
+            className={cn(
+              "font-display text-xl font-bold mb-4 flex items-center gap-2",
+              paperTheme === "light" ? "text-[#0f172a]" : "text-white",
+            )}
+          >
             <BookOpen className="size-5 text-[#0099ff]" />
             <span>Table of Contents</span>
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-5">
             {showTopics && (
               <div className="space-y-2">
                 <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#888888]">
@@ -207,9 +293,14 @@ function CourseExportView() {
                     <a
                       key={t.id}
                       href={`#topic-${t.slug}`}
-                      className="flex items-center justify-between p-2 rounded-lg bg-[#141414] border border-[#262626] hover:border-[#0099ff]/50 text-[#cccccc]"
+                      className={cn(
+                        "flex items-center justify-between p-2.5 rounded-lg border transition-colors",
+                        paperTheme === "light"
+                          ? "bg-white border-[#cbd5e1] text-[#1e293b] hover:border-[#0099ff]"
+                          : "bg-[#141414] border-[#262626] hover:border-[#0099ff]/50 text-[#cccccc]",
+                      )}
                     >
-                      <span className="font-mono text-[11px] text-[#0099ff] w-6 shrink-0">
+                      <span className="font-mono text-[11px] text-[#0099ff] w-7 shrink-0 font-bold">
                         #{String(t.number).padStart(2, "0")}
                       </span>
                       <span className="truncate flex-1 font-medium">{t.title}</span>
@@ -229,9 +320,14 @@ function CourseExportView() {
                     <a
                       key={eq.id}
                       href={`#exam-${eq.id}`}
-                      className="flex items-center justify-between p-2 rounded-lg bg-[#141414] border border-[#262626] hover:border-amber-500/50 text-[#cccccc]"
+                      className={cn(
+                        "flex items-center justify-between p-2.5 rounded-lg border transition-colors",
+                        paperTheme === "light"
+                          ? "bg-white border-[#cbd5e1] text-[#1e293b] hover:border-amber-500"
+                          : "bg-[#141414] border-[#262626] hover:border-amber-500/50 text-[#cccccc]",
+                      )}
                     >
-                      <span className="font-mono text-[11px] text-amber-400 w-8 shrink-0">
+                      <span className="font-mono text-[11px] text-amber-500 w-8 shrink-0 font-bold">
                         Q{eq.number}
                       </span>
                       <span className="truncate flex-1 font-medium">{eq.title}</span>
@@ -245,12 +341,22 @@ function CourseExportView() {
 
         {/* Section 1: Topics Content */}
         {showTopics && (
-          <section className="space-y-12">
-            <div className="border-b border-white/20 pb-3">
+          <section className="space-y-12 mb-14">
+            <div
+              className={cn(
+                "pb-3",
+                paperTheme === "light" ? "border-b border-[#cbd5e1]" : "border-b border-white/20",
+              )}
+            >
               <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#0099ff]">
                 PART 1 · SYLLABUS TOPIC MODULES
               </span>
-              <h2 className="font-display text-2xl sm:text-3xl font-bold text-white mt-1">
+              <h2
+                className={cn(
+                  "font-display text-2xl sm:text-3xl font-bold mt-1",
+                  paperTheme === "light" ? "text-[#0f172a]" : "text-white",
+                )}
+              >
                 Complete Structured Notes
               </h2>
             </div>
@@ -259,33 +365,67 @@ function CourseExportView() {
               <article
                 key={topic.id}
                 id={`topic-${topic.slug}`}
-                className={cn("space-y-6 pt-6", idx > 0 && "border-t border-[#262626] page-break-before")}
+                className={cn(
+                  "space-y-6 pt-6",
+                  idx > 0 && "print-page-break page-break-before",
+                  idx > 0 && (paperTheme === "light" ? "border-t border-[#cbd5e1]" : "border-t border-[#262626]"),
+                )}
               >
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   <div className="flex flex-wrap items-center gap-2 text-xs">
-                    <span className="rounded bg-[#0099ff] text-white px-2 py-0.5 font-mono font-bold">
+                    <span className="rounded bg-[#0099ff] text-white px-2.5 py-0.5 font-mono font-bold">
                       Module #{String(topic.number).padStart(2, "0")}
                     </span>
-                    <span className="rounded bg-[#1c1c1c] border border-[#262626] text-[#999999] px-2 py-0.5 font-sans font-medium">
+                    <span
+                      className={cn(
+                        "rounded border px-2.5 py-0.5 font-sans font-medium",
+                        paperTheme === "light"
+                          ? "bg-[#f1f5f9] border-[#cbd5e1] text-[#475569]"
+                          : "bg-[#1c1c1c] border-[#262626] text-[#999999]",
+                      )}
+                    >
                       {topic.unit}
                     </span>
                     {topic.marks && (
-                      <span className="rounded bg-[#1c1c1c] border border-[#262626] text-[#999999] px-2 py-0.5 font-mono">
+                      <span
+                        className={cn(
+                          "rounded border px-2.5 py-0.5 font-mono",
+                          paperTheme === "light"
+                            ? "bg-[#f1f5f9] border-[#cbd5e1] text-[#475569]"
+                            : "bg-[#1c1c1c] border-[#262626] text-[#999999]",
+                        )}
+                      >
                         {topic.marks} Marks
                       </span>
                     )}
                   </div>
-                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  <h3
+                    className={cn(
+                      "font-display text-2xl sm:text-3xl font-bold tracking-tight",
+                      paperTheme === "light" ? "text-[#0f172a]" : "text-white",
+                    )}
+                  >
                     {topic.title}
                   </h3>
                   {topic.summary && (
-                    <p className="font-sans text-sm text-[#aaaaaa] leading-relaxed italic">
+                    <p
+                      className={cn(
+                        "font-sans text-sm leading-relaxed italic",
+                        paperTheme === "light" ? "text-[#475569]" : "text-[#aaaaaa]",
+                      )}
+                    >
                       {topic.summary}
                     </p>
                   )}
                 </div>
 
-                <div className="note-prose text-sm leading-relaxed text-[#d4d4d4]">
+                <div
+                  className={cn(
+                    "note-prose",
+                    fontSizeClass,
+                    paperTheme === "light" ? "text-[#1e293b]" : "text-[#d4d4d4]",
+                  )}
+                >
                   <NoteBody blocks={topic.blocks} docId={`export:topic:${topic.slug}`} />
                 </div>
               </article>
@@ -295,12 +435,28 @@ function CourseExportView() {
 
         {/* Section 2: Model Examination Answers */}
         {showExam && (
-          <section className={cn("space-y-12", showTopics && "mt-16 pt-10 border-t-2 border-white/20 page-break-before")}>
-            <div className="border-b border-white/20 pb-3">
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-amber-400">
+          <section
+            className={cn(
+              "space-y-12",
+              showTopics && "mt-16 pt-10 print-page-break page-break-before",
+              showTopics && (paperTheme === "light" ? "border-t-2 border-[#cbd5e1]" : "border-t-2 border-white/20"),
+            )}
+          >
+            <div
+              className={cn(
+                "pb-3",
+                paperTheme === "light" ? "border-b border-[#cbd5e1]" : "border-b border-white/20",
+              )}
+            >
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-amber-500">
                 PART 2 · 14-MARK MODEL EXAMINATION BANK
               </span>
-              <h2 className="font-display text-2xl sm:text-3xl font-bold text-white mt-1">
+              <h2
+                className={cn(
+                  "font-display text-2xl sm:text-3xl font-bold mt-1",
+                  paperTheme === "light" ? "text-[#0f172a]" : "text-white",
+                )}
+              >
                 Model Examination Answers
               </h2>
             </div>
@@ -309,31 +465,60 @@ function CourseExportView() {
               <article
                 key={eq.id}
                 id={`exam-${eq.id}`}
-                className={cn("space-y-6 pt-6", idx > 0 && "border-t border-[#262626] page-break-before")}
+                className={cn(
+                  "space-y-6 pt-6",
+                  idx > 0 && "print-page-break page-break-before",
+                  idx > 0 && (paperTheme === "light" ? "border-t border-[#cbd5e1]" : "border-t border-[#262626]"),
+                )}
               >
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   <div className="flex flex-wrap items-center gap-2 text-xs">
-                    <span className="rounded bg-amber-500 text-black px-2 py-0.5 font-mono font-bold">
+                    <span className="rounded bg-amber-500 text-black px-2.5 py-0.5 font-mono font-bold">
                       Question {eq.number}
                     </span>
                     {eq.marks && (
-                      <span className="rounded bg-[#1c1c1c] border border-[#262626] text-amber-300 px-2 py-0.5 font-mono font-bold">
+                      <span
+                        className={cn(
+                          "rounded border px-2.5 py-0.5 font-mono font-bold",
+                          paperTheme === "light"
+                            ? "bg-amber-50 border-amber-200 text-amber-900"
+                            : "bg-[#1c1c1c] border-[#262626] text-amber-300",
+                        )}
+                      >
                         {eq.marks} Marks Scope
                       </span>
                     )}
                   </div>
-                  <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  <h3
+                    className={cn(
+                      "font-display text-xl sm:text-2xl font-bold tracking-tight",
+                      paperTheme === "light" ? "text-[#0f172a]" : "text-white",
+                    )}
+                  >
                     {eq.title}
                   </h3>
-                  <div className="rounded-xl border border-[#262626] bg-[#141414] p-4 text-xs sm:text-sm text-[#cccccc]">
+                  <div
+                    className={cn(
+                      "exam-prompt-box rounded-xl border p-4 text-xs sm:text-sm",
+                      paperTheme === "light"
+                        ? "bg-[#fffbeb] border-[#fde68a] text-[#78350f]"
+                        : "bg-[#141414] border-[#262626] text-[#cccccc]",
+                    )}
+                  >
                     <span className="font-mono text-[10px] uppercase font-bold text-[#888888] block mb-1">
                       Examination Question Prompt:
                     </span>
-                    <p className="font-medium">{eq.question}</p>
+                    <p className="font-medium leading-relaxed">{eq.question}</p>
                   </div>
                 </div>
 
-                <div className="note-prose text-sm leading-relaxed text-[#d4d4d4]">
+                <div
+                  className={cn(
+                    "note-prose",
+                    fontSizeClass,
+                    paperTheme === "light" ? "text-[#1e293b]" : "text-[#d4d4d4]",
+                  )}
+                >
                   <NoteBody blocks={eq.blocks} docId={`export:exam:${eq.id}`} />
                 </div>
               </article>

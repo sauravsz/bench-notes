@@ -191,7 +191,7 @@ function Block({
       );
     case "table":
       return (
-        <div className="mb-6 overflow-x-auto rounded-[18px] border border-[#262626] bg-[#141414]">
+        <div className="note-table-container avoid-break mb-6 overflow-x-auto rounded-[18px] border border-[#262626] bg-[#141414]">
           {block.caption ? (
             <p className="m-0 border-b border-[#262626] bg-[#1c1c1c] px-4 py-2.5 font-mono text-xs font-semibold text-[#999999]">
               {render(block.caption)}
@@ -219,7 +219,7 @@ function Block({
       );
     case "quote":
       return (
-        <blockquote className="my-5 rounded-r-[18px] border-l-2 border-[#0099ff] bg-[#141414] px-5 py-4">
+        <blockquote className="note-quote avoid-break my-5 rounded-r-[18px] border-l-2 border-[#0099ff] bg-[#141414] px-5 py-4">
           <p className="mb-1 font-medium text-white italic leading-relaxed">
             {render(block.text)}
           </p>
@@ -232,7 +232,7 @@ function Block({
       );
     case "def":
       return (
-        <article className="mb-4 rounded-[18px] border border-[#262626] bg-[#141414] p-5">
+        <article className="note-def avoid-break mb-4 rounded-[18px] border border-[#262626] bg-[#141414] p-5">
           <header className="mb-2 flex flex-wrap items-baseline justify-between gap-2">
             <h4 className="m-0 font-display font-bold text-white">
               {render(block.term)}
@@ -248,7 +248,7 @@ function Block({
       );
     case "maxim":
       return (
-        <article className="mb-4 rounded-[18px] border border-[#262626] bg-[#141414] p-5">
+        <article className="note-maxim avoid-break mb-4 rounded-[18px] border border-[#262626] bg-[#141414] p-5">
           <p className="mb-1 font-display text-base font-bold text-white tracking-[-0.01em]">
             {render(block.latin)}
           </p>
@@ -259,7 +259,7 @@ function Block({
       const label = block.label || block.title || "Note";
       const body = block.body || block.text || "";
       return (
-        <aside className="mb-5 rounded-[18px] border border-[#262626] bg-[#181818] p-5">
+        <aside className="note-callout avoid-break mb-5 rounded-[18px] border border-[#262626] bg-[#181818] p-5">
           <p className="mb-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#0099ff]">
             {render(label)}
           </p>
@@ -277,7 +277,7 @@ function Block({
       );
     case "tree":
       return (
-        <div className="my-5 rounded-[18px] border border-[#262626] bg-[#141414] p-5 shadow-xs">
+        <div className="note-tree avoid-break my-5 rounded-[18px] border border-[#262626] bg-[#141414] p-5 shadow-xs">
           {block.title ? (
             <p className="mb-2 font-mono text-xs font-bold uppercase tracking-wider text-[#0099ff]">
               {render(block.title)}
@@ -286,7 +286,6 @@ function Block({
           <pre className="m-0 p-4 rounded-xl bg-[#090909] border border-[#262626] font-mono text-xs leading-relaxed text-[#cccccc] overflow-x-auto">{block.lines.join("\n")}</pre>
         </div>
       );
-    default:
       return null;
   }
 }

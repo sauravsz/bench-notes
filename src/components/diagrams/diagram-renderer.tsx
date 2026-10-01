@@ -53,7 +53,7 @@ export function DiagramRenderer({
   };
 
   return (
-    <div className="my-6">
+    <div className="my-6 avoid-break diagram-container">
       {title ? (
         <p className="mb-2 font-sans text-xs font-semibold uppercase tracking-[0.14em] text-muted">
           {title}

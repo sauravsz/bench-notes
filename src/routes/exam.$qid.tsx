@@ -95,7 +95,7 @@ function ExamAnswer() {
         {/* Main Article Canvas */}
         <article className={cn("min-w-0 flex-1 transition-all duration-200 ios-fade-up", TEXT_WIDTH_CLASSES[textWidth])}>
           {/* Breadcrumb Trail */}
-          <nav className="mb-6 flex flex-wrap items-center gap-1.5 font-mono text-xs text-[#666666]">
+          <nav className="print-breadcrumbs mb-6 flex flex-wrap items-center gap-1.5 font-mono text-xs text-[#666666]">
             <Link to="/" className="hover:text-white transition-colors">
               MBA Papers
             </Link>
@@ -132,8 +132,8 @@ function ExamAnswer() {
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.03em] text-white leading-tight">
               {exam.title}
             </h1>
-            <div className="rounded-[20px] border border-[#262626] bg-[#141414] p-5 sm:p-6 shadow-xs">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#666666] block mb-2">
+            <div className="exam-prompt-box rounded-[20px] border border-[#262626] bg-[#141414] p-5 sm:p-6 shadow-xs">
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#0099ff] block mb-2">
                 Examination Question Prompt
               </span>
               <p className="font-sans text-sm sm:text-base leading-relaxed text-[#cccccc]">
@@ -144,8 +144,7 @@ function ExamAnswer() {
 
           {/* Related Modules */}
           {related.length > 0 ? (
-            <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
-              <span className="font-mono text-[#666666]">Related Syllabus Notes:</span>
+            <div className="no-print mt-4 flex flex-wrap items-center gap-2 text-xs">
               {related.map((t) => (
                 <Link
                   key={t.slug}

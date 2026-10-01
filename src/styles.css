@@ -311,80 +311,304 @@
 }
 
 /* ==========================================================================
-   ACADEMIC PRINT & PDF EXPORT STYLESHEET
+   ACADEMIC PRINT & PDF EXPORT STYLESHEET (High-Yield Publication Grade)
    ========================================================================== */
 @media print {
   @page {
-    margin: 1.5cm;
     size: A4 portrait;
+    margin: 12mm 14mm 14mm 14mm;
   }
 
-  html, body, #root, main, article {
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-sizing: border-box !important;
+  }
+
+  html,
+  body,
+  #root {
     background: #ffffff !important;
-    color: #111111 !important;
-    font-size: 10.5pt !important;
-    line-height: 1.5 !important;
+    color: #0f172a !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 10pt !important;
+    line-height: 1.55 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
     box-shadow: none !important;
   }
 
-  .no-print, nav, aside, header, button, .ios-controls, .reader-toolbar {
+  /* Hide all UI Chrome, controls, floating toolbars, navigations */
+  .no-print,
+  nav:not(.print-breadcrumbs),
+  aside:not(.print-visible),
+  header:not(.print-header),
+  footer:not(.print-footer),
+  button,
+  [role="progressbar"],
+  [data-highlight-popover],
+  [data-selection-toolbar],
+  .ios-controls,
+  .reader-toolbar {
     display: none !important;
   }
 
-  .page-break-before {
+  /* Clean Canvas Resets (Eliminates screen-only dark backgrounds and huge paddings) */
+  main,
+  article,
+  .print-canvas,
+  div[class*="bg-[#090909]"],
+  div[class*="bg-[#0d0d0d]"],
+  div[class*="bg-[#141414]"],
+  div[class*="bg-[#1c1c1c]"] {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    box-shadow: none !important;
+  }
+
+  /* Page Break Invariants */
+  .page-break-before,
+  .print-page-break {
     page-break-before: always !important;
     break-before: page !important;
   }
 
-  .avoid-break {
+  .page-break-after {
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  .avoid-break,
+  figure,
+  blockquote,
+  table,
+  tr,
+  .note-table-container,
+  .diagram-container,
+  .note-callout,
+  .note-def,
+  .note-maxim,
+  .note-quote,
+  .note-tree,
+  .exam-prompt-box,
+  .print-card,
+  .print-avoid-break {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
 
-  h1, h2, h3, h4, .font-display {
-    color: #000000 !important;
+  /* Prevent Orphaned Headings at Bottom of Pages */
+  h1, h2, h3, h4, h5, h6,
+  .font-display,
+  .section-title {
     page-break-after: avoid !important;
     break-after: avoid !important;
+    color: #0f172a !important;
   }
 
-  p, li, span {
-    color: #1a1a1a !important;
+  h1 {
+    font-size: 20pt !important;
+    line-height: 1.25 !important;
+    font-weight: 800 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0.5rem !important;
   }
 
-  .note-prose {
-    color: #111111 !important;
+  h2 {
+    font-size: 14pt !important;
+    line-height: 1.3 !important;
+    font-weight: 700 !important;
+    margin-top: 1.25rem !important;
+    margin-bottom: 0.4rem !important;
+    border-bottom-color: #cbd5e1 !important;
   }
 
-  .note-prose table {
-    border-collapse: collapse !important;
-    border: 1px solid #cccccc !important;
+  h3 {
+    font-size: 12pt !important;
+    line-height: 1.35 !important;
+    font-weight: 700 !important;
+    margin-top: 1rem !important;
+    margin-bottom: 0.35rem !important;
+  }
+
+  h4 {
+    font-size: 10.5pt !important;
+    line-height: 1.4 !important;
+    font-weight: 600 !important;
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  /* Body Typography Contrast */
+  p,
+  li,
+  .note-prose p,
+  .note-prose li {
+    color: #1e293b !important;
+    font-size: 9.75pt !important;
+    line-height: 1.55 !important;
+    margin-bottom: 0.45rem !important;
+  }
+
+  strong,
+  b,
+  .note-prose strong,
+  .note-prose b {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+  }
+
+  em,
+  i,
+  .note-prose em,
+  .note-prose i {
+    color: #334155 !important;
+  }
+
+  /* Structured Academic Tables */
+  .note-prose table,
+  table {
     width: 100% !important;
+    border-collapse: collapse !important;
+    border: 1px solid #cbd5e1 !important;
+    margin: 0.75rem 0 1rem 0 !important;
+    background-color: #ffffff !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
 
-  .note-prose th, .note-prose td {
-    border: 1px solid #d0d0d0 !important;
-    padding: 6px 8px !important;
-    color: #000000 !important;
-    background: #ffffff !important;
-    font-size: 9.5pt !important;
+  thead {
+    display: table-header-group !important;
   }
 
-  .note-prose th {
-    background-color: #f2f2f2 !important;
-    font-weight: bold !important;
+  tbody {
+    display: table-row-group !important;
   }
 
-  blockquote, .rounded-xl, .rounded-2xl {
-    border-color: #cccccc !important;
-    background-color: #f8f8f8 !important;
-    color: #000000 !important;
+  tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
-  code, pre {
-    border: 1px solid #dddddd !important;
-    background: #f5f5f5 !important;
-    color: #000000 !important;
+  .note-prose th,
+  th {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    font-size: 9pt !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 6px 9px !important;
+    text-align: left !important;
+  }
+
+  .note-prose td,
+  td {
+    background-color: #ffffff !important;
+    color: #1e293b !important;
+    font-size: 8.75pt !important;
+    line-height: 1.45 !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 6px 9px !important;
+  }
+
+  /* Callout Boxes, Blockquotes, and Definitions */
+  .note-prose blockquote,
+  blockquote,
+  .note-quote {
+    border-left: 3px solid #0284c7 !important;
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+    padding: 8px 12px !important;
+    margin: 0.75rem 0 !important;
+    border-radius: 0 8px 8px 0 !important;
+  }
+
+  .note-callout,
+  aside.note-callout {
+    background-color: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #1e293b !important;
+    padding: 8px 12px !important;
+    margin: 0.75rem 0 !important;
+    border-radius: 8px !important;
+  }
+
+  .note-def,
+  .note-maxim,
+  article.note-def,
+  article.note-maxim {
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #1e293b !important;
+    padding: 8px 12px !important;
+    margin: 0.75rem 0 !important;
+    border-radius: 8px !important;
+  }
+
+  .exam-prompt-box {
+    background-color: #fffbeb !important;
+    border: 1px solid #fde68a !important;
+    color: #78350f !important;
+    padding: 8px 12px !important;
+    margin: 0.5rem 0 !important;
+    border-radius: 8px !important;
+  }
+
+  /* Code & Syntax Snippets */
+  code,
+  pre,
+  .note-tree pre {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+    border: 1px solid #e2e8f0 !important;
+    font-family: "JetBrains Mono", Menlo, Consolas, monospace !important;
+    font-size: 8.5pt !important;
+    padding: 6px 10px !important;
+    border-radius: 6px !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+  }
+
+  /* Highlighting & Annotations */
+  mark,
+  .highlight-item {
+    background-color: #fef08a !important;
+    color: #713f12 !important;
+    padding: 1px 3px !important;
+    border-radius: 2px !important;
+    border-bottom: 1.5px solid #eab308 !important;
+  }
+
+  /* Interactive & Structural Diagrams */
+  .diagram-container {
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 12px !important;
+    margin: 1rem 0 !important;
+    border-radius: 10px !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .diagram-container h4,
+  .diagram-container h5,
+  .diagram-container h6 {
+    color: #0f172a !important;
+  }
+
+  .diagram-container p,
+  .diagram-container li,
+  .diagram-container span,
+  .diagram-container div {
+    color: #1e293b !important;
+  }
+
+  /* Preserve semantic pill badge text contrast */
+  .diagram-container [class*="text-white"],
+  span[class*="text-white"] {
+    color: #ffffff !important;
   }
 }
