@@ -95,7 +95,7 @@ export function HighlightsDrawer({
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/80 backdrop-blur-xl transition-opacity duration-300">
-      <div className="flex h-full w-full max-w-md flex-col border-l border-[#262626] bg-[#141414] shadow-2xl animate-in slide-in-from-right duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
+      <div className="drawer-surface flex h-full w-full max-w-md flex-col border-l border-[#262626] bg-[#141414] shadow-2xl animate-in slide-in-from-right duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-[#262626] p-5">
           <div className="flex items-center gap-2">

@@ -546,7 +546,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             aria-label="Close syllabus"
             onClick={() => setOpen(false)}
           />
-          <nav className="absolute inset-y-0 left-0 w-[min(20rem,88vw)] overflow-y-auto border-r border-[#262626] bg-[#090909] px-4 pt-16 shadow-2xl">
+          <nav className="drawer-surface absolute inset-y-0 left-0 w-[min(20rem,88vw)] overflow-y-auto border-r border-[#262626] bg-[#090909] px-4 pt-16 shadow-2xl animate-in slide-in-from-left duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
             <NavList onNavigate={() => setOpen(false)} />
           </nav>
         </div>

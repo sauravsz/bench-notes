@@ -97,7 +97,7 @@ function ExamAnswer() {
         aria-label="Reading progress"
       >
         <div
-          className="h-full bg-[#0099ff] transition-[width] duration-100 ease-out"
+          className="h-full bg-[#0099ff] reading-progress-bar"
           style={{ width: `${progress}%` }}
         />
       </div>

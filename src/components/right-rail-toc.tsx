@@ -167,11 +167,11 @@ export function RightRailToc({
                   type="button"
                   onClick={() => scrollToHeading(h.id)}
                   className={cn(
-                    "block w-full text-left py-1 text-[11px] leading-snug transition-colors duration-150 -ml-[1px]",
+                    "block w-full text-left py-1.5 text-[11px] leading-snug transition-all duration-200 -ml-[1px] rounded-r-lg",
                     h.level === 3 ? "pl-5" : "pl-3",
                     isActive
-                      ? "border-l-2 border-[#0099ff] text-white font-bold"
-                      : "border-l-2 border-transparent text-[#666666] hover:text-[#999999]",
+                      ? "border-l-2 border-[#0099ff] bg-[#0099ff]/10 text-white font-bold"
+                      : "border-l-2 border-transparent text-[#777777] hover:text-white hover:bg-white/5",
                   )}
                 >
                   <span className="line-clamp-2">{h.title}</span>

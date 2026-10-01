@@ -112,9 +112,57 @@
 }
 
 /* ==========================================================================
+   View Transitions API Smooth Page Cross-Fades
+   ========================================================================== */
+::view-transition-group(root) {
+  animation-duration: 0.2s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root) {
+  animation: 0.16s cubic-bezier(0.16, 1, 0.3, 1) both vtFadeOut;
+}
+
+::view-transition-new(root) {
+  animation: 0.2s cubic-bezier(0.16, 1, 0.3, 1) both vtFadeIn;
+}
+
+@keyframes vtFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.996);
+  }
+}
+
+@keyframes vtFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.004);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================================
    Framer Kinetic Animation & Interaction Classes
    ========================================================================== */
 
+.reading-progress-bar {
+  transition: width 120ms cubic-bezier(0.1, 0.9, 0.2, 1);
+  will-change: width;
+}
+
+.drawer-surface {
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
 @keyframes framerFadeUp {
   0% {
     opacity: 0;
