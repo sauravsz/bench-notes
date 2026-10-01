@@ -1,4 +1,4 @@
-import { type ReactNode, useMemo } from "react";
+import { type ReactNode, useMemo, memo } from "react";
 import type { NoteBlock } from "@/data/types";
 import { HIGHLIGHT_COLORS, useHighlights, type HighlightItem } from "@/lib/highlights";
 import { DiagramRenderer } from "./diagrams/diagram-renderer";
@@ -286,9 +286,12 @@ function Block({
           <pre className="m-0 p-4 rounded-xl bg-[#090909] border border-[#262626] font-mono text-xs leading-relaxed text-[#cccccc] overflow-x-auto">{block.lines.join("\n")}</pre>
         </div>
       );
+    default:
       return null;
   }
 }
+
+const MemoizedBlock = memo(Block);
 
 export function NoteBody({
   blocks,
@@ -312,7 +315,7 @@ export function NoteBody({
     <div className={cn("note-prose", className)}>
       {blocks.map((block, i) => (
         <div key={i} data-block-index={i} className="block-wrapper">
-          <Block
+          <MemoizedBlock
             block={block}
             blockIndex={i}
             docHighlights={docHighlights}

@@ -59,12 +59,14 @@ function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<"pending" | "approved" | "whitelist" | "database">("pending");
   const [isSyncing, setIsSyncing] = useState(false);
 
-  // Real-time server sync every 3 seconds
+  // Real-time server sync every 4 seconds only when tab is active and visible
   useEffect(() => {
     syncWithServer();
     const interval = setInterval(() => {
-      syncWithServer();
-    }, 3000);
+      if (typeof document !== "undefined" && document.visibilityState === "visible") {
+        syncWithServer();
+      }
+    }, 4000);
     return () => clearInterval(interval);
   }, [syncWithServer]);
 

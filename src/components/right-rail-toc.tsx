@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Check, Clock, ListOrdered, PanelRight, PanelRightClose, Sparkles } from "lucide-react";
 import type { NoteBlock } from "@/data/types";
 import { extractHeadings, type HeadingItem } from "./table-of-contents";
@@ -19,7 +19,7 @@ export function RightRailToc({
   className?: string;
 }) {
   const [activeId, setActiveId] = useState<string>("");
-  const headings = extractHeadings(blocks);
+  const headings = useMemo(() => extractHeadings(blocks), [blocks]);
   const rightSidebarCollapsed = useAppearance((s) => s.rightSidebarCollapsed);
   const toggleRightSidebar = useAppearance((s) => s.toggleRightSidebar);
   const toggleStudiedStore = useProgress((s) => s.toggleStudied);

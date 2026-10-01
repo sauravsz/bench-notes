@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  BookOpen,
   Check,
   Clock,
   Copy,
@@ -8,7 +7,6 @@ import {
   Highlighter,
   ListOrdered,
   Printer,
-  SlidersHorizontal,
   Sparkles,
   Zap,
   ZapOff,
@@ -21,7 +19,6 @@ import {
 import { useAppearance } from "@/lib/appearance";
 import { useProgress } from "@/lib/progress";
 import { Switch } from "./ui/switch";
-import { Button } from "./ui/button";
 import { StudyTimer } from "./study-timer";
 import { ShortcutsDialog } from "./shortcuts-dialog";
 import { toast } from "sonner";

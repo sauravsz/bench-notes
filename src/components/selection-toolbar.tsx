@@ -42,10 +42,16 @@ export function SelectionToolbar({
         }
       }
     }
+    function handleScroll() {
+      onClose();
+    }
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [onHighlight, onAddNote, onClose]);
-
   if (!selectionRect || !selectedText || !mounted) return null;
 
   const toolbarWidth = 240;

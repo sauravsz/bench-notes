@@ -1,14 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
-  AlertTriangle,
-  ArrowLeft,
-  ArrowRight,
   BookOpen,
   Check,
   ChevronDown,
   ChevronRight,
-  Command,
   Download,
   FileText,
   Highlighter,
@@ -18,23 +14,17 @@ import {
   Menu,
   PanelLeft,
   PanelLeftClose,
-  Printer,
+  PanelRight,
+  PanelRightClose,
   Scale,
   Search,
-  Share2,
   ShieldCheck,
   SlidersHorizontal,
   Sparkles,
   TableProperties,
-  PanelRight,
-  PanelRightClose,
-  Plus,
-  Trash2,
   Unlock,
   User,
   X,
-  Zap,
-  ZapOff,
 } from "lucide-react";
 import { useProgress } from "@/lib/progress";
 import { useHighlights } from "@/lib/highlights";

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 import { ArrowRight, Search, X } from "lucide-react";
 import { allCourses, searchGlobalNotes, type GlobalSearchHit } from "@/data/courses";
 import { useCurrentCourse } from "@/lib/current-course";
@@ -16,15 +16,16 @@ const kindBadge: Record<string, { label: string; class: string }> = {
 
 function SearchPage() {
   const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
   const [selectedCourseSlug, setSelectedCourseSlug] = useState<string>("all");
   const setActiveCourseSlug = useCurrentCourse((s) => s.setActiveCourseSlug);
   const hits = useMemo(
     () =>
       searchGlobalNotes(
-        query,
+        deferredQuery,
         selectedCourseSlug === "all" ? undefined : selectedCourseSlug,
       ),
-    [query, selectedCourseSlug],
+    [deferredQuery, selectedCourseSlug],
   );
 
   return (

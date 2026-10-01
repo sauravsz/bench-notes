@@ -39,17 +39,19 @@ export function topicsByUnit(unit: string): Topic[] {
 }
 
 export function getTopic(slug: string): Topic | undefined {
-  const local = topics.find((t) => t.slug === slug);
-  if (local) return local;
-
   const result = getTopicBySlug(slug);
-  return result?.topic;
+  if (result) return result.topic;
+  return topics.find((t) => t.slug === slug);
 }
 
 export function adjacentTopics(slug: string): {
   prev?: Topic;
   next?: Topic;
 } {
+  const courseAdj = getAdjacentTopicsBySlug(slug);
+  if (courseAdj.prev || courseAdj.next) {
+    return courseAdj;
+  }
   const i = topics.findIndex((t) => t.slug === slug);
   if (i >= 0) {
     return {
@@ -57,22 +59,23 @@ export function adjacentTopics(slug: string): {
       next: i < topics.length - 1 ? topics[i + 1] : undefined,
     };
   }
-
-  return getAdjacentTopicsBySlug(slug);
+  return {};
 }
 
 export function getExam(id: string): ExamQuestion | undefined {
-  const local = examQuestions.find((q) => q.id === id);
-  if (local) return local;
-
   const result = getExamById(id);
-  return result?.exam;
+  if (result) return result.exam;
+  return examQuestions.find((q) => q.id === id);
 }
 
 export function adjacentExams(id: string): {
   prev?: ExamQuestion;
   next?: ExamQuestion;
 } {
+  const courseAdj = getAdjacentExamsById(id);
+  if (courseAdj.prev || courseAdj.next) {
+    return courseAdj;
+  }
   const i = examQuestions.findIndex((q) => q.id === id);
   if (i >= 0) {
     return {
@@ -80,8 +83,7 @@ export function adjacentExams(id: string): {
       next: i < examQuestions.length - 1 ? examQuestions[i + 1] : undefined,
     };
   }
-
-  return getAdjacentExamsById(id);
+  return {};
 }
 function blockText(block: NoteBlock): string {
   switch (block.type) {

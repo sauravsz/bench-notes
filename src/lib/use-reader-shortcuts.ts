@@ -17,14 +17,20 @@ export function useReaderShortcuts() {
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      // Ignore if user is currently typing in an input, textarea, or contentEditable
+      // Ignore if user is currently typing in an input, textarea, contentEditable, or inside a modal/dialog
       const target = e.target as HTMLElement | null;
       if (
         target instanceof HTMLInputElement ||
         target instanceof HTMLTextAreaElement ||
         target?.isContentEditable ||
         target?.closest("input") ||
-        target?.closest("textarea")
+        target?.closest("textarea") ||
+        target?.closest("[role='dialog']") ||
+        target?.closest("[role='combobox']") ||
+        target?.closest("[data-radix-portal]") ||
+        target?.closest("[cmdk-root]") ||
+        target?.closest("[data-highlight-popover]") ||
+        target?.closest("[data-selection-toolbar]")
       ) {
         return;
       }

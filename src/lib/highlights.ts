@@ -211,9 +211,19 @@ export const useHighlights = create<HighlightsState>()((set, get) => ({
           };
         }
 
-        // Canonical cloud synchronization: replace stale local partition with remote map
-        set({ highlights: remoteMap, isSyncing: false });
-        saveLocalPartition(targetEmail, remoteMap);
+        // Two-way timestamp-aware synchronization: merge remote with local to preserve offline additions
+        const localHighlights = get().highlights;
+        const mergedMap: Record<string, HighlightItem> = { ...localHighlights };
+
+        for (const [id, remoteItem] of Object.entries(remoteMap)) {
+          const localItem = mergedMap[id];
+          if (!localItem || remoteItem.updatedAt >= localItem.updatedAt) {
+            mergedMap[id] = remoteItem;
+          }
+        }
+
+        set({ highlights: mergedMap, isSyncing: false });
+        saveLocalPartition(targetEmail, mergedMap);
         return true;
       }
     } catch {

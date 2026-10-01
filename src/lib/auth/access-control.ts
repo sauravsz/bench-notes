@@ -151,7 +151,10 @@ export const useAccessControl = create<AccessControlState>()(
 
       syncWithServer: async () => {
         try {
-          const res = await fetch("/api/access/list");
+          const token = get().adminToken;
+          const headers: Record<string, string> = {};
+          if (token) headers["Authorization"] = `Bearer ${token}`;
+          const res = await fetch("/api/access/list", { headers });
           if (res.ok) {
             const data = await res.json();
             if (data.ok && Array.isArray(data.records)) {
