@@ -105,6 +105,17 @@ export function CommandPalette({
         },
       },
       {
+        id: "nav-midsem-om02",
+        category: "High-Yield Shortcuts",
+        title: "⭐ Mid Sem Important Notes (OM 02 · Logistics & SCM)",
+        subtitle: "8 master notes for Big Data, Reverse Logistics, Unitization, 4 Cycles, 5 Forecast Methods",
+        icon: Sparkles,
+        action: () => {
+          setActiveCourseSlug("logistics-scm");
+          router.navigate({ to: "/topic/$slug", params: { slug: "midsem-big-data-analytics-supply-chain" } });
+        },
+      },
+      {
         id: "nav-midsem-603",
         category: "High-Yield Shortcuts",
         title: "⭐ Mid Sem Important Notes (Paper 603 · Business Laws)",
