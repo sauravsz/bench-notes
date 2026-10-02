@@ -9,14 +9,740 @@ export const tqmCourse: Course = {
   accentColor: "sky",
   instructor: "Prof. Operations & Quality Engineering",
   description:
-    "Comprehensive master notes, quantitative formulations, analytical frameworks, and 14-mark examination answers for Total Quality Management (TQM), Statistical Process Control (SPC), Quality Engineering, Lean Six Sigma, and Operational Excellence.",
+    "Comprehensive master examination notes, quantitative formulations, analytical frameworks, and 14-mark model exam answers for Total Quality Management (TQM), Statistical Process Control (SPC), Quality Engineering, Strategic Sourcing, and Lean Six Sigma.",
   units: [
+    "Mid Sem Important",
     "Principles & Philosophies of TQM",
     "Benchmarking, Customer Needs & Quality Engineering",
     "Operations Quality, SPC & 7 QC Tools",
     "Six Sigma, Lean, Quality Systems & Awards"
   ],
   topics: [
+    // ==========================================
+    // UNIT: MID SEM IMPORTANT (7 CORE TOPICS)
+    // ==========================================
+    {
+      id: "midsem-om01-topic-1",
+      slug: "midsem-benchmarking-12-stages",
+      number: 101,
+      title: "What is Benchmarking? The 12 Stages of Benchmarking (AT&T Model)",
+      unit: "Mid Sem Important",
+      marks: 14,
+      lecture: "Mid-Sem Master Notes · Benchmarking Foundations",
+      summary:
+        "Comprehensive 14-mark master note on benchmarking: foundational definitions (APQC, Bogan & English), strategic purpose, and step-by-step breakdown of the 12 stages (AT&T Model) from Subject Selection to Review & Recalibration.",
+      tags: [
+        "Mid Sem Important",
+        "Benchmarking Definition",
+        "12 Stages",
+        "AT&T Model",
+        "Process Differences",
+        "Recalibration"
+      ],
+      blocks: [
+        {
+          type: "h3",
+          text: "Definition & Conceptual Foundations of Benchmarking"
+        },
+        {
+          type: "p",
+          text: "Benchmarking is the continuous, systematic process of measuring an organization's products, services, processes, and practices against recognized industry leaders or world-class organizations to identify performance gaps, establish stretch targets, and adapt superior practices for breakthrough operational improvement."
+        },
+        {
+          type: "ul",
+          items: [
+            "**American Productivity and Quality Center (APQC) Definition**: The process of identifying, understanding, and adapting outstanding practices and processes from organizations anywhere in the world to help an organization improve its performance.",
+            "**Bogan and English Definition**: An ongoing outreach activity whose goal is the identification of best operating practices that, when implemented, produce superior performance.",
+            "**Core Operating Principle**: Benchmarking focuses on understanding *how* the best-in-class achieve their performance levels and using that knowledge for adaptive creativity. It is not copying or industrial espionage, but an organized framework to avoid reinventing the wheel."
+          ]
+        },
+        {
+          type: "quote",
+          text: "Benchmarking = Measuring Performance Against Best-in-Class + Understanding Process Differences + Creative Adaptation"
+        },
+        {
+          type: "h3",
+          text: "The 12 Stages of the Benchmarking Process (AT&T Model)"
+        },
+        {
+          type: "table",
+          headers: ["Stage Number & Name", "Core Operational Action", "Key Deliverables / Methods", "Industrial Benchmark Example"],
+          rows: [
+            [
+              "**1. Select Subject**",
+              "Determine critical business processes or bottlenecks directly impacting customer satisfaction and cost structures.",
+              "Pareto analysis, Critical-to-Quality (CTQ) trees, customer complaint logs.",
+              "*An industrial pump maker targets custom pump delivery lead time (16 weeks) as its primary lost-order driver.*"
+            ],
+            [
+              "**2. Define the Process**",
+              "Thoroughly map and document current internal process workflows and baseline performance metrics.",
+              "Detailed process flowcharts, cycle time baselines, first-pass yield, defect PPM.",
+              "*Mapping all 24 sequential engineering and administrative steps required to process an Engineering Change Order (ECO).*"
+            ],
+            [
+              "**3. Identify Potential Partners**",
+              "Screen world-class performers, competitors, or non-competing firms recognized for excellence in the target process.",
+              "Internal business units, direct competitors, functional leaders, cross-industry pioneers.",
+              "*Southwest Airlines identifying Formula 1 racing pit crews as potential partners for aircraft gate turnaround.*"
+            ],
+            [
+              "**4. Identify Data Sources**",
+              "Determine information-gathering avenues and data repositories required to analyze partner practices.",
+              "Industry databases (APQC, IBID), trade journals, SEC filings, regulatory disclosures, professional surveys.",
+              "*Consulting the Open Standards Benchmarking database and IEEE technical publications.*"
+            ],
+            [
+              "**5. Collect Data and Select Partners**",
+              "Establish mutual benchmarking protocols, confidentiality agreements, and conduct structured site visits.",
+              "Questionnaires, structured plant walkthroughs, executive interviews, focus groups.",
+              "*Conducting structured site visits at a leading Japanese electronics plant to inspect automated pick-and-place lines.*"
+            ],
+            [
+              "**6. Determine the Gap**",
+              "Quantify the performance delta between internal operations and the benchmark partner's metrics.",
+              "Gap analysis: Negative Gap (lagging), Parity (equal), or Positive Gap (leading).",
+              "*Calculating an order fulfillment gap of 5 days (internal: 7 days vs. benchmark partner: 2 days).*"
+            ],
+            [
+              "**7. Establish Process Differences**",
+              "Analyze root causes, enabling technologies, and managerial practices driving the partner's superior execution.",
+              "Process practice comparison, technology audit, organizational structure mapping.",
+              "*Discovering that the partner uses automated wireless barcode scanning and dynamic slotting rather than paper pick lists.*"
+            ],
+            [
+              "**8. Target Future Performance**",
+              "Project the future performance trajectory of the partner to avoid aiming at an obsolete standard ('moving target').",
+              "Forecasted partner trajectory, internal stretch goals surpassing partner's current baseline.",
+              "*Setting a 2-year internal target of 1.5 days lead time when the benchmark partner currently operates at 2.0 days.*"
+            ],
+            [
+              "**9. Communicate**",
+              "Disseminate benchmarking findings, gap analyses, and business cases to leadership and process owners.",
+              "Executive briefings, shop-floor town halls, change management communication plans.",
+              "*Presenting data showing that adopting automated picking workflows will reduce unit labor costs by 32%.*"
+            ],
+            [
+              "**10. Adjust Goal**",
+              "Integrate validated benchmarking targets into formal strategic planning, annual budgets, and departmental KPIs.",
+              "Revised functional goals, balanced scorecards, managerial performance metrics.",
+              "*Tying plant manager annual bonus criteria directly to achieving a 99.2% on-time order dispatch rate.*"
+            ],
+            [
+              "**11. Implement**",
+              "Execute action plans: re-engineer workflows, procure tooling, install software, update SOPs, and train staff.",
+              "Work Breakdown Structure (WBS), Gantt/PERT charts, standard operating procedures, training modules.",
+              "*Installing a modern Warehouse Management System (WMS) and training 120 logistics operators on voice-directed picking.*"
+            ],
+            [
+              "**12. Review & Recalibrate**",
+              "Monitor performance against benchmark projections and periodically reset higher standards as industry advances.",
+              "Ongoing KPI dashboards, periodic partner re-audits, continuous PDCA improvement cycles.",
+              "*Conducting bi-annual reviews of warehouse pick rates to establish new stretch targets once the 2-day goal is met.*"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      id: "midsem-om01-topic-2",
+      slug: "midsem-7-types-of-benchmarking",
+      number: 102,
+      title: "The Seven Strategic Types of Benchmarking and Industrial Applications",
+      unit: "Mid Sem Important",
+      marks: 14,
+      lecture: "Mid-Sem Master Notes · Benchmarking Taxonomy",
+      summary:
+        "Comprehensive 14-mark master note analyzing the Seven Types of Benchmarking: Process, Performance, Product, Strategic, Functional, Best-in-Class, and Operational Benchmarking with full comparison matrix and case studies.",
+      tags: [
+        "Mid Sem Important",
+        "Types of Benchmarking",
+        "Process Benchmarking",
+        "Strategic Benchmarking",
+        "Functional Benchmarking",
+        "Best-in-Class"
+      ],
+      blocks: [
+        {
+          type: "h3",
+          text: "Taxonomy of the Seven Types of Benchmarking"
+        },
+        {
+          type: "table",
+          headers: ["Benchmarking Type", "Core Analytical Focus", "Organizational Scope", "Primary Strategic Benefit", "Benchmark Industrial Example"],
+          rows: [
+            [
+              "**1. Process Benchmarking**",
+              "Discrete operational workflows, work methods, and step-by-step cycle times.",
+              "Cross-industry or cross-functional",
+              "Radically reduces cycle times and eliminates non-value-added waste (Muda).",
+              "*Hospital emergency departments benchmarking patient intake and triage against Formula 1 pit-stop coordination.*"
+            ],
+            [
+              "**2. Performance Benchmarking**",
+              "Quantitative metric comparison of pricing, technical specifications, and operating speed.",
+              "Direct competitors or industry peers",
+              "Establishes competitive market positioning and baseline metric targets.",
+              "*Smartphone manufacturers comparing processor clock speeds, battery discharge rates, and low-light camera sensors.*"
+            ],
+            [
+              "**3. Product Benchmarking**",
+              "Physical product teardowns, reverse engineering, and feature-by-feature cost analysis.",
+              "Competing products and direct market substitutes",
+              "Uncovers competitor design architectures, material selections, and manufacturing cost structures.",
+              "*Automotive OEMs tearing down competitor electric vehicles to analyze chassis metallurgy, weld spacing, and battery pack modularity.*"
+            ],
+            [
+              "**4. Strategic Benchmarking**",
+              "High-level business models, core competencies, corporate alliances, and market positioning.",
+              "Global industry leaders and diversified corporations",
+              "Guides long-term corporate transformations, diversification, and new technology investments.",
+              "*Traditional automotive OEMs benchmarking electric vehicle startups' direct-to-consumer sales models and over-the-air software architectures.*"
+            ],
+            [
+              "**5. Functional Benchmarking**",
+              "Specific corporate functions (e.g., procurement, billing, logistics, human resources).",
+              "Similar functional leaders across non-competing sectors",
+              "Overcomes industry-specific blind spots; external partners readily share non-proprietary functional data.",
+              "*Commercial airlines benchmarking customer loyalty management and dynamic revenue pricing algorithms against global hotel chains.*"
+            ],
+            [
+              "**6. Best-in-Class Benchmarking**",
+              "Universally acknowledged single best performer worldwide for a specific process.",
+              "Across all global industries regardless of domain",
+              "Yields revolutionary breakthroughs and industry-redefining operational paradigms.",
+              "*Xerox benchmarking its logistics and warehouse picking operations against L.L. Bean to achieve a 50% reduction in warehouse labor costs.*"
+            ],
+            [
+              "**7. Operational Benchmarking**",
+              "Frontline shop-floor practices, workstation ergonomics, tooling setup, and daily routines.",
+              "Internal factory cells or direct manufacturing peers",
+              "Drives immediate incremental shop-floor productivity, setup reduction, and equipment availability.",
+              "*Machining workshops benchmarking Single-Minute Exchange of Die (SMED) changeover routines against high-speed stamping plants.*"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      id: "midsem-om01-topic-3",
+      slug: "midsem-dimensions-of-quality-garvin-servqual",
+      number: 103,
+      title: "Dimensions of Quality: Garvin's 8 Product Dimensions vs. SERVQUAL 5 Dimensions",
+      unit: "Mid Sem Important",
+      marks: 14,
+      lecture: "Mid-Sem Master Notes · Quality Dimensions",
+      summary:
+        "Comprehensive 14-mark master note comparing David A. Garvin's Eight Dimensions of Product Quality with Parasuraman, Zeithaml & Berry's Five SERVQUAL Dimensions of Service Quality with concrete examples.",
+      tags: [
+        "Mid Sem Important",
+        "Quality Dimensions",
+        "Garvin 8 Dimensions",
+        "SERVQUAL",
+        "RATER Model",
+        "Service Quality"
+      ],
+      blocks: [
+        {
+          type: "h3",
+          text: "David Garvin's Eight Dimensions of Product Quality"
+        },
+        {
+          type: "table",
+          headers: ["Product Dimension", "Strategic Operational Definition", "Engineering / Audit Criteria", "Practical Industrial Example"],
+          rows: [
+            [
+              "**1. Performance**",
+              "A product's primary operating characteristics and baseline functional execution.",
+              "Speed, acceleration, resolution, processing throughput, fuel economy.",
+              "*A high-speed laser printer outputting 45 pages per minute at 1200 DPI resolution.*"
+            ],
+            [
+              "**2. Features**",
+              "Secondary characteristics that supplement the basic functioning of the product.",
+              "Number of auxiliary options, smart connectivity, ambient lighting, accessory integration.",
+              "*An automotive infotainment unit featuring Apple CarPlay, wireless charging, and head-up display.*"
+            ],
+            [
+              "**3. Reliability**",
+              "Probability of a product functioning successfully over a specified period under stated operating conditions without breakdown.",
+              "Mean Time Between Failures (MTBF), failure rate ($\\lambda$), warranty claims per 1,000 units.",
+              "*An aircraft turbine engine operating for 20,000 flight hours without unscheduled shop maintenance.*"
+            ],
+            [
+              "**4. Conformance**",
+              "The degree to which a product's physical design and operating characteristics meet established engineering blueprints.",
+              "Process capability ($C_p, C_{pk}$), defect PPM, dimensional tolerance limits ($[LSL, USL]$).",
+              "*A CNC-machined automotive crankshaft held to an exact diameter of $40.000\\text{ mm} \\pm 0.005\\text{ mm}$.*"
+            ],
+            [
+              "**5. Durability**",
+              "Measure of product operational lifespan; amount of use derived before physical deterioration dictates replacement over repair.",
+              "Total operational lifespan (hours/years), Mean Time to Failure (MTTF), cyclic stress endurance.",
+              "*A cast-iron industrial slurry pump operating for 25 years in an aggressive chemical mining environment.*"
+            ],
+            [
+              "**6. Serviceability**",
+              "The speed, courtesy, competence, and ease of product repair and maintenance.",
+              "Mean Time to Repair (MTTR), modular replacement design, availability of spare parts.",
+              "*An electric commercial delivery van designed with modular battery trays that can be swapped in under 10 minutes.*"
+            ],
+            [
+              "**7. Aesthetics**",
+              "Subjective sensory evaluation including visual appearance, tactile feel, sound profile, taste, or aroma.",
+              "Surface finish, haptic feedback, acoustic resonance, panel gap alignment.",
+              "*The acoustic dampening and solid tactile latching sound ('thud') of a luxury automobile door.*"
+            ],
+            [
+              "**8. Perceived Quality**",
+              "Subjective assessment based on brand reputation, corporate image, advertising, and country-of-origin signals.",
+              "Net Promoter Score (NPS), brand equity valuation, consumer trust index.",
+              "*A hospital purchasing diagnostic imaging hardware based on the manufacturer's 60-year global clinical reputation.*"
+            ]
+          ]
+        },
+        {
+          type: "h3",
+          text: "Parasuraman, Zeithaml & Berry's 5 SERVQUAL Service Quality Dimensions"
+        },
+        {
+          type: "table",
+          headers: ["SERVQUAL Dimension", "Operational Definition", "Key Service Audit Criteria", "Service Industry Benchmark"],
+          rows: [
+            [
+              "**1. Reliability**",
+              "Ability to perform the promised service dependably, accurately, and consistently without administrative errors.",
+              "Zero billing errors, on-time flight arrival, accurate ledger reconciliation.",
+              "*An automated securities stock exchange clearing 100,000 trades per second with zero ledger reconciliation discrepancies.*"
+            ],
+            [
+              "**2. Responsiveness**",
+              "Willingness to help customers and provide prompt, agile, and enthusiastic service.",
+              "Average speed of answer (ASA), queue wait times, complaint resolution velocity.",
+              "*An emergency roadside assistance provider dispatching a support vehicle to an accident scene within 15 minutes.*"
+            ],
+            [
+              "**3. Assurance**",
+              "Knowledge, competence, courtesy, and trustworthiness of employees that inspire customer confidence.",
+              "Professional certifications, technical expertise, transparent explanation of procedural risks.",
+              "*A board-certified wealth manager explaining fiduciary portfolio risk allocations with clarity to alleviate client anxiety.*"
+            ],
+            [
+              "**4. Empathy**",
+              "Caring, individualized, and compassionate attention provided to every individual customer.",
+              "Personalized interaction, customized scheduling, understanding unique client constraints.",
+              "*A specialized pediatric clinic offering personalized treatment schedules and dedicated parent counseling.*"
+            ],
+            [
+              "**5. Tangibles**",
+              "Physical facilities, equipment, communication materials, and clean appearance of personnel.",
+              "Modern architecture, clean clinical spaces, intuitive digital user interfaces.",
+              "*Clean, sterile hospital diagnostic suites equipped with modern digital monitoring displays and neatly groomed staff.*"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      id: "midsem-om01-topic-4",
+      slug: "midsem-strategic-purchasing-traditional-vs-strategic",
+      number: 104,
+      title: "Strategic Purchasing: Upstream Quality Genesis & Traditional vs. Strategic Comparison",
+      unit: "Mid Sem Important",
+      marks: 14,
+      lecture: "Mid-Sem Master Notes · Strategic Procurement",
+      summary:
+        "Comprehensive 14-mark master note on Strategic Purchasing: the upstream genesis of quality, the 1-10-100 cost rule, and an in-depth 10-point architectural comparison between Traditional and Strategic Purchasing.",
+      tags: [
+        "Mid Sem Important",
+        "Strategic Purchasing",
+        "Traditional Purchasing",
+        "TCO",
+        "1-10-100 Rule",
+        "Dock-to-Stock"
+      ],
+      blocks: [
+        {
+          type: "diagram",
+          kind: "coq-paf-model",
+          caption: "Cost of Quality PAF Architecture & 1-10-100 Prevention Leverage Multiplier"
+        },
+        {
+          type: "h3",
+          text: "The Strategic Role & Upstream Genesis of Purchasing"
+        },
+        {
+          type: "p",
+          text: "In modern Total Quality Management, quality begins upstream in Product Conceptual Design and Strategic Procurement / Supplier Relationships. Quality cannot be inspected into a finished product; it must be designed into the blueprint and built into purchased raw materials and sub-assemblies."
+        },
+        {
+          type: "ul",
+          items: [
+            "**Definition of Strategic Purchasing**: The systematic planning, evaluation, acquisition, and management of an enterprise's external resources, aligning procurement capabilities directly with long-term corporate strategic goals.",
+            "**The 1-10-100 Rule of Quality Costs**:",
+            "• *Design/Procurement Stage ($1.00)*: Cost to prevent a defect during supplier qualification and material specification.",
+            "• *Manufacturing Stage ($10.00)*: Cost to catch, sort, and rework a defective component internally on the assembly line.",
+            "• *Customer Hands ($100.00+)*: Cost of handling warranty claims, product recalls, and legal liabilities once a defect escapes into the field."
+          ]
+        },
+        {
+          type: "h3",
+          text: "Traditional vs. Strategic Purchasing Comparison"
+        },
+        {
+          type: "table",
+          headers: ["Architectural Dimension", "Traditional Purchasing", "Strategic Purchasing (TQM Paradigm)"],
+          rows: [
+            [
+              "**1. Relationship Model**",
+              "Adversarial, arm's-length, and zero-sum; buyer exploits market power over supplier.",
+              "Collaborative, long-term partnering; mutual win-win value creation and joint problem-solving."
+            ],
+            [
+              "**2. Supply Base Structure**",
+              "Large, fragmented supplier base to foster aggressive price bidding wars.",
+              "Rationalized, small base of high-capability, certified tier-one suppliers."
+            ],
+            [
+              "**3. Contract Duration**",
+              "Short-term (annual or transaction-by-transaction purchase orders).",
+              "Multi-year long-term agreements with shared risk and gain-sharing frameworks."
+            ],
+            [
+              "**4. Selection Metric**",
+              "Lowest unit purchase price tag at the point of quotation.",
+              "Lowest **Total Cost of Ownership (TCO)**, evaluating acquisition, quality, logistics, maintenance, and disposal costs."
+            ],
+            [
+              "**5. Quality Verification**",
+              "Massive receiving inspection, counting, sorting, and scrapping at the factory receiving dock.",
+              "**Dock-to-Stock Certification**: Supplier quality is guaranteed at source, eliminating incoming inspection entirely."
+            ],
+            [
+              "**6. Information Exchange**",
+              "Guarded, secretive, and restricted strictly to basic purchase orders and invoices.",
+              "Transparent and open; real-time Electronic Data Interchange (EDI), shared demand forecasts, and joint CAD files."
+            ],
+            [
+              "**7. Design Involvement**",
+              "Late involvement; suppliers bid on finalized engineering drawings after design freeze.",
+              "**Early Supplier Involvement (ESI)**: Suppliers participate during conceptual design, prototyping, and DFMEA stages."
+            ],
+            [
+              "**8. Cost Reduction**",
+              "Aggressive price haggling and supplier margin compression.",
+              "Joint target costing, Value Analysis / Value Engineering (VAVE), and open-book cost breakdown modeling."
+            ],
+            [
+              "**9. Process Capability**",
+              "Acceptance of Acceptable Quality Levels (AQL) and scrap allowances.",
+              "Mandatory statistical process capability ($C_p \\ge 1.33, C_{pk} \\ge 1.33$) and continuous pursuit of Zero Defects."
+            ],
+            [
+              "**10. Supplier Development**",
+              "Zero technical assistance; failing suppliers are immediately dropped.",
+              "Active technical assistance: deploying customer quality engineers to train suppliers in SPC, Kaizen, and Lean."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      id: "midsem-om01-topic-5",
+      slug: "midsem-supplier-qualification-lifecycle",
+      number: 105,
+      title: "The 7-Stage Supplier Qualification Lifecycle and Scorecard Rating System",
+      unit: "Mid Sem Important",
+      marks: 14,
+      lecture: "Mid-Sem Master Notes · Supplier Quality Assurance",
+      summary:
+        "Comprehensive 14-mark master note on the Supplier Qualification System: step-by-step lifecycle flow (Screen -> Audit -> Sample Approval -> Trial Run -> Monitor -> Tier -> Requalify), PPAP requirements, and Supplier Performance Index (SPI).",
+      tags: [
+        "Mid Sem Important",
+        "Supplier Qualification",
+        "PPAP",
+        "Vendor Audit",
+        "SPI",
+        "Dock-to-Stock"
+      ],
+      blocks: [
+        {
+          type: "h3",
+          text: "Concept & Purpose of Supplier Qualification"
+        },
+        {
+          type: "p",
+          text: "A Supplier Qualification System is a structured, multi-stage evaluation framework deployed by procurement and quality assurance to verify that a prospective vendor possesses the technical competence, process capability, financial stability, and quality management infrastructure required to deliver zero-defect materials consistently."
+        },
+        {
+          type: "h3",
+          text: "The 7-Stage Supplier Qualification Lifecycle Flow"
+        },
+        {
+          type: "table",
+          headers: ["Stage", "Lifecycle Phase", "Audit & Technical Action", "Acceptance Criteria / Deliverables"],
+          rows: [
+            [
+              "**1. Screen**",
+              "Initial Prequalification & Survey",
+              "Evaluate candidate vendor financial solvency, facility capacity, and management stability.",
+              "Preliminary supplier survey, ISO 9001 / IATF 16949 certificates, credit rating review."
+            ],
+            [
+              "**2. Audit**",
+              "On-Site Quality & Process Audit",
+              "Cross-functional team audits plant machinery, SPC records, calibration, and Poka-Yoke mistake-proofing.",
+              "Formal audit report scoring process capability, tool maintenance, and operator training matrices."
+            ],
+            [
+              "**3. Sample Approval**",
+              "First Article Inspection & PPAP",
+              "Supplier fabricates initial prototype lots on production tooling for destructive and dimensional tests.",
+              "Production Part Approval Process (PPAP 19 elements), 100% CMM inspection, Gage R&R ($<10\\%$)."
+            ],
+            [
+              "**4. Trial Run**",
+              "Pilot Production Batch",
+              "Supplier runs full-speed pilot batch (500-5000 units) processed through buyer assembly lines.",
+              "Verification of line fit, absence of assembly jams, and initial process capability ($C_{pk} \\ge 1.33$)."
+            ],
+            [
+              "**5. Monitor**",
+              "Ongoing Scorecard Rating",
+              "Continuously track supplier quality, delivery, cost, and service using monthly scorecards.",
+              "Mathematical Supplier Performance Index: $\\text{SPI} = 0.40(Q) + 0.30(D) + 0.20(C) + 0.10(S)$."
+            ],
+            [
+              "**6. Tier**",
+              "Supplier Classification",
+              "Segment suppliers into performance tiers to drive commercial allocation and development.",
+              "Tier 1 (Certified Dock-to-Stock), Tier 2 (Approved), Tier 3 (Conditional/Probation), Tier 4 (De-listed)."
+            ],
+            [
+              "**7. Requalify**",
+              "Periodic Recertification",
+              "Conduct mandatory annual re-audits or event-driven requalification upon major tool/facility changes.",
+              "Recertification audit, re-PPAP approval for major engineering changes, continuous development plans."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      id: "midsem-om01-topic-6",
+      slug: "midsem-pareto-chart-analysis",
+      number: 106,
+      title: "Pareto Chart Analysis: 80/20 Rule, Construction Protocol, and Diagram",
+      unit: "Mid Sem Important",
+      marks: 14,
+      lecture: "Mid-Sem Master Notes · Quality Tools",
+      summary:
+        "Comprehensive 14-mark master note on Pareto Chart Analysis: Vilfredo Pareto origin, Juran's vital few vs. useful many principle, 5-step construction methodology, categorical vs. histogram distinction, and worked industrial case studies.",
+      tags: [
+        "Mid Sem Important",
+        "Pareto Chart",
+        "80/20 Rule",
+        "Vital Few",
+        "Juran",
+        "Quality Tools"
+      ],
+      blocks: [
+        {
+          type: "h3",
+          text: "Theoretical Principles & Origin of the Pareto Diagram"
+        },
+        {
+          type: "p",
+          text: "A Pareto diagram is a specialized dual-axis column graph that ranks categorical data classifications in descending numerical order from left to right, superimposed with a cumulative percentage line (ogive). Developed from Italian economist Vilfredo Pareto's wealth distribution studies and adapted by Dr. Joseph M. Juran as a universal quality management principle: **The Pareto Principle (80/20 Rule)**."
+        },
+        {
+          type: "ul",
+          items: [
+            "**The Core 80/20 Law**: Approximately **80% of process problems, scrap costs, or customer complaints stem from 20% of the vital few root causes**, while the remaining 20% of issues are dispersed across the 80% useful many (trivial many).",
+            "**Distinction from Histograms**: A Pareto chart features a *categorical* horizontal axis (machine numbers, defect types, suppliers), whereas a histogram features a *continuous numerical* horizontal axis (dimensions, temperature, time).",
+            "**Economic Return Leverage**: A 50% improvement in the vital few yields dramatically higher financial returns and is far easier to achieve than a 50% improvement in the useful many."
+          ]
+        },
+        {
+          type: "h3",
+          text: "Step-by-Step Construction Protocol (5 Steps)"
+        },
+        {
+          type: "ol",
+          items: [
+            "**Step 1: Determine Data Classification**: Select the classification category (by defect type, machine number, operator shift, supplier, or department).",
+            "**Step 2: Select Ranking Metric**: Choose the ranking measure—**monetary cost / dollars** is the most effective metric, followed by defect frequency.",
+            "**Step 3: Collect Data**: Gather empirical inspection records over a representative operating time interval.",
+            "**Step 4: Summarize and Rank**: Tabulate categories in descending order from largest to smallest; combine small residual categories into an 'Other' category placed at the far right.",
+            "**Step 5: Construct Dual-Axis Diagram**: Plot categorical bars against the left vertical axis (cost/frequency) and superimpose a cumulative percentage ogive line against the right vertical axis (0% to 100%)."
+          ]
+        },
+        {
+          type: "h3",
+          text: "Worked Industrial Benchmark Case: Coating Machine Scrap Analysis"
+        },
+        {
+          type: "table",
+          headers: ["Coating Machine ID", "Annual Scrap Cost ($)", "Percentage Share (%)", "Cumulative Cost ($)", "Cumulative Percentage (%)", "Pareto Category"],
+          rows: [
+            [
+              "**Machine 51**",
+              "$53,000",
+              "53.0%",
+              "$53,000",
+              "53.0%",
+              "**Vital Few** (Target 1)"
+            ],
+            [
+              "**Machine 35**",
+              "$21,000",
+              "21.0%",
+              "$74,000",
+              "**74.0%**",
+              "**Vital Few** (Target 2)"
+            ],
+            [
+              "**Machine 44**",
+              "$10,000",
+              "10.0%",
+              "$84,000",
+              "84.0%",
+              "Useful Many"
+            ],
+            [
+              "**Machine 47**",
+              "$7,000",
+              "7.0%",
+              "$91,000",
+              "91.0%",
+              "Useful Many"
+            ],
+            [
+              "**Machine 29**",
+              "$4,000",
+              "4.0%",
+              "$95,000",
+              "95.0%",
+              "Useful Many"
+            ],
+            [
+              "**Other (Machine 31 + misc)**",
+              "$5,000",
+              "5.0%",
+              "$100,000",
+              "100.0%",
+              "Useful Many"
+            ]
+          ]
+        },
+        {
+          type: "p",
+          text: "**Managerial Decision**: Coating machines 51 and 35 alone account for **74% of all scrap dollars**. Engineering resources are allocated exclusively to investigating Machine 51 and 35, ignoring the remaining machines until primary scrap drivers are resolved."
+        }
+      ]
+    },
+    {
+      id: "midsem-om01-topic-7",
+      slug: "midsem-cause-and-effect-ishikawa-6ms",
+      number: 107,
+      title: "Cause and Effect (Ishikawa / Fishbone) Diagram: Origin, Construction, and The 6Ms",
+      unit: "Mid Sem Important",
+      marks: 14,
+      lecture: "Mid-Sem Master Notes · Root Cause Analysis",
+      summary:
+        "Comprehensive 14-mark master note on the Cause-and-Effect Diagram: Dr. Kaoru Ishikawa origin, step-by-step construction protocol with brainstorming rules, comprehensive breakdown of the 6Ms, and worked industrial case studies.",
+      tags: [
+        "Mid Sem Important",
+        "Cause and Effect",
+        "Ishikawa Diagram",
+        "Fishbone Diagram",
+        "6Ms",
+        "5 Whys",
+        "Root Cause"
+      ],
+      blocks: [
+        {
+          type: "h3",
+          text: "Origin & Purpose of the Cause-and-Effect Diagram"
+        },
+        {
+          type: "p",
+          text: "Developed in 1943 by **Dr. Kaoru Ishikawa** at the University of Tokyo, the Cause-and-Effect (C&E) diagram is a structured graphical analysis tool composed of lines and symbols designed to illustrate the meaningful relationship between an operational effect (problem or goal) and all contributing causal factors. It is commonly termed the **Ishikawa Diagram** or **Fishbone Diagram** due to its skeletal geometry."
+        },
+        {
+          type: "ul",
+          items: [
+            "**Why It Is Used**: Systematically guides cross-functional teams to identify and structure root causes rather than treating superficial symptoms; prevents jumping to premature solutions; acts as a permanent visual training guide.",
+            "**Dual Applicability**: Used to investigate 'bad effects' (defects, line jams, delays) to eliminate root causes, or 'good effects' (record yield, customer praise) to standardize best operating practices."
+          ]
+        },
+        {
+          type: "h3",
+          text: "Detailed Breakdown of the Six Ms (Manufacturing 6Ms)"
+        },
+        {
+          type: "table",
+          headers: ["Category (6Ms)", "Operational Definition", "Key Diagnostic Factors Examined", "Industrial Case Example"],
+          rows: [
+            [
+              "**1. Man (People / Manpower)**",
+              "Human factors, operator competence, training, and psychological states influencing task execution.",
+              "Operator training, technical skill level, worker fatigue, turnover, adherence to standard work instructions, supervision.",
+              "*Night-shift operator not trained on digital micrometer zeroing protocol.*"
+            ],
+            [
+              "**2. Machine (Equipment / Tooling)**",
+              "Physical machinery, automated systems, fixtures, cutting tools, and computers used in production.",
+              "Tool wear, mechanical backlash, spindle vibration, machine capability ($C_m$), calibration drift, hydraulic pressure stability.",
+              "*CNC lathe main spindle bearing exhibiting $0.008\\text{ mm}$ thermal runout after 4 hours of continuous operation.*"
+            ],
+            [
+              "**3. Method (Work Methods / Processes)**",
+              "Operating procedures, task sequences, operational parameters, and execution techniques.",
+              "Standard Operating Procedures (SOPs), cutting feed rates, welding speeds, cycle times, mixing sequences, setup routines.",
+              "*Feed rate set at $0.25\\text{ mm/rev}$ instead of SOP standard $0.15\\text{ mm/rev}$, causing tool chatter.*"
+            ],
+            [
+              "**4. Material (Raw Materials / Components)**",
+              "Incoming raw materials, sub-assemblies, consumables, chemicals, and packaging.",
+              "Material hardness variability, tensile strength, chemical composition, vendor dimensional tolerances, contamination, moisture content.",
+              "*Raw alloy steel bar stock hardness fluctuating from 28 HRC to 38 HRC across vendor shipments.*"
+            ],
+            [
+              "**5. Measurement (Inspection / Gauges)**",
+              "Metrology equipment, inspection techniques, calibration standards, and sensory evaluations.",
+              "Gauge Repeatability and Reproducibility (Gage R&R), instrument resolution, calibration expiration, operator measurement bias.",
+              "*Vernier caliper jaw worn by $0.004\\text{ mm}$, producing false out-of-spec readings.*"
+            ],
+            [
+              "**6. Milieu / Environment**",
+              "Ambient physical and environmental working conditions surrounding the manufacturing process.",
+              "Ambient temperature fluctuations, relative humidity, airborne dust/particulate contamination, lighting intensity, floor vibration.",
+              "*Afternoon ambient shop temperature rising by $14^\\circ\\text{C}$, causing thermal workpiece expansion during measurement.*"
+            ]
+          ]
+        },
+        {
+          type: "h3",
+          text: "Brainstorming & Construction Protocol"
+        },
+        {
+          type: "ol",
+          items: [
+            "**1. Define the Effect**: Write the specific quality problem in a box on the far right of a large working board (2 ft $\\times$ 3 ft).",
+            "**2. Draw Main Spine**: Draw a horizontal backbone pointing directly to the effect box.",
+            "**3. Establish Major 6M Branches**: Draw primary diagonal branches for Man, Machine, Method, Material, Measurement, and Environment.",
+            "**4. Conduct Brainstorming (5 Whys)**: Use round-robin participation (one idea per person per turn), encourage idea quantity over quality, forbid criticism, and drill down using *Why? What? Where? When? Who? How?*.",
+            "**5. Incubation & Voting**: Allow ideas to incubate overnight, then have team members vote on the minor causes to circle the 4–5 primary root suspects.",
+            "**6. Implement Countermeasures**: Collect empirical verification data and deploy permanent corrective actions (Poka-Yoke, SOP updates)."
+          ]
+        }
+      ]
+    },
+
+    // ==========================================
+    // REMAINING SYLLABUS TOPICS
+    // ==========================================
     {
       id: "tqm-t-1",
       slug: "defining-quality-philosophies-gurus",
@@ -38,274 +764,7 @@ export const tqmCourse: Course = {
         },
         {
           type: "p",
-          text: "Quality is fundamentally defined as the degree to which a set of inherent characteristics fulfills customer requirements. Mathematically, quality is expressed as the Quality Ratio ($Q$):"
-        },
-        {
-          type: "quote",
-          text: "Q = \\frac{\\text{Actual Performance (P)}}{\\text{Customer Expectation (E)}}"
-        },
-        {
-          type: "ul",
-          items: [
-            "**Q > 1.0 (Customer Delight / Superior Quality)**: Actual delivered performance exceeds customer expectations, fostering brand equity, customer retention, and premium pricing power.",
-            "**Q = 1.0 (Customer Satisfaction / Conformance)**: Performance precisely satisfies customer expectations; hygiene threshold is met.",
-            "**Q < 1.0 (Unacceptable Quality / Defect State)**: Performance falls below customer expectations, triggering dissatisfaction, warranty liability, customer churn, and brand erosion."
-          ]
-        },
-        {
-          type: "h3",
-          text: "David Garvin's Five Conceptual Approaches to Defining Quality"
-        },
-        {
-          type: "table",
-          headers: ["Approach", "Core Philosophical Basis", "Measurement Focus", "Industrial Example"],
-          rows: [
-            [
-              "**1. Transcendent Approach**",
-              "Quality is innate excellence, universally recognized through direct experience but difficult to objectively measure.",
-              "Subjective prestige, timeless craftsmanship, aesthetic superiority.",
-              "*Rolex mechanical movements, Rolls-Royce handcrafted interiors, Steinway grand pianos.*"
-            ],
-            [
-              "**2. Product-Based Approach**",
-              "Quality is viewed as a precise, measurable variable based on the quantity of specific attributes or ingredients present.",
-              "Physical specifications, concentration of active ingredients, technical benchmark scores.",
-              "*Thread count in Egyptian cotton sheets (800 vs. 200), vehicle engine horsepower, DRAM silicon density.*"
-            ],
-            [
-              "**3. User-Based Approach**",
-              "Quality lies in the eyes of the beholder; highly personalized fitness for intended customer use.",
-              "Customer satisfaction scores, ergonomic ratings, usability, ease of operation.",
-              "*Intuitive UI of Apple iOS compared to open Android; customizable ERP dashboards tailored to finance vs. operations.*"
-            ],
-            [
-              "**4. Manufacturing-Based Approach**",
-              "Quality is strict 'conformance to requirements' and engineering blueprints; defect-free production.",
-              "Tolerance limits, scrap rates, Cpk process capability, parts-per-million (PPM) defect rates.",
-              "*Semiconductor wafer fabrication with sub-nanometer lithography tolerance; automotive engine cylinder bore precision.*"
-            ],
-            [
-              "**5. Value-Based Approach**",
-              "Quality defined in terms of costs and prices; delivering maximum performance at an acceptable, competitive price point.",
-              "Price-to-performance ratio, total cost of ownership (TCO), economic utility.",
-              "*Southwest Airlines affordable point-to-point travel; Xiaomi feature-rich smartphones priced at budget tiers.*"
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Master Comparison of Core Quality Gurus"
-        },
-        {
-          type: "table",
-          headers: ["Quality Guru", "Core Philosophy & Definition", "Primary Framework", "Attribution of Defects"],
-          rows: [
-            [
-              "**W. Edwards Deming**",
-              "Predictable uniformity and dependability at low cost; quality driven by statistical system management.",
-              "**14 Points for Management** & System of Profound Knowledge (SoPK); PDCA Cycle.",
-              "**94% Systemic / Management**, only 6% Special worker causes."
-            ],
-            [
-              "**Joseph M. Juran**",
-              "'Fitness for use'; quality does not occur by chance—it requires project-by-project management like financial planning.",
-              "**The Juran Quality Trilogy** (Planning, Control, Improvement) & Cost of Poor Quality (COPQ).",
-              "**80% Management controllable**, 20% Operator controllable (Pareto Principle)."
-            ],
-            [
-              "**Philip B. Crosby**",
-              "'Conformance to requirements'; Zero Defects is the only acceptable operational standard.",
-              "**Four Absolutes of Quality** & Price of Nonconformance (PONC).",
-              "**100% Management & worker accountability**; quality is free because prevention costs less than failure."
-            ],
-            [
-              "**Armand V. Feigenbaum**",
-              "Total composite product and service characteristics across marketing, engineering, and manufacturing.",
-              "**Total Quality Control (TQC)** & PAF Cost of Quality Model (Prevention, Appraisal, Failure).",
-              "**Cross-functional responsibility**; exposed the 'Hidden Plant' consuming up to 40% capacity on rework."
-            ],
-            [
-              "**Kaoru Ishikawa**",
-              "Democratized statistical tools so frontline factory workers solve operational defects directly.",
-              "**7 Basic QC Tools**, Cause-and-Effect (Fishbone) Diagram, and Quality Control (QC) Circles.",
-              "**Company-wide collective responsibility**; 'The next process is your customer'."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      id: "tqm-t-2",
-      slug: "dimensions-of-quality-garvin-servqual",
-      number: 2,
-      title: "Dimensions of Quality: Garvin's 8 Product Dimensions vs. SERVQUAL Service Dimensions",
-      unit: "Principles & Philosophies of TQM",
-      summary:
-        "Detailed breakdown of David Garvin's 8 dimensions of product quality and Parasuraman, Zeithaml & Berry's 5 SERVQUAL dimensions of service quality with industry benchmark examples.",
-      tags: ["Quality Dimensions", "Garvin 8 Dimensions", "SERVQUAL", "Parasuraman", "Product vs Service"],
-      blocks: [
-        {
-          type: "h3",
-          text: "David Garvin's Eight Dimensions of Product Quality"
-        },
-        {
-          type: "table",
-          headers: ["Dimension", "Strategic Definition", "Industrial Metric / Evaluation", "Corporate Benchmark Example"],
-          rows: [
-            [
-              "**1. Performance**",
-              "A product's primary operating characteristics and baseline functional execution.",
-              "Speed, acceleration, resolution, processing throughput, fuel economy.",
-              "*Tesla Model S Plaid accelerating 0-60 mph in 1.99 seconds; smartphone camera optical resolution.*"
-            ],
-            [
-              "**2. Features**",
-              "Secondary characteristics that supplement the basic functioning of the product.",
-              "Number of auxiliary options, smart connectivity, ambient lighting, accessory integration.",
-              "*Automobile head-up display (HUD), heated steering wheels, wireless Apple CarPlay.*"
-            ],
-            [
-              "**3. Reliability**",
-              "Probability of a product malfunctioning or failing within a specified time period under stated conditions.",
-              "Mean Time Between Failures (MTBF), failure rate ($\\lambda$), warranty claims per 1,000 units.",
-              "*Toyota Hilux engine powertrain surviving 400,000 km in severe desert terrain with zero catastrophic breakdowns.*"
-            ],
-            [
-              "**4. Conformance**",
-              "The degree to which a product's physical design and operating characteristics meet established engineering blueprints.",
-              "Cp/Cpk process capability, defect PPM, dimensional tolerance limits ($[LSL, USL]$).",
-              "*Boeing commercial airliner titanium spar machined to within $\\pm 0.005\\text{ mm}$ of CAD specifications.*"
-            ],
-            [
-              "**5. Durability**",
-              "The measure of product life; the amount of use one gets from a product before physical deterioration forces replacement.",
-              "Total operational lifespan (hours/years), Mean Time to Failure (MTTF), cyclic stress endurance.",
-              "*Caterpillar heavy earthmoving machinery operating 25,000+ hours under extreme mining conditions before structural overhaul.*"
-            ],
-            [
-              "**6. Serviceability**",
-              "The speed, courtesy, competence, and ease of repair when maintenance is required.",
-              "Mean Time to Repair (MTTR), availability of replacement parts, authorized service network coverage.",
-              "*Apple Genius Bar same-day modular screen and battery replacement; John Deere farm equipment remote telemetry repair.*"
-            ],
-            [
-              "**7. Aesthetics**",
-              "How a product looks, feels, sounds, tastes, or smells; highly subjective sensory evaluation.",
-              "Haptic feedback, tactile feel of premium leather, acoustic resonance of exhaust or car door closing.",
-              "*Bang & Olufsen precision-machined aluminum speaker grilles; Mercedes-Benz acoustic cabin door-thud.*"
-            ],
-            [
-              "**8. Perceived Quality**",
-              "Subjective customer assessment based on brand reputation, marketing imagery, country-of-origin bias, and pedigree.",
-              "Net Promoter Score (NPS), Brand equity valuation, consumer perception index.",
-              "*Apple premium branding commanding 40% margin over competitors with equivalent silicon hardware; German automotive engineering pedigree.*"
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Parasuraman, Zeithaml & Berry's 5 SERVQUAL Service Quality Dimensions"
-        },
-        {
-          type: "table",
-          headers: ["SERVQUAL Dimension", "Operational Definition", "Key Service Audit Criteria", "Service Industry Benchmark"],
-          rows: [
-            [
-              "**1. Reliability**",
-              "Ability to perform the promised service dependably, accurately, and consistently without error.",
-              "Billing accuracy, on-time flight arrival, zero-error transaction processing.",
-              "*FedEx overnight delivery commitment: 'When it absolutely, positively has to be there overnight'.*"
-            ],
-            [
-              "**2. Responsiveness**",
-              "Willingness to help customers and provide prompt, enthusiastic service.",
-              "Average speed of answer (ASA), customer support chat queue time, resolution speed.",
-              "*Amazon Prime Customer Support issuing instant refunds or resolving customer inquiries in under 60 seconds.*"
-            ],
-            [
-              "**3. Assurance**",
-              "Knowledge, competence, courtesy, and trustworthiness of employees that inspire trust and confidence.",
-              "Professional certifications, security compliance (SOC 2, ISO 27001), empathetic communication.",
-              "*Mayo Clinic physicians explaining complex clinical procedures transparently to alleviate patient anxiety.*"
-            ],
-            [
-              "**4. Empathy**",
-              "Caring, individualized, and compassionate attention provided to every individual customer.",
-              "Personalized greeting, customized financial planning, understanding unique customer constraints.",
-              "*Ritz-Carlton hotel staff empowered with $2,000 discretionary budget per employee to resolve guest issues instantly.*"
-            ],
-            [
-              "**5. Tangibles**",
-              "Physical facilities, equipment, grooming of personnel, and communication materials.",
-              "Cleanliness of aircraft cabin, modern retail layout, intuitive UI/UX of digital banking portal.",
-              "*Singapore Airlines modern cabin design, spotless interior cleanliness, and iconic Kebaya cabin crew uniform.*"
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      id: "tqm-t-3",
-      slug: "evolution-of-quality-tqc-vs-tqm",
-      number: 3,
-      title: "Evolution of Quality: Traditional Quality Control vs. Total Quality Management (TQM)",
-      unit: "Principles & Philosophies of TQM",
-      summary:
-        "Comparative architectural analysis of traditional quality control (inspection/detection) versus Total Quality Management (prevention/continuous improvement system).",
-      tags: ["Quality Evolution", "Inspection", "SQC", "TQC", "TQM", "Continuous Improvement"],
-      blocks: [
-        {
-          type: "h3",
-          text: "Historical Eras in the Evolution of Quality"
-        },
-        {
-          type: "ul",
-          items: [
-            "**1. Inspection Era (1900s–1920s - Taylorism)**: Quality achieved through end-of-line sorting. Inspectors separate good parts from defective scrap. Reactive and extremely expensive.",
-            "**2. Statistical Quality Control (SQC) Era (1930s–1950s - Shewhart & Dodge-Romig)**: Introduction of control charts and statistical acceptance sampling to detect process deviations during manufacture.",
-            "**3. Quality Assurance / TQC Era (1960s–1980s - Feigenbaum & Juran)**: Transition from shop-floor inspection to system design, vendor qualification, reliability engineering, and Cost of Quality (COQ) metrics.",
-            "**4. Total Quality Management & Six Sigma Era (1990s–Present)**: Company-wide strategic culture focusing on customer delight, continuous improvement (Kaizen), DMAIC, and zero defects."
-          ]
-        },
-        {
-          type: "h3",
-          text: "Traditional QC vs. Total Quality Management (TQM) Comparison"
-        },
-        {
-          type: "table",
-          headers: ["Architectural Dimension", "Traditional Quality Control (QC)", "Total Quality Management (TQM)"],
-          rows: [
-            [
-              "**Strategic Focus**",
-              "Detection & sorting: Inspecting products after manufacturing to catch defects before shipping.",
-              "**Prevention & Design**: Designing defect-free processes and error-proofing (Poka-Yoke) from inception."
-            ],
-            [
-              "**Quality Philosophy**",
-              "Acceptable Quality Level (AQL); defects are viewed as an inevitable cost of doing business.",
-              "**Continuous Improvement (Kaizen)** & Zero Defects; any defect represents an opportunity for root-cause elimination."
-            ],
-            [
-              "**Organizational Ownership**",
-              "Isolated to the Quality Control (QC) Department and designated line inspectors.",
-              "**Company-wide responsibility (CWQC)**: Every employee from shop floor operator to CEO is accountable."
-            ],
-            [
-              "**Supplier Relationships**",
-              "Adversarial, short-term contracts; lowest bidding price wins; multiple competing vendors.",
-              "**Long-term collaborative partnerships**: Single-source certified vendors integrated into co-design."
-            ],
-            [
-              "**Driver of Improvement**",
-              "Reacting to customer complaints, warranty claims, and end-of-line reject spikes.",
-              "**Proactive customer delight**: Anticipating latent customer needs (Kano model) and benchmarking."
-            ],
-            [
-              "**Problem Solving Model**",
-              "Assigning blame to workers; applying temporary superficial fixes / rework.",
-              "**Systemic root-cause analysis**: 5 Whys, Ishikawa diagrams, SPC, and DMAIC methodologies."
-            ]
-          ]
+          text: "Quality is fundamentally defined as the degree to which a set of inherent characteristics fulfills customer requirements. Mathematically, quality is expressed as the Quality Ratio ($Q = P/E$)."
         }
       ]
     },
@@ -329,45 +788,8 @@ export const tqmCourse: Course = {
           text: "Deming's System of Profound Knowledge (SoPK)"
         },
         {
-          type: "table",
-          headers: ["SoPK Pillar", "Theoretical Principle", "Operational Management Implication"],
-          rows: [
-            [
-              "**1. Appreciation for a System**",
-              "An organization is a network of interdependent components that work together toward a shared aim.",
-              "Sub-optimization of individual silos destroys the overall system. Cross-functional collaboration must replace departmental competition."
-            ],
-            [
-              "**2. Knowledge of Variation**",
-              "Distinguishing between Common Cause variation (systemic) and Special Cause variation (assignable).",
-              "Tampering with a stable system under common cause variation increases total variation and scrap (Deming's Funnel Experiment)."
-            ],
-            [
-              "**3. Theory of Knowledge**",
-              "Management is prediction. Knowledge requires rational theory and iterative empirical testing (PDCA).",
-              "Without theory, facts are meaningless; experience alone teaches nothing without structured hypotheses."
-            ],
-            [
-              "**4. Understanding Psychology**",
-              "Humans have innate intrinsic motivation, curiosity, and pride in craftsmanship.",
-              "Performance appraisal rankings, merit pay, and management by fear destroy intrinsic motivation and foster destructive internal politics."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Key Landmark Items from Deming's 14 Points"
-        },
-        {
-          type: "ul",
-          items: [
-            "**Point 1: Create constancy of purpose** toward improvement of product and service.",
-            "**Point 3: Cease dependence on inspection to achieve quality**; build quality into the product in the first place.",
-            "**Point 4: End the practice of awarding business on the basis of price tag alone**; move toward a single supplier for any one item based on long-term relationship of loyalty and trust.",
-            "**Point 8: Drive out fear** so that everyone may work effectively for the company.",
-            "**Point 10: Eliminate slogans, exhortations, and targets for the work force** asking for zero defects and new levels of productivity without providing the methods.",
-            "**Point 11: Eliminate numerical quotas and management by objective (MBO)**; substitute leadership."
-          ]
+          type: "p",
+          text: "Deming's System of Profound Knowledge comprises four interrelated parts: (1) Appreciation for a System, (2) Knowledge of Variation, (3) Theory of Knowledge, and (4) Understanding Psychology."
         }
       ]
     },
@@ -386,215 +808,8 @@ export const tqmCourse: Course = {
           text: "The Juran Quality Trilogy Architecture"
         },
         {
-          type: "table",
-          headers: ["Trilogy Component", "Core Managerial Action", "Standard Operational Deliverables"],
-          rows: [
-            [
-              "**1. Quality Planning**",
-              "Designing products, services, and manufacturing processes capable of meeting customer needs with zero initial deficiencies.",
-              "Customer identification, VOC translation, product specifications, process capability verification."
-            ],
-            [
-              "**2. Quality Control**",
-              "Evaluating actual operational performance during production, comparing against standards, and acting on deviations.",
-              "Statistical Process Control (SPC) control charts, visual inspection gates, corrective action loops."
-            ],
-            [
-              "**3. Quality Improvement**",
-              "Systematically driving chronic waste down to unprecedented low levels (Breakthrough Sequence).",
-              "Project-by-project cross-functional teams, Pareto analysis, root-cause elimination, institutionalizing new standards."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Juran's Breakthrough Sequence"
-        },
-        {
-          type: "ol",
-          items: [
-            "**1. Proof of the Need**: Quantifying the Cost of Poor Quality (COPQ) in financial currency to gain executive commitment.",
-            "**2. Project Identification**: Selecting vital few projects using Pareto analysis (80/20 rule).",
-            "**3. Organization for Breakthrough**: Forming steering committees and designated diagnostic project teams.",
-            "**4. The Diagnostic Journey**: Moving from symptoms to underlying root causes via rigorous data analysis.",
-            "**5. The Remedial Journey**: Formulating, piloting, and validating systemic countermeasures.",
-            "**6. Overcoming Resistance to Change**: Addressing cultural and organizational barriers to new methods.",
-            "**7. Holding the Gains**: Establishing new standards, control plans, and training to lock in the improvement permanently."
-          ]
-        }
-      ]
-    },
-    {
-      id: "tqm-t-6",
-      slug: "benchmarking-process-twelve-stages-seven-types",
-      number: 6,
-      title: "The Benchmarking Process: Twelve Stages (AT&T Model) and Seven Types of Benchmarking",
-      unit: "Benchmarking, Customer Needs & Quality Engineering",
-      summary:
-        "Detailed analysis of benchmarking theory, the 12-stage AT&T benchmarking process, and the 7 strategic classifications of benchmarking with industrial case studies.",
-      tags: ["Benchmarking", "AT&T Model", "Competitive Benchmarking", "Functional Benchmarking", "Best Practices"],
-      blocks: [
-        {
-          type: "h3",
-          text: "Foundations and Definition of Benchmarking"
-        },
-        {
           type: "p",
-          text: "Benchmarking is the continuous, systematic process of measuring an organization's products, services, and operational processes against recognized industry leaders or world-class best-in-class performers to identify performance gaps, establish stretch targets, and adapt superior practices."
-        },
-        {
-          type: "h3",
-          text: "The 12 Stages of the Benchmarking Process (AT&T / Xerox Model)"
-        },
-        {
-          type: "ol",
-          items: [
-            "**Stage 1: Determine What to Benchmark**: Identify critical processes that directly impact customer satisfaction and financial profitability (Core business drivers / Critical to Quality metrics).",
-            "**Stage 2: Form and Train the Benchmarking Team**: Assemble cross-functional experts possessing intimate operational knowledge of the selected process and trained in benchmarking protocols.",
-            "**Stage 3: Identify Benchmarking Partners**: Screen potential organizations recognized as world-class leaders in the targeted domain (competitors, suppliers, or non-competing cross-industry leaders).",
-            "**Stage 4: Analyze Current Internal Processes**: Thoroughly map internal workflows, measure baseline cycle times, calculate unit costs, and quantify internal performance metrics.",
-            "**Stage 5: Design Information Gathering Strategy**: Develop detailed benchmarking questionnaires, schedule field visits, and execute structured partner interview protocols.",
-            "**Stage 6: Collect Benchmarking Data**: Execute site visits, review technical operational documentation, observe shop-floor procedures, and gather empirical performance data.",
-            "**Stage 7: Analyze Data and Identify Performance Gaps**: Quantify the performance delta between internal performance and the benchmark partner; isolate the root enabling factors driving their superior execution.",
-            "**Stage 8: Project Future Performance Trajectories**: Forecast future performance levels of the benchmark partner to avoid targeting obsolete standards (aiming ahead of the moving target).",
-            "**Stage 9: Establish Functional Goals & Action Plans**: Gain executive consensus, establish aggressive stretch targets, and formulate comprehensive implementation roadmaps.",
-            "**Stage 10: Implement Specific Action Plans**: Execute process re-engineering, reconfigure workflows, procure advanced tooling, and train operating personnel.",
-            "**Stage 11: Monitor Progress & Calibrate Results**: Track KPIs against milestone deliverables, recalibrate metrics, and report operational improvements to executive leadership.",
-            "**Stage 12: Recalibrate Benchmarks**: Institutionalize superior practices into Standard Operating Procedures (SOPs) and reset benchmarks as continuous improvement elevates industry baselines."
-          ]
-        },
-        {
-          type: "h3",
-          text: "Seven Strategic Types of Benchmarking"
-        },
-        {
-          type: "table",
-          headers: ["Benchmarking Type", "Strategic Focus & Scope", "Key Advantages", "Benchmark Industry Example"],
-          rows: [
-            [
-              "**1. Internal Benchmarking**",
-              "Comparing similar processes, lines, or departments within different operating units or plants of the same corporation.",
-              "Zero data confidentiality barriers, rapid access to data, low cost, immediate knowledge sharing.",
-              "*Toyota comparing assembly line cycle times and ergonomics between Georgetown, USA and Tsutsumi, Japan plants.*"
-            ],
-            [
-              "**2. Competitive Benchmarking**",
-              "Direct comparison against immediate market competitors manufacturing identical products.",
-              "Reveals exact competitive market positioning and customer perception gaps.",
-              "*Ford Motor Company reverse-engineering BMW 3-Series suspension geometry to improve chassis handling.*"
-            ],
-            [
-              "**3. Functional Benchmarking**",
-              "Comparing specific functional processes (e.g., logistics, billing) against industry leaders in similar operating environments.",
-              "Breaks industry-specific tunnel vision; partners are willing to share non-proprietary functional practices.",
-              "*Southwest Airlines benchmarking aircraft gate turnaround times against Formula 1 pit stop tire-change crews.*"
-            ],
-            [
-              "**4. Generic (Process) Benchmarking**",
-              "Comparing core work processes against recognized world-class leaders regardless of industry or market.",
-              "Yields breakthrough, radical operational innovations and disruptive workflow paradigms.",
-              "*Metropolitan hospitals benchmarking surgical emergency room patient intake against hotel concierge check-in systems.*"
-            ],
-            [
-              "**5. Strategic Benchmarking**",
-              "Examining high-level business models, market positioning, corporate governance, and core competencies.",
-              "Informs corporate pivot, mergers and acquisitions, and long-term portfolio investment.",
-              "*Microsoft benchmarking Apple's transition to subscription services (SaaS) and silicon hardware integration.*"
-            ],
-            [
-              "**6. Performance (Metric) Benchmarking**",
-              "Quantitative comparison of pricing, technical specifications, cycle times, financial ratios, and service response times.",
-              "Provides immediate baseline numerical metrics for executive goal setting.",
-              "*Cloud data centers benchmarking PUE (Power Usage Effectiveness) and server uptime (99.999%).*"
-            ],
-            [
-              "**7. International / Global Benchmarking**",
-              "Benchmarking processes against leading multinational firms across foreign regulatory and geographic boundaries.",
-              "Overcomes national blind spots and leverages global best practices.",
-              "*Samsung benchmarking semiconductor lithography cleanroom standards across Dutch (ASML) and Taiwanese (TSMC) facilities.*"
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      id: "tqm-t-7",
-      slug: "voice-of-customer-voc-kano-model",
-      number: 7,
-      title: "Voice of the Customer (VOC) and the Kano Model of Customer Satisfaction",
-      unit: "Benchmarking, Customer Needs & Quality Engineering",
-      summary:
-        "Techniques for capturing the Voice of the Customer (VOC) and deconstructing Noriaki Kano's Model of Customer Satisfaction (Must-Be, One-Dimensional, Attractive, Indifferent, Reverse) with decay lifecycle dynamics.",
-      tags: ["VOC", "Kano Model", "Customer Satisfaction", "Delighters", "Must-Be"],
-      blocks: [
-        {
-          type: "diagram",
-          kind: "kano-model",
-          caption: "Noriaki Kano Customer Satisfaction Coordinate Model & Lifecycle Decay Curve"
-        },
-        {
-          type: "h3",
-          text: "Capturing the Voice of the Customer (VOC)"
-        },
-        {
-          type: "p",
-          text: "Voice of the Customer (VOC) is the in-depth process of capturing customer requirements, expectations, preferences, and aversions. VOC methodologies encompass:"
-        },
-        {
-          type: "ul",
-          items: [
-            "**Reactive VOC**: Customer complaints, warranty claims, helpdesk ticket logs, field service failure reports, product return data.",
-            "**Proactive VOC**: Contextual customer interviews, focus groups, ethnographic gemba observations, lead-user surveys, social sentiment mining.",
-            "**VOC to CTQ Translation**: Converting qualitative, emotional customer statements (*'The car door feels flimsy'*) into measurable Critical-to-Quality engineering characteristics (*'Door latch closing force: 28 N ± 3 N; Acoustic seal damping: 45 dB'*)."
-          ]
-        },
-        {
-          type: "h3",
-          text: "Noriaki Kano's Model of Customer Satisfaction"
-        },
-        {
-          type: "table",
-          headers: ["Kano Category", "Mathematical Relationship", "Psychological Impact", "Industrial Benchmark Example"],
-          rows: [
-            [
-              "**1. Must-Be / Basic (Threshold)**",
-              "Asymmetrical negative ($S \\le 0$): 100% execution yields neutral satisfaction; failure causes severe dissatisfaction.",
-              "Taken for granted; non-negotiable hygiene prerequisite.",
-              "*Automobile anti-lock brakes (ABS), hotel room hot water, airline flight safety compliance.*"
-            ],
-            [
-              "**2. One-Dimensional (Performance)**",
-              "Linear symmetrical ($S \\propto \\text{Execution}$): Higher execution yields proportionate customer satisfaction; lower execution yields dissatisfaction.",
-              "Direct competitive battleground; 'more is better'.",
-              "*Automobile fuel efficiency (km/l), smartphone battery life (hours), cloud server latency (ms).*"
-            ],
-            [
-              "**3. Attractive (Delighters / Excitement)**",
-              "Exponential positive ($S = f(\\text{Execution}^2)$): Absence causes zero dissatisfaction; presence creates overwhelming customer delight.",
-              "Latent, unexpected features that differentiate the brand.",
-              "*Tesla in-car automated infotainment updates, airline personalized travel itinerary concierge, wireless smartphone charging in cars (when first launched).*"
-            ],
-            [
-              "**4. Indifferent**",
-              "Zero slope ($S = 0$): Execution level has zero impact on customer satisfaction.",
-              "Over-engineered features; prime targets for cost reduction.",
-              "*Cardboard packaging tensile strength exceeding standard; 50-page printed manual inside an app-managed IoT gadget box.*"
-            ],
-            [
-              "**5. Reverse**",
-              "Inverse slope ($S \\propto -\\text{Execution}$): Higher presence actively irritates and dissatisfies customers.",
-              "Unwanted complexity or intrusive automation.",
-              "*Intrusive pop-up notifications, overly complex multi-layered touch menus while driving.*"
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "The Dynamic Decay Law of the Kano Model"
-        },
-        {
-          type: "p",
-          text: "Customer expectations are never static. Over time (typically 12 to 24 months), every **Attractive / Delighter** attribute decays into a **One-Dimensional / Performance** requirement as competitors replicate it, and eventually degenerates into a **Must-Be / Basic** hygiene requirement. Organizations must constantly channel innovation budgets into new Delighters to maintain market leadership."
+          text: "Juran identified three core processes: Quality Planning (designing processes capable of meeting goals), Quality Control (maintaining current performance and acting on sporadic spikes), and Quality Improvement (driving chronic waste down to breakthrough levels)."
         }
       ]
     },
@@ -619,66 +834,7 @@ export const tqmCourse: Course = {
         },
         {
           type: "p",
-          text: "Developed by Yoji Akao and Shigeru Mizuno in 1966 at Mitsubishi's Kobe Shipyard, QFD is a structured cross-functional methodology that translates qualitative customer requirements (Voice of Customer) into quantitative engineering parameters, part specifications, process operations, and production control limits."
-        },
-        {
-          type: "h3",
-          text: "The Six Structural Rooms of the House of Quality (HOQ)"
-        },
-        {
-          type: "table",
-          headers: ["HOQ Room", "Architectural Location", "Core Engineering Function", "Mathematical Formulation / Weighting"],
-          rows: [
-            [
-              "**Room 1: Customer Requirements (WHATs)**",
-              "Left vertical column",
-              "Structured list of customer needs and expectations captured from VOC research.",
-              "Customer Importance Weight ($w_i$ on a 1 to 5 scale; $\\sum w_i$ normalized)."
-            ],
-            [
-              "**Room 2: Engineering Characteristics (HOWs)**",
-              "Top horizontal ceiling",
-              "Measurable technical parameters formulated by engineering to address customer WHATs.",
-              "Includes direction of optimization: $\\uparrow$ (Maximize), $\\downarrow$ (Minimize), or $\\odot$ (Target nominal value)."
-            ],
-            [
-              "**Room 3: Interrelationship Matrix**",
-              "Central grid (WHATs $\\times$ HOWs)",
-              "Evaluates the strength of impact between each customer demand and each engineering characteristic.",
-              "Standard scoring: Strong ($\\odot = 9$), Moderate ($\\bigcirc = 3$), Weak ($\\triangle = 1$), None ($\\text{Blank} = 0$)."
-            ],
-            [
-              "**Room 4: Correlation Roof (Trade-off Matrix)**",
-              "Triangular peak roof",
-              "Identifies physical engineering trade-offs and synergies between different technical parameters.",
-              "Scoring: $++$ (Strong Positive), $+$ (Positive), $-$ (Negative Trade-off), $--$ (Severe Conflict)."
-            ],
-            [
-              "**Room 5: Customer Competitive Assessment**",
-              "Right vertical column",
-              "Evaluates how the firm's current product compares against leading competitors from the customer's perspective.",
-              "Competitive scores (1-5 scale); derives Improvement Ratio ($IR = \\text{Target}/\\text{Current}$) and Sales Point multiplier."
-            ],
-            [
-              "**Room 6: Technical Targets & Importance Scores**",
-              "Bottom horizontal foundation",
-              "Calculates absolute technical priorities and establishes concrete engineering design targets.",
-              "Technical Importance Score: $W_j = \\sum_{i=1}^{n} (w_i \\times R_{ij})$; sets physical target metrics ($N, mm, dB$). "
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Clausing's Four-Phase QFD Cascading Process"
-        },
-        {
-          type: "ol",
-          items: [
-            "**Phase 1: Product Planning (House of Quality)**: Customer Requirements (WHATs) $\\rightarrow$ Engineering Characteristics (HOWs).",
-            "**Phase 2: Part Deployment**: Engineering Characteristics (WHATs) $\\rightarrow$ Critical Part Characteristics (HOWs).",
-            "**Phase 3: Process Planning**: Critical Part Characteristics (WHATs) $\\rightarrow$ Manufacturing Process Operations (HOWs).",
-            "**Phase 4: Production Planning**: Manufacturing Process Operations (WHATs) $\\rightarrow$ Quality Controls, Inspection Points & SPC Limits (HOWs)."
-          ]
+          text: "QFD translates qualitative customer requirements (WHATs) into quantitative engineering parameters (HOWs), part characteristics, process parameters, and production controls."
         }
       ]
     },
@@ -703,54 +859,7 @@ export const tqmCourse: Course = {
         },
         {
           type: "p",
-          text: "Failure Mode and Effects Analysis (FMEA) is a systematic, proactive engineering risk-assessment methodology designed to identify potential design and process failure modes, evaluate their potential severity and causes, and establish prioritized preventive countermeasures before product manufacturing."
-        },
-        {
-          type: "h3",
-          text: "Design FMEA (DFMEA) vs. Process FMEA (PFMEA)"
-        },
-        {
-          type: "table",
-          headers: ["FMEA Dimension", "Design FMEA (DFMEA)", "Process FMEA (PFMEA)"],
-          rows: [
-            [
-              "**Primary Objective**",
-              "Ensure product design functions reliably and safely across operating conditions before tooling release.",
-              "Ensure manufacturing and assembly operations produce parts conforming to engineering specs without disruption."
-            ],
-            [
-              "**Failure Mode Focus**",
-              "Material fatigue, structural yield, thermal expansion, dielectric breakdown, component clash.",
-              "Operator error, incorrect torque, machine wear, tooling misorientation, contamination, thermal drift."
-            ],
-            [
-              "**Typical Root Causes**",
-              "Incorrect material selection, insufficient safety margin, inappropriate geometry, harsh environmental limits.",
-              "Inadequate training, missing Poka-Yoke interlocks, improper lubrication, worn cutting inserts, ambient humidity."
-            ],
-            [
-              "**Countermeasures**",
-              "Redesigning geometry, selecting higher-grade alloys, enlarging safety factors, thermal shielding.",
-              "Mistake-proofing (Poka-Yoke), automated optical inspection (AOI), statistical process control (SPC), torque verification."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Mathematical Formulation of Risk Priority Number (RPN)"
-        },
-        {
-          type: "quote",
-          text: "\\text{RPN} = \\text{Severity (S)} \\times \\text{Occurrence (O)} \\times \\text{Detection (D)}"
-        },
-        {
-          type: "ul",
-          items: [
-            "**Severity (S, 1–10 scale)**: Assesses the seriousness of the effect of the potential failure mode on the customer. ($1 = \\text{Negligible aesthetic flaw}$; $10 = \\text{Hazardous failure without warning affecting passenger safety}$).",
-            "**Occurrence (O, 1–10 scale)**: Assesses the likelihood that a specific failure cause will occur during product lifecycle. ($1 = \\text{Failure improbable, } < 1 \\text{ in } 1,000,000$; $10 = \\text{Failure almost certain, } > 1 \\text{ in } 10$).",
-            "**Detection (D, 1–10 scale - Inverted Metric)**: Assesses the likelihood that current design/process controls will detect the failure before releasing to the customer. ($1 = \\text{Almost certain detection via 100% Poka-Yoke}$; $10 = \\text{Absolute uncertainty; no control exists}$).",
-            "**RPN Range**: Values span from $1$ to $1,000$. Historically, RPNs exceeding $100–120$ triggered mandatory corrective action."
-          ]
+          text: "FMEA is a proactive risk assessment tool that evaluates potential failure modes across Severity ($S$), Occurrence ($O$), and Detection ($D$) to compute the Risk Priority Number ($RPN = S \\times O \\times D$)."
         }
       ]
     },
@@ -775,197 +884,7 @@ export const tqmCourse: Course = {
         },
         {
           type: "p",
-          text: "Genichi Taguchi redefined quality as 'the financial loss imparted to society from the time a product is shipped'. Taguchi fundamentally rejected the traditional manufacturing 'goalpost' mentality, which falsely assumed zero financial loss as long as a dimension fell anywhere inside tolerance limits $[LSL, USL]$."
-        },
-        {
-          type: "h3",
-          text: "Three Formulations of Taguchi Loss Function"
-        },
-        {
-          type: "table",
-          headers: ["Characteristic Type", "Mathematical Formula", "Loss Coefficient ($k$)", "Industrial Benchmark Example"],
-          rows: [
-            [
-              "**1. Nominal-the-Best (NTB)**",
-              "$L(y) = k(y - m)^2$",
-              "$k = \\frac{A_0}{\\Delta^2}$ where $A_0$ is scrap cost and $\\Delta$ is customer tolerance.",
-              "*Shaft diameter ($50.00\\text{ mm} \\pm 0.05\\text{ mm}$), automotive piston clearance, resistor voltage.*"
-            ],
-            [
-              "**2. Smaller-the-Better (STB)**",
-              "$L(y) = k y^2$",
-              "$k = \\frac{A_0}{y_0^2}$ where $y_0$ is maximum permissible threshold.",
-              "*Engine carbon emissions (g/km), electrical resistance in copper wiring, chemical impurity PPM.*"
-            ],
-            [
-              "**3. Larger-the-Better (LTB)**",
-              "$L(y) = k \\left(\\frac{1}{y^2}\\right)$",
-              "$k = A_0 y_0^2$ where $y_0$ is minimum acceptable threshold.",
-              "*Tensile breaking strength of crane cables (kN), smartphone battery lifespan (cycles), weld joint shear strength.*"
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Average Expected Societal Loss in a Production Process"
-        },
-        {
-          type: "p",
-          text: "For a continuous production process with mean $\\mu$ and variance $\\sigma^2$, the average expected loss per unit ($\\bar{L}$) is mathematically formulated as:"
-        },
-        {
-          type: "quote",
-          text: "\\bar{L} = k \\left[ \\sigma^2 + (\\mu - m)^2 \\right]"
-        },
-        {
-          type: "p",
-          text: "This formulation proves that total financial loss is driven by two independent components: (1) process variability around the mean ($\\sigma^2$), and (2) process off-centeredness from the nominal target ($(\\mu - m)^2$). To minimize loss, organizations must first reduce process variance ($\\sigma^2 \\rightarrow 0$) and then adjust process mean to target ($\\mu = m$)."
-        }
-      ]
-    },
-    {
-      id: "tqm-t-11",
-      slug: "supplier-qualification-evaluation-system",
-      number: 11,
-      title: "Strategic Purchasing and the Four-Tier Supplier Qualification Lifecycle",
-      unit: "Operations Quality, SPC & 7 QC Tools",
-      summary:
-        "Supplier quality assurance, the Four-Tier Supplier Qualification Lifecycle (Unapproved, Conditional, Approved, Certified/Partner), ISO/IATF auditing, and vendor rating systems.",
-      tags: ["Supplier Quality", "Vendor Qualification", "Dock-to-Stock", "SPI", "Procurement"],
-      blocks: [
-        {
-          type: "h3",
-          text: "The Four-Tier Supplier Qualification Lifecycle"
-        },
-        {
-          type: "table",
-          headers: ["Qualification Tier", "Operational Status", "Audit & Verification Requirements", "Inspection & Sourcing Policy"],
-          rows: [
-            [
-              "**Tier 1: Unapproved / Potential Supplier**",
-              "Candidate supplier undergoing initial screening; no commercial purchase orders authorized.",
-              "Financial solvency check, preliminary capability survey, code of conduct compliance review.",
-              "Strictly prototype or R&D sample quantities only; 100% destructive/metallurgical testing."
-            ],
-            [
-              "**Tier 2: Conditionally Approved Supplier**",
-              "Supplier authorized for limited commercial trial production runs with intensive surveillance.",
-              "On-site Quality Management System (QMS) audit, initial Process Capability ($C_{pk} \\ge 1.33$) evaluation.",
-              "Rigorous receiving inspection (Level II tightened sampling); mandatory Certificate of Analysis (COA) with each batch."
-            ],
-            [
-              "**Tier 3: Approved Supplier**",
-              "Fully qualified supplier consistently satisfying quality, cost, and delivery (QCD) performance targets.",
-              "Annual surveillance audits, ISO 9001 / IATF 16949 certification, established Corrective Action (8D) process.",
-              "Standard normal sampling inspection (AQL 0.65%); standard purchase order execution."
-            ],
-            [
-              "**Tier 4: Certified / Strategic Partner**",
-              "World-class supplier operating with proven $C_{pk} \\ge 1.67$ and integrated into long-term strategic co-design.",
-              "Continuous electronic SPC data streaming, Lean Six Sigma capability, joint Value Engineering (VAVE).",
-              "**Dock-to-Stock status**: Zero incoming receiving inspection; parts flow directly from supplier trucks onto factory assembly line."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Comprehensive Supplier Quality Rating System (SQRS)"
-        },
-        {
-          type: "p",
-          text: "World-class procurement organizations evaluate approved suppliers using weighted multi-attribute rating models:"
-        },
-        {
-          type: "quote",
-          text: "\\text{Supplier Performance Index (SPI)} = 0.40(Q) + 0.30(D) + 0.20(C) + 0.10(S)"
-        },
-        {
-          type: "ul",
-          items: [
-            "**Quality Score (Q, 40% weight)**: Calculated based on lot acceptance rate and incoming defect PPM ($Q = 100 - \\text{PPM penalty}$).",
-            "**Delivery Score (D, 30% weight)**: Evaluates on-time in-full (OTIF) delivery performance against schedule commitments.",
-            "**Cost Competitiveness (C, 20% weight)**: Evaluates annual cost-reduction targets, payment terms, and total cost of ownership (TCO).",
-            "**Service & Responsiveness (S, 10% weight)**: Evaluates 8D problem-solving responsiveness, engineering support, and flexibility."
-          ]
-        }
-      ]
-    },
-    {
-      id: "tqm-t-12",
-      slug: "seven-basic-qc-tools-quality-investigation",
-      number: 12,
-      title: "The Seven Basic Quality Control (7 QC) Tools: Architecture, Functions, and 6-Phase Investigation Flow",
-      unit: "Operations Quality, SPC & 7 QC Tools",
-      summary:
-        "Comprehensive breakdown of the 7 Basic QC Tools (Check Sheet, Pareto Chart, Cause-and-Effect Diagram, Histogram, Control Chart, Scatter Diagram, Stratification/Flowchart) and their 6-phase quality investigation flow.",
-      tags: ["7 QC Tools", "Ishikawa", "Pareto", "Fishbone", "Histogram", "Scatter Plot"],
-      blocks: [
-        {
-          type: "h3",
-          text: "The Seven Basic Quality Control (7 QC) Tools"
-        },
-        {
-          type: "table",
-          headers: ["Tool", "Creator / Principle", "Primary Analytical Purpose", "Industrial Quality Application"],
-          rows: [
-            [
-              "**1. Check Sheet**",
-              "Standardized observation form",
-              "Structured, real-time data collection at the operational site to capture defect frequencies and spatial locations.",
-              "*Defect-location 'measles chart' marking solder bridging locations on PCB assembly lines.*"
-            ],
-            [
-              "**2. Pareto Chart**",
-              "Joseph Juran (80/20 Rule)",
-              "Separates the 'vital few' defect causes from the 'useful many' by plotting descending frequencies with cumulative ogive line.",
-              "*Isolating that 2 out of 25 CNC machines account for 81% of total automotive engine scrap costs.*"
-            ],
-            [
-              "**3. Cause-and-Effect (Fishbone)**",
-              "Kaoru Ishikawa (5M+1E / 4P)",
-              "Systematically brainstorms and structures all potential root causes contributing to a specific quality defect.",
-              "*Investigating pharmaceutical tablet dissolution failure across Man, Machine, Material, Method, Measurement, Environment.*"
-            ],
-            [
-              "**4. Histogram**",
-              "Frequency distribution graph",
-              "Visualizes central tendency, spread, and shape of continuous data relative to tolerance limits $[LSL, USL]$.",
-              "*Detecting bimodal distribution indicating mixed raw material batches from two different steel suppliers.*"
-            ],
-            [
-              "**5. Scatter Diagram**",
-              "Correlation coordinate plot",
-              "Tests for mathematical correlation between an independent process variable ($X$) and dependent quality metric ($Y$).",
-              "*Validating positive correlation between injection molding nozzle temperature and plastic tensile strength.*"
-            ],
-            [
-              "**6. Stratification / Flowchart**",
-              "Data segmentation & process map",
-              "Separates mixed data into distinct homogeneous layers (by shift, machine, operator, lot) to isolate sources of variation.",
-              "*Stratifying defect rates by Day Shift vs. Night Shift to reveal operator training discrepancies.*"
-            ],
-            [
-              "**7. Control Chart**",
-              "Walter Shewhart ($\\pm 3\\sigma$)",
-              "Distinguishes common cause variation from assignable/special causes to maintain statistical process stability over time.",
-              "*Tracking shaft outer diameter with an $\\bar{X}-R$ chart to detect tool wear trends before out-of-spec defects occur.*"
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Six-Phase Quality Investigation Sequence"
-        },
-        {
-          type: "ol",
-          items: [
-            "**Step 1: Process Mapping (Flowchart)**: Map operational process flow to establish investigation boundaries and isolate potential risk points.",
-            "**Step 2: Empirical Data Collection (Check Sheet)**: Collect quantitative defect counts, operational parameters, and spatial failure locations in real-time.",
-            "**Step 3: Defect Prioritization (Pareto Chart)**: Apply 80/20 analysis to isolate the vital few root defects responsible for the majority of financial losses.",
-            "**Step 4: Root-Cause Investigation (Fishbone & 5 Whys)**: Brainstorm potential causal factors across 5M+1E and drill down to verified root causes.",
-            "**Step 5: Statistical Distribution & Correlation (Histogram & Scatter)**: Analyze process spread against specification limits and confirm mathematical relationships between process inputs and quality outputs.",
-            "**Step 6: Process Stabilization & Long-Term Monitoring (Control Chart)**: Implement statistical control limits to hold the gains and detect assignable causes in real-time."
-          ]
+          text: "Taguchi proved that economic and societal loss increases quadratically as dimensions drift away from nominal target: $L(y) = k(y-m)^2$."
         }
       ]
     },
@@ -984,68 +903,8 @@ export const tqmCourse: Course = {
           text: "The Seven New Management & Planning (MP) Tools"
         },
         {
-          type: "table",
-          headers: ["MP Tool", "Japanese Origin / Method", "Core Function", "Strategic Role in Planning"],
-          rows: [
-            [
-              "**1. Affinity Diagram**",
-              "KJ Method (Jiro Kawakita)",
-              "Organizes vast amounts of unstructured, qualitative brainstorming data and customer feedback into natural conceptual clusters.",
-              "Synthesizes subjective VOC data into structured problem themes."
-            ],
-            [
-              "**2. Relations Diagram**",
-              "Interrelationship Digraph",
-              "Maps multi-directional cause-and-effect relationships among diverse factors to identify primary system drivers vs. outcome indicators.",
-              "Isolates root driver nodes (nodes with high outgoing arrows)."
-            ],
-            [
-              "**3. Tree Diagram**",
-              "Systematic Diagram",
-              "Systematically breaks down broad strategic objectives or root drivers into increasing levels of detailed operational tasks ('How-How').",
-              "Decomposes complex goals into actionable work breakdown structures."
-            ],
-            [
-              "**4. Matrix Diagram**",
-              "L, T, X, Y shaped matrices",
-              "Evaluates multi-dimensional relationships and functional responsibilities between tasks, departments, and quality targets.",
-              "Assigns organizational accountability (RACI matrix)."
-            ],
-            [
-              "**5. Prioritization Matrix**",
-              "Analytical Hierarchy Process (AHP)",
-              "Ranks and scores alternative implementation options against rigorously weighted strategic evaluation criteria.",
-              "Selects the highest-ROI solution paths objectively."
-            ],
-            [
-              "**6. Process Decision Program Chart (PDPC)**",
-              "Contingency Risk Tree",
-              "Systematically maps potential failure modes, 'what-if' risks, and unintended side effects during plan execution to design countermeasures.",
-              "Proactive operational risk mitigation and contingency planning."
-            ],
-            [
-              "**7. Arrow Diagram**",
-              "Activity Network Diagram / CPM",
-              "Sequences validated tasks into an execution network, determining task dependencies, Earliest/Latest times, slack, and Critical Path.",
-              "Ensures project execution stays on schedule without critical delays."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Detailed 7-Step Tool Integration Sequence"
-        },
-        {
-          type: "ol",
-          items: [
-            "**Step 1 (Affinity Diagram)**: Cross-functional team brainstorms 80+ unstructured challenges regarding missed delivery schedules; clusters them into natural themes (*People, Technology, Logistics, Vendors*).",
-            "**Step 2 (Relations Diagram)**: Takes theme headers from the Affinity Diagram and draws directional causal arrows. Node with highest outgoing arrows (*'Lack of standardized supervisor training'*) is isolated as Primary System Driver.",
-            "**Step 3 (Tree Diagram)**: Takes Primary System Driver as root goal and decomposes it across 3 hierarchical levels by asking *'How can we resolve this?'*, producing 12 discrete sub-tasks.",
-            "**Step 4 (Matrix Diagram)**: Places the 12 sub-tasks on the vertical axis against departments (*HR, Production, Engineering, Maintenance*) on the horizontal axis to assign RACI responsibilities.",
-            "**Step 5 (Prioritization Matrix)**: Scores alternative training delivery software options against weighted criteria (*Implementation Cost 40%, Speed 30%, Usability 30%*) to select optimal platform.",
-            "**Step 6 (PDPC)**: Constructs a contingency tree for software rollout, identifying risk scenarios (*'Server crash during live training', 'Shift worker overtime clash'*) and designing backup protocols.",
-            "**Step 7 (Arrow Diagram)**: Plots finalized, risk-mitigated tasks into a Critical Path Method (CPM) network diagram, establishing a 6-week execution path with zero schedule slippage."
-          ]
+          type: "p",
+          text: "The 7 MP tools organize unstructured qualitative ideas, map cause-and-effect networks, decompose tasks, assign responsibilities, mitigate risks, and sequence project critical paths."
         }
       ]
     },
@@ -1066,83 +925,11 @@ export const tqmCourse: Course = {
         },
         {
           type: "h3",
-          text: "Common Cause vs. Special Cause Variation"
-        },
-        {
-          type: "table",
-          headers: ["Variation Type", "Nature & Origin", "Predictability & Impact", "Management Responsibility & Action"],
-          rows: [
-            [
-              "**Common Cause (Chance / Natural)**",
-              "Inherent in the system design, machine tolerances, ambient conditions, and standard raw material variation.",
-              "Statistically predictable within $\\pm 3\\sigma$ boundaries; stable over time.",
-              "**Management Action Required**: Can only be reduced by fundamentally redesigning the process/equipment (Deming 94% rule)."
-            ],
-            [
-              "**Special Cause (Assignable / Unnatural)**",
-              "External disturbances not inherent to the system (e.g., operator error, tool breakage, batch formulation error).",
-              "Unpredictable, causes process instability, shifts mean, or inflates variance.",
-              "**Frontline Operator Action Required**: Immediate local intervention to identify, isolate, and eliminate the assignable cause."
-            ]
-          ]
-        },
-        {
-          type: "h3",
           text: "Mathematical Architecture of Shewhart Control Charts"
         },
         {
           type: "p",
-          text: "Control limits are established at $\\pm 3\\sigma$ from the centerline ($CL$). In a stable normal distribution, $99.73\\%$ of all data points fall naturally within $\\pm 3\\sigma$ under common cause variation alone:"
-        },
-        {
-          type: "quote",
-          text: "\\text{UCL} = \\mu + 3\\sigma_{\\bar{X}} = \\bar{\\bar{X}} + A_2 \\bar{R}, \\quad \\text{CL} = \\bar{\\bar{X}}, \\quad \\text{LCL} = \\mu - 3\\sigma_{\\bar{X}} = \\bar{\\bar{X}} - A_2 \\bar{R}"
-        },
-        {
-          type: "h3",
-          text: "Western Electric Out-of-Control Sensitizing Rules"
-        },
-        {
-          type: "table",
-          headers: ["Rule", "Pattern Trigger Condition", "Zone Involved", "Diagnostic Meaning & Cause"],
-          rows: [
-            [
-              "**Rule 1**",
-              "1 point falls outside the $\\pm 3\\sigma$ Control Limits ($> UCL$ or $< LCL$).",
-              "Beyond Zone A",
-              "Severe assignable shock (tool fracture, severe power surge, wrong material lot)."
-            ],
-            [
-              "**Rule 2**",
-              "2 out of 3 consecutive points fall in Zone A (between $2\\sigma$ and $3\\sigma$) on the same side of CL.",
-              "Zone A",
-              "Significant process mean shift or process variance surge."
-            ],
-            [
-              "**Rule 3**",
-              "4 out of 5 consecutive points fall in Zone B or beyond ($> 1\\sigma$) on the same side of CL.",
-              "Zone B or beyond",
-              "Moderate process mean shift; emerging calibration drift."
-            ],
-            [
-              "**Rule 4**",
-              "8 to 9 consecutive points fall on the same side of the Center Line (CL).",
-              "Same side of CL",
-              "Persistent bias in process mean (new operator setting, revised raw material supplier)."
-            ],
-            [
-              "**Rule 5 (Trend)**",
-              "6 consecutive points steadily increasing or steadily decreasing.",
-              "Across zones",
-              "Gradual systematic wear (tool wear, chemical bath depletion, dirt accumulation)."
-            ],
-            [
-              "**Rule 6 (Oscillation)**",
-              "14 consecutive points alternating up and down in saw-tooth pattern.",
-              "Across CL",
-              "Systematic alternating feeds (two different operators, alternating raw material hoppers)."
-            ]
-          ]
+          text: "Control charts set limits at $\\pm 3\\sigma$ around the centerline. Western Electric rules detect non-random special causes before out-of-spec defects occur."
         }
       ]
     },
@@ -1161,72 +948,8 @@ export const tqmCourse: Course = {
           text: "Mathematical Formulations of Capability Indices"
         },
         {
-          type: "table",
-          headers: ["Index", "Mathematical Formula", "Core Focus & Sensitivity", "Key Limitation"],
-          rows: [
-            [
-              "**Potential Capability ($C_p$)**",
-              "$C_p = \\frac{\\text{USL} - \\text{LSL}}{6\\sigma}$",
-              "Measures process spread (spread capability) relative to specification width.",
-              "Blind to process centering; a process can have $C_p = 2.0$ yet produce 100% scrap if mean is shifted."
-            ],
-            [
-              "**Actual Capability ($C_{pk}$)**",
-              "$C_{pk} = \\min \\left( \\frac{\\text{USL} - \\mu}{3\\sigma}, \\frac{\\mu - \\text{LSL}}{3\\sigma} \\right)$",
-              "Measures both process spread AND process centering relative to nearest specification limit.",
-              "Does not directly penalize deviation from target $m$ if specifications are asymmetrical."
-            ],
-            [
-              "**Taguchi Capability ($C_{pm}$)**",
-              "$C_{pm} = \\frac{\\text{USL} - \\text{LSL}}{6\\sqrt{\\sigma^2 + (\\mu - m)^2}} = \\frac{C_p}{\\sqrt{1 + \\left(\\frac{\\mu - m}{\\sigma}\\right)^2}}$",
-              "Directly incorporates quadratic financial loss and penalizes any off-center deviation from target $m$.",
-              "Requires explicit target nominal value $m$ definition."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Process Centering Relationship & Capability Interpretation Matrix"
-        },
-        {
-          type: "quote",
-          text: "C_{pk} = C_p (1 - k) \\quad \\text{where} \\quad k = \\frac{|m - \\mu|}{\\frac{\\text{USL} - \\text{LSL}}{2}}"
-        },
-        {
-          type: "table",
-          headers: ["$C_{pk}$ Value", "Process Capability Status", "Expected Defect Rate (PPM)", "Industrial Action Mandate"],
-          rows: [
-            [
-              "**$C_{pk} < 1.0$**",
-              "**Incapable Process** (Process spread exceeds tolerance width or severe mean shift).",
-              "$> 2,700 \\text{ PPM}$ (Severe non-conformance)",
-              "Mandatory 100% sorting inspection; line stoppage; root-cause intervention required."
-            ],
-            [
-              "**$1.0 \\le C_{pk} < 1.33$**",
-              "**Barely Capable / Marginal Process** (Meets traditional $3\\sigma$ boundaries).",
-              "$63 - 2,700 \\text{ PPM}$",
-              "Requires intensive statistical monitoring; unacceptable for safety-critical automotive/aerospace parts."
-            ],
-            [
-              "**$1.33 \\le C_{pk} < 1.67$**",
-              "**Adequate / Capable Process** (Industry benchmark standard for existing processes).",
-              "$0.57 - 63 \\text{ PPM}$ ($4\\sigma$ quality level)",
-              "Standard SPC chart monitoring; process is under statistical control and capable."
-            ],
-            [
-              "**$C_{pk} \\ge 1.67$**",
-              "**World-Class / Highly Capable Process** (Required for new tooling, automotive safety components).",
-              "$< 0.57 \\text{ PPM}$ ($5\\sigma$ quality level)",
-              "Eligible for reduced sampling inspection or Dock-to-Stock supplier certification."
-            ],
-            [
-              "**$C_{pk} \\ge 2.0$**",
-              "**Six Sigma Quality Level** ($6\\sigma$ process spread)",
-              "$\\le 3.4 \\text{ DPMO}$ with $1.5\\sigma$ shift",
-              "World-class benchmark excellence; zero receiving inspection required."
-            ]
-          ]
+          type: "p",
+          text: "Potential capability $C_p = \\frac{USL - LSL}{6\\sigma}$ evaluates process spread, while actual capability $C_{pk} = \\min(\\frac{USL-\\mu}{3\\sigma}, \\frac{\\mu-LSL}{3\\sigma})$ accounts for process centering."
         }
       ]
     },
@@ -1251,67 +974,7 @@ export const tqmCourse: Course = {
         },
         {
           type: "p",
-          text: "Pioneered by Bill Smith and Bob Galvin at Motorola in 1986 and famously scaled by Jack Welch at General Electric in 1995, Six Sigma is a disciplined, data-driven methodology designed to eliminate defects, reduce process variation, and achieve near-perfection in manufacturing and transactional processes."
-        },
-        {
-          type: "h3",
-          text: "Mathematical Formulation of Defects Per Million Opportunities (DPMO)"
-        },
-        {
-          type: "quote",
-          text: "\\text{DPMO} = \\left( \\frac{\\text{Total Defects Found (D)}}{\\text{Total Units Inspected (U)} \\times \\text{Opportunities per Unit (O)}} \\right) \\times 10^6"
-        },
-        {
-          type: "h3",
-          text: "The 1.5-Sigma Long-Term Process Shift"
-        },
-        {
-          type: "p",
-          text: "In short-term laboratory or controlled pilot runs, a pure $6\\sigma$ process produces only **0.002 PPM** (2 defects per billion opportunities). However, empirical studies across industrial manufacturing prove that over the long term, machine wear, ambient thermal changes, material lot variations, and operator fatigue cause the process mean to drift by approximately **$1.5\\sigma$**."
-        },
-        {
-          type: "p",
-          text: "Under this standard $1.5\\sigma$ drift assumption, a Six Sigma process allows a specification width of $\\pm 6\\sigma$ while operating at an effective $4.5\\sigma$ limit, yielding precisely **3.4 Defects Per Million Opportunities (DPMO)** (99.99966% yield)."
-        },
-        {
-          type: "h3",
-          text: "Six Sigma DMAIC Phase-Gate Roadmap"
-        },
-        {
-          type: "table",
-          headers: ["DMAIC Phase", "Core Executive Question", "Key Deliverables", "Primary Statistical & Analytical Tools"],
-          rows: [
-            [
-              "**1. DEFINE**",
-              "What specific operational problem are we solving, what is the business case, and who is the customer?",
-              "Project Charter, Problem Statement, Business Case, SIPOC High-Level Process Map.",
-              "Project Charter, SIPOC Diagram, VOC to CTQ Tree, Kano Analysis."
-            ],
-            [
-              "**2. MEASURE**",
-              "What is the baseline capability of the current process, and is our measurement system statistically reliable?",
-              "Data Collection Plan, Gage R&R Study ($< 10\\%$ target), Baseline Sigma Level & DPMO calculation.",
-              "Gage R&R, Process Capability ($C_p, C_{pk}$), Value Stream Map, DPMO Calculator."
-            ],
-            [
-              "**3. ANALYZE**",
-              "What are the verified vital few root causes ($X$'s) that drive output variation ($Y = f(X)$)?",
-              "Validated Root Causes, Identification of Waste (Muda), Mathematical Transfer Function.",
-              "Fishbone Diagram, 5 Whys, Multi-Vari Analysis, ANOVA, Regression, PFMEA."
-            ],
-            [
-              "**4. IMPROVE**",
-              "What optimized solutions eliminate root causes, and has the solution been piloted and validated?",
-              "Piloted Countermeasures, Design of Experiments (DOE) optimization, Cost-Benefit Analysis.",
-              "Design of Experiments (DOE), Poka-Yoke (Mistake Proofing), Kaizen Event, Pilot Run."
-            ],
-            [
-              "**5. CONTROL**",
-              "How will the process improvements be standardized and held so the process never reverts back?",
-              "Standard Operating Procedures (SOPs), Statistical Process Control (SPC) Dashboard, Control Plan.",
-              "Control Charts ($\\bar{X}-R, p$), Visual Management (5S), Training Plan, Process Control Plan."
-            ]
-          ]
+          text: "Six Sigma targets 3.4 Defects Per Million Opportunities (DPMO) assuming a standard $1.5\\sigma$ long-term process drift across the DMAIC roadmap."
         }
       ]
     },
@@ -1330,98 +993,8 @@ export const tqmCourse: Course = {
           text: "The 8 Wastes of Lean Manufacturing (DOWNTIME)"
         },
         {
-          type: "table",
-          headers: ["Lean Waste (Muda)", "Acronym Letter", "Operational Definition", "Industrial Factory Example"],
-          rows: [
-            [
-              "**Defects**",
-              "**D**",
-              "Products or services that fail to meet specifications, requiring scrap, rework, or warranty replacement.",
-              "*Machined automotive crankshaft with out-of-round journal requiring scrapping.*"
-            ],
-            [
-              "**Overproduction**",
-              "**O**",
-              "Producing more than customer demand or producing ahead of schedule (the most severe waste).",
-              "*Stamping 10,000 car door panels when the assembly line only needs 500 per shift.*"
-            ],
-            [
-              "**Waiting**",
-              "**W**",
-              "Idle time caused by bottlenecks, machine downtime, material shortages, or delayed sign-offs.",
-              "*Assembly workers waiting 45 minutes for forklift operator to deliver fastener bins.*"
-            ],
-            [
-              "**Non-Utilized Talent**",
-              "**N**",
-              "Failing to engage frontline operators' problem-solving skills, creativity, and domain knowledge.",
-              "*Ignoring shop floor workers' suggestions for improving tool changeover ergonomics.*"
-            ],
-            [
-              "**Transportation**",
-              "**T**",
-              "Unnecessary physical movement of raw materials, work-in-progress (WIP), or finished goods between facilities.",
-              "*Trucking sub-assemblies back and forth between two distant warehouse buildings for painting.*"
-            ],
-            [
-              "**Inventory**",
-              "**I**",
-              "Excess raw materials, buffer WIP, or finished goods tying up working capital and hiding underlying process problems.",
-              "*Holding 60 days of buffer raw steel coils in warehouse due to erratic vendor reliability.*"
-            ],
-            [
-              "**Motion**",
-              "**M**",
-              "Unnecessary physical movement or ergonomic strain by operators (bending, reaching, walking).",
-              "*Operator walking 15 paces back and forth to retrieve hand tools from a distant tool cabinet.*"
-            ],
-            [
-              "**Extra Processing**",
-              "**E**",
-              "Performing more work, higher precision, or extra features beyond what the customer requested or values.",
-              "*Polishing internal engine casing surfaces that have zero functional or aesthetic impact.*"
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "The 5S Workplace Organization Methodology"
-        },
-        {
-          type: "table",
-          headers: ["5S Step (Japanese)", "English Equivalent", "Core Workplace Action", "Audit Criteria & Tooling"],
-          rows: [
-            [
-              "**1. Seiri**",
-              "**Sort**",
-              "Separate necessary items from unnecessary items; remove all clutter from workplace.",
-              "**Red Tag Campaign**: Affix red tags to unused tools/materials and discard after 48h."
-            ],
-            [
-              "**2. Seiton**",
-              "**Set in Order**",
-              "Organize remaining necessary items so they are easy to locate, retrieve, and return ('A place for everything, and everything in its place').",
-              "**Shadow Boards**, floor tape boundaries, labeled part bins, ergonomic point-of-use placement."
-            ],
-            [
-              "**3. Seiso**",
-              "**Shine (Sweep)**",
-              "Thoroughly clean work areas, equipment, and tooling daily; cleaning acts as primary inspection for leaks and wear.",
-              "Daily 5-minute cleaning checklists, white glove inspections, clear oil sight glasses."
-            ],
-            [
-              "**4. Seiketsu**",
-              "**Standardize**",
-              "Establish visual standard operating procedures, checklists, and color-coding across the entire facility.",
-              "Visual SOP placards, color-coded floor striping, standardized workstation layouts."
-            ],
-            [
-              "**5. Shitsuke**",
-              "**Sustain**",
-              "Institutionalize discipline and self-maintenance through regular 5S audits, management walkthroughs, and rewards.",
-              "Weekly 5S radar chart audits, 5S scoreboards, continuous employee engagement."
-            ]
-          ]
+          type: "p",
+          text: "Lean targets the elimination of 8 operational wastes: Defects, Overproduction, Waiting, Non-utilized talent, Transportation, Inventory, Motion, and Extra processing."
         }
       ]
     },
@@ -1437,49 +1010,11 @@ export const tqmCourse: Course = {
       blocks: [
         {
           type: "h3",
-          text: "Foundations of Total Productive Maintenance (TPM)"
-        },
-        {
-          type: "p",
-          text: "Developed by Seiichi Nakajima at the Japan Institute of Plant Maintenance (JIPM), TPM is an equipment management philosophy designed to maximize equipment effectiveness throughout its entire lifecycle by eliminating breakdowns, slowdowns, and defects through cross-functional frontline operator engagement."
-        },
-        {
-          type: "h3",
           text: "Mathematical Architecture of Overall Equipment Effectiveness (OEE)"
         },
         {
           type: "quote",
           text: "\\text{OEE} = \\text{Availability (A)} \\times \\text{Performance Rate (P)} \\times \\text{Quality Rate (Q)}"
-        },
-        {
-          type: "table",
-          headers: ["OEE Factor", "Mathematical Formula", "Target Six Big Loss Addressed", "World-Class Benchmark"],
-          rows: [
-            [
-              "**1. Availability (A)**",
-              "$A = \\frac{\\text{Operating Time}}{\\text{Planned Production Time}} = \\frac{\\text{Planned Time} - \\text{Downtime}}{\\text{Planned Time}}$",
-              "Loss 1: Equipment Breakdowns & Catastrophic Failures\\nLoss 2: Setup, Tool Changeovers & Adjustments (SMED)",
-              "**$\\ge 90.0\\%$**"
-            ],
-            [
-              "**2. Performance (P)**",
-              "$P = \\frac{\\text{Ideal Cycle Time} \\times \\text{Total Count}}{\\text{Operating Time}} = \\frac{\\text{Actual Output}}{\\text{Target Output at Max Speed}}$",
-              "Loss 3: Idling & Minor Stoppages ($< 5\\text{ min}$ sensor jams)\\nLoss 4: Reduced Operating Speed (running machine below design nameplate)",
-              "**$\\ge 95.0\\%$**"
-            ],
-            [
-              "**3. Quality (Q)**",
-              "$Q = \\frac{\\text{Good Output Count}}{\\text{Total Output Count}} = \\frac{\\text{Total Count} - (\\text{Scrap} + \\text{Rework})}{\\text{Total Count}}$",
-              "Loss 5: Process Defects & In-line Scrap\\nLoss 6: Startup / Warm-up Yield Losses during tool changeover",
-              "**$\\ge 99.9\\%$**"
-            ],
-            [
-              "**Total Overall OEE**",
-              "$\text{OEE} = A \times P \times Q = 0.90 \times 0.95 \times 0.999$",
-              "Comprehensive elimination of all Six Big Equipment Losses",
-              "**$\\ge 85.0\\%$ (World-Class Excellence)**"
-            ]
-          ]
         }
       ]
     },
@@ -1503,50 +1038,8 @@ export const tqmCourse: Course = {
           text: "The Four Categories of the PAF Cost of Quality Model"
         },
         {
-          type: "table",
-          headers: ["Cost Category", "Classification", "Typical Industry % Share", "Operational Line-Item Examples"],
-          rows: [
-            [
-              "**1. Prevention Costs**",
-              "**Cost of Conformance** (Proactive investment to prevent defects from occurring at source).",
-              "**5% – 10%** (Target: $> 50\\%$ of total COQ budget)",
-              "*Design reviews, DFMEA/PFMEA sessions, Poka-Yoke fixture fabrication, supplier qualification audits, SPC employee training, preventive maintenance.*"
-            ],
-            [
-              "**2. Appraisal Costs**",
-              "**Cost of Conformance** (Expenditures incurred in measuring, evaluating, or auditing products to assure conformance).",
-              "**20% – 25%**",
-              "*Receiving inspection of incoming raw parts, in-line vision inspection sensors, CMM dimensional measurement, laboratory destructive testing, gauge calibration.*"
-            ],
-            [
-              "**3. Internal Failure Costs**",
-              "**Cost of Non-Conformance** (Costs resulting from defects caught BEFORE shipment to the customer).",
-              "**25% – 40%**",
-              "*Scrap, rework labor, re-inspection costs, machine downtime from line jams, downgrading products to secondary scrap markets.*"
-            ],
-            [
-              "**4. External Failure Costs**",
-              "**Cost of Non-Conformance** (Costs incurred when defective products reach the end customer; most catastrophic).",
-              "**40% – 50%**",
-              "*Warranty repair payouts, product recall logistics, customer complaint dispute resolution, product liability lawsuits, permanent loss of brand equity.*"
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "The 1-10-100 Prevention Leverage Rule"
-        },
-        {
           type: "p",
-          text: "The 1-10-100 Rule demonstrates the exponential economic leverage of proactive quality management:"
-        },
-        {
-          type: "ul",
-          items: [
-            "**$1.00 Prevention Cost**: Spending $1.00 in engineering design (FMEA, Poka-Yoke) eliminates the root cause before manufacturing.",
-            "**$10.00 Appraisal & Rework Cost**: Failing to prevent the defect means spending $10.00 to inspect, detect, and rework the defective part inside the factory.",
-            "**$100.00+ External Failure Cost**: If the defect escapes to the customer, the cost explodes to $100.00+ in warranty claims, field recalls, legal liability, and brand destruction."
-          ]
+          text: "Cost of Quality classifies costs into Conformance (Prevention, Appraisal) and Non-Conformance (Internal Failure, External Failure), governed by the 1-10-100 prevention leverage rule."
         }
       ]
     },
@@ -1565,76 +1058,8 @@ export const tqmCourse: Course = {
           text: "The Seven Quality Management Principles (QMPs) of ISO 9001:2015"
         },
         {
-          type: "ol",
-          items: [
-            "**QMP 1: Customer Focus**: Meeting and exceeding customer expectations to sustain long-term customer loyalty.",
-            "**QMP 2: Leadership**: Establishing unity of purpose, vision, and organizational engagement at all levels.",
-            "**QMP 3: Engagement of People**: Empowering competent, skilled employees throughout the organization.",
-            "**QMP 4: Process Approach**: Managing interconnected activities as coherent processes to optimize organizational performance.",
-            "**QMP 5: Improvement**: Ongoing focus on continuous improvement (PDCA) to drive operational resilience.",
-            "**QMP 6: Evidence-Based Decision Making**: Making decisions based on rigorous analysis and evaluation of empirical data.",
-            "**QMP 7: Relationship Management**: Managing relationships with suppliers and partners for sustained supply chain performance."
-          ]
-        },
-        {
-          type: "h3",
-          text: "Annex SL 10-Clause High-Level Structure (HLS)"
-        },
-        {
-          type: "table",
-          headers: ["Clause Number & Title", "PDCA Cycle Alignment", "Core ISO 9001:2015 Requirement"],
-          rows: [
-            [
-              "**Clause 1: Scope**",
-              "—",
-              "Defines intended outcomes and applicability of the Quality Management System (QMS)."
-            ],
-            [
-              "**Clause 2: Normative References**",
-              "—",
-              "References ISO 9000:2015 fundamentals and vocabulary."
-            ],
-            [
-              "**Clause 3: Terms & Definitions**",
-              "—",
-              "Standardized terminology applicable across all Annex SL management systems."
-            ],
-            [
-              "**Clause 4: Context of the Organization**",
-              "**PLAN**",
-              "Understanding internal/external issues, interested parties, and defining QMS boundaries."
-            ],
-            [
-              "**Clause 5: Leadership**",
-              "**PLAN / DO**",
-              "Executive leadership commitment, quality policy formulation, and assigning organizational roles/responsibilities."
-            ],
-            [
-              "**Clause 6: Planning**",
-              "**PLAN**",
-              "**Risk-Based Thinking**: Identifying organizational risks/opportunities and setting measurable quality objectives."
-            ],
-            [
-              "**Clause 7: Support**",
-              "**DO**",
-              "Resource allocation, infrastructure, monitoring/measuring resources, competence, awareness, and documented information."
-            ],
-            [
-              "**Clause 8: Operation**",
-              "**DO**",
-              "Operational planning and control, customer requirements review, design & development, supplier control, and product release."
-            ],
-            [
-              "**Clause 9: Performance Evaluation**",
-              "**CHECK**",
-              "Customer satisfaction monitoring, data analysis, internal audits, and Management Review Meetings (MRM)."
-            ],
-            [
-              "**Clause 10: Improvement**",
-              "**ACT**",
-              "Non-conformity management, Corrective Action (CAPA), and continuous improvement of QMS suitability."
-            ]
-          ]
+          type: "p",
+          text: "ISO 9001:2015 establishes 7 QMPs and a 10-clause Annex SL High-Level Structure centered on Risk-Based Thinking and PDCA."
         }
       ]
     },
@@ -1653,73 +1078,8 @@ export const tqmCourse: Course = {
           text: "Comparative Analysis of the Three Global Quality Award Frameworks"
         },
         {
-          type: "table",
-          headers: ["Award Framework", "Founding Origin & Sponsor", "Primary Evaluation Focus", "Scoring System & Structure"],
-          rows: [
-            [
-              "**Malcolm Baldrige National Quality Award (MBNQA)**",
-              "United States (1987, US Congress / NIST)",
-              "Holistic organizational performance excellence, business results, competitive competitiveness, and leadership.",
-              "**1,000-Point Scoring System** across 7 Categories (Leadership, Strategy, Customers, Measurement/Knowledge, Workforce, Operations, Results [450 pts])."
-            ],
-            [
-              "**The Deming Application Prize**",
-              "Japan (1951, JUSE - Japanese Union of Scientists and Engineers)",
-              "Strict implementation of Company-Wide Quality Control (CWQC / TQM), statistical methods, and statistical process management.",
-              "Non-prescriptive checklist auditing 10 categories (Policy, Organization, Information, Standardization, QC Circles, Quality Assurance, Effects)."
-            ],
-            [
-              "**EFQM Global Excellence Award**",
-              "Europe (1991, European Foundation for Quality Management)",
-              "Organizational transformation, European stakeholder value creation, sustainability, and purpose-driven leadership.",
-              "**RADAR Logic Matrix** (Results, Approaches, Deploy, Assess, Refine) evaluating 7 Criteria divided into Direction, Execution, and Results."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "MBNQA 1,000-Point Category Breakdown"
-        },
-        {
-          type: "table",
-          headers: ["MBNQA Category", "Point Allocation", "Core Organizational Evaluation Focus"],
-          rows: [
-            [
-              "**1. Leadership**",
-              "120 Points",
-              "Senior leadership actions, corporate governance, legal/ethical behavior, societal contributions."
-            ],
-            [
-              "**2. Strategy**",
-              "85 Points",
-              "Strategic planning process, strategic objectives, resource allocation, implementation action plans."
-            ],
-            [
-              "**3. Customers**",
-              "85 Points",
-              "Voice of Customer listening, customer engagement, relationship building, satisfaction measurement."
-            ],
-            [
-              "**4. Measurement, Analysis & Knowledge**",
-              "90 Points",
-              "Performance metrics tracking, competitive benchmarking, organizational knowledge management."
-            ],
-            [
-              "**5. Workforce**",
-              "85 Points",
-              "Workforce environment, employee capability development, engagement, compensation/benefits."
-            ],
-            [
-              "**6. Operations**",
-              "85 Points",
-              "Work process design, management, innovation, supply chain management, operational resilience."
-            ],
-            [
-              "**7. Results (The Crucial Half)**",
-              "**450 Points**",
-              "Product & process performance (120), Customer results (80), Workforce results (80), Leadership & governance (80), Financial & market results (90)."
-            ]
-          ]
+          type: "p",
+          text: "MBNQA (USA, 1,000 points across 7 categories with 450 points on Results), Deming Prize (Japan, statistical CWQC), and EFQM (Europe, RADAR logic matrix)."
         }
       ]
     }
@@ -1728,93 +1088,40 @@ export const tqmCourse: Course = {
     {
       id: "om01-eq-1",
       number: 1,
-      title: "Garvin's Five Approaches to Defining Quality and Master Guru Philosophies",
+      title: "What is Benchmarking? The 12 Stages of Benchmarking (AT&T Model)",
       marks: 14,
-      relatedSlugs: ["defining-quality-philosophies-gurus"],
+      relatedSlugs: ["midsem-benchmarking-12-stages"],
       question:
-        "Critically examine David Garvin's five conceptual approaches to defining quality. Contrast the foundational quality philosophies of Deming, Juran, Crosby, and Feigenbaum, explaining how their paradigms transformed modern industrial management.",
+        "What is benchmarking? Explain the 12 stages of benchmarking based on the AT&T Model (Select subject, Define process, Identify potential partners, Identify data sources, Collect data and select partners, Determine gap, Establish process differences, Target future performance, Communicate, Adjust goal, Implement, Review and recalibrate) with concrete industrial examples for each stage.",
       blocks: [
         {
-          type: "diagram",
-          kind: "deming-pdca",
-          caption: "Deming PDCA Improvement Cycle & Quality Gurus Strategic Comparison Matrix"
-        },
-        {
           type: "h3",
-          text: "Part 1: Mathematical Quality Ratio and Garvin's Five Approaches"
+          text: "1. Definition and Conceptual Foundations of Benchmarking"
         },
         {
           type: "p",
-          text: "Quality is formally defined by the Quality Ratio $Q = P/E$. When actual delivered performance ($P$) exceeds customer expectation ($E$), customer delight is achieved ($Q > 1.0$). David Garvin categorized quality definitions into five distinct conceptual lenses:"
-        },
-        {
-          type: "table",
-          headers: ["Approach", "Philosophical Basis", "Measurement Focus", "Industrial Case Example"],
-          rows: [
-            [
-              "**Transcendent**",
-              "Innate, uncompromised excellence recognized through experience.",
-              "Aesthetic superiority, prestige, timeless craftsmanship.",
-              "*Rolex mechanical movements, Rolls-Royce handcrafted interiors.*"
-            ],
-            [
-              "**Product-Based**",
-              "Quality is a precise, measurable variable based on the quantity of ingredients/attributes present.",
-              "Technical specifications, silicon density, active chemical concentration.",
-              "*800-thread-count Egyptian cotton sheets, vehicle horsepower, DRAM capacity.*"
-            ],
-            [
-              "**User-Based**",
-              "Fitness for intended customer use; subjective customer satisfaction.",
-              "Ergonomics, user experience, Net Promoter Score (NPS).",
-              "*Intuitive UI of Apple iOS; customizable ERP dashboards.*"
-            ],
-            [
-              "**Manufacturing-Based**",
-              "Strict conformance to engineering blueprints and tolerance limits.",
-              "Defect PPM, Cpk capability, scrap rates, tolerance adherence ($[LSL, USL]$).",
-              "*Semiconductor wafer sub-nanometer lithography; aerospace turbine machining.*"
-            ],
-            [
-              "**Value-Based**",
-              "Delivering maximum performance at an acceptable, competitive price point.",
-              "Price-to-performance ratio, total cost of ownership (TCO).",
-              "*Southwest Airlines low-cost point-to-point travel; Xiaomi budget smartphones.*"
-            ]
-          ]
+          text: "Benchmarking is the continuous, systematic process of measuring an organization's products, services, processes, and practices against recognized industry leaders or world-class organizations to identify performance gaps, establish stretch targets, and adapt superior practices for breakthrough operational improvement."
         },
         {
           type: "h3",
-          text: "Part 2: Strategic Comparison of Core Quality Gurus"
+          text: "2. The 12 Stages of the Benchmarking Process (AT&T Model)"
         },
         {
           type: "table",
-          headers: ["Guru", "Definition of Quality", "Primary Framework", "Attribution of Process Defects"],
+          headers: ["Stage", "Operational Action", "Methods / Deliverables", "Industrial Case Example"],
           rows: [
-            [
-              "**W. Edwards Deming**",
-              "Predictable uniformity and dependability at low cost suited to the market.",
-              "**14 Points for Management** & System of Profound Knowledge (SoPK); PDCA Cycle.",
-              "**94% Management/Systemic**, 6% Special worker causes."
-            ],
-            [
-              "**Joseph M. Juran**",
-              "'Fitness for use'; planned project-by-project management.",
-              "**Juran Quality Trilogy** (Planning, Control, Improvement) & COPQ.",
-              "**80% Management controllable**, 20% Operator controllable (Pareto Principle)."
-            ],
-            [
-              "**Philip B. Crosby**",
-              "'Conformance to requirements'; non-subjective standard.",
-              "**Four Absolutes of Quality** & Zero Defects (ZD) performance standard.",
-              "**100% Management & worker accountability**; quality is free."
-            ],
-            [
-              "**Armand V. Feigenbaum**",
-              "Total composite product and service characteristics across all functions.",
-              "**Total Quality Control (TQC)** & PAF Cost Model (Prevention, Appraisal, Failure).",
-              "**Cross-functional responsibility**; exposed the 'Hidden Plant'."
-            ]
+            ["**1. Select Subject**", "Determine critical processes impacting customer satisfaction.", "Pareto analysis, CTQ trees.", "*Industrial pump maker targeting 16-week delivery lead time.*"],
+            ["**2. Define Process**", "Map internal workflows and baseline performance metrics.", "Flowcharts, cycle times, defect PPM.", "*Mapping 24 steps of Engineering Change Order (ECO) workflow.*"],
+            ["**3. Potential Partners**", "Screen world-class performers and industry leaders.", "Internal units, rivals, functional pioneers.", "*Southwest Airlines identifying F1 racing pit crews.*"],
+            ["**4. Data Sources**", "Determine information gathering repositories.", "APQC databases, trade journals, SEC filings.", "*Consulting APQC Open Standards Benchmarking database.*"],
+            ["**5. Collect Data**", "Execute confidentiality protocols and site visits.", "Questionnaires, plant walkthroughs, interviews.", "*Plant visits to Japanese electronics assembly lines.*"],
+            ["**6. Determine Gap**", "Quantify performance delta vs. partner.", "Gap analysis: Negative, Parity, Positive.", "*Calculating 5-day order fulfillment gap (7d vs. 2d).*"],
+            ["**7. Process Differences**", "Analyze underlying enablers driving superior execution.", "Technology audit, workflow comparison.", "*Discovering partner uses automated barcode scanning vs paper.*"],
+            ["**8. Target Future**", "Project partner trajectory to avoid moving target trap.", "Forecasted partner trajectory, stretch goals.", "*Setting 2-year goal of 1.5 days when partner is at 2.0 days.*"],
+            ["**9. Communicate**", "Disseminate findings to leadership and process owners.", "Executive briefings, change management plans.", "*Presenting business case showing 32% unit labor reduction.*"],
+            ["**10. Adjust Goal**", "Integrate targets into formal strategic planning & KPIs.", "Balanced scorecards, annual department KPIs.", "*Tying plant manager bonus to 99.2% on-time dispatch.*"],
+            ["**11. Implement**", "Execute action plans, reconfigure workflows, update SOPs.", "WBS, SOP updates, operator training.", "*Installing Warehouse Management System and training 120 staff.*"],
+            ["**12. Recalibrate**", "Audit results and continuously reset higher standards.", "KPI dashboards, periodic partner re-audits.", "*Bi-annual reviews to set new stretch targets once 2-day goal met.*"]
           ]
         }
       ]
@@ -1822,11 +1129,39 @@ export const tqmCourse: Course = {
     {
       id: "om01-eq-2",
       number: 2,
-      title: "David Garvin's 8 Product Dimensions vs. SERVQUAL Service Dimensions",
+      title: "The Seven Strategic Types of Benchmarking and Industrial Applications",
       marks: 14,
-      relatedSlugs: ["dimensions-of-quality-garvin-servqual"],
+      relatedSlugs: ["midsem-7-types-of-benchmarking"],
       question:
-        "Differentiate between product quality and service quality. Provide a detailed comparative analysis of David Garvin's eight dimensions of product quality and Parasuraman, Zeithaml & Berry's 5 SERVQUAL service dimensions with industry examples.",
+        "What are the types of benchmarking? Explain all seven types of benchmarking: (1) Process benchmarking, (2) Performance benchmarking, (3) Product benchmarking, (4) Strategic benchmarking, (5) Functional benchmarking, (6) Best-in-class benchmarking, and (7) Operational benchmarking with suitable industrial examples.",
+      blocks: [
+        {
+          type: "h3",
+          text: "Comprehensive Taxonomy of the Seven Types of Benchmarking"
+        },
+        {
+          type: "table",
+          headers: ["Type", "Core Analytical Focus", "Organizational Scope", "Strategic Benefit", "Benchmark Industrial Example"],
+          rows: [
+            ["**1. Process**", "Workflows, work methods, cycle times.", "Cross-industry/functional", "Radically cuts cycle times and waste.", "*Hospital ER benchmarking triage vs F1 pit-stop coordination.*"],
+            ["**2. Performance**", "Quantitative metrics (pricing, specs, speed).", "Direct competitors/peers", "Establishes competitive market positioning.", "*Smartphones comparing processor clock speed and battery life.*"],
+            ["**3. Product**", "Teardowns, reverse engineering, feature costs.", "Competing products", "Reveals competitor material and cost architecture.", "*Automotive OEMs tearing down competitor electric vehicles.*"],
+            ["**4. Strategic**", "High-level business models, core competencies.", "Global industry leaders", "Guides corporate pivots and tech investments.", "*Automakers benchmarking EV startups' direct-to-consumer sales.*"],
+            ["**5. Functional**", "Corporate functions (procurement, billing, HR).", "Non-competing sector leaders", "Breaks industry blind spots; data shared freely.", "*Airlines benchmarking customer loyalty vs global hotel chains.*"],
+            ["**6. Best-in-Class**", "Single best performer worldwide for a process.", "Across all global industries", "Yields revolutionary breakthrough paradigms.", "*Xerox benchmarking warehouse picking vs L.L. Bean (50% cut).*"],
+            ["**7. Operational**", "Frontline shop-floor practices, setups, 5S.", "Internal cells / factory peers", "Drives immediate shop-floor equipment uptime.", "*Machine shops benchmarking SMED changeovers vs stamping plants.*"]
+          ]
+        }
+      ]
+    },
+    {
+      id: "om01-eq-3",
+      number: 3,
+      title: "Dimensions of Quality: Garvin's 8 Product Dimensions vs. SERVQUAL 5 Dimensions",
+      marks: 14,
+      relatedSlugs: ["midsem-dimensions-of-quality-garvin-servqual"],
+      question:
+        "What are the dimensions of quality? Explain David Garvin's eight dimensions of product quality and Parasuraman, Zeithaml & Berry's five SERVQUAL dimensions of service quality, providing operational criteria and concrete examples for each.",
       blocks: [
         {
           type: "h3",
@@ -1836,54 +1171,14 @@ export const tqmCourse: Course = {
           type: "table",
           headers: ["Dimension", "Strategic Definition", "Evaluation Metric", "Corporate Benchmark Example"],
           rows: [
-            [
-              "**1. Performance**",
-              "Primary operating characteristics.",
-              "Speed, resolution, acceleration, throughput.",
-              "*Tesla Model S Plaid 0-60 mph in 1.99s.*"
-            ],
-            [
-              "**2. Features**",
-              "Secondary supplemental characteristics.",
-              "Auxiliary options, smart connectivity.",
-              "*Automobile head-up display (HUD), heated steering.*"
-            ],
-            [
-              "**3. Reliability**",
-              "Probability of non-failure within a given time period.",
-              "Mean Time Between Failures (MTBF), failure rate ($\\lambda$).",
-              "*Toyota Hilux engine surviving 400,000 km in severe conditions.*"
-            ],
-            [
-              "**4. Conformance**",
-              "Degree to which design meets established blueprints.",
-              "Process capability ($C_{pk}$), defect PPM, tolerance limits.",
-              "*Boeing titanium spar machined within $\\pm 0.005\\text{ mm}$.*"
-            ],
-            [
-              "**5. Durability**",
-              "Measure of product operational lifespan before replacement.",
-              "Mean Time to Failure (MTTF), cyclic stress endurance.",
-              "*Caterpillar earthmoving machines operating 25,000+ hours.*"
-            ],
-            [
-              "**6. Serviceability**",
-              "Speed, courtesy, and ease of repair.",
-              "Mean Time to Repair (MTTR), spare parts availability.",
-              "*Apple Genius Bar same-day modular screen replacement.*"
-            ],
-            [
-              "**7. Aesthetics**",
-              "Subjective sensory feel, look, sound, smell.",
-              "Haptic feedback, acoustic resonance.",
-              "*Bang & Olufsen precision-machined aluminum speaker grilles.*"
-            ],
-            [
-              "**8. Perceived Quality**",
-              "Subjective assessment based on brand reputation & pedigree.",
-              "Net Promoter Score (NPS), brand valuation.",
-              "*Apple premium pricing commanding 40% gross margins.*"
-            ]
+            ["**1. Performance**", "Primary operating characteristics.", "Speed, resolution, acceleration, throughput.", "*Laser printer outputting 45 ppm at 1200 DPI resolution.*"],
+            ["**2. Features**", "Secondary supplemental characteristics.", "Auxiliary options, smart connectivity.", "*Automotive CarPlay, wireless charging, head-up display.*"],
+            ["**3. Reliability**", "Probability of non-failure over specified time.", "MTBF, failure rate ($\\lambda$), warranty claims.", "*Aircraft turbine engine operating 20,000 flight hours without unscheduled maintenance.*"],
+            ["**4. Conformance**", "Degree to which design meets blueprints.", "Process capability ($C_{pk}$), defect PPM, tolerances.", "*CNC crankshaft machined within $\\pm 0.005\\text{ mm}$.*"],
+            ["**5. Durability**", "Measure of operational lifespan before replacement.", "MTTF, cyclic stress fatigue limits.", "*Cast-iron industrial slurry pump operating 25 years.*"],
+            ["**6. Serviceability**", "Speed, courtesy, and ease of repair.", "MTTR, modular replacement, spare parts access.", "*Electric delivery van modular battery swapped in < 10 min.*"],
+            ["**7. Aesthetics**", "Subjective sensory feel, look, sound, smell.", "Haptic feedback, acoustic resonance.", "*Acoustic dampening and solid 'thud' of luxury car door.*"],
+            ["**8. Perceived Quality**", "Subjective assessment based on reputation.", "Net Promoter Score (NPS), brand valuation.", "*Hospital purchasing MRI scanners based on 60-year brand reputation.*"]
           ]
         },
         {
@@ -1892,97 +1187,13 @@ export const tqmCourse: Course = {
         },
         {
           type: "table",
-          headers: ["SERVQUAL Dimension", "Operational Definition", "Audit Criteria", "Service Industry Benchmark"],
+          headers: ["Dimension", "Operational Definition", "Audit Criteria", "Service Industry Benchmark"],
           rows: [
-            [
-              "**1. Reliability**",
-              "Ability to perform promised service dependably and accurately.",
-              "Billing accuracy, on-time flight arrivals.",
-              "*FedEx overnight delivery commitment.*"
-            ],
-            [
-              "**2. Responsiveness**",
-              "Willingness to help customers and provide prompt service.",
-              "Speed of answer, support ticket resolution time.",
-              "*Amazon Prime Customer Support resolving queries in < 60s.*"
-            ],
-            [
-              "**3. Assurance**",
-              "Knowledge, courtesy, and competence inspiring trust.",
-              "Professional certifications, transparent explanations.",
-              "*Mayo Clinic physicians communicating clinical procedures.*"
-            ],
-            [
-              "**4. Empathy**",
-              "Caring, individualized, compassionate attention.",
-              "Personalized greeting, customized financial plans.",
-              "*Ritz-Carlton $2,000 discretionary staff incident budget.*"
-            ],
-            [
-              "**5. Tangibles**",
-              "Physical facilities, equipment, grooming of personnel.",
-              "Cleanliness, modern UI/UX design.",
-              "*Singapore Airlines spotless cabins and iconic cabin uniform.*"
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      id: "om01-eq-3",
-      number: 3,
-      title: "Traditional Quality Control vs. Total Quality Management (TQM) Paradigm",
-      marks: 14,
-      relatedSlugs: ["evolution-of-quality-tqc-vs-tqm"],
-      question:
-        "Trace the historical evolution of quality management from Taylorism to TQM. Contrast the architectural characteristics of traditional inspection-based quality control with modern Total Quality Management.",
-      blocks: [
-        {
-          type: "h3",
-          text: "Part 1: Historical Evolution of Quality Management"
-        },
-        {
-          type: "ul",
-          items: [
-            "**1. Inspection Era (1900s–1920s)**: Taylorism; end-of-line sorting; high scrap and rework costs.",
-            "**2. Statistical Quality Control (1930s–1950s)**: Walter Shewhart control charts; Dodge-Romig statistical sampling.",
-            "**3. Quality Assurance / TQC (1960s–1980s)**: Armand Feigenbaum TQC; system design; supplier quality audits; COPQ quantification.",
-            "**4. TQM & Six Sigma (1990s–Present)**: Company-wide cultural transformation, DMAIC, customer delight, continuous improvement."
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: Traditional QC vs. TQM Architectural Comparison"
-        },
-        {
-          type: "table",
-          headers: ["Dimension", "Traditional Quality Control (QC)", "Total Quality Management (TQM)"],
-          rows: [
-            [
-              "**Primary Objective**",
-              "Detection: Catch defects before they are shipped to customers.",
-              "**Prevention**: Design defect-free processes and mistake-proof (Poka-Yoke) workflows."
-            ],
-            [
-              "**Quality Standard**",
-              "Acceptable Quality Level (AQL); defects are viewed as inevitable.",
-              "**Continuous Improvement (Kaizen) & Zero Defects**; all variation is target for reduction."
-            ],
-            [
-              "**Ownership**",
-              "Isolated strictly to QC inspectors and QC department.",
-              "**Company-wide responsibility (CWQC)** from shop-floor operators to the CEO."
-            ],
-            [
-              "**Supplier Relations**",
-              "Adversarial, short-term contracts; lowest bidding price wins.",
-              "**Long-term collaborative partnerships**; single-source certified vendor integration."
-            ],
-            [
-              "**Problem Solving**",
-              "Assigning blame to individual workers; superficial patching.",
-              "**Systemic root cause elimination**: Ishikawa, 5 Whys, SPC, DMAIC."
-            ]
+            ["**1. Reliability**", "Performing promised service dependably & accurately.", "Zero billing errors, on-time arrivals.", "*Securities exchange clearing 100k trades/sec with 0 errors.*"],
+            ["**2. Responsiveness**", "Willingness to help & provide prompt service.", "Speed of answer, resolution velocity.", "*Emergency roadside assistance arriving within 15 minutes.*"],
+            ["**3. Assurance**", "Knowledge, courtesy, and competence inspiring trust.", "Certifications, transparent risk explanation.", "*Wealth manager explaining fiduciary portfolio risk clearly.*"],
+            ["**4. Empathy**", "Caring, individualized, compassionate attention.", "Personalized greeting, custom schedules.", "*Pediatric clinic offering tailored parent counseling.*"],
+            ["**5. Tangibles**", "Physical facilities, equipment, staff grooming.", "Cleanliness, modern UI/UX design.", "*Clean, sterile hospital diagnostic suites with modern displays.*"]
           ]
         }
       ]
@@ -1990,105 +1201,71 @@ export const tqmCourse: Course = {
     {
       id: "om01-eq-4",
       number: 4,
-      title: "Deming's 14 Points for Management and System of Profound Knowledge",
+      title: "Strategic Purchasing: Upstream Quality Genesis & Traditional vs. Strategic Comparison",
       marks: 14,
-      relatedSlugs: ["deming-14-points-system-of-profound-knowledge"],
+      relatedSlugs: ["midsem-strategic-purchasing-traditional-vs-strategic"],
       question:
-        "Critically evaluate W. Edwards Deming's System of Profound Knowledge (SoPK). Detail his 14 Points for Management, explaining why traditional management practices like numerical quotas and merit rankings destroy operational quality.",
+        "What do you mean by strategic purchasing? Explain where quality begins in operations, detail the 1-10-100 Cost of Quality Rule, and provide an in-depth architectural comparison between traditional and strategic purchasing across key operational dimensions.",
       blocks: [
         {
           type: "diagram",
-          kind: "deming-pdca",
-          caption: "Deming PDCA Cycle & Four Pillars of System of Profound Knowledge"
+          kind: "coq-paf-model",
+          caption: "Cost of Quality PAF Architecture & 1-10-100 Prevention Leverage Multiplier"
         },
         {
           type: "h3",
-          text: "Part 1: The Four Pillars of Deming's System of Profound Knowledge (SoPK)"
-        },
-        {
-          type: "table",
-          headers: ["Pillar", "Theoretical Foundation", "Executive Management Mandate"],
-          rows: [
-            [
-              "**1. Appreciation for a System**",
-              "An organization is an interdependent network aiming for a common goal.",
-              "Eliminate internal competition; optimize the whole rather than departmental silos."
-            ],
-            [
-              "**2. Knowledge of Variation**",
-              "Distinguishing Common Cause (94% systemic) from Special Cause variation.",
-              "Cease blaming workers for systemic noise; avoid tampering with stable processes."
-            ],
-            [
-              "**3. Theory of Knowledge**",
-              "Prediction requires rational theory and iterative testing (PDCA).",
-              "Experience without theory teaches nothing; management decisions must be hypothesis-driven."
-            ],
-            [
-              "**4. Understanding Psychology**",
-              "Intrinsic motivation and pride in workmanship drive performance.",
-              "Eliminate annual performance rankings, merit pay, and fear-based management."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: Why Numerical Quotas and Merit Ratings Destroy Quality"
+          text: "Part 1: The Upstream Genesis of Quality & The 1-10-100 Rule"
         },
         {
           type: "p",
-          text: "Deming demonstrated that numerical quotas (Point 11) force operators to prioritize piece-rate quantity over craftsmanship, inevitably producing hidden defects that disrupt downstream operations. Similarly, annual merit rating systems (Point 12) pit coworkers against one another, destroying teamwork and encouraging short-term gaming of metrics rather than genuine systemic innovation."
+          text: "Quality begins in Product Design and Procurement. Quality cannot be inspected into a product; it must be built into raw materials and blueprints. Under the 1-10-100 Rule, spending $1.00 in prevention during procurement prevents $10.00 in factory rework and $100.00+ in field warranty and recall liabilities."
+        },
+        {
+          type: "h3",
+          text: "Part 2: Traditional vs. Strategic Purchasing Comparison"
+        },
+        {
+          type: "table",
+          headers: ["Dimension", "Traditional Purchasing", "Strategic Purchasing (TQM Paradigm)"],
+          rows: [
+            ["**Relationship**", "Adversarial, arm's-length, zero-sum.", "Collaborative, long-term partnering, win-win."],
+            ["**Supply Base**", "Large, fragmented base to foster price wars.", "Rationalized, small base of certified partners."],
+            ["**Contract Term**", "Short-term annual or spot purchase orders.", "Multi-year agreements with shared gain-sharing."],
+            ["**Selection Metric**", "Lowest unit purchase price tag.", "Lowest Total Cost of Ownership (TCO)."],
+            ["**Quality Control**", "Massive receiving inspection at factory dock.", "Dock-to-Stock Certification (0 incoming inspection)."],
+            ["**Information**", "Guarded, secretive, POs/invoices only.", "Open EDI, shared forecasts, joint CAD files."],
+            ["**Design Role**", "Late; bid after engineering freeze.", "Early Supplier Involvement (ESI) during concept."],
+            ["**Cost Strategy**", "Aggressive price haggling and margin squeezing.", "Joint target costing and Value Engineering (VAVE)."],
+            ["**Capability Target**", "Acceptable Quality Levels (AQL) / scrap quotas.", "Process capability ($C_{pk} \\ge 1.33$) & Zero Defects."],
+            ["**Development**", "Zero technical support; failing vendors dropped.", "Active supplier training in SPC, Kaizen, and Lean."]
+          ]
         }
       ]
     },
     {
       id: "om01-eq-5",
       number: 5,
-      title: "The Juran Quality Trilogy and Breakthrough Sequence for Project Improvement",
+      title: "The 7-Stage Supplier Qualification Lifecycle and Scorecard Rating System",
       marks: 14,
-      relatedSlugs: ["juran-quality-trilogy-copq"],
+      relatedSlugs: ["midsem-supplier-qualification-lifecycle"],
       question:
-        "Explain Joseph Juran's Quality Trilogy (Quality Planning, Quality Control, Quality Improvement). Detail Juran's Breakthrough Sequence, explaining how organizations systematically eradicate chronic waste and transition to world-class quality levels.",
+        "What do you mean by a supplier qualification system? Explain the complete multi-stage qualification lifecycle flowing from Screen to Audit to Sample Approval to Trial Run to Monitor to Tier to Requalify, and explain the mathematical formulation of a Supplier Performance Index (SPI).",
       blocks: [
         {
           type: "h3",
-          text: "Part 1: The Three Processes of the Juran Quality Trilogy"
+          text: "The 7-Stage Supplier Qualification Lifecycle Flow"
         },
         {
           type: "table",
-          headers: ["Trilogy Process", "Primary Purpose", "Key Operational Deliverables"],
+          headers: ["Stage", "Phase Name", "Audit & Technical Action", "Acceptance Deliverables"],
           rows: [
-            [
-              "**1. Quality Planning**",
-              "Design processes capable of meeting customer needs with zero initial deficiencies.",
-              "Customer identification, VOC translation, product design specs, capability checks."
-            ],
-            [
-              "**2. Quality Control**",
-              "Maintain current operational performance and act on sporadic spikes.",
-              "Control charts, visual inspection, SOP enforcement, immediate corrective loops."
-            ],
-            [
-              "**3. Quality Improvement**",
-              "Drive chronic waste down to unprecedented low levels (Breakthrough).",
-              "Cross-functional teams, Pareto analysis, root-cause elimination, locking in new standards."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: Juran's 7-Step Breakthrough Sequence"
-        },
-        {
-          type: "ol",
-          items: [
-            "**1. Proof of the Need**: Quantifying the financial Cost of Poor Quality (COPQ) to prove business case.",
-            "**2. Project Identification**: Applying Pareto 80/20 analysis to isolate the vital few chronic problems.",
-            "**3. Organization for Breakthrough**: Appointing steering committees and diagnostic task forces.",
-            "**4. Diagnostic Journey**: Analyzing data to distinguish symptoms from root causes.",
-            "**5. Remedial Journey**: Designing, piloting, and verifying permanent countermeasures.",
-            "**6. Overcoming Resistance to Change**: Guiding organizational culture and overcoming inertia.",
-            "**7. Holding the Gains**: Institutionalizing new Standard Operating Procedures and control plans."
+            ["**1. Screen**", "Initial Prequalification", "Evaluate financial solvency, facility capacity, QMS.", "Survey questionnaires, ISO 9001 certificates."],
+            ["**2. Audit**", "On-Site Process Audit", "Audit plant machinery, SPC records, Poka-Yoke fixtures.", "Scored audit report covering maintenance and training."],
+            ["**3. Sample Approval**", "First Article / PPAP", "Fabricate prototype lots on production tooling for tests.", "PPAP 19 elements, CMM inspection, Gage R&R ($<10\\%$)."],
+            ["**4. Trial Run**", "Pilot Production Batch", "Full-speed pilot batch (500-5000 units) on assembly lines.", "Verification of line fit, 0 jams, $C_{pk} \\ge 1.33$."],
+            ["**5. Monitor**", "Ongoing Scorecard Tracking", "Track quality, delivery, cost, and service in real time.", "$\\text{SPI} = 0.40(Q) + 0.30(D) + 0.20(C) + 0.10(S)$."],
+            ["**6. Tier**", "Supplier Classification", "Classify into performance tiers for commercial allocation.", "Tier 1 (Dock-to-Stock), Tier 2 (Approved), Tier 3 (Conditional)."],
+            ["**7. Requalify**", "Periodic Recertification", "Annual re-audits or re-PPAP upon major tooling/facility moves.", "Recertification audit, continuous improvement plans."]
           ]
         }
       ]
@@ -2096,1184 +1273,74 @@ export const tqmCourse: Course = {
     {
       id: "om01-eq-6",
       number: 6,
-      title: "The Twelve Stages of Benchmarking and Strategic Benchmarking Types",
+      title: "Pareto Chart Analysis: 80/20 Rule, Construction Protocol, and Diagram",
       marks: 14,
-      relatedSlugs: ["benchmarking-process-twelve-stages-seven-types"],
+      relatedSlugs: ["midsem-pareto-chart-analysis"],
       question:
-        "Explain the strategic importance of benchmarking in operational excellence. Detail the 12 stages of the benchmarking process (AT&T Model) and distinguish between the 7 major types of benchmarking with real-world examples.",
+        "What do you mean by a Pareto chart? When is it used? Explain its theoretical principles (Vilfredo Pareto and Joseph Juran's 80/20 rule), distinguish it from histograms, provide step-by-step construction instructions with diagrams, and discuss a practical industrial example.",
       blocks: [
         {
           type: "h3",
-          text: "Part 1: The 12 Stages of the Benchmarking Process"
+          text: "Part 1: Principles & 5-Step Construction Methodology"
         },
         {
-          type: "ol",
-          items: [
-            "**1. Determine What to Benchmark**: Select critical business processes directly impacting customer satisfaction.",
-            "**2. Form and Train Benchmarking Team**: Assemble cross-functional operators with deep process knowledge.",
-            "**3. Identify Benchmarking Partners**: Screen recognized world-class leaders (competitors or cross-industry).",
-            "**4. Analyze Internal Process**: Map internal workflows, baseline cycle times, and quantify unit costs.",
-            "**5. Design Information Gathering Plan**: Prepare questionnaires, field visit protocols, and interview guides.",
-            "**6. Collect Benchmarking Data**: Execute partner site visits and gather operational performance data.",
-            "**7. Analyze Data and Identify Gaps**: Quantify performance delta and isolate enabling root practices.",
-            "**8. Project Future Trajectories**: Forecast future benchmark partner performance to aim ahead of moving targets.",
-            "**9. Establish Goals & Action Plans**: Gain executive consensus and formulate structured implementation roadmaps.",
-            "**10. Implement Specific Actions**: Re-engineer workflows, procure tooling, and train personnel.",
-            "**11. Monitor Progress & Calibrate**: Track milestone KPIs and report operational improvements to leadership.",
-            "**12. Recalibrate Benchmarks**: Institutionalize best practices into SOPs and reset higher benchmarks."
-          ]
+          type: "p",
+          text: "A Pareto diagram ranks categorical data in descending order from left to right with a cumulative percentage line. Based on Juran's 80/20 rule, 80% of scrap and defects arise from 20% of vital few causes. The horizontal axis is categorical (unlike continuous numerical histograms)."
         },
         {
           type: "h3",
-          text: "Part 2: Seven Types of Benchmarking"
+          text: "Part 2: Worked Industrial Coating Machine Scrap Case"
         },
         {
           type: "table",
-          headers: ["Type", "Scope & Focus", "Key Advantage", "Industry Example"],
+          headers: ["Machine ID", "Annual Scrap ($)", "Share (%)", "Cumulative ($)", "Cumulative (%)", "Pareto Category"],
           rows: [
-            [
-              "**Internal**",
-              "Comparing lines/units within the same firm.",
-              "Zero confidentiality barriers; instant data access.",
-              "*Toyota comparing Georgetown, USA vs Tsutsumi, Japan.*"
-            ],
-            [
-              "**Competitive**",
-              "Direct comparison against market competitors.",
-              "Reveals exact competitive market positioning.",
-              "*Ford reverse-engineering BMW 3-Series suspension.*"
-            ],
-            [
-              "**Functional**",
-              "Comparing similar functional processes across industries.",
-              "Breaks industry tunnel vision; willing partners.",
-              "*Southwest Airlines benchmarking gate turnaround vs F1 pit crews.*"
-            ],
-            [
-              "**Generic**",
-              "Comparing core processes against world leaders.",
-              "Yields breakthrough, radical workflow innovations.",
-              "*Hospital ER benchmarking patient intake vs hotel concierge check-in.*"
-            ],
-            [
-              "**Strategic**",
-              "High-level business models & corporate capabilities.",
-              "Informs long-term corporate pivots and M&A.",
-              "*Microsoft benchmarking Apple's SaaS & silicon integration.*"
-            ],
-            [
-              "**Performance**",
-              "Quantitative pricing, specifications, cycle times.",
-              "Provides baseline numerical targets.",
-              "*Data centers benchmarking Power Usage Effectiveness (PUE).*"
-            ],
-            [
-              "**Global**",
-              "Benchmarking across international borders.",
-              "Leverages global operational best practices.",
-              "*Samsung benchmarking cleanroom standards vs ASML and TSMC.*"
-            ]
+            ["**Machine 51**", "$53,000", "53.0%", "$53,000", "53.0%", "**Vital Few** (Target 1)"],
+            ["**Machine 35**", "$21,000", "21.0%", "$74,000", "**74.0%**", "**Vital Few** (Target 2)"],
+            ["**Machine 44**", "$10,000", "10.0%", "$84,000", "84.0%", "Useful Many"],
+            ["**Machine 47**", "$7,000", "7.0%", "$91,000", "91.0%", "Useful Many"],
+            ["**Machine 29**", "$4,000", "4.0%", "$95,000", "95.0%", "Useful Many"],
+            ["**Other (31+misc)**", "$5,000", "5.0%", "$100,000", "100.0%", "Useful Many"]
           ]
+        },
+        {
+          type: "p",
+          text: "**Conclusion**: Machines 51 and 35 account for 74% of scrap dollars; corrective resources are focused exclusively on these two vital few machines."
         }
       ]
     },
     {
       id: "om01-eq-7",
       number: 7,
-      title: "Voice of the Customer (VOC) and Kano Model Customer Satisfaction Architecture",
+      title: "Cause and Effect (Ishikawa / Fishbone) Diagram: Origin, Construction, and The 6Ms",
       marks: 14,
-      relatedSlugs: ["voice-of-customer-voc-kano-model"],
+      relatedSlugs: ["midsem-cause-and-effect-ishikawa-6ms"],
       question:
-        "Explain the methodologies for capturing the Voice of the Customer (VOC). Analyze Noriaki Kano's Model of Customer Satisfaction, mathematically formulating its categories, and explain the dynamic decay law over product lifecycles.",
+        "What do you mean by a cause and effect diagram? Why is it used and how is it used? Explain its six Ms (Man, Machine, Method, Material, Measurement, Milieu/Environment) with proper diagrammatic structure, brainstorming rules, and industrial examples.",
       blocks: [
         {
-          type: "diagram",
-          kind: "kano-model",
-          caption: "Noriaki Kano Customer Satisfaction Coordinate Model & Lifecycle Decay Curve"
+          type: "h3",
+          text: "Part 1: The Six Ms (Manufacturing 6Ms) Diagnostic Framework"
+        },
+        {
+          type: "table",
+          headers: ["6M Category", "Operational Definition", "Diagnostic Factors Examined", "Industrial Case Example"],
+          rows: [
+            ["**1. Man**", "Human factors, operator competence, training.", "Training, fatigue, turnover, SOP compliance.", "*Night-shift worker not trained on micrometer zeroing.*"],
+            ["**2. Machine**", "Machinery, automated systems, fixtures, tools.", "Tool wear, backlash, vibration, spindle runout.", "*CNC lathe spindle exhibiting $0.008\\text{ mm}$ thermal runout.*"],
+            ["**3. Method**", "Operating procedures, task sequences, feeds.", "SOPs, feed rates, cycle times, setup routines.", "*Feed rate set at $0.25\\text{ mm/rev}$ instead of $0.15\\text{ mm/rev}$.*"],
+            ["**4. Material**", "Incoming raw materials, chemicals, components.", "Hardness, tensile strength, vendor tolerances.", "*Raw steel bar hardness fluctuating from 28 to 38 HRC.*"],
+            ["**5. Measurement**", "Gauges, inspection tools, calibration.", "Gage R&R, instrument wear, parallax bias.", "*Vernier caliper jaw worn by $0.004\\text{ mm}$ giving false error.*"],
+            ["**6. Milieu (Environment)**", "Ambient conditions surrounding manufacturing.", "Temperature swings, humidity, dust, vibration.", "*Afternoon ambient temp rising by $14^\\circ\\text{C}$ expanding metal.*"]
+          ]
         },
         {
           type: "h3",
-          text: "Part 1: Capturing the Voice of the Customer (VOC)"
+          text: "Part 2: Brainstorming Protocol & 5 Whys"
         },
         {
           type: "p",
-          text: "VOC is captured through reactive channels (warranty claims, complaints, returns) and proactive channels (ethnographic observations, contextual interviews, focus groups). Qualitative statements are translated into Critical to Quality (CTQ) specifications using CTQ Trees."
-        },
-        {
-          type: "h3",
-          text: "Part 2: Deconstruction of the Kano Model Categories"
-        },
-        {
-          type: "table",
-          headers: ["Category", "Mathematical Formula", "Customer Perception", "Benchmark Example"],
-          rows: [
-            [
-              "**Must-Be / Basic**",
-              "Asymmetrical negative ($S \\le 0$)",
-              "Taken for granted; absence causes extreme dissatisfaction.",
-              "*Automobile ABS brakes, clean hotel running water.*"
-            ],
-            [
-              "**One-Dimensional**",
-              "Linear symmetrical ($S \\propto \\text{Exec}$)",
-              "Direct competitive battleground; more is better.",
-              "*Automobile fuel efficiency (km/l), phone battery life.*"
-            ],
-            [
-              "**Attractive**",
-              "Exponential positive ($S = f(\\text{Exec}^2)$)",
-              "Unexpected delight; absence causes zero dissatisfaction.",
-              "*Tesla OTA software updates, free airline booking concierge.*"
-            ],
-            [
-              "**Indifferent**",
-              "Flat horizontal line ($S = 0$)",
-              "Zero customer utility; engineering over-processing.",
-              "*Cardboard packaging tensile strength exceeding standard.*"
-            ],
-            [
-              "**Reverse**",
-              "Inverse slope ($S \\propto -\\text{Exec}$)",
-              "Active irritation and customer dissatisfaction.",
-              "*Intrusive pop-up notifications, complex menu layers.*"
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 3: The Dynamic Decay Law"
-        },
-        {
-          type: "p",
-          text: "Customer expectations evolve continuously. Over 12–24 months, every **Attractive (Delighter)** feature decays into a **One-Dimensional (Performance)** baseline, and eventually into a **Must-Be (Hygiene)** requirement as competitors duplicate it. R&D must continuously introduce fresh Delighters."
-        }
-      ]
-    },
-    {
-      id: "om01-eq-8",
-      number: 8,
-      title: "Quality Function Deployment (QFD) and House of Quality (HOQ) 6-Room Architecture",
-      marks: 14,
-      relatedSlugs: ["qfd-house-of-quality-architecture"],
-      question:
-        "Detail the structural architecture of the House of Quality (HOQ) in Quality Function Deployment (QFD). Explain the function and mathematical calculations of all 6 rooms, and outline Clausing's 4-phase cascading QFD process.",
-      blocks: [
-        {
-          type: "diagram",
-          kind: "house-of-quality",
-          caption: "House of Quality (HOQ) 6-Room Structural Architecture"
-        },
-        {
-          type: "h3",
-          text: "Part 1: The Six Structural Rooms of the House of Quality (HOQ)"
-        },
-        {
-          type: "table",
-          headers: ["HOQ Room", "Location", "Core Function", "Mathematical Formulation"],
-          rows: [
-            [
-              "**Room 1: Customer WHATs**",
-              "Left vertical column",
-              "Prioritized Voice of Customer requirements.",
-              "Customer Importance Weight ($w_i$ on 1-5 scale)."
-            ],
-            [
-              "**Room 2: Engineering HOWs**",
-              "Top horizontal ceiling",
-              "Measurable engineering design parameters.",
-              "Optimization direction: $\\uparrow$ Max, $\\downarrow$ Min, $\\odot$ Target."
-            ],
-            [
-              "**Room 3: Interrelationship Grid**",
-              "Central matrix",
-              "Evaluates strength between WHATs and HOWs.",
-              "Scoring: Strong ($\\odot=9$), Med ($\\bigcirc=3$), Weak ($\\triangle=1$)."
-            ],
-            [
-              "**Room 4: Correlation Roof**",
-              "Triangular peak",
-              "Evaluates trade-offs and synergies between HOWs.",
-              "Trade-off matrix: $++, +, -, --$ conflicts."
-            ],
-            [
-              "**Room 5: Competitive Benchmarks**",
-              "Right vertical column",
-              "Customer perception of us vs. key competitors.",
-              "Calculates Improvement Ratio ($IR = \\text{Target}/\\text{Current}$). "
-            ],
-            [
-              "**Room 6: Technical Targets**",
-              "Bottom foundation",
-              "Calculates absolute technical priorities & specs.",
-              "Importance: $W_j = \\sum_{i=1}^{n} (w_i \\times R_{ij})$; sets physical specs."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: Clausing's 4-Phase Cascading QFD Flow"
-        },
-        {
-          type: "ol",
-          items: [
-            "**Phase 1 (Product Planning)**: Customer Requirements (WHATs) $\\rightarrow$ Engineering Characteristics (HOWs).",
-            "**Phase 2 (Part Deployment)**: Engineering Characteristics (WHATs) $\\rightarrow$ Critical Part Characteristics (HOWs).",
-            "**Phase 3 (Process Planning)**: Critical Part Characteristics (WHATs) $\\rightarrow$ Manufacturing Process Operations (HOWs).",
-            "**Phase 4 (Production Planning)**: Manufacturing Process Operations (WHATs) $\\rightarrow$ Inspection Controls & SPC Limits (HOWs)."
-          ]
-        }
-      ]
-    },
-    {
-      id: "om01-eq-9",
-      number: 9,
-      title: "Failure Mode and Effects Analysis (FMEA): DFMEA vs. PFMEA and RPN Risk Modeling",
-      marks: 14,
-      relatedSlugs: ["fmea-risk-priority-number-rpn"],
-      question:
-        "Examine Failure Mode and Effects Analysis (FMEA) as a proactive engineering risk management tool. Differentiate between DFMEA and PFMEA, explain the mathematical formulation of Risk Priority Number (RPN), and discuss the AIAG-VDA Action Priority matrix.",
-      blocks: [
-        {
-          type: "diagram",
-          kind: "fmea-matrix",
-          caption: "Failure Mode and Effects Analysis (FMEA) & RPN Risk Simulator"
-        },
-        {
-          type: "h3",
-          text: "Part 1: Design FMEA (DFMEA) vs. Process FMEA (PFMEA)"
-        },
-        {
-          type: "table",
-          headers: ["FMEA Dimension", "Design FMEA (DFMEA)", "Process FMEA (PFMEA)"],
-          rows: [
-            [
-              "**Primary Objective**",
-              "Ensure product design functions reliably and safely across operating envelope.",
-              "Ensure manufacturing and assembly operations produce conforming parts without errors."
-            ],
-            [
-              "**Failure Focus**",
-              "Material fatigue, structural yield, dielectric breakdown, component clash.",
-              "Operator error, incorrect torque, machine wear, tooling misorientation, contamination."
-            ],
-            [
-              "**Typical Causes**",
-              "Incorrect material selection, insufficient safety margin, inappropriate geometry.",
-              "Inadequate training, missing Poka-Yoke interlocks, improper lubrication, thermal drift."
-            ],
-            [
-              "**Countermeasures**",
-              "Redesigning geometry, selecting higher-grade alloys, enlarging safety factors.",
-              "Mistake-proofing (Poka-Yoke), automated vision inspection, SPC tightening."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: Mathematical Formulation of Risk Priority Number (RPN)"
-        },
-        {
-          type: "quote",
-          text: "\\text{RPN} = \\text{Severity (S)} \\times \\text{Occurrence (O)} \\times \\text{Detection (D)}"
-        },
-        {
-          type: "ul",
-          items: [
-            "**Severity (S, 1–10)**: Seriousness of failure effect ($1 = \\text{None}$, $10 = \\text{Hazardous without warning}$).",
-            "**Occurrence (O, 1–10)**: Frequency likelihood of failure cause ($1 = < 1 \\text{ in } 10^6$, $10 = > 1 \\text{ in } 10$).",
-            "**Detection (D, 1–10 Inverted)**: Ability of controls to detect defect ($1 = \\text{100% Poka-Yoke}$, $10 = \\text{Zero detection}$).",
-            "**AIAG-VDA Action Priority**: Replaces pure RPN thresholds with logic tables giving precedence to high Severity ($S \\ge 9$) regardless of RPN."
-          ]
-        }
-      ]
-    },
-    {
-      id: "om01-eq-10",
-      number: 10,
-      title: "Taguchi Quality Loss Function Formulations, Robust Design, and Process Societal Loss",
-      marks: 14,
-      relatedSlugs: ["taguchi-quality-loss-function-robust-design"],
-      question:
-        "Critically evaluate Genichi Taguchi's Quality Loss Function. Contrast Taguchi's philosophy with traditional goalpost inspection. Mathematically derive the Nominal-the-Best, Smaller-the-Better, and Larger-the-Better formulations, and explain average societal loss modeling.",
-      blocks: [
-        {
-          type: "diagram",
-          kind: "taguchi-loss",
-          caption: "Taguchi Quadratic Loss Function vs. Traditional Goalpost Model"
-        },
-        {
-          type: "h3",
-          text: "Part 1: Taguchi Philosophy vs. Traditional Goalpost Mentality"
-        },
-        {
-          type: "p",
-          text: "Taguchi defined quality as the financial loss imparted to society after product shipment. Traditional goalpost inspection falsely assumes zero economic loss within tolerance limits $[LSL, USL]$. Taguchi proved that loss increases quadratically as a dimension drifts away from nominal target $m$."
-        },
-        {
-          type: "h3",
-          text: "Part 2: Three Formulations of Taguchi Loss Function"
-        },
-        {
-          type: "table",
-          headers: ["Type", "Formula", "Loss Constant ($k$)", "Industrial Benchmark Example"],
-          rows: [
-            [
-              "**Nominal-the-Best (NTB)**",
-              "$L(y) = k(y - m)^2$",
-              "$k = \\frac{A_0}{\\Delta^2}$",
-              "*Shaft diameter ($50.00 \\pm 0.05\\text{ mm}$), piston clearance.*"
-            ],
-            [
-              "**Smaller-the-Better (STB)**",
-              "$L(y) = k y^2$",
-              "$k = \\frac{A_0}{y_0^2}$",
-              "*Carbon emissions (g/km), electrical resistance, chemical impurity PPM.*"
-            ],
-            [
-              "**Larger-the-Better (LTB)**",
-              "$L(y) = k \\left(\\frac{1}{y^2}\\right)$",
-              "$k = A_0 y_0^2$",
-              "*Tensile breaking strength of crane cables, battery lifecycle cycles.*"
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 3: Average Expected Societal Loss in Manufacturing"
-        },
-        {
-          type: "quote",
-          text: "\\bar{L} = k \\left[ \\sigma^2 + (\\mu - m)^2 \\right]"
-        },
-        {
-          type: "p",
-          text: "This formula demonstrates that average loss is minimized by two sequential engineering steps: (1) reducing process variance ($\\sigma^2 \\rightarrow 0$), and (2) shifting the process mean to the nominal target ($\\mu = m$)."
-        }
-      ]
-    },
-    {
-      id: "om01-eq-11",
-      number: 11,
-      title: "Strategic Purchasing, Supplier Quality Assurance, and Four-Tier Qualification Lifecycle",
-      marks: 14,
-      relatedSlugs: ["supplier-qualification-evaluation-system"],
-      question:
-        "Discuss the role of strategic purchasing in Total Quality Management. Detail the Four-Tier Supplier Qualification Lifecycle, supplier quality auditing, and the mathematical construction of a Supplier Performance Index (SPI).",
-      blocks: [
-        {
-          type: "h3",
-          text: "Part 1: The Four-Tier Supplier Qualification Lifecycle"
-        },
-        {
-          type: "table",
-          headers: ["Tier", "Operational Status", "Audit Requirements", "Inspection Policy"],
-          rows: [
-            [
-              "**Tier 1: Unapproved**",
-              "Candidate vendor; no POs authorized.",
-              "Financial solvency, preliminary capability survey.",
-              "Prototype samples only; 100% destructive testing."
-            ],
-            [
-              "**Tier 2: Conditional**",
-              "Authorized for trial production runs.",
-              "On-site QMS audit, Process Capability ($C_{pk} \\ge 1.33$).",
-              "Tightened receiving inspection; mandatory COA."
-            ],
-            [
-              "**Tier 3: Approved**",
-              "Consistent quality, cost, delivery performer.",
-              "Annual surveillance audits, ISO 9001 / IATF 16949, 8D CAPA.",
-              "Normal sampling inspection (AQL 0.65%)."
-            ],
-            [
-              "**Tier 4: Certified Partner**",
-              "Strategic co-design partner ($C_{pk} \\ge 1.67$).",
-              "Live SPC data streaming, Lean Six Sigma capability.",
-              "**Dock-to-Stock**: Zero receiving inspection."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: Supplier Performance Index (SPI) Mathematical Model"
-        },
-        {
-          type: "quote",
-          text: "\\text{SPI} = 0.40(Q) + 0.30(D) + 0.20(C) + 0.10(S)"
-        },
-        {
-          type: "ul",
-          items: [
-            "**Quality Score ($Q$, 40%)**: $100 - \\text{PPM defect penalty}$ based on accepted lot proportion.",
-            "**Delivery Score ($D$, 30%)**: On-Time In-Full (OTIF) delivery compliance percentage.",
-            "**Cost Score ($C$, 20%)**: Annual cost-reduction achievement and TCO competitiveness.",
-            "**Service Score ($S$, 10%)**: Responsiveness to 8D problem-solving inquiries within 48 hours."
-          ]
-        }
-      ]
-    },
-    {
-      id: "om01-eq-12",
-      number: 12,
-      title: "The Seven Basic Quality Control (7 QC) Tools and 6-Phase Quality Investigation Sequence",
-      marks: 14,
-      relatedSlugs: ["seven-basic-qc-tools-quality-investigation"],
-      question:
-        "Explain Kaoru Ishikawa's Seven Basic Quality Control (7 QC) Tools. Provide their analytical purpose and construct a structured 6-phase operational sequence illustrating how an engineering team integrates them during a root-cause quality investigation.",
-      blocks: [
-        {
-          type: "h3",
-          text: "Part 1: The Seven Basic Quality Control (7 QC) Tools"
-        },
-        {
-          type: "table",
-          headers: ["Tool", "Creator / Principle", "Analytical Purpose", "Industrial Quality Application"],
-          rows: [
-            [
-              "**1. Check Sheet**",
-              "Standardized observation form",
-              "Structured real-time data collection at gemba.",
-              "*Defect-location measles chart on PCB assembly.*"
-            ],
-            [
-              "**2. Pareto Chart**",
-              "Joseph Juran (80/20 Rule)",
-              "Separates 'vital few' defect causes from 'useful many'.",
-              "*Isolating 2 CNC lathes driving 81% of scrap.*"
-            ],
-            [
-              "**3. Fishbone Diagram**",
-              "Kaoru Ishikawa (5M+1E)",
-              "Brainstorms and categorizes all potential root causes.",
-              "*Diagnosing tablet dissolution failure causes.*"
-            ],
-            [
-              "**4. Histogram**",
-              "Frequency distribution graph",
-              "Visualizes process spread, center, and shape vs specs.",
-              "*Detecting bimodal distribution from mixed vendor lots.*"
-            ],
-            [
-              "**5. Scatter Diagram**",
-              "Correlation coordinate plot",
-              "Tests correlation between input $X$ and quality output $Y$.",
-              "*Correlating injection nozzle temperature with tensile strength.*"
-            ],
-            [
-              "**6. Stratification**",
-              "Data segmentation",
-              "Separates data into homogeneous layers to find variation.",
-              "*Stratifying defect rates by Day vs Night shifts.*"
-            ],
-            [
-              "**7. Control Chart**",
-              "Walter Shewhart ($\\pm 3\\sigma$)",
-              "Distinguishes common cause from special cause variation.",
-              "*Tracking shaft OD with $\\bar{X}-R$ chart to catch tool wear.*"
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: Six-Phase Quality Investigation Sequence"
-        },
-        {
-          type: "ol",
-          items: [
-            "**Step 1: Process Mapping (Flowchart)**: Map operational process flow to isolate investigation boundaries.",
-            "**Step 2: Empirical Data Collection (Check Sheet)**: Collect quantitative defect counts and spatial locations in real-time.",
-            "**Step 3: Defect Prioritization (Pareto Chart)**: Apply 80/20 analysis to isolate vital few defects.",
-            "**Step 4: Root-Cause Investigation (Fishbone & 5 Whys)**: Brainstorm causal factors across 5M+1E and drill down to root cause.",
-            "**Step 5: Statistical Distribution & Correlation (Histogram & Scatter)**: Verify process spread and mathematically confirm $Y = f(X)$.",
-            "**Step 6: Process Stabilization & Monitoring (Control Chart)**: Implement statistical control limits to maintain gains."
-          ]
-        }
-      ]
-    },
-    {
-      id: "om01-eq-13",
-      number: 13,
-      title: "The Seven New Management and Planning Tools (JUSE / MP Tools) and Their 7-Step Integration Flow",
-      marks: 14,
-      relatedSlugs: ["seven-new-management-planning-tools"],
-      question:
-        "Analyze the Seven New Management and Planning Tools (JUSE / MP Tools). Describe each tool's architectural function and detail their seamless 7-step integration sequence in complex organizational problem solving.",
-      blocks: [
-        {
-          type: "h3",
-          text: "Part 1: The Seven New Management & Planning (MP) Tools"
-        },
-        {
-          type: "table",
-          headers: ["MP Tool", "Origin", "Core Function", "Strategic Role"],
-          rows: [
-            [
-              "**1. Affinity Diagram**",
-              "KJ Method",
-              "Clusters vast qualitative brainstorming data into natural themes.",
-              "Synthesizes subjective VOC data into problem themes."
-            ],
-            [
-              "**2. Relations Diagram**",
-              "Digraph",
-              "Maps multi-directional cause-and-effect relationships.",
-              "Isolates primary system drivers (high outgoing arrows)."
-            ],
-            [
-              "**3. Tree Diagram**",
-              "Systematic",
-              "Decomposes broad objectives into detailed operational tasks.",
-              "Decomposes goals into actionable work breakdowns."
-            ],
-            [
-              "**4. Matrix Diagram**",
-              "L/T/X Grid",
-              "Evaluates multi-dimensional relationships and responsibilities.",
-              "Assigns RACI execution responsibilities."
-            ],
-            [
-              "**5. Prioritization Matrix**",
-              "AHP Matrix",
-              "Ranks alternative solutions against weighted criteria.",
-              "Selects highest-ROI solution paths objectively."
-            ],
-            [
-              "**6. PDPC**",
-              "Risk Tree",
-              "Maps potential 'what-if' failure risks to design countermeasures.",
-              "Proactive operational contingency planning."
-            ],
-            [
-              "**7. Arrow Diagram**",
-              "CPM Network",
-              "Sequences tasks, identifying dependencies and Critical Path.",
-              "Ensures project execution stays on schedule."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: Detailed 7-Step Tool Integration Sequence"
-        },
-        {
-          type: "ol",
-          items: [
-            "**Step 1 (Affinity Diagram)**: Cluster 80+ unstructured operational complaints into natural theme clusters.",
-            "**Step 2 (Relations Diagram)**: Map directional causal arrows between theme headers; identify Primary System Driver.",
-            "**Step 3 (Tree Diagram)**: Decompose Primary Driver into discrete sub-tasks across 3 hierarchical levels.",
-            "**Step 4 (Matrix Diagram)**: Plot sub-tasks against departments on an L-shaped matrix to assign RACI ownership.",
-            "**Step 5 (Prioritization Matrix)**: Score alternative implementation paths against weighted strategic criteria.",
-            "**Step 6 (PDPC)**: Build a contingency tree mapping 'what-if' failure scenarios to approved countermeasures.",
-            "**Step 7 (Arrow Diagram)**: Plot risk-mitigated tasks into a CPM network diagram establishing the Critical Path."
-          ]
-        }
-      ]
-    },
-    {
-      id: "om01-eq-14",
-      number: 14,
-      title: "Statistical Process Control (SPC): Shewhart Control Charts and Western Electric Sensitizing Rules",
-      marks: 14,
-      relatedSlugs: ["spc-shewhart-control-charts-western-electric-rules"],
-      question:
-        "Elaborate on the theoretical principles of Statistical Process Control (SPC). Differentiate between common cause and special cause variation, derive the mathematical architecture of Shewhart Control Charts, and explain the Western Electric out-of-control sensitizing rules.",
-      blocks: [
-        {
-          type: "diagram",
-          kind: "spc-control-chart",
-          caption: "Shewhart Control Chart Architecture & Western Electric Out-of-Control Sensitizing Rules"
-        },
-        {
-          type: "h3",
-          text: "Part 1: Common Cause vs. Special Cause Variation"
-        },
-        {
-          type: "table",
-          headers: ["Variation Type", "Origin & Nature", "Predictability", "Action Mandate"],
-          rows: [
-            [
-              "**Common Cause (Natural)**",
-              "Inherent in system design, machine tolerances, ambient conditions.",
-              "Statistically predictable within $\\pm 3\\sigma$; stable.",
-              "**Management Action**: Requires process redesign (Deming 94%)."
-            ],
-            [
-              "**Special Cause (Assignable)**",
-              "External shocks (tool fracture, power surge, operator error).",
-              "Unpredictable, causes instability and mean shifts.",
-              "**Frontline Action**: Immediate intervention to remove cause."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: Western Electric Out-of-Control Sensitizing Rules"
-        },
-        {
-          type: "table",
-          headers: ["Rule", "Pattern Trigger Condition", "Zone", "Diagnostic Meaning & Cause"],
-          rows: [
-            [
-              "**Rule 1**",
-              "1 point falls outside $\\pm 3\\sigma$ limits ($> UCL$ or $< LCL$).",
-              "Beyond Zone A",
-              "Severe assignable shock (tool fracture, power surge)."
-            ],
-            [
-              "**Rule 2**",
-              "2 out of 3 consecutive points fall in Zone A ($2\\sigma$ to $3\\sigma$) on same side.",
-              "Zone A",
-              "Significant process mean shift or variance surge."
-            ],
-            [
-              "**Rule 3**",
-              "4 out of 5 consecutive points fall in Zone B or beyond ($> 1\\sigma$) on same side.",
-              "Zone B or beyond",
-              "Moderate process mean shift; calibration drift."
-            ],
-            [
-              "**Rule 4**",
-              "8 to 9 consecutive points on same side of Centerline.",
-              "Same side of CL",
-              "Persistent bias in process mean (new tool setting)."
-            ],
-            [
-              "**Rule 5**",
-              "6 consecutive points steadily increasing or decreasing.",
-              "Across zones",
-              "Systematic trend (tool wear, chemical bath depletion)."
-            ],
-            [
-              "**Rule 6**",
-              "14 consecutive points alternating up and down.",
-              "Across CL",
-              "Systematic oscillation (two alternating operators/hoppers)."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      id: "om01-eq-15",
-      number: 15,
-      title: "Process Capability Analysis: Cp, Cpk, Cpm Indices, Interpretation Matrix, and Statistical Inferences",
-      marks: 14,
-      relatedSlugs: ["process-capability-indices-cp-cpk-cpm"],
-      question:
-        "Critically examine Process Capability Analysis. Mathematically derive the Cp, Cpk, and Cpm indices, explain the relationship between process centering and capability, and provide a complete Capability Interpretation Matrix with PPM defect levels.",
-      blocks: [
-        {
-          type: "h3",
-          text: "Part 1: Mathematical Formulations of Capability Indices"
-        },
-        {
-          type: "table",
-          headers: ["Index", "Formula", "Analytical Focus", "Key Limitation"],
-          rows: [
-            [
-              "**$C_p$ (Potential)**",
-              "$C_p = \\frac{\\text{USL} - \\text{LSL}}{6\\sigma}$",
-              "Measures spread capability relative to tolerance width.",
-              "Blind to process centering; can have $C_p = 2.0$ yet 100% scrap."
-            ],
-            [
-              "**$C_{pk}$ (Actual)**",
-              "$C_{pk} = \\min \\left( \\frac{\\text{USL} - \\mu}{3\\sigma}, \\frac{\\mu - \\text{LSL}}{3\\sigma} \\right)$",
-              "Measures both process spread AND centering relative to nearest limit.",
-              "Does not penalize deviation from target if specs are asymmetrical."
-            ],
-            [
-              "**$C_{pm}$ (Taguchi)**",
-              "$C_{pm} = \\frac{\\text{USL} - \\text{LSL}}{6\\sqrt{\\sigma^2 + (\\mu - m)^2}}$",
-              "Directly incorporates quadratic loss and penalizes deviation from target $m$.",
-              "Requires explicit target nominal value $m$ definition."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: Process Capability Interpretation Matrix"
-        },
-        {
-          type: "table",
-          headers: ["$C_{pk}$ Value", "Capability Status", "Expected Defect Rate (PPM)", "Operational Action Mandate"],
-          rows: [
-            [
-              "**$C_{pk} < 1.0$**",
-              "**Incapable Process**",
-              "$> 2,700 \\text{ PPM}$",
-              "Mandatory 100% sorting inspection; line stoppage required."
-            ],
-            [
-              "**$1.0 \\le C_{pk} < 1.33$**",
-              "**Barely Capable / Marginal**",
-              "$63 - 2,700 \\text{ PPM}$",
-              "Requires intensive monitoring; unacceptable for safety parts."
-            ],
-            [
-              "**$1.33 \\le C_{pk} < 1.67$**",
-              "**Capable / Industry Benchmark**",
-              "$0.57 - 63 \\text{ PPM}$ ($4\\sigma$ level)",
-              "Standard SPC monitoring; process under statistical control."
-            ],
-            [
-              "**$C_{pk} \\ge 1.67$**",
-              "**World-Class / Highly Capable**",
-              "$< 0.57 \\text{ PPM}$ ($5\\sigma$ level)",
-              "Eligible for reduced sampling or Dock-to-Stock certification."
-            ],
-            [
-              "**$C_{pk} \\ge 2.0$**",
-              "**Six Sigma Quality Level**",
-              "$\\le 3.4 \\text{ DPMO}$ with $1.5\\sigma$ shift",
-              "World-class benchmark excellence; zero receiving inspection."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      id: "om01-eq-16",
-      number: 16,
-      title: "Six Sigma Methodology: DMAIC Roadmap, DPMO Mathematical Engine, and 1.5-Sigma Process Shift",
-      marks: 14,
-      relatedSlugs: ["six-sigma-dmaic-roadmap-dpmo-engine"],
-      question:
-        "Explain the operational framework of Six Sigma. Detail the DMAIC problem-solving roadmap with tollgate review questions, derive the mathematical formula for DPMO, and justify the theoretical foundation of the 1.5-sigma long-term process shift.",
-      blocks: [
-        {
-          type: "diagram",
-          kind: "dmaic-roadmap",
-          caption: "Six Sigma DMAIC Phase-Gate Roadmap & DPMO Mathematical Engine"
-        },
-        {
-          type: "h3",
-          text: "Part 1: Six Sigma DMAIC Phase-Gate Roadmap"
-        },
-        {
-          type: "table",
-          headers: ["Phase", "Core Tollgate Question", "Key Deliverables", "Primary Tools"],
-          rows: [
-            [
-              "**DEFINE**",
-              "What problem are we solving, what is the business case, who is the customer?",
-              "Project Charter, Problem Statement, SIPOC Map.",
-              "Project Charter, SIPOC, VOC to CTQ, Kano."
-            ],
-            [
-              "**MEASURE**",
-              "What is baseline capability, is measurement system reliable?",
-              "Data Collection Plan, Gage R&R ($< 10\\%$), Baseline Sigma.",
-              "Gage R&R, Process Capability ($C_{pk}$), VSM."
-            ],
-            [
-              "**ANALYZE**",
-              "What are the verified vital root causes ($X$'s) driving $Y = f(X)$?",
-              "Validated Root Causes, Waste Identification, Transfer Function.",
-              "Fishbone, 5 Whys, ANOVA, Regression, PFMEA."
-            ],
-            [
-              "**IMPROVE**",
-              "What optimized solutions eliminate root causes, has it been piloted?",
-              "Piloted Countermeasures, DOE Optimization, Cost-Benefit.",
-              "DOE, Poka-Yoke, Kaizen Event, Pilot Run."
-            ],
-            [
-              "**CONTROL**",
-              "How will gains be standardized and held permanently?",
-              "SOPs, SPC Monitoring Dashboard, Control Plan.",
-              "Control Charts ($\\bar{X}-R, p$), 5S, Training SOPs."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: Mathematical DPMO Formulation & The 1.5-Sigma Shift"
-        },
-        {
-          type: "quote",
-          text: "\\text{DPMO} = \\left( \\frac{\\text{Total Defects Found (D)}}{\\text{Total Units (U)} \\times \\text{Opportunities per Unit (O)}} \\right) \\times 10^6"
-        },
-        {
-          type: "p",
-          text: "In short-term lab conditions, a pure $6\\sigma$ normal distribution yields 0.002 PPM. Over long-term production, equipment wear, ambient thermal changes, and operator fatigue cause the process mean to drift by approximately $1.5\\sigma$. Operating at an effective $4.5\\sigma$ limit yields exactly **3.4 Defects Per Million Opportunities (DPMO)**."
-        }
-      ]
-    },
-    {
-      id: "om01-eq-17",
-      number: 17,
-      title: "Lean Manufacturing: The 8 Wastes of Lean (DOWNTIME), 5S Methodology, and Value Stream Mapping",
-      marks: 14,
-      relatedSlugs: ["lean-manufacturing-8-wastes-5s-vsm"],
-      question:
-        "Analyze the principles of Lean Manufacturing. Detail the 8 Wastes of Lean using the DOWNTIME framework, explain the 5S workplace organization methodology, and outline the construction of a Value Stream Map (VSM).",
-      blocks: [
-        {
-          type: "h3",
-          text: "Part 1: The 8 Wastes of Lean Manufacturing (DOWNTIME)"
-        },
-        {
-          type: "table",
-          headers: ["Waste (Muda)", "Letter", "Operational Definition", "Industrial Example"],
-          rows: [
-            [
-              "**Defects**",
-              "**D**",
-              "Products failing to meet specs; requiring scrap or rework.",
-              "*Machined crankshaft with out-of-round journal.*"
-            ],
-            [
-              "**Overproduction**",
-              "**O**",
-              "Producing ahead of demand (most severe waste).",
-              "*Stamping 10,000 door panels when 500 needed per shift.*"
-            ],
-            [
-              "**Waiting**",
-              "**W**",
-              "Idle time caused by bottlenecks, downtime, shortages.",
-              "*Assembly workers waiting 45 min for forklift delivery.*"
-            ],
-            [
-              "**Non-Utilized Talent**",
-              "**N**",
-              "Failing to engage frontline workers' creative ideas.",
-              "*Ignoring shop floor suggestions for tool changeover.*"
-            ],
-            [
-              "**Transportation**",
-              "**T**",
-              "Unnecessary physical movement of materials/WIP.",
-              "*Trucking sub-assemblies across town between buildings.*"
-            ],
-            [
-              "**Inventory**",
-              "**I**",
-              "Excess raw materials or finished goods tying up cash.",
-              "*Holding 60 days of steel coils due to vendor unreliability.*"
-            ],
-            [
-              "**Motion**",
-              "**M**",
-              "Unnecessary physical movement or ergonomic strain.",
-              "*Operator walking 15 paces to retrieve hand tools.*"
-            ],
-            [
-              "**Extra Processing**",
-              "**E**",
-              "Doing more work or higher precision than customer values.",
-              "*Polishing internal engine casing surfaces with no function.*"
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: The 5S Workplace Organization Methodology"
-        },
-        {
-          type: "table",
-          headers: ["5S Step", "English", "Core Action", "Audit Criteria"],
-          rows: [
-            [
-              "**1. Seiri**",
-              "**Sort**",
-              "Separate necessary from unnecessary items; remove clutter.",
-              "**Red Tag Campaign**: Discard unneeded items after 48h."
-            ],
-            [
-              "**2. Seiton**",
-              "**Set in Order**",
-              "Organize items so they are easy to find and return.",
-              "**Shadow Boards**, floor tape boundaries, labeled bins."
-            ],
-            [
-              "**3. Seiso**",
-              "**Shine**",
-              "Clean work areas daily; cleaning acts as inspection.",
-              "Daily 5-min cleaning checklists, oil sight glasses."
-            ],
-            [
-              "**4. Seiketsu**",
-              "**Standardize**",
-              "Establish visual standard operating procedures facility-wide.",
-              "Visual SOP placards, color-coded floor striping."
-            ],
-            [
-              "**5. Shitsuke**",
-              "**Sustain**",
-              "Institutionalize discipline through regular audits & rewards.",
-              "Weekly 5S radar audits, 5S scoreboards."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      id: "om01-eq-18",
-      number: 18,
-      title: "Total Productive Maintenance (TPM) and Overall Equipment Effectiveness (OEE) Metric Architecture",
-      marks: 14,
-      relatedSlugs: ["tpm-overall-equipment-effectiveness-oee"],
-      question:
-        "Explain the philosophy of Total Productive Maintenance (TPM) and Autonomous Maintenance (Jishu Hozen). Derive the mathematical model for Overall Equipment Effectiveness (OEE) and analyze the Six Big Equipment Losses.",
-      blocks: [
-        {
-          type: "h3",
-          text: "Part 1: Mathematical Architecture of Overall Equipment Effectiveness (OEE)"
-        },
-        {
-          type: "quote",
-          text: "\\text{OEE} = \\text{Availability (A)} \\times \\text{Performance Rate (P)} \\times \\text{Quality Rate (Q)}"
-        },
-        {
-          type: "table",
-          headers: ["OEE Factor", "Mathematical Formula", "Target Six Big Loss Addressed", "World-Class Benchmark"],
-          rows: [
-            [
-              "**1. Availability (A)**",
-              "$A = \\frac{\\text{Operating Time}}{\\text{Planned Time}} = \\frac{\\text{Planned Time} - \\text{Downtime}}{\\text{Planned Time}}$",
-              "Loss 1: Equipment Breakdowns\\nLoss 2: Setup & Adjustments (SMED)",
-              "**$\\ge 90.0\\%$**"
-            ],
-            [
-              "**2. Performance (P)**",
-              "$P = \\frac{\\text{Ideal Cycle Time} \\times \\text{Total Count}}{\\text{Operating Time}}$",
-              "Loss 3: Idling & Minor Stoppages ($< 5\\text{ min}$)\\nLoss 4: Reduced Operating Speed",
-              "**$\\ge 95.0\\%$**"
-            ],
-            [
-              "**3. Quality (Q)**",
-              "$Q = \\frac{\\text{Good Output Count}}{\\text{Total Output Count}}$",
-              "Loss 5: Process Defects & Scrap\\nLoss 6: Startup / Warm-up Yield Losses",
-              "**$\\ge 99.9\\%$**"
-            ],
-            [
-              "**Total Overall OEE**",
-              "$\text{OEE} = A \times P \times Q = 0.90 \times 0.95 \times 0.999$",
-              "Comprehensive elimination of all Six Big Losses",
-              "**$\\ge 85.0\\%$ (World-Class)**"
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      id: "om01-eq-19",
-      number: 19,
-      title: "Cost of Quality (COQ) PAF Model: Prevention, Appraisal, Failure, and 1-10-100 Prevention Leverage",
-      marks: 14,
-      relatedSlugs: ["cost-of-quality-coq-paf-model"],
-      question:
-        "Examine Armand Feigenbaum's Cost of Quality (COQ) PAF model. Categorize Prevention, Appraisal, Internal Failure, and External Failure costs with real-world examples, explain the 'Hidden Plant' concept, and demonstrate the economic rationale of the 1-10-100 Rule.",
-      blocks: [
-        {
-          type: "diagram",
-          kind: "coq-paf-model",
-          caption: "Cost of Quality (COQ) PAF Architecture & 1-10-100 Prevention Leverage Multiplier"
-        },
-        {
-          type: "h3",
-          text: "Part 1: The Four Categories of the PAF Cost of Quality Model"
-        },
-        {
-          type: "table",
-          headers: ["Category", "Classification", "Typical % Share", "Operational Line-Item Examples"],
-          rows: [
-            [
-              "**1. Prevention**",
-              "**Conformance Cost** (Proactive investment to stop defects).",
-              "**5% – 10%** (Target: $> 50\\%$)",
-              "*Design reviews, FMEA sessions, Poka-Yoke tooling, supplier audits, SPC training, preventive maintenance.*"
-            ],
-            [
-              "**2. Appraisal**",
-              "**Conformance Cost** (Measuring, evaluating, auditing).",
-              "**20% – 25%**",
-              "*Incoming inspection, vision sensors, CMM dimensional measurement, lab testing, gauge calibration.*"
-            ],
-            [
-              "**3. Internal Failure**",
-              "**Non-Conformance Cost** (Defects caught BEFORE customer shipment).",
-              "**25% – 40%**",
-              "*Scrap, rework labor, re-inspection, line downtime, downgrading products to secondary scrap.*"
-            ],
-            [
-              "**4. External Failure**",
-              "**Non-Conformance Cost** (Defects escaping to end customer; most catastrophic).",
-              "**40% – 50%**",
-              "*Warranty claims, product recalls, complaint resolution, lawsuits, brand equity destruction.*"
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: The 1-10-100 Prevention Leverage Rule"
-        },
-        {
-          type: "ul",
-          items: [
-            "**$1.00 Prevention Cost**: Spending $1.00 in engineering design (FMEA, Poka-Yoke) eliminates root causes at inception.",
-            "**$10.00 Appraisal & Rework Cost**: Cost to inspect, catch, and rework the defective part inside the factory.",
-            "**$100.00+ External Failure Cost**: Cost when defect reaches the customer (warranty claims, recalls, litigation, brand destruction)."
-          ]
-        }
-      ]
-    },
-    {
-      id: "om01-eq-20",
-      number: 20,
-      title: "ISO 9001:2015 High-Level Structure (Annex SL), Risk-Based Thinking, and Audit Lifecycle",
-      marks: 14,
-      relatedSlugs: ["iso-9001-2015-standards-risk-based-thinking"],
-      question:
-        "Analyze the architecture of ISO 9001:2015. Detail the 10-clause High-Level Structure (Annex SL), the Seven Quality Management Principles (QMPs), the integration of Risk-Based Thinking, and the certification audit lifecycle.",
-      blocks: [
-        {
-          type: "h3",
-          text: "Part 1: The Seven Quality Management Principles (QMPs) of ISO 9001:2015"
-        },
-        {
-          type: "ol",
-          items: [
-            "**QMP 1: Customer Focus**: Meeting and exceeding customer requirements to sustain loyalty.",
-            "**QMP 2: Leadership**: Establishing unity of purpose, vision, and organizational engagement.",
-            "**QMP 3: Engagement of People**: Empowering competent, skilled employees across all tiers.",
-            "**QMP 4: Process Approach**: Managing interconnected activities as coherent processes.",
-            "**QMP 5: Improvement**: Continuous focus on improvement (PDCA) to drive resilience.",
-            "**QMP 6: Evidence-Based Decision Making**: Making decisions based on rigorous empirical data analysis.",
-            "**QMP 7: Relationship Management**: Managing supplier partnerships for sustained supply chain performance."
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: Annex SL 10-Clause High-Level Structure"
-        },
-        {
-          type: "table",
-          headers: ["Clause & Title", "PDCA Cycle", "Core Requirement"],
-          rows: [
-            [
-              "**Clause 4: Context of Organization**",
-              "**PLAN**",
-              "Understanding internal/external issues, interested parties, QMS scope."
-            ],
-            [
-              "**Clause 5: Leadership**",
-              "**PLAN / DO**",
-              "Top management commitment, quality policy, assigning roles/authorities."
-            ],
-            [
-              "**Clause 6: Planning**",
-              "**PLAN**",
-              "**Risk-Based Thinking**: Identifying risks/opportunities, quality objectives."
-            ],
-            [
-              "**Clause 7: Support**",
-              "**DO**",
-              "Resources, infrastructure, monitoring tools, competence, documented info."
-            ],
-            [
-              "**Clause 8: Operation**",
-              "**DO**",
-              "Operational control, customer requirements, design, supplier control, product release."
-            ],
-            [
-              "**Clause 9: Performance Evaluation**",
-              "**CHECK**",
-              "Customer satisfaction, internal audits, Management Review Meetings (MRM)."
-            ],
-            [
-              "**Clause 10: Improvement**",
-              "**ACT**",
-              "Non-conformity management, Corrective Action (CAPA), continuous improvement."
-            ]
-          ]
-        }
-      ]
-    },
-    {
-      id: "om01-eq-21",
-      number: 21,
-      title: "Quality Award Frameworks: Malcolm Baldrige National Quality Award (MBNQA) vs. Deming Prize vs. EFQM",
-      marks: 14,
-      relatedSlugs: ["quality-awards-mbnqa-deming-prize-efqm"],
-      question:
-        "Provide a comprehensive comparative analysis of the three major global quality award frameworks: Malcolm Baldrige National Quality Award (MBNQA), the Deming Application Prize, and the EFQM Excellence Model. Detail the 1,000-point scoring structure of MBNQA.",
-      blocks: [
-        {
-          type: "h3",
-          text: "Part 1: Master Comparison of Global Quality Award Frameworks"
-        },
-        {
-          type: "table",
-          headers: ["Award Framework", "Origin & Sponsor", "Evaluation Focus", "Scoring System & Structure"],
-          rows: [
-            [
-              "**Malcolm Baldrige Award (MBNQA)**",
-              "USA (1987, NIST / US Congress)",
-              "Holistic performance excellence, business results, competitive strategy, leadership.",
-              "**1,000-Point Scoring System** across 7 Categories (Results = 450 pts)."
-            ],
-            [
-              "**Deming Application Prize**",
-              "Japan (1951, JUSE)",
-              "Strict implementation of statistical CWQC/TQM and process control methods.",
-              "Non-prescriptive audit of 10 categories (Policy, QC Circles, QA, Standardization)."
-            ],
-            [
-              "**EFQM Excellence Model**",
-              "Europe (1991, EFQM)",
-              "European stakeholder value, sustainability, purpose-driven leadership.",
-              "**RADAR Logic Matrix** (Results, Approaches, Deploy, Assess, Refine) across 7 Criteria."
-            ]
-          ]
-        },
-        {
-          type: "h3",
-          text: "Part 2: MBNQA 1,000-Point Category Scoring Breakdown"
-        },
-        {
-          type: "table",
-          headers: ["MBNQA Category", "Point Allocation", "Core Evaluation Focus"],
-          rows: [
-            [
-              "**1. Leadership**",
-              "120 Points",
-              "Senior leadership vision, corporate governance, legal/ethical behavior."
-            ],
-            [
-              "**2. Strategy**",
-              "85 Points",
-              "Strategic planning process, objective setting, action plan deployment."
-            ],
-            [
-              "**3. Customers**",
-              "85 Points",
-              "Voice of Customer listening, customer engagement, relationship building."
-            ],
-            [
-              "**4. Measurement, Analysis & Knowledge**",
-              "90 Points",
-              "KPI tracking, competitive benchmarking, knowledge management."
-            ],
-            [
-              "**5. Workforce**",
-              "85 Points",
-              "Workforce environment, capability development, engagement, benefits."
-            ],
-            [
-              "**6. Operations**",
-              "85 Points",
-              "Process design, management, innovation, supply chain management."
-            ],
-            [
-              "**7. Results (The Crucial Half)**",
-              "**450 Points**",
-              "Product/Process (120), Customer (80), Workforce (80), Leadership (80), Financial/Market (90)."
-            ]
-          ]
+          text: "Teams use round-robin participation (one idea per turn), prioritize quantity over quality, forbid criticism during ideation, allow ideas to incubate overnight, and vote to circle the 4–5 most critical root causes for empirical verification and Poka-Yoke countermeasure design."
         }
       ]
     }
