@@ -116,16 +116,16 @@ function Dashboard() {
               </div>
             </div>
 
-            {/* Card 2: OM 02 Mid-Sem Focus */}
+            {/* Card 2: OM 02 Curriculum */}
             <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#4F46E5] via-[#4338CA] to-[#1E1B4B] p-5 text-white shadow-xl transition-all duration-300">
               <div className="space-y-2.5">
                 <div className="flex items-center gap-2">
                   <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-md px-2.5 py-0.5 font-mono text-[10px] font-bold text-white border border-white/20">
-                    Paper OM 02 · Mid Sem
+                    Paper OM 02 · Operations
                   </span>
                 </div>
                 <h3 className="font-display text-base sm:text-lg font-bold tracking-[-0.03em] text-white leading-snug">
-                  9 Master Modules Ready.
+                  Logistics & SCM Master Notes.
                 </h3>
                 <p className="font-sans text-[11px] text-white/85 leading-relaxed line-clamp-3">
                   7 R's & Total Cost, Logistics vs SCM, Cycle & Push/Pull, Strategic Fit, Bullwhip Effect, 5 Modes, EOQ/ROP, 3PL/4PL & Centroid.
@@ -133,11 +133,11 @@ function Dashboard() {
                 <div className="pt-1">
                   <Link
                     to="/topic/$slug"
-                    params={{ slug: "midsem-logistics-7rs-total-cost" }}
+                    params={{ slug: "logistics-7rs-total-cost" }}
                     onClick={() => setActiveCourseSlug("logistics-scm")}
                     className="inline-flex items-center gap-1.5 rounded-full bg-white text-black hover:bg-white/90 px-3.5 py-1.5 text-xs font-bold shadow-md transition-all ios-press"
                   >
-                    <span>Study OM 02</span>
+                    <span>Explore OM 02</span>
                     <ArrowRight className="size-3" />
                   </Link>
                 </div>
