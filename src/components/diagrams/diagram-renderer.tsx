@@ -11,7 +11,14 @@ import { ScqaFrameworkDiagram } from "./scqa-framework";
 import { RvuModelDiagram } from "./rvu-model";
 import { StressMindsetGridDiagram } from "./stress-mindset-grid";
 import { GeometricStageSpaceDiagram } from "./geometric-stage-space";
-
+import { KanoModelDiagram } from "./kano-model";
+import { TaguchiLossDiagram } from "./taguchi-loss";
+import { HouseOfQualityDiagram } from "./house-of-quality";
+import { FmeaMatrixDiagram } from "./fmea-matrix";
+import { SpcControlChartDiagram } from "./spc-control-chart";
+import { DemingPdcaDiagram } from "./deming-pdca";
+import { DmaicRoadmapDiagram } from "./dmaic-roadmap";
+import { CoqPafModelDiagram } from "./coq-paf-model";
 export function DiagramRenderer({
   kind,
   title,
@@ -47,6 +54,23 @@ export function DiagramRenderer({
         return <StressMindsetGridDiagram />;
       case "geometric-stage-space":
         return <GeometricStageSpaceDiagram />;
+      case "kano-model":
+        return <KanoModelDiagram />;
+      case "taguchi-loss":
+        return <TaguchiLossDiagram />;
+      case "house-of-quality":
+      case "tqm-house":
+        return <HouseOfQualityDiagram />;
+      case "fmea-matrix":
+        return <FmeaMatrixDiagram />;
+      case "spc-control-chart":
+        return <SpcControlChartDiagram />;
+      case "deming-pdca":
+        return <DemingPdcaDiagram />;
+      case "dmaic-roadmap":
+        return <DmaicRoadmapDiagram />;
+      case "coq-paf-model":
+        return <CoqPafModelDiagram />;
       default:
         return null;
     }
