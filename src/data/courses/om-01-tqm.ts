@@ -19,7 +19,7 @@ export const tqmCourse: Course = {
   ],
   topics: [
     // ==========================================
-    // UNIT: MID SEM IMPORTANT (7 CORE TOPICS)
+    // UNIT: MID SEM IMPORTANT (9 CORE TOPICS)
     // ==========================================
     {
       id: "midsem-om01-topic-1",
@@ -739,6 +739,369 @@ export const tqmCourse: Course = {
         }
       ]
     },
+    {
+      id: "midsem-om01-topic-8",
+      slug: "midsem-kaizen-pdca-cycle",
+      number: 108,
+      title: "What is Kaizen? The PDCA (Plan–Do–Check–Act) Cycle, 5S & Continuous Improvement",
+      unit: "Mid Sem Important",
+      marks: 14,
+      lecture: "Mid-Sem Master Notes · Continuous Improvement",
+      summary:
+        "Comprehensive 14-mark master note on Kaizen: Masaaki Imai Gemba Kaizen, Kaizen vs. Innovation comparison table, supporting practices (QCC, Suggestion System, 5S, Poka-Yoke), the Walter A. Shewhart / Deming PDCA (PDSA) cycle with diagram, and worked industrial examples.",
+      tags: [
+        "Mid Sem Important",
+        "Kaizen",
+        "PDCA Cycle",
+        "PDSA",
+        "Masaaki Imai",
+        "5S Methodology",
+        "Continuous Improvement",
+        "Poka-Yoke"
+      ],
+      blocks: [
+        {
+          type: "diagram",
+          kind: "deming-pdca",
+          caption: "Figure 5 — The PDCA (PDSA) Continuous Improvement Wheel: Plan → Do → Check (Study) → Act"
+        },
+        {
+          type: "h3",
+          text: "Meaning & Core Philosophy of Kaizen"
+        },
+        {
+          type: "ul",
+          items: [
+            "**Etymological Origin**: Kaizen is a Japanese word: **Kai** = change and **Zen** = good (for the better); together it means **continuous improvement**.",
+            "**Masaaki Imai & Gemba Kaizen**: Masaaki Imai—the pioneer associated with **Gemba Kaizen** (improvement at the real workplace, where value is added)—defines it as ongoing improvement involving **everyone in the organization, managers and workers alike**, achieved primarily through common sense, personal effort, and teamwork rather than heavy capital investment.",
+            "**People-Oriented & Process-Oriented**: Small improvements accumulate day after day, and every improvement, once validated, is **standardized (SDCA)**—the new standard becomes the permanent launching pad for the next continuous improvement cycle.",
+            "**Working Engine**: In Besterfield's TQM framework, Kaizen operates within Continuous Process Improvement alongside the PDSA cycle and the 7-phase problem-solving method. The **PDCA cycle is the working engine of Kaizen**."
+          ]
+        },
+        {
+          type: "h3",
+          text: "Kaizen versus Innovation Comparison"
+        },
+        {
+          type: "table",
+          headers: ["Aspect / Dimension", "Kaizen (Continuous Improvement)", "Innovation (Breakthrough Change)"],
+          rows: [
+            [
+              "**Nature of Change**",
+              "Small, gradual, continuous, and evolutionary step-by-step gains.",
+              "Large, dramatic, radical, and abrupt technology leaps."
+            ],
+            [
+              "**Capital & Resource Cost**",
+              "Low — maximizes existing equipment, tools, and human creativity.",
+              "High — requires heavy capital investment in new technology and machinery."
+            ],
+            [
+              "**Employee Involvement**",
+              "Everyone — cross-functional participation from shop-floor operators to senior executives.",
+              "A few select specialists, R&D researchers, and design engineers."
+            ],
+            [
+              "**Underlying Basis**",
+              "Common sense, personal effort, discipline, and teamwork.",
+              "Advanced technology, scientific breakthroughs, and large capital budgets."
+            ],
+            [
+              "**Effect on the Standard**",
+              "Maintains and elevates standards step-by-step (PDCA $\\rightarrow$ SDCA).",
+              "Occasional exponential jump to an entirely new technological plateau."
+            ],
+            [
+              "**Operational Risk**",
+              "Low risk — easily tested and modified on small pilot scales.",
+              "High risk — large investments with potential implementation failure."
+            ]
+          ]
+        },
+        {
+          type: "h3",
+          text: "Supporting Pillars & Practices of Kaizen"
+        },
+        {
+          type: "ul",
+          items: [
+            "**1. Quality Control Circles (QCC)**: Small groups of frontline employees from the same work center who meet regularly to identify, analyze, and eliminate quality defects in their own work area; **Dr. Kaoru Ishikawa** is regarded as the father of Quality Circles.",
+            "**2. Employee Suggestion System**: Structured mechanism where frontline workers submit improvement ideas, which are rapidly evaluated, implemented, and rewarded—maintaining active employee engagement and pride in craftsmanship.",
+            "**3. 5S Workplace Organization Methodology**: Foundational visual management and housekeeping framework (see table below).",
+            "**4. Poka-Yoke (Mistake-Proofing)**: Inexpensive mechanical or electronic sensory devices, pioneered by **Shigeo Shingo**, that make it impossible for an operator error to occur or be passed to the next process step."
+          ]
+        },
+        {
+          type: "h3",
+          text: "The 5S Workplace Organization Framework"
+        },
+        {
+          type: "table",
+          headers: ["Japanese Term", "English Equivalent", "Core Operational Action & Rule"],
+          rows: [
+            [
+              "**1. Seiri**",
+              "**Sort**",
+              "Separate necessary items from unnecessary items; remove and discard all clutter via Red Tag campaigns."
+            ],
+            [
+              "**2. Seiton**",
+              "**Set in Order**",
+              "Arrange necessary items for quick retrieval and return ('A place for everything, and everything in its place') using shadow boards and floor tape."
+            ],
+            [
+              "**3. Seiso**",
+              "**Shine (Sweep)**",
+              "Clean workplace, tooling, and machinery daily — cleaning acts as primary inspection for leaks, wear, and loose bolts."
+            ],
+            [
+              "**4. Seiketsu**",
+              "**Standardize**",
+              "Maintain the first 3 S's through visual standards, color-coding, checklists, and standardized operating procedures (SOPs)."
+            ],
+            [
+              "**5. Shitsuke**",
+              "**Sustain**",
+              "Institutionalize self-discipline and habitual adherence to standards through regular audits and management walkthroughs."
+            ]
+          ]
+        },
+        {
+          type: "h3",
+          text: "The PDCA (PDSA) Continuous Improvement Cycle"
+        },
+        {
+          type: "p",
+          text: "The PDCA cycle is the structured engine driving continuous improvement. Developed by **Walter A. Shewhart** and popularized globally by **W. Edwards Deming**, it is also called the Shewhart cycle or Deming wheel. Besterfield designates it as the **PDSA** cycle (Plan–Do–Study–Act). The cycle rotates clockwise and never stops: once a solution is standardized, the next improvement cycle launches from that higher standard baseline."
+        },
+        {
+          type: "ol",
+          items: [
+            "**1. PLAN**: Recognize and identify the problem/opportunity; analyze the current process using flowcharts, Pareto charts, and cause-and-effect diagrams; determine root causes (5 Whys), and develop the optimal countermeasure. (Corresponds to Problem-Solving Phases 1–3: Identify opportunity, Analyze current process, Develop optimal solution).",
+            "**2. DO**: Implement the proposed solution or process change on a small, controlled trial or pilot scale, and collect empirical data on results. (Corresponds to Phase 4: Implement changes on pilot scale).",
+            "**3. CHECK / STUDY**: Study and analyze pilot data; compare performance before and after the change: was the target metric achieved, and did any new unintended problems emerge? (Corresponds to Phase 5: Study the results).",
+            "**4. ACT / STANDARDIZE**: If successful, standardize the solution (update SOPs, train all operators) so the gain is locked in permanently, and plan the next improvement target; if unsuccessful, revise the plan and repeat the cycle. (Corresponds to Phases 6–7: Standardize the solution, Plan for the future)."
+          ]
+        },
+        {
+          type: "h3",
+          text: "Worked Industrial Examples of Kaizen & PDCA"
+        },
+        {
+          type: "p",
+          text: "**Case 1: Billing Cell Invoice Error Reduction**"
+        },
+        {
+          type: "ul",
+          items: [
+            "**Plan**: A finance billing team faces a 5% invoice error rate. The team flowcharts the process, uses a Pareto chart to discover that wrong customer account codes represent 78% of errors, and constructs a Fishbone diagram identifying root cause: manual keying of account codes. Countermeasure developed: an automated on-screen validation check linked to the customer master database.",
+            "**Do**: The automated validation check is piloted in one regional branch for one month.",
+            "**Check**: Billing error rates drop from 5.0% to 1.5% — exceeding the 2.0% target with zero system lag.",
+            "**Act**: The validation rule is standardized into the company-wide ERP system, staff across all branches are trained, and the team sets a new stretch target of 0.5% errors for the next PDCA cycle."
+          ]
+        },
+        {
+          type: "p",
+          text: "**Case 2: CNC Machining Changeover Kaizen**"
+        },
+        {
+          type: "ul",
+          items: [
+            "A frontline shop-floor Quality Circle systematically videotapes tooling changeover routines, applies 5S tool staging, and eliminates minor worker adjustments, shaving 30 seconds off machine setup times every week through ongoing suggestion implementations."
+          ]
+        }
+      ]
+    },
+    {
+      id: "midsem-om01-topic-9",
+      slug: "midsem-six-sigma-dmaic-methodology",
+      number: 109,
+      title: "What is Six Sigma? Key Concepts, 1.5σ Shift, Belt Hierarchy & DMAIC Implementation Roadmap",
+      unit: "Mid Sem Important",
+      marks: 14,
+      lecture: "Mid-Sem Master Notes · Six Sigma Methodology",
+      summary:
+        "Comprehensive 14-mark master note on Six Sigma: statistical and strategic definitions (Motorola 1980s, Harry & Stewart), Sigma capability comparison table (2σ to 6σ with DPMO and yield), the 1.5σ long-term shift, DPMO mathematical formula with worked numerical examples, 5-phase DMAIC vs. DMADV roadmap with chevron diagram, Belt Hierarchy table, and industrial implementation essentials.",
+      tags: [
+        "Mid Sem Important",
+        "Six Sigma",
+        "DMAIC",
+        "DPMO",
+        "1.5 Sigma Shift",
+        "Belt Hierarchy",
+        "Motorola",
+        "Process Capability"
+      ],
+      blocks: [
+        {
+          type: "diagram",
+          kind: "dmaic-roadmap",
+          caption: "Figure 7 — The DMAIC Phase-Gate Roadmap for Improving Existing Processes"
+        },
+        {
+          type: "h3",
+          text: "Meaning & Statistical Foundations of Six Sigma"
+        },
+        {
+          type: "ul",
+          items: [
+            "**Dual Nature of Six Sigma**: Six Sigma is both a **rigorous statistical measure of process capability** and a **disciplined, data-driven management strategy** for eliminating defects and variation. It was pioneered at **Motorola in the 1980s** by **Bill Smith, Mikel Harry, and Bob Galvin** (1988).",
+            "**Sigma ($\\sigma$) as Standard Deviation**: Sigma ($\\sigma$) represents the standard deviation—the statistical measure of dispersion or variation in a process. The sigma level indicates how many standard deviations fit between the process mean ($\\mu$) and the nearest customer specification limit ($[LSL, USL]$).",
+            "**Six Sigma Quality Metric**: Achieving Six Sigma quality means the specification limits lie at $\\pm 6\\sigma$ from the process mean, producing only **3.4 Defects Per Million Opportunities (DPMO)** — representing a defect-free yield of **99.99966%**.",
+            "**Strategic Objective**: To make processes so capable and robustly centered that even normal operational variation remains comfortably within customer specification boundaries."
+          ]
+        },
+        {
+          type: "h3",
+          text: "Six Sigma versus Three Sigma Process Capability Table"
+        },
+        {
+          type: "table",
+          headers: ["Sigma Level ($\\sigma$)", "Defects Per Million Opportunities (DPMO)", "Process Yield (%)", "Practical Industrial Interpretation"],
+          rows: [
+            [
+              "**2σ**",
+              "308,537 DPMO",
+              "69.15%",
+              "Unacceptable / Incapable process; 1 in 3 items defective."
+            ],
+            [
+              "**3σ**",
+              "66,807 DPMO",
+              "93.32%",
+              "Traditional manufacturing standard; produces 66,807 defects per million."
+            ],
+            [
+              "**4σ**",
+              "6,210 DPMO",
+              "99.38%",
+              "Industry benchmark standard for competitive operations."
+            ],
+            [
+              "**5σ**",
+              "233 DPMO",
+              "99.977%",
+              "World-class operational capability; near-zero defects."
+            ],
+            [
+              "**6σ**",
+              "3.4 DPMO",
+              "99.99966%",
+              "Six Sigma Quality Excellence; near-perfection."
+            ]
+          ]
+        },
+        {
+          type: "p",
+          text: "**Practical Meaning of the Metric**: Note that even a process operating at 99.0% yield still produces 10,000 defects per million opportunities. This is why Six Sigma measures process performance in DPMO rather than percentages."
+        },
+        {
+          type: "h3",
+          text: "The 1.5σ Long-Term Process Shift"
+        },
+        {
+          type: "p",
+          text: "No manufacturing or service process remains perfectly centered over the long run. Normal machine wear, slight raw material batch variations, ambient temperature fluctuations, and operator fatigue cause the process mean to slowly drift over time. Based on extensive empirical research, Six Sigma assumes a standard long-term drift of **$1.5\\sigma$**. A process capable of $6\\sigma$ under short-term controlled conditions will behave like a $4.5\\sigma$ process in the long term, which produces precisely **3.4 Defects Per Million Opportunities (DPMO)**. The DPMO figures in standard Six Sigma conversion tables incorporate this $1.5\\sigma$ shift."
+        },
+        {
+          type: "h3",
+          text: "Defects Per Million Opportunities (DPMO) Mathematical Formula"
+        },
+        {
+          type: "quote",
+          text: "\\text{DPMO} = \\left( \\frac{\\text{Total Defects Found (D)}}{\\text{Total Units Inspected (U)} \\times \\text{Defect Opportunities per Unit (O)}} \\right) \\times 1,000,000"
+        },
+        {
+          type: "ul",
+          items: [
+            "**Worked Numerical Calculation**: Suppose a quality inspector audits **500 electronic circuit boards**, each board has **3 critical defect opportunities** (e.g., solder bridge, missing component, reversed polarity), and **9 total defects** are detected:",
+            "$$\\text{DPMO} = \\left( \\frac{9}{500 \\times 3} \\right) \\times 1,000,000 = \\left( \\frac{9}{1500} \\right) \\times 1,000,000 = 0.006 \\times 1,000,000 = \\mathbf{6,000\\text{ DPMO}}$$",
+            "**Sigma Assessment**: 6,000 DPMO corresponds to approximately the **$4.0\\sigma$ quality level** (6,210 DPMO)."
+          ]
+        },
+        {
+          type: "h3",
+          text: "DMAIC — The Six Sigma Improvement Roadmap"
+        },
+        {
+          type: "ol",
+          items: [
+            "**1. DEFINE**: Define the business problem, project scope, business case, measurable goals, and customer Critical to Quality (CTQ) requirements; formulate and approve the Project Charter with executive sponsors.",
+            "**2. MEASURE**: Map the current process (SIPOC/VSM), validate the measurement system using Gage Repeatability & Reproducibility (Gage R&R $<10\\%$), collect baseline data, and calculate the current baseline sigma level and DPMO.",
+            "**3. ANALYZE**: Statistically analyze process data and maps using Pareto charts, Fishbone diagrams (5M+1E), 5 Whys, Multi-Vari analysis, and Design of Experiments (DOE) to identify and mathematically verify root causes ($Y = f(X)$).",
+            "**4. IMPROVE**: Generate creative solution alternatives, optimize process parameters using Design of Experiments (DOE), implement Poka-Yoke mistake-proofing, pilot test solutions, and verify defect reduction empirically.",
+            "**5. CONTROL**: Standardize the improved process (update SOPs), implement Statistical Process Control (SPC) monitoring charts ($\\bar{X}-R, p$), establish a Process Control Plan, and formally hand over the process to the operational owner."
+          ]
+        },
+        {
+          type: "p",
+          text: "**DMADV Methodology**: When a brand-new product or process must be designed from scratch rather than improved, Six Sigma utilizes **DMADV** (Define, Measure, Analyze, Design, Verify), also known as **Design for Six Sigma (DFSS)**."
+        },
+        {
+          type: "h3",
+          text: "Six Sigma Belt Training & Organizational Hierarchy"
+        },
+        {
+          type: "table",
+          headers: ["Belt / Role", "Organizational Level", "Nature of Involvement & Responsibilities"],
+          rows: [
+            [
+              "**Champion / Sponsor**",
+              "Executive / Senior Management",
+              "Initiates and sponsors Six Sigma programs, selects projects aligned with corporate strategy, allocates budgets, and removes organizational roadblocks."
+            ],
+            [
+              "**Master Black Belt (MBB)**",
+              "Full-Time Technical Expert",
+              "Highest technical authority; trains Black Belts and Green Belts, provides statistical coaching, and oversees strategic project portfolios."
+            ],
+            [
+              "**Black Belt (BB)**",
+              "Full-Time Project Leader",
+              "Full-time change agent leading cross-functional DMAIC projects; executes advanced statistical analyses and mentors Green Belts."
+            ],
+            [
+              "**Green Belt (GB)**",
+              "Part-Time Project Lead / Member",
+              "Trained practitioner who leads smaller local DMAIC projects or participates in major projects part-time alongside regular operational duties."
+            ],
+            [
+              "**Yellow Belt (YB)**",
+              "Frontline Team Member",
+              "Understands basic Six Sigma concepts and tools, participating as effective project team members supporting local data collection."
+            ]
+          ]
+        },
+        {
+          type: "h3",
+          text: "Implementation Essentials & Critical Caveats"
+        },
+        {
+          type: "ul",
+          items: [
+            "**Top-Management Commitment**: Sustained leadership sponsorship linking projects directly to strategic business metrics and P&L financial returns.",
+            "**Rigorous Project Selection**: Selecting projects with measurable customer and financial impact rather than trivial 'hobby' projects.",
+            "**Trained Infrastructure**: Maintaining a full-time and part-time belt hierarchy so problem solving becomes standard operational capability.",
+            "**Besterfield Critical Caveat**: Six Sigma can become excessively bureaucratic and costly if over-applied. Pushing every minor process to a 6σ level is not always economically justified—the rigor must match the strategic and safety criticality of the process."
+          ]
+        },
+        {
+          type: "h3",
+          text: "Worked Industrial Benchmark Case: Piston Ring Manufacturing"
+        },
+        {
+          type: "ul",
+          items: [
+            "**Problem**: Rejection of automotive engine piston rings on the Outside Diameter (OD) dimension is **12,000 DPMO** (~3.1σ). A Black Belt leads a DMAIC project:",
+            "• **Define**: Goal established to reduce OD rejections by 80%; Project Charter signed with Plant Sponsor.",
+            "• **Measure**: Dimension data collected across shifts; Gage R&R confirmed at 6.2%; baseline established at 3.1σ.",
+            "• **Analyze**: Cause-and-effect analysis and ANOVA trace dimensional variation to spindle-bearing mechanical runout and thermal shop swings.",
+            "• **Improve**: Automated temperature-compensated tool offsets and precision ceramic spindle bearings are piloted; defects drop to **300 DPMO** (5.0σ).",
+            "• **Control**: Shewhart $\\bar{X}-R$ control charts and daily preventive maintenance schedules are institutionalized; annual savings of $240,000 confirmed by finance."
+          ]
+        }
+      ]
+    },
 
     // ==========================================
     // REMAINING SYLLABUS TOPICS
@@ -1341,6 +1704,123 @@ export const tqmCourse: Course = {
         {
           type: "p",
           text: "Teams use round-robin participation (one idea per turn), prioritize quantity over quality, forbid criticism during ideation, allow ideas to incubate overnight, and vote to circle the 4–5 most critical root causes for empirical verification and Poka-Yoke countermeasure design."
+        }
+      ]
+    },
+    {
+      id: "om01-eq-8",
+      number: 8,
+      title: "What is Kaizen? The PDCA (Plan–Do–Check–Act) Cycle, 5S & Continuous Improvement",
+      marks: 14,
+      relatedSlugs: ["midsem-kaizen-pdca-cycle"],
+      question:
+        "What is Kaizen? Differentiate Kaizen from Innovation. Explain the supporting practices of Kaizen (QCC, Suggestion System, 5S Workplace Organization, Poka-Yoke). Detail the four stages of the Walter A. Shewhart / Deming PDCA (PDSA) cycle with diagrams and worked industrial examples.",
+      blocks: [
+        {
+          type: "diagram",
+          kind: "deming-pdca",
+          caption: "Figure 5 — The PDCA (PDSA) Continuous Improvement Wheel: Plan → Do → Check (Study) → Act"
+        },
+        {
+          type: "h3",
+          text: "1. Meaning of Kaizen & Kaizen vs. Innovation"
+        },
+        {
+          type: "p",
+          text: "Kaizen (**Kai** = change, **Zen** = good) means continuous improvement involving everyone across the organization through common sense and teamwork. Unlike Innovation (large, high-cost, high-risk technological leaps led by few specialists), Kaizen focuses on low-cost, gradual, people-oriented cumulative improvements that steadily maintain and elevate standardized operating baselines (SDCA $\\rightarrow$ PDCA)."
+        },
+        {
+          type: "h3",
+          text: "2. The 5S Workplace Organization Framework"
+        },
+        {
+          type: "table",
+          headers: ["Japanese Term", "English Equivalent", "Core Action & Rule"],
+          rows: [
+            ["**1. Seiri**", "**Sort**", "Separate necessary items from unneeded ones; Red Tag clutter removal."],
+            ["**2. Seiton**", "**Set in Order**", "A place for everything, everything in its place; shadow boards, labeled bins."],
+            ["**3. Seiso**", "**Shine**", "Daily cleaning and inspection; cleaning is inspection."],
+            ["**4. Seiketsu**", "**Standardize**", "Visual management standards, color-coding, checklists, SOPs."],
+            ["**5. Shitsuke**", "**Sustain**", "Self-discipline and habit of adhering to standards through regular audits."]
+          ]
+        },
+        {
+          type: "h3",
+          text: "3. The PDCA (PDSA) Cycle Four Stages"
+        },
+        {
+          type: "ol",
+          items: [
+            "**Plan**: Identify problem, analyze current process via flowcharts/Pareto/Fishbone, find root causes, and design countermeasure.",
+            "**Do**: Implement the solution on a small pilot/trial scale and collect empirical data.",
+            "**Check / Study**: Study pilot results vs. targets; verify if performance improved and check for unintended side effects.",
+            "**Act**: Standardize the successful solution (update SOPs, train staff) and plan the next cycle; if unsuccessful, revise plan."
+          ]
+        }
+      ]
+    },
+    {
+      id: "om01-eq-9",
+      number: 9,
+      title: "What is Six Sigma? Key Concepts, 1.5σ Shift, Belt Hierarchy & DMAIC Implementation Roadmap",
+      marks: 14,
+      relatedSlugs: ["midsem-six-sigma-dmaic-methodology"],
+      question:
+        "What is Six Sigma? Differentiate Six Sigma from Three Sigma quality. Explain the 1.5σ long-term shift, state the mathematical formula for DPMO with a worked calculation, detail the five phases of the DMAIC roadmap with diagrams, and explain the Six Sigma Belt training hierarchy.",
+      blocks: [
+        {
+          type: "diagram",
+          kind: "dmaic-roadmap",
+          caption: "Figure 7 — The DMAIC Phase-Gate Roadmap for Improving Existing Processes"
+        },
+        {
+          type: "h3",
+          text: "1. Six Sigma Definition & The 1.5σ Shift"
+        },
+        {
+          type: "p",
+          text: "Six Sigma is a statistical capability measure and data-driven management strategy (Motorola 1988) establishing tolerance limits at $\\pm 6\\sigma$ from the mean. Accounting for a standard long-term process mean drift of **$1.5\\sigma$**, a $6\\sigma$ process produces only **3.4 Defects Per Million Opportunities (DPMO)** (99.99966% yield), compared to 66,807 DPMO (93.32% yield) for a traditional 3σ process."
+        },
+        {
+          type: "h3",
+          text: "2. DPMO Mathematical Formula & Worked Example"
+        },
+        {
+          type: "quote",
+          text: "\\text{DPMO} = \\left( \\frac{\\text{Total Defects}}{\\text{Units Inspected} \\times \\text{Opportunities per Unit}} \\right) \\times 1,000,000"
+        },
+        {
+          type: "p",
+          text: "*Worked Example*: Auditing 500 circuit boards with 3 defect opportunities each where 9 defects are detected: $\\text{DPMO} = \\frac{9}{500 \\times 3} \\times 1,000,000 = \\mathbf{6,000\\text{ DPMO}}$ (~$4.0\\sigma$ level)."
+        },
+        {
+          type: "h3",
+          text: "3. The DMAIC 5-Phase Roadmap"
+        },
+        {
+          type: "ol",
+          items: [
+            "**Define**: Problem statement, project scope, CTQ customer requirements, Project Charter.",
+            "**Measure**: Process mapping (SIPOC), Gage R&R ($<10\\%$), baseline sigma level and DPMO calculation.",
+            "**Analyze**: Root cause identification via Pareto, Fishbone (5M+1E), 5 Whys, ANOVA, and regression ($Y=f(X)$).",
+            "**Improve**: Design of Experiments (DOE) optimization, Poka-Yoke mistake proofing, pilot implementation.",
+            "**Control**: Standard operating procedures, Shewhart SPC control charts, Control Plan, process handover."
+          ]
+        },
+        {
+          type: "h3",
+          text: "4. Six Sigma Belt Training Hierarchy"
+        },
+        {
+          type: "table",
+          headers: ["Belt / Role", "Organizational Level", "Responsibilities"],
+          rows: [
+            ["**Champion / Sponsor**", "Executive / Senior Management", "Sponsors program, aligns projects to business strategy, removes roadblocks."],
+            ["**Master Black Belt (MBB)**", "Full-Time Technical Expert", "Highest technical coach; trains Black Belts/Green Belts and oversees portfolio."],
+            ["**Black Belt (BB)**", "Full-Time Project Leader", "Leads cross-functional DMAIC projects, executes advanced statistical models."],
+            ["**Green Belt (GB)**", "Part-Time Project Lead/Member", "Leads local departmental DMAIC projects alongside daily job duties."],
+            ["**Yellow Belt (YB)**", "Frontline Team Member", "Basic Six Sigma tool awareness; participates in project data collection."]
+          ]
         }
       ]
     }

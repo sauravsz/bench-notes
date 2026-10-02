@@ -97,14 +97,13 @@ function Dashboard() {
                   </span>
                 </div>
                 <h3 className="font-display text-base sm:text-lg font-bold tracking-[-0.03em] text-white leading-snug">
-                  7 Master Notes Ready.
+                  9 Master Notes Ready.
                 </h3>
                 <p className="font-sans text-[11px] text-white/85 leading-relaxed line-clamp-3">
-                  Benchmarking (12 Stages & 7 Types), Quality Dimensions, Strategic Purchasing, Supplier Lifecycle, Pareto & Ishikawa 6Ms.
+                  Benchmarking (12 Stages & 7 Types), Quality Dimensions, Strategic Purchasing, Supplier Lifecycle, Pareto, 6Ms, Kaizen & Six Sigma.
                 </p>
                 <div className="pt-1">
                   <Link
-                    to="/topic/$slug"
                     params={{ slug: "midsem-benchmarking-12-stages" }}
                     onClick={() => setActiveCourseSlug("tqm")}
                     className="inline-flex items-center gap-1.5 rounded-full bg-white text-black hover:bg-white/90 px-3.5 py-1.5 text-xs font-bold shadow-md transition-all ios-press"
