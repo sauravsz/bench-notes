@@ -94,10 +94,32 @@ export function CommandPalette({
   const defaultActions = useMemo(() => {
     return [
       {
-        id: "nav-midsem",
+        id: "nav-midsem-om01",
         category: "High-Yield Shortcuts",
-        title: "⭐ Mid Sem Important Notes (Paper 603)",
-        subtitle: "9 master modules for 14-mark university exam questions",
+        title: "⭐ Mid Sem Important Notes (OM 01 · TQM)",
+        subtitle: "7 master examination notes for Benchmarking, Quality, Purchasing, Pareto & 6Ms",
+        icon: Sparkles,
+        action: () => {
+          setActiveCourseSlug("tqm");
+          router.navigate({ to: "/topic/$slug", params: { slug: "midsem-benchmarking-12-stages" } });
+        },
+      },
+      {
+        id: "nav-midsem-om02",
+        category: "High-Yield Shortcuts",
+        title: "⭐ Mid Sem Important Notes (OM 02 · Logistics & SCM)",
+        subtitle: "9 master modules for 7 R's, SCM Evolution, Strategic Fit, Bullwhip, EOQ & 3PL/4PL",
+        icon: Sparkles,
+        action: () => {
+          setActiveCourseSlug("logistics-scm");
+          router.navigate({ to: "/topic/$slug", params: { slug: "midsem-logistics-7rs-total-cost" } });
+        },
+      },
+      {
+        id: "nav-midsem-603",
+        category: "High-Yield Shortcuts",
+        title: "⭐ Mid Sem Important Notes (Paper 603 · Business Laws)",
+        subtitle: "9 master modules for legal maxims, contract remedies, and Companies Act 2013",
         icon: Sparkles,
         action: () => {
           setActiveCourseSlug("business-laws");

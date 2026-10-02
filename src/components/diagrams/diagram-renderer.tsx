@@ -19,6 +19,10 @@ import { SpcControlChartDiagram } from "./spc-control-chart";
 import { DemingPdcaDiagram } from "./deming-pdca";
 import { DmaicRoadmapDiagram } from "./dmaic-roadmap";
 import { CoqPafModelDiagram } from "./coq-paf-model";
+import { BullwhipEffectDiagram } from "./bullwhip-effect";
+import { EoqModelDiagram } from "./eoq-model";
+import { StrategicFitGridDiagram } from "./strategic-fit-grid";
+import { SupplyChainFlowDiagram } from "./supply-chain-flow";
 export function DiagramRenderer({
   kind,
   title,
@@ -71,6 +75,14 @@ export function DiagramRenderer({
         return <DmaicRoadmapDiagram />;
       case "coq-paf-model":
         return <CoqPafModelDiagram />;
+      case "bullwhip-effect":
+        return <BullwhipEffectDiagram />;
+      case "eoq-model":
+        return <EoqModelDiagram />;
+      case "strategic-fit-grid":
+        return <StrategicFitGridDiagram />;
+      case "supply-chain-flow":
+        return <SupplyChainFlowDiagram />;
       default:
         return null;
     }

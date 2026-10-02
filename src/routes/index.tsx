@@ -86,87 +86,115 @@ function Dashboard() {
             </p>
           </div>
 
-          {/* ⭐ Master Spotlight Cards (602, 603, and OM 01) */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {/* ⭐ Master Spotlight Cards (OM 01, OM 02, 603, and 602) */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {/* Card 1: OM 01 Mid-Sem Focus */}
-            <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#0284C7] via-[#0369A1] to-[#0F172A] p-6 text-white shadow-xl transition-all duration-300">
-              <div className="space-y-3">
+            <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#0284C7] via-[#0369A1] to-[#0F172A] p-5 text-white shadow-xl transition-all duration-300">
+              <div className="space-y-2.5">
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-md px-2.5 py-0.5 font-mono text-[11px] font-bold text-white border border-white/20">
-                    Paper OM 01 · Mid Sem Focus
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-md px-2.5 py-0.5 font-mono text-[10px] font-bold text-white border border-white/20">
+                    Paper OM 01 · Mid Sem
                   </span>
                 </div>
-                <h3 className="font-display text-lg sm:text-xl font-bold tracking-[-0.03em] text-white leading-snug">
-                  7 Master Examination Notes Ready.
+                <h3 className="font-display text-base sm:text-lg font-bold tracking-[-0.03em] text-white leading-snug">
+                  7 Master Notes Ready.
                 </h3>
-                <p className="font-sans text-xs text-white/85 leading-relaxed">
-                  14-mark answers covering Benchmarking (12 Stages & 7 Types), Quality Dimensions, Strategic Purchasing, Supplier Lifecycle, Pareto Chart & Ishikawa 6Ms.
+                <p className="font-sans text-[11px] text-white/85 leading-relaxed line-clamp-3">
+                  Benchmarking (12 Stages & 7 Types), Quality Dimensions, Strategic Purchasing, Supplier Lifecycle, Pareto & Ishikawa 6Ms.
                 </p>
                 <div className="pt-1">
                   <Link
                     to="/topic/$slug"
                     params={{ slug: "midsem-benchmarking-12-stages" }}
                     onClick={() => setActiveCourseSlug("tqm")}
-                    className="inline-flex items-center gap-2 rounded-full bg-white text-black hover:bg-white/90 px-4 py-2 text-xs font-bold shadow-md transition-all ios-press"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white text-black hover:bg-white/90 px-3.5 py-1.5 text-xs font-bold shadow-md transition-all ios-press"
                   >
-                    <span>Study OM 01 Mid-Sem</span>
-                    <ArrowRight className="size-3.5" />
+                    <span>Study OM 01</span>
+                    <ArrowRight className="size-3" />
                   </Link>
                 </div>
               </div>
             </div>
 
-            {/* Card 2: Paper 603 Mid-Sem Spotlight */}
-            <div className="relative overflow-hidden rounded-[24px] spotlight-violet p-6 text-white shadow-xl transition-all duration-300">
-              <div className="space-y-3">
+            {/* Card 2: OM 02 Mid-Sem Focus */}
+            <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#4F46E5] via-[#4338CA] to-[#1E1B4B] p-5 text-white shadow-xl transition-all duration-300">
+              <div className="space-y-2.5">
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-md px-2.5 py-0.5 font-mono text-[11px] font-bold text-white border border-white/20">
-                    Paper 603 · Mid Sem Focus
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-md px-2.5 py-0.5 font-mono text-[10px] font-bold text-white border border-white/20">
+                    Paper OM 02 · Mid Sem
                   </span>
                 </div>
-                <h3 className="font-display text-lg sm:text-xl font-bold tracking-[-0.03em] text-white leading-snug">
-                  9 Master Examination Modules Ready.
+                <h3 className="font-display text-base sm:text-lg font-bold tracking-[-0.03em] text-white leading-snug">
+                  9 Master Modules Ready.
                 </h3>
-                <p className="font-sans text-xs text-white/85 leading-relaxed">
-                  Core examination notes covering 6 foundational Latin maxims, Companies Act 2013 revamp analysis, and Indian Contract Act breach remedies.
+                <p className="font-sans text-[11px] text-white/85 leading-relaxed line-clamp-3">
+                  7 R's & Total Cost, Logistics vs SCM, Cycle & Push/Pull, Strategic Fit, Bullwhip Effect, 5 Modes, EOQ/ROP, 3PL/4PL & Centroid.
+                </p>
+                <div className="pt-1">
+                  <Link
+                    to="/topic/$slug"
+                    params={{ slug: "midsem-logistics-7rs-total-cost" }}
+                    onClick={() => setActiveCourseSlug("logistics-scm")}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white text-black hover:bg-white/90 px-3.5 py-1.5 text-xs font-bold shadow-md transition-all ios-press"
+                  >
+                    <span>Study OM 02</span>
+                    <ArrowRight className="size-3" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3: Paper 603 Mid-Sem Spotlight */}
+            <div className="relative overflow-hidden rounded-[24px] spotlight-violet p-5 text-white shadow-xl transition-all duration-300">
+              <div className="space-y-2.5">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-md px-2.5 py-0.5 font-mono text-[10px] font-bold text-white border border-white/20">
+                    Paper 603 · Mid Sem
+                  </span>
+                </div>
+                <h3 className="font-display text-base sm:text-lg font-bold tracking-[-0.03em] text-white leading-snug">
+                  9 Master Modules Ready.
+                </h3>
+                <p className="font-sans text-[11px] text-white/85 leading-relaxed line-clamp-3">
+                  6 foundational Latin maxims, Indian Contract Act Section 10 & remedies, and Companies Act 2013 architecture.
                 </p>
                 <div className="pt-1">
                   <Link
                     to="/topic/$slug"
                     params={{ slug: "midsem-foundational-legal-maxims" }}
                     onClick={() => setActiveCourseSlug("business-laws")}
-                    className="inline-flex items-center gap-2 rounded-full bg-white text-black hover:bg-white/90 px-4 py-2 text-xs font-bold shadow-md transition-all ios-press"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white text-black hover:bg-white/90 px-3.5 py-1.5 text-xs font-bold shadow-md transition-all ios-press"
                   >
-                    <span>Study 603 Mid-Sem</span>
-                    <ArrowRight className="size-3.5" />
+                    <span>Study 603</span>
+                    <ArrowRight className="size-3" />
                   </Link>
                 </div>
               </div>
             </div>
 
-            {/* Card 3: Paper 602 Spotlight */}
-            <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#0099ff]/90 via-[#007acc] to-[#6a4cf5] p-6 text-white shadow-xl transition-all duration-300 sm:col-span-2 lg:col-span-1">
-              <div className="space-y-3">
+            {/* Card 4: Paper 602 Spotlight */}
+            <div className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#0099ff]/90 via-[#007acc] to-[#6a4cf5] p-5 text-white shadow-xl transition-all duration-300">
+              <div className="space-y-2.5">
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-md px-2.5 py-0.5 font-mono text-[11px] font-bold text-white border border-white/20">
-                    Paper 602 · Master Notes
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/20 backdrop-blur-md px-2.5 py-0.5 font-mono text-[10px] font-bold text-white border border-white/20">
+                    Paper 602 · Master
                   </span>
                 </div>
-                <h3 className="font-display text-lg sm:text-xl font-bold tracking-[-0.03em] text-white leading-snug">
-                  19 High-Yield 14-Mark Modules Ready.
+                <h3 className="font-display text-base sm:text-lg font-bold tracking-[-0.03em] text-white leading-snug">
+                  19 High-Yield Modules.
                 </h3>
-                <p className="font-sans text-xs text-white/85 leading-relaxed">
-                  Complete analytical answers for Business Communications covering Hook-Line-Sinker, Minto Pyramid, SCQA, and RVU models.
+                <p className="font-sans text-[11px] text-white/85 leading-relaxed line-clamp-3">
+                  Executive communications covering Hook-Line-Sinker, Minto Pyramid, SCQA, and RVU pitch frameworks.
                 </p>
                 <div className="pt-1">
                   <Link
                     to="/topic/$slug"
                     params={{ slug: "nature-scope-business-communication" }}
                     onClick={() => setActiveCourseSlug("business-communications")}
-                    className="inline-flex items-center gap-2 rounded-full bg-white text-black hover:bg-white/90 px-4 py-2 text-xs font-bold shadow-md transition-all ios-press"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white text-black hover:bg-white/90 px-3.5 py-1.5 text-xs font-bold shadow-md transition-all ios-press"
                   >
-                    <span>Explore 602 Notes</span>
-                    <ArrowRight className="size-3.5" />
+                    <span>Explore 602</span>
+                    <ArrowRight className="size-3" />
                   </Link>
                 </div>
               </div>
