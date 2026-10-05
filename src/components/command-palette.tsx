@@ -94,6 +94,28 @@ export function CommandPalette({
   const defaultActions = useMemo(() => {
     return [
       {
+        id: "nav-midsem-mm01",
+        category: "High-Yield Shortcuts",
+        title: "⭐ Master Exam Notes (MM 01 · Consumer Behaviour)",
+        subtitle: "12 master examination notes for Buying Roles, Traditional/Contemporary Models, Perception, Motivation & Gender",
+        icon: Sparkles,
+        action: () => {
+          setActiveCourseSlug("consumer-behaviour");
+          router.navigate({ to: "/topic/$slug", params: { slug: "customers-vs-consumers-and-buying-roles" } });
+        },
+      },
+      {
+        id: "nav-midsem-mm02",
+        category: "High-Yield Shortcuts",
+        title: "⭐ Mid Sem Important Notes (MM 02 · Sales Management)",
+        subtitle: "7 master notes for Selling Process, Stimulus-Response, Relationship Marketing, Org Structures, Recruitment & Training",
+        icon: Sparkles,
+        action: () => {
+          setActiveCourseSlug("sales-management");
+          router.navigate({ to: "/topic/$slug", params: { slug: "nature-role-importance-selling-in-business" } });
+        },
+      },
+      {
         id: "nav-midsem-om01",
         category: "High-Yield Shortcuts",
         title: "⭐ Mid Sem Important Notes (OM 01 · TQM)",
