@@ -121,6 +121,7 @@ export function CommandPalette({
         category: "High-Yield Shortcuts",
         title: "⭐ Mid Sem Important Notes (OM 01 · TQM)",
         subtitle: "9 master examination notes for Benchmarking, Quality, Purchasing, Pareto, 6Ms, Kaizen & Six Sigma",
+        icon: Sparkles,
         action: () => {
           setActiveCourseSlug("tqm");
           router.navigate({ to: "/topic/$slug", params: { slug: "midsem-benchmarking-12-stages" } });
@@ -314,8 +315,7 @@ export function CommandPalette({
           ) : (
             items.map((item, idx) => {
               const isSelected = selectedIndex === idx;
-              const Icon = item.icon;
-
+              const Icon = item.icon || Sparkles;
               return (
                 <button
                   key={item.id}
