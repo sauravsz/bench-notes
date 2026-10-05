@@ -69,15 +69,6 @@ function Dashboard() {
         {/* Poster-grade Hero Statement */}
         <section className="space-y-6">
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1c1c1c] border border-[#262626] px-3 py-1 text-xs font-medium text-[#999999]">
-                <GraduationCap className="size-3.5 text-[#0099ff]" />
-                MBA Academic Revision Artboard
-              </span>
-              <span className="rounded-full bg-[#141414] border border-[#262626] px-2.5 py-0.5 text-xs font-mono text-[#666666]">
-                8 Papers
-              </span>
-            </div>
             <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.04em] text-white leading-[0.95]">
               Bench Notes.
             </h1>
