@@ -34,6 +34,13 @@ export function useReaderShortcuts() {
       ) {
         return;
       }
+      // 0. Cmd + K / Ctrl + K -> Toggle Global Command Palette
+      if ((e.metaKey || e.ctrlKey) && (e.key.toLowerCase() === "k" || e.code === "KeyK" || e.keyCode === 75)) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.dispatchEvent(new CustomEvent("open-command-palette"));
+        return;
+      }
 
       // 1. Cmd + B / Ctrl + B -> Toggle Left Sidebar
       if ((e.metaKey || e.ctrlKey) && (e.key.toLowerCase() === "b" || e.code === "KeyB")) {

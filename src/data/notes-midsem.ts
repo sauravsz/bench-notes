@@ -506,7 +506,7 @@ export const midSemImportantTopics: Topic[] = [
         items: [
           "_Independent Directors (Sec 149(4))_: Mandatory for listed companies (at least one-third of the board).",
           "_Women Directors (Sec 149(1))_: Mandatory appointment of at least one woman director for prescribed classes of companies.",
-          "_Resident Director (Sec 149(3))_: At least one director must stay in India for $\ge 182$ days in a financial year.",
+          "_Resident Director (Sec 149(3))_: At least one director must stay in India for $\\ge 182$ days in a financial year.",
           "_Codified Director Duties (Sec 166)_: Fiduciary duty to act in good faith, exercise due care, and promote the objects of the company for stakeholders.",
         ],
       },
@@ -517,7 +517,7 @@ export const midSemImportantTopics: Topic[] = [
       {
         type: "ul",
         items: [
-          "_Applicability Threshold_: Companies with Net Worth $\ge ₹500\text{ Cr}$, Turnover $\ge ₹1,000\text{ Cr}$, or Net Profit $\ge ₹5\text{ Cr}$.",
+          "_Applicability Threshold_: Companies with Net Worth $\\ge ₹500\\text{ Cr}$, Turnover $\\ge ₹1,000\\text{ Cr}$, or Net Profit $\\ge ₹5\\text{ Cr}$.",
           "_Mandate_: Must spend at least **2% of average net profits** of the preceding 3 financial years on Schedule VII social activities (education, healthcare, poverty eradication, sustainability).",
         ],
       },
