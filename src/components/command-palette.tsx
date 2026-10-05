@@ -152,7 +152,7 @@ export function CommandPalette({
       {
         id: "nav-syllabus",
         category: "Navigation",
-        title: `Syllabus Overview (${activeCourse.code} · ${activeCourse.title})`,
+        title: `Syllabus Overview (${activeCourse?.code ?? ""} · ${activeCourse?.title ?? ""})`,
         subtitle: "View complete unit breakdown and topics",
         icon: BookOpen,
         action: () => router.navigate({ to: "/" }),
@@ -160,8 +160,8 @@ export function CommandPalette({
       {
         id: "nav-exam",
         category: "Navigation",
-        title: `Model Exam Answers (${activeCourse.code})`,
-        subtitle: `${activeCourse.examQuestions.length} complete model questions & analytical solutions`,
+        title: `Model Exam Answers (${activeCourse?.code ?? ""})`,
+        subtitle: `${activeCourse?.examQuestions?.length ?? 0} complete model questions & analytical solutions`,
         icon: Scale,
         action: () => router.navigate({ to: "/exam" }),
       },

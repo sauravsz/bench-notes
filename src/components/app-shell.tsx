@@ -328,10 +328,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       }
     };
     window.addEventListener("open-command-palette", handleCustomOpen);
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown, { capture: true });
     return () => {
       window.removeEventListener("open-command-palette", handleCustomOpen);
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown, { capture: true });
     };
   }, []);
   const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
