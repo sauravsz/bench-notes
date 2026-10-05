@@ -54,25 +54,26 @@ export function CommandPalette({
     return () => clearTimeout(handler);
   }, [query]);
 
-  // Global Cmd+K / Ctrl+K listener
+  // Global Escape & Cmd+K close listener inside palette
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      if ((e.metaKey || e.ctrlKey) && (e.key.toLowerCase() === "k" || e.code === "KeyK")) {
         e.preventDefault();
+        e.stopPropagation();
         if (isOpen) {
           onClose();
         } else {
-          // Trigger open via document event or parent prop
-          const event = new CustomEvent("open-command-palette");
-          window.dispatchEvent(event);
+          window.dispatchEvent(new CustomEvent("open-command-palette"));
         }
       }
       if (e.key === "Escape" && isOpen) {
+        e.preventDefault();
+        e.stopPropagation();
         onClose();
       }
     }
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown, { capture: true });
+    return () => window.removeEventListener("keydown", handleKeyDown, { capture: true });
   }, [isOpen, onClose]);
 
   // Focus input on open

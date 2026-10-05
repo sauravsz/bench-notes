@@ -321,8 +321,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const handleCustomOpen = () => setCommandPaletteOpen(true);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key.toLowerCase() === "k" || e.code === "KeyK")) {
+        e.preventDefault();
+        setCommandPaletteOpen((prev) => !prev);
+      }
+    };
     window.addEventListener("open-command-palette", handleCustomOpen);
-    return () => window.removeEventListener("open-command-palette", handleCustomOpen);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("open-command-palette", handleCustomOpen);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
   const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
   const currentUser = useAccessControl((s) => s.currentUser);
