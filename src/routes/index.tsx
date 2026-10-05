@@ -161,12 +161,6 @@ function Dashboard() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {filteredCourses.map((c) => {
               const isSelected = c.slug === activeCourseSlug;
-              const is602 = c.slug === "business-communications";
-              const is603 = c.slug === "business-laws";
-              const isMM01 = c.slug === "consumer-behaviour";
-              const isMM02 = c.slug === "sales-management";
-              const isOM01 = c.slug === "tqm";
-              const isOM02 = c.slug === "logistics-scm";
               return (
                 <div
                   key={c.id}
@@ -200,36 +194,6 @@ function Dashboard() {
                     <p className="line-clamp-2 text-xs text-[#999999] leading-relaxed">
                       {c.description}
                     </p>
-                    {is602 && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-sky-500/15 border border-sky-500/40 text-sky-400 px-2 py-0.5 text-[10px] font-bold">
-                        ⭐ 19 Master Modules Ready
-                      </span>
-                    )}
-                    {is603 && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-400 px-2 py-0.5 text-[10px] font-bold">
-                        ⭐ 9 Mid Sem Modules Ready
-                      </span>
-                    )}
-                    {isMM01 && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-pink-500/15 border border-pink-500/40 text-pink-400 px-2 py-0.5 text-[10px] font-bold">
-                        ⭐ 10 Master Modules Ready
-                      </span>
-                    )}
-                    {isMM02 && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-orange-500/15 border border-orange-500/40 text-orange-400 px-2 py-0.5 text-[10px] font-bold">
-                        ⭐ 7 Mid Sem Modules Ready
-                      </span>
-                    )}
-                    {isOM01 && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-sky-500/15 border border-sky-500/40 text-sky-400 px-2 py-0.5 text-[10px] font-bold">
-                        ⭐ 9 Mid Sem Modules Ready
-                      </span>
-                    )}
-                    {isOM02 && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-indigo-500/15 border border-indigo-500/40 text-indigo-400 px-2 py-0.5 text-[10px] font-bold">
-                        ⭐ 8 Mid Sem Modules Ready
-                      </span>
-                    )}
                   </div>
 
                   <div className="mt-4 pt-3 border-t border-[#262626] flex items-center justify-between text-xs">
