@@ -54,27 +54,7 @@ export function CommandPalette({
     return () => clearTimeout(handler);
   }, [query]);
 
-  // Global Escape & Cmd+K close listener inside palette
-  useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
-      if ((e.metaKey || e.ctrlKey) && (e.key.toLowerCase() === "k" || e.code === "KeyK")) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (isOpen) {
-          onClose();
-        } else {
-          window.dispatchEvent(new CustomEvent("open-command-palette"));
-        }
-      }
-      if (e.key === "Escape" && isOpen) {
-        e.preventDefault();
-        e.stopPropagation();
-        onClose();
-      }
-    }
-    window.addEventListener("keydown", handleKeyDown, { capture: true });
-    return () => window.removeEventListener("keydown", handleKeyDown, { capture: true });
-  }, [isOpen, onClose]);
+  // Auto-focus input when palette opens
 
   // Focus input on open
   useEffect(() => {

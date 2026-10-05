@@ -320,20 +320,30 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
   useEffect(() => {
-    const handleCustomOpen = () => setCommandPaletteOpen(true);
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && (e.key.toLowerCase() === "k" || e.code === "KeyK")) {
+      const isCmdK = (e.metaKey || e.ctrlKey) && (e.key?.toLowerCase() === "k" || e.code === "KeyK");
+      if (isCmdK) {
         e.preventDefault();
+        e.stopPropagation();
         setCommandPaletteOpen((prev) => !prev);
+        return;
+      }
+      if (e.key === "Escape" && commandPaletteOpen) {
+        e.preventDefault();
+        e.stopPropagation();
+        setCommandPaletteOpen(false);
       }
     };
-    window.addEventListener("open-command-palette", handleCustomOpen);
+
+    const handleCustomOpen = () => setCommandPaletteOpen(true);
+
     window.addEventListener("keydown", handleKeyDown, { capture: true });
+    window.addEventListener("open-command-palette", handleCustomOpen);
     return () => {
-      window.removeEventListener("open-command-palette", handleCustomOpen);
       window.removeEventListener("keydown", handleKeyDown, { capture: true });
+      window.removeEventListener("open-command-palette", handleCustomOpen);
     };
-  }, []);
+  }, [commandPaletteOpen]);
   const activeCourse = useCurrentCourse((s) => s.getActiveCourse());
   const currentUser = useAccessControl((s) => s.currentUser);
   const isAdmin = useAccessControl((s) => s.isAdmin(s.currentUser?.email));
